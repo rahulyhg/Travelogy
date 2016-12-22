@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace DomingoBL
 {
-    public class UserManager
+    /// <summary>
+    /// 
+    /// </summary>
+    public class UserManager 
     {
         public int UpdateUserTravellerProfile(Traveller _travellerObj)
         {
