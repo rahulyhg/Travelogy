@@ -1,3 +1,40 @@
 ﻿@model WebApplication1.Models.TravelogyModelBase
 
-ContactUs
+<h2>Contact Us</h2>
+
+@if (Request.IsAuthenticated)
+{
+    
+    <section id="ContactForm">
+        @using (Html.BeginForm("CreateThread", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "reg-page", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <h2 class="orange">Now that you are a member!</h2>
+            <h5>Send your message to the Travelogers</h5>
+
+            <div class="reg-header">
+                <h3>@ViewBag.Title.</h3>                
+            </div>
+
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon"><i class="icon-envelope-alt"></i></span>
+                @Html.TextBox("ThreadHeading", null, new { @class = "form-control", @placeholder = "Mention a Subject" })
+            </div>
+            <div class="input-group margin-bottom-20">                
+                @Html.TextArea("Description", null, new { @class = "form-control", @rows = 10, @cols = 200 })
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" value="Start a discussion" class="btn-u pull-right" />
+                </div>
+            </div>
+        }
+    </section>
+}
+
+else
+{
+@Html.Partial("_ContactUsExternal")
+}

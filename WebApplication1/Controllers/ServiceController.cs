@@ -25,5 +25,28 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+
+        public ActionResult MessageCenter()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CreateThread()
+        {
+            return RedirectToAction("MessageCenter");
+        }
     }
 }
