@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6f005f0f12d84824a60ccaae1b3b7ce0" Name="Diagram1">
+        <EntityTypeShape EntityType="TravelogyDevModel.AspNetRole" Width="1.5" PointX="0.625" PointY="1.875" />
+        <EntityTypeShape EntityType="TravelogyDevModel.AspNetUserClaim" Width="1.5" PointX="4.875" PointY="1.125" />
+        <EntityTypeShape EntityType="TravelogyDevModel.AspNetUserLogin" Width="1.5" PointX="0.5" PointY="3.875" />
+        <EntityTypeShape EntityType="TravelogyDevModel.AspNetUser" Width="1.5" PointX="2.75" PointY="1" />
+        <AssociationConnector Association="TravelogyDevModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="TravelogyDevModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="TravelogyDevModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="TravelogyDevModel.Country" Width="1.5" PointX="7.125" PointY="0.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.Destination" Width="1.5" PointX="3.75" PointY="5.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.DestinationCountry" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.DestinationLink" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.DestinationTravelOption" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.SubDestination" Width="1.5" PointX="5.75" PointY="7.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.TripProvider" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.Traveller" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.TravellerType" Width="1.5" PointX="9.75" PointY="0.75" />
+        <AssociationConnector Association="TravelogyDevModel.FK_Traveller_Traveller" />
+        <EntityTypeShape EntityType="TravelogyDevModel.Thread" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.ThreadMessage" Width="1.5" PointX="3.375" PointY="10.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

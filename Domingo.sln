@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.25928.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D-PortalV1", "WebApplication1\D-PortalV1.csproj", "{897FD76E-3433-42C5-ABD8-5579CE286647}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomingoDAL", "DomingoDAL\DomingoDAL.csproj", "{C02DD5FA-8F02-4790-8DD8-6F3AB131130E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomingoBL", "DomingoBL\DomingoBL.csproj", "{BB47AAF6-40CA-4B19-8733-8E893F74BFC3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{897FD76E-3433-42C5-ABD8-5579CE286647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{897FD76E-3433-42C5-ABD8-5579CE286647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{897FD76E-3433-42C5-ABD8-5579CE286647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{897FD76E-3433-42C5-ABD8-5579CE286647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C02DD5FA-8F02-4790-8DD8-6F3AB131130E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C02DD5FA-8F02-4790-8DD8-6F3AB131130E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C02DD5FA-8F02-4790-8DD8-6F3AB131130E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C02DD5FA-8F02-4790-8DD8-6F3AB131130E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB47AAF6-40CA-4B19-8733-8E893F74BFC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB47AAF6-40CA-4B19-8733-8E893F74BFC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB47AAF6-40CA-4B19-8733-8E893F74BFC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB47AAF6-40CA-4B19-8733-8E893F74BFC3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
