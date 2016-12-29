@@ -1083,6 +1083,7 @@
     <Content Include="Views\Shared\_JoinNowTripPlanning.cshtml" />
     <Content Include="Views\Service\Dashboard.cshtml" />
     <Content Include="Views\Service\MessageCenter.cshtml" />
+    <Content Include="Views\Manage\TravellerProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

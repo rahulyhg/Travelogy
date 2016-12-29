@@ -220,6 +220,11 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public ActionResult TravellerProfile()
+        {
+            return View();
+        }
+
         //
         // POST: /Manage/ChangePassword
         [HttpPost]

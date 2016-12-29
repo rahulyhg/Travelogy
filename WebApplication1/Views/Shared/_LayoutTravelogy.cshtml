@@ -121,7 +121,14 @@
                         <!-- Navigation starts.  -->
                         <div class="navy">
                             <ul>
-                                <!-- Main menu -->
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
+                                    <li>@Html.ActionLink("My Profile", "TravellerProfile", "Manage")</li>
+                                }
+                                else
+                                {
+                                        <!-- Main menu -->
                                 <li>
                                     <a href="#">Circuits</a>
                                     <ul>
@@ -154,13 +161,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                @*<li>
-                                    <a href="#">Services</a>
-                                    <ul>
-                                        <li>@Html.ActionLink("Trip Planning", "TripPlanning", "Service")</li>
-                                        <li>@Html.ActionLink("Travel Logistics", "TravelLogistics", "Service")</li>                                        
-                                    </ul>
-                                </li>*@
+                                }
                                 <li>
                                     <a href="#">Information</a>
                                     <ul>

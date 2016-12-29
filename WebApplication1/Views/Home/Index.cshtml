@@ -2,23 +2,23 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-@if (Request.IsAuthenticated)
-{
-    <h2>Embark on a new adventure</h2>
-    <p class="lead">Travelogy club is a platform created to offer 360 degree solution for travel to exotic destinations.</p>
-    <p><a href="/Circuit" class="btn btn-default">Explore the circuits to start planning &raquo;</a></p>
-}
-else
-{
-    <h2>Embark on a new adventure</h2>
-    <p class="lead">Travelogy club is a platform created to offer 360 degree solution for travel to exotic destinations.</p>
-    <p><a href="/Account/Register" class="btn btn-default">Join the club &raquo;</a></p>
-}
-    
-</div>
-
 @Html.Partial("_HomepageCarousel")
+
+<div class="jumbotron">
+    @if (Request.IsAuthenticated)
+    {
+        <h2>Embark on a new adventure</h2>
+        <p class="lead">Travelogy club is a platform for 360 degree solution for travel to exotic destinations.</p>
+        <p><a href="/Circuit" class="btn btn-default">Explore the circuits to start planning &raquo;</a></p>
+    }
+    else
+    {
+        <h2>Embark on a new adventure</h2>
+        <p class="lead">Travelogy club is a platform for 360 degree solution for travel to exotic destinations.</p>
+        <h1><a href="/Account/Register" class="btn btn-orange">Join the club &raquo;</a></h1>
+    }
+
+</div>
 
 <div class="row">
     <div class="img-box-3 text-center">

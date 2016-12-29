@@ -41,17 +41,25 @@
                 @* Enable this once you have account confirmation enabled for password reset functionality
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                    </p>*@                
             }
         </section>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4">   
         <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+            <div class="reg-page">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </div>
+        </section>     
     </div>
-    <div class="col-md-4">
-        
+    <div class="col-md-4">        
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 padd-15">
+        <h4>By logging in you agree to our <a href="/Information/TermsAndConditions" target="_blank" class="orange">Terms And Conditions</a>. 
+        <small>Please read our <a href="/Information/Privacy" target="_blank" class="orange">Privacy policy</a> for peace of mind.</small>  </h4>
     </div>
 </div>
 

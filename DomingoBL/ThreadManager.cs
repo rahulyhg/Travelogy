@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 
 namespace DomingoBL
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class UserManager 
+    public class ThreadManager
     {
-        public DomingoBlError UpdateUserTravellerProfile(Traveller _travellerObj)
+        public static DomingoBlError CreateThread(Thread t)
         {
-            int _status = DomingoDataController.UpdateTraveller(_travellerObj);
             return new DomingoBlError() { ErrorCode = 100, ErrorMessage = "Not Implemented" };
         }
     }
