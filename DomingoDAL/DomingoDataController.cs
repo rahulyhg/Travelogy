@@ -39,7 +39,7 @@ namespace DomingoDAL
                 throw new DomingoDalException();
             }
             
-        }
+        }       
 
     }
 }

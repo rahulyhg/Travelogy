@@ -8,6 +8,8 @@ namespace DomingoDAL
 {
     public class DomingoDalException : Exception
     {
-        public string DalDescription { get; set; }
+        public int ErrorCode;
+
+        public string DalDescription;
     }
 }

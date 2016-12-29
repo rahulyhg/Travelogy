@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -44,7 +45,9 @@ namespace WebApplication1.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public ActionResult CreateThread()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateThread(MessageViewModel _model)
         {
             return RedirectToAction("MessageCenter");
         }
