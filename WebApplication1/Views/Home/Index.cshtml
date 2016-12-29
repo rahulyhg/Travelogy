@@ -4,12 +4,34 @@
 
 @Html.Partial("_HomepageCarousel")
 
-<div class="jumbotron">
+
+@if (Request.IsAuthenticated)
+{
+    @Html.Partial("_TripPlannerOverview")
+}
+
+else
+{
+    <!--Tag Box v5-->
+    <div class="row tag-box tag-box-v5">
+        <div class="col-md-8">
+            <span>360 degree solution for travel to exotic destinations.</span>
+        </div>
+        <div class="col-md-4">
+            <p> <a href="/Account/Register" class="btn-u btn-u-lg btn-u-orange"><i class="icon-signin"></i> &nbsp; Join the club</a></p>
+        </div>
+    </div>
+    <!--End Tag Box v5-->
+
+}
+
+
+@*<div class="jumbotron">
     @if (Request.IsAuthenticated)
     {
         <h2>Embark on a new adventure</h2>
         <p class="lead">Travelogy club is a platform for 360 degree solution for travel to exotic destinations.</p>
-        <p><a href="/Circuit" class="btn btn-default">Explore the circuits to start planning &raquo;</a></p>
+        <p><a href="/Service/Tripplanning" class="btn btn-orange">Start planning your next trip &raquo;</a></p>
     }
     else
     {
@@ -18,7 +40,7 @@
         <h1><a href="/Account/Register" class="btn btn-orange">Join the club &raquo;</a></h1>
     }
 
-</div>
+</div>*@
 
 <div class="row">
     <div class="img-box-3 text-center">

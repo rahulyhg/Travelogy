@@ -19,6 +19,7 @@ namespace DomingoDAL
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int TravellerTypeId { get; set; }
+        public string AspnetUserid { get; set; }
     
         public virtual Traveller Traveller1 { get; set; }
         public virtual Traveller Traveller2 { get; set; }

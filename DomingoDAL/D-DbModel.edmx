@@ -145,6 +145,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="200" />
           <Property Name="LastName" Type="nvarchar" MaxLength="200" />
           <Property Name="TravellerTypeId" Type="int" Nullable="false" />
+          <Property Name="AspnetUserid" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TravellerType">
           <Key>
@@ -506,6 +507,7 @@
           <Property Name="TravellerTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Traveller1" Relationship="TravelogyDevModel.FK_Traveller_Traveller" FromRole="Traveller" ToRole="Traveller1" />
           <NavigationProperty Name="Traveller2" Relationship="TravelogyDevModel.FK_Traveller_Traveller" FromRole="Traveller1" ToRole="Traveller" />
+          <Property Name="AspnetUserid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TravellerType">
           <Key>
@@ -707,6 +709,7 @@
           <EntitySetMapping Name="Travellers">
             <EntityTypeMapping TypeName="TravelogyDevModel.Traveller">
               <MappingFragment StoreEntitySet="Traveller">
+                <ScalarProperty Name="AspnetUserid" ColumnName="AspnetUserid" />
                 <ScalarProperty Name="TravellerTypeId" ColumnName="TravellerTypeId" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

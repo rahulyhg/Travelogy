@@ -1,3 +1,26 @@
 ﻿@model WebApplication1.Models.ProfileViewModel
 
-<h1>Traveller Profile</h1>
+<h1>Your Traveller Profile</h1>
+
+@using (Html.BeginForm("SaveTravellerProfile", "Manage", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "reg-page", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="reg-header">
+        <h5>Build your travel profile</h5>
+    </div>
+
+    <div class="input-group margin-bottom-20">        
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+    </div>
+
+    <div class="input-group margin-bottom-20">
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" value="Save your profile" class="btn-u pull-right" />
+        </div>
+    </div>
+}

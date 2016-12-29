@@ -118,6 +118,11 @@ img.img-circle {
    color:#fff !important;
    text-decoration:none !important;
 }
+
+.btn-u200 {
+    min-width: 200px;
+}
+
 .btn-u:hover {
    color:#fff;
    background:#f69110;

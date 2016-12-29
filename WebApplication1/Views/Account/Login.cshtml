@@ -5,7 +5,7 @@
 }
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-lg-offset-2">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "reg-page", role = "form" }))
             {
@@ -57,7 +57,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12 padd-15">
+    <div class="col-md-12 padd-15 text-center">
         <h4>By logging in you agree to our <a href="/Information/TermsAndConditions" target="_blank" class="orange">Terms And Conditions</a>. 
         <small>Please read our <a href="/Information/Privacy" target="_blank" class="orange">Privacy policy</a> for peace of mind.</small>  </h4>
     </div>

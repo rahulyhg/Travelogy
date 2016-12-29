@@ -40,16 +40,10 @@
     <link href="~/Content/css/styles/skin-orange.css" rel="stylesheet" id="color_theme">
     <link href="~/Content/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="~/Content/css/custom.css" rel="stylesheet">
-    <link href="~/Content/assets/css/pages/page_log_reg_v1.css" rel="stylesheet">
-
-    <!-- CSS Global Compulsory-->
-    @*<link href="~/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">*@
+    <link href="~/Content/assets/css/pages/page_log_reg_v1.css" rel="stylesheet">       
     <link href="~/Content/assets/css/style.css" rel="stylesheet">
-    @*<link href="~/Content/assets/css/headers/header1.css" rel="stylesheet">*@
-    @*<link href="~/Content/assets/css/responsive.css" rel="stylesheet">*@
-    @*<link href="~/Content/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet">*@
-    @*<link href="~/Content/assets/css/themes/default.css" id="style_color" rel="stylesheet">*@
-    @*<link href="~/Content/assets/css/themes/headers/default.css" id="style_color-header-1" rel="stylesheet">*@ 
+    <link href="~/Content/assets/css/pages/page_search.css" rel="stylesheet">
+   
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/">     
@@ -125,51 +119,54 @@
                                 {
                                     <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
                                     <li>@Html.ActionLink("My Profile", "TravellerProfile", "Manage")</li>
+                                    <li>@Html.ActionLink("My Messages", "MessageCenter", "Service")</li>
                                 }
                                 else
                                 {
-                                        <!-- Main menu -->
-                                <li>
-                                    <a href="#">Circuits</a>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Africa</a>
-                                            <ul>
-                                                <li>@Html.ActionLink("Kilimanjaro Climb", "Kilimanjaro", "Circuit")</li>
-                                                <li>@Html.ActionLink("Safari in Tanzania", "TanzaniaSafari", "Circuit")</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">Europe</a>
-                                            <ul>
-                                                <li>@Html.ActionLink("Moscow and the Trans-Siberian", "TransSiberian", "Circuit")</li>
-                                                <li>@Html.ActionLink("Scottish Isles", "ScottishIsles", "Circuit")</li>
-                                                <li>@Html.ActionLink("Historic Britain", "HistoricBritain", "Circuit")</li>
-                                                <li>@Html.ActionLink("British Countryside", "BritishCountryside", "Circuit")</li>
-                                                <li>@Html.ActionLink("London - Art, Culture and Nightlife", "London", "Circuit")</li>
-                                                <li>@Html.ActionLink("Supercar & Superbike tours of Britain", "SupercarSuperbikeBritain", "Circuit")</li>                                               
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">Asia</a>
-                                            <ul>
-                                                <li>@Html.ActionLink("Lake Baikal and Buryat republic", "LakeBaikal", "Circuit")</li>
-                                                <li>@Html.ActionLink("Trans-Mongolian journeys", "TransMongolian", "Circuit")</li>
-                                                <li>@Html.ActionLink("Nomadic Mongolia", "Mongolia", "Circuit")</li>
-                                                <li>@Html.ActionLink("Tibet - roof of the world", "Tibet", "Circuit")</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                }
-                                <li>
-                                    <a href="#">Information</a>
-                                    <ul>
-                                        <li>@Html.ActionLink("F.A.Q.", "FAQ", "Information")</li>                                        
-                                        <li>@Html.ActionLink("Privacy Policy", "Privacy", "Information")</li>                                        
-                                        <li>@Html.ActionLink("Terms and Conditions", "TermsAndConditions", "Information")</li>                                                                                
-                                    </ul>
-                                </li>
+                                    <!-- Main menu -->
+                                    <li>
+                                        <a href="#">Circuits</a>
+                                        <ul>                                            
+                                            <li>
+                                                <a href="#">Asia</a>
+                                                <ul>
+                                                    <li>@Html.ActionLink("Eastern Himalaya - Motorcycle tour", "MotoEasternHimalaya", "Circuit")</li>
+                                                    <li>@Html.ActionLink("Eastern Himalaya - Backpacking", "BackpackEasternHimalaya", "Circuit")</li>
+                                                    <li>@Html.ActionLink("India and Nepal - Specialized Photography Tours", "PhotographyToursIndia", "Circuit")</li>
+                                                    <li>@Html.ActionLink("Lake Baikal and Buryat republic", "LakeBaikal", "Circuit")</li>
+                                                    <li>@Html.ActionLink("Trans-Mongolian journeys", "TransMongolian", "Circuit")</li>
+                                                    <li>@Html.ActionLink("Nomadic Mongolia", "Mongolia", "Circuit")</li>
+                                                    <li>@Html.ActionLink("Tibet - roof of the world", "Tibet", "Circuit")</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="#">Africa</a>
+                                                <ul>
+                                                    <li>@Html.ActionLink("Kilimanjaro Climb", "Kilimanjaro", "Circuit")</li>
+                                                    <li>@Html.ActionLink("Safari in Tanzania", "TanzaniaSafari", "Circuit")</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="#">Europe</a>
+                                                <ul>
+                                                    <li>@Html.ActionLink("Moscow and the Trans-Siberian", "TransSiberian", "Circuit")</li>
+                                                    <li>@Html.ActionLink("Scottish Isles", "ScottishIsles", "Circuit")</li>                                                    
+                                                    <li>@Html.ActionLink("Supercar & Superbike tours of Britain", "SupercarSuperbikeBritain", "Circuit")</li>                                               
+                                                </ul>
+                                            </li>
+                                            <li><a href="/Circuit">Browse All</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">Information</a>
+                                        <ul>
+                                            <li>@Html.ActionLink("F.A.Q.", "FAQ", "Information")</li>
+                                            <li>@Html.ActionLink("Privacy Policy", "Privacy", "Information")</li>
+                                            <li>@Html.ActionLink("Terms and Conditions", "TermsAndConditions", "Information")</li>
+                                        </ul>
+                                    </li>
+                                }                                
                                 <li>@Html.ActionLink("About Us", "AboutUs", "Information")</li> 
                                 <li>@Html.ActionLink("Contact Us", "ContactUs", "Information")</li> 
                             </ul>
@@ -252,9 +249,9 @@
                 <p class="pull-left orange">Copyright &copy; 2016 - <a href="/">Travelogy Ltd</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small class="orange">Icons by vectors market at <a href="http://www.flaticon.com/" target="_blank">www.flaticon.com</a></small> </p>
                 <ul class="list-inline pull-right">
                     <!-- List -->
-                    <li><a href="/">Home</a>
-                    <li>
-                    <li><a href="~/Circuit">Circuits</a></li>
+                    <li><a href="~/Information/FAQ">FAQ</a></li>
+                    <li><a href="~/Information/TermsAndConditions">Terms &amp; Conditions</a></li>
+                    <li><a href="~/Information/Privacy">Privacy Policy</a></li>
                     <li><a href="~/Information/Philosophy">Philosophy</a></li>
                     <li><a href="~/Information/AboutUs">About</a></li>
                     <li><a href="~/Information/ContactUs">Contact</a></li>

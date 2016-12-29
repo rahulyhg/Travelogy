@@ -20,11 +20,6 @@ namespace WebApplication1.Controllers
             return View(circuitModel);
         }
 
-        public ActionResult Circuits()
-        {
-            return View();
-        }
-
         public ActionResult Kilimanjaro()
         {
             return View();
@@ -45,7 +40,42 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public ActionResult HistoricBritain()
+        public ActionResult MotoEasternHimalaya()
+        {
+            return View();
+        }
+
+        public ActionResult BackpackEasternHimalaya()
+        {
+            return View();
+        }
+
+        public ActionResult PhotographyToursIndia()
+        {
+            return View();
+        }
+
+        public ActionResult LakeBaikal()
+        {
+            return View();
+        }
+
+        public ActionResult TransMongolian()
+        {
+            return View();
+        }
+
+        public ActionResult Mongolia()
+        {
+            return View();
+        }
+
+        public ActionResult Tibet()
+        {
+            return View();
+        }
+
+        public ActionResult SupercarSuperbikeBritain()
         {
             return View();
         }

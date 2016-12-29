@@ -19,8 +19,12 @@ namespace WebApplication1.Models
     {
         //public AspNetUser User { get; set; }
 
-        public Traveller Profile { get; set; }
-        
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
     }
 
     public class ManageLoginsViewModel

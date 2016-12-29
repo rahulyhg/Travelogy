@@ -218,16 +218,52 @@ namespace WebApplication1.Controllers
         //
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
-        {
-            var _travellerProfile = new Traveller();
-            var _blError = TravellerProfileManager.GetTravellerProfile(User.Identity.GetUserId(), out _travellerProfile);
-            var _model = new ProfileViewModel() { Profile = _travellerProfile }; 
+        {            
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult TravellerProfile()
         {
-            return View();
+            Traveller _travellerProfile = null;
+            // get the traveller profile, if exists
+            var _blError = TravellerProfileManager.GetTravellerProfile(User.Identity.GetUserId(), out _travellerProfile);
+
+            // if not found, create a new profile
+            if(_blError.ErrorCode != 0 || _travellerProfile == null)
+            {
+                _travellerProfile = new Traveller();
+            }
+
+            var _model = new ProfileViewModel() { FirstName = _travellerProfile.FirstName, LastName = _travellerProfile.LastName };
+            return View(_model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveTravellerProfile(ProfileViewModel profileView)
+        {
+            Traveller _travellerProfile = null;
+            // get the traveller profile, if exists
+            var _blError = TravellerProfileManager.GetTravellerProfile(User.Identity.GetUserId(), out _travellerProfile);
+
+            // if not found, create a new profile
+            if (_blError.ErrorCode != 0 || _travellerProfile == null)
+            {
+                _travellerProfile = new Traveller();
+            }
+
+            _travellerProfile.FirstName = profileView.FirstName;
+            _travellerProfile.LastName = profileView.LastName;
+            _travellerProfile.AspnetUserid = User.Identity.GetUserId();
+
+            _blError = TravellerProfileManager.UpdateUserTravellerProfile(_travellerProfile);
+
+            return RedirectToAction("TravellerProfile");
         }
 
         //

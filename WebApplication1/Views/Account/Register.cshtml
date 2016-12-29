@@ -6,7 +6,7 @@
 
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-lg-offset-2">
 
         @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
@@ -53,6 +53,16 @@
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new WebApplication1.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 padd-15 text-center">
+        <h4>
+            By Joining the club you agree to our <a href="/Information/TermsAndConditions" target="_blank" class="orange">Terms And Conditions</a>.
+            <small>Please read our <a href="/Information/Privacy" target="_blank" class="orange">Privacy policy</a> for peace of mind.</small>
+        </h4>
     </div>
 </div>
 
