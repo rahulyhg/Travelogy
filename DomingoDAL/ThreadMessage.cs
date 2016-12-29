@@ -18,11 +18,7 @@ namespace DomingoDAL
         public int ThreadId { get; set; }
         public string Body { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public int AuthorUserId { get; set; }
-        public int ModerationStatus { get; set; }
-        public int TodoCompleted { get; set; }
-        public Nullable<int> brickid { get; set; }
-        public Nullable<int> ModerationStatusChangedByUserId { get; set; }
-        public Nullable<System.DateTime> ModerationStatusChangedDate { get; set; }
+        public int TravellerId { get; set; }
+        public string AspnetUserId { get; set; }
     }
 }

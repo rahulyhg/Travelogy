@@ -1,3 +1,9 @@
-﻿@model WebApplication1.Models.TravelogyModelBase
+﻿@model WebApplication1.Models.MessageListModel
 
-<h1>Messages</h1>
+<h3>@Model.Header</h3>
+<h5>@Model.Description</h5>
+
+@foreach (var item in Model.AllMessages)
+{
+    <h6>@item.Body <small>@item.CreateDate</small> </h6>
+}

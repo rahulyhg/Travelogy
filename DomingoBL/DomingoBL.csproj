@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="DomingoBlError.cs" />
     <Compile Include="ThreadManager.cs" />
-    <Compile Include="UserManager.cs" />
+    <Compile Include="TravellerProfileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

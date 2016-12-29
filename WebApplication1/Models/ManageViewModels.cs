@@ -17,7 +17,7 @@ namespace WebApplication1.Models
 
     public class ProfileViewModel
     {
-        public AspNetUser User { get; }
+        //public AspNetUser User { get; set; }
 
         public Traveller Profile { get; set; }
         

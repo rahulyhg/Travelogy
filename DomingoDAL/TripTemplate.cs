@@ -12,15 +12,16 @@ namespace DomingoDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Thread
+    public partial class TripTemplate
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public int AuthorUserId { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public System.DateTime MostRecentPostDate { get; set; }
-        public string Tags { get; set; }
-        public int Type { get; set; }
-        public string AspnetUserId { get; set; }
+        public int TripProviderId { get; set; }
+        public int DestinationId { get; set; }
+        public Nullable<int> DurationDaysMin { get; set; }
+        public Nullable<int> DurationDaysMax { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string ThumbnailPath { get; set; }
+        public string AdditionalHtml { get; set; }
     }
 }

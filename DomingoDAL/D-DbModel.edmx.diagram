@@ -23,6 +23,7 @@
         <EntityTypeShape EntityType="TravelogyDevModel.TravellerType" Width="1.5" PointX="9.75" PointY="0.75" />
         <AssociationConnector Association="TravelogyDevModel.FK_Traveller_Traveller" />
         <EntityTypeShape EntityType="TravelogyDevModel.Thread" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.TripTemplate" Width="1.5" PointX="10.375" PointY="7.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.ThreadMessage" Width="1.5" PointX="3.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>

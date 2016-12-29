@@ -120,19 +120,10 @@
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="AuthorUserId" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="ModerationStatus" Type="int" Nullable="false" />
-          <Property Name="SafeFilterStatus" Type="int" Nullable="false" />
           <Property Name="MostRecentPostDate" Type="datetime" Nullable="false" />
-          <Property Name="MostRecentUserId" Type="int" Nullable="false" />
-          <Property Name="TotalViews" Type="int" Nullable="false" />
-          <Property Name="TotalReplies" Type="int" Nullable="false" />
           <Property Name="Tags" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="IsPrivate" Type="bit" Nullable="false" />
-          <Property Name="AllowInvites" Type="bit" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
-          <Property Name="ts" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="FlaggedOn" Type="datetime" />
-          <Property Name="LastMessageId" Type="int" />
+          <Property Name="AspnetUserId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ThreadMessage">
           <Key>
@@ -142,12 +133,8 @@
           <Property Name="ThreadId" Type="int" Nullable="false" />
           <Property Name="Body" Type="text" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="AuthorUserId" Type="int" Nullable="false" />
-          <Property Name="ModerationStatus" Type="int" Nullable="false" />
-          <Property Name="TodoCompleted" Type="int" Nullable="false" />
-          <Property Name="brickid" Type="int" />
-          <Property Name="ModerationStatusChangedByUserId" Type="int" />
-          <Property Name="ModerationStatusChangedDate" Type="datetime" />
+          <Property Name="TravellerId" Type="int" Nullable="false" />
+          <Property Name="AspnetUserId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Traveller">
           <Key>
@@ -183,6 +170,30 @@
           <Property Name="Telephone02" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Telephone03" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TripTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TripProviderId" Type="int" Nullable="false" />
+          <Property Name="DestinationId" Type="int" Nullable="false" />
+          <Property Name="DurationDaysMin" Type="int" />
+          <Property Name="DurationDaysMax" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="100" />
+          <Property Name="AdditionalHtml" Type="ntext" />
+        </EntityType>
+        <EntityType Name="TripTemplateDay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TripTemplateId" Type="int" Nullable="false" />
+          <Property Name="SubDestinationId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -269,6 +280,8 @@
           <EntitySet Name="Traveller" EntityType="Self.Traveller" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TravellerType" EntityType="Self.TravellerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripProvider" EntityType="Self.TripProvider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TripTemplate" EntityType="Self.TripTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TripTemplateDay" EntityType="Self.TripTemplateDay" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -325,6 +338,7 @@
             <End Role="Traveller1" EntitySet="Travellers" />
           </AssociationSet>
           <EntitySet Name="Threads" EntityType="TravelogyDevModel.Thread" />
+          <EntitySet Name="TripTemplates" EntityType="TravelogyDevModel.TripTemplate" />
           <EntitySet Name="ThreadMessages" EntityType="TravelogyDevModel.ThreadMessage" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
@@ -521,19 +535,24 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AuthorUserId" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModerationStatus" Type="Int32" Nullable="false" />
-          <Property Name="SafeFilterStatus" Type="Int32" Nullable="false" />
           <Property Name="MostRecentPostDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="MostRecentUserId" Type="Int32" Nullable="false" />
-          <Property Name="TotalViews" Type="Int32" Nullable="false" />
-          <Property Name="TotalReplies" Type="Int32" Nullable="false" />
           <Property Name="Tags" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
-          <Property Name="AllowInvites" Type="Boolean" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="ts" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="FlaggedOn" Type="DateTime" Precision="3" />
-          <Property Name="LastMessageId" Type="Int32" />
+          <Property Name="AspnetUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TripTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TripProviderId" Type="Int32" Nullable="false" />
+          <Property Name="DestinationId" Type="Int32" Nullable="false" />
+          <Property Name="DurationDaysMin" Type="Int32" />
+          <Property Name="DurationDaysMax" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ThreadMessage">
           <Key>
@@ -543,12 +562,8 @@
           <Property Name="ThreadId" Type="Int32" Nullable="false" />
           <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="AuthorUserId" Type="Int32" Nullable="false" />
-          <Property Name="ModerationStatus" Type="Int32" Nullable="false" />
-          <Property Name="TodoCompleted" Type="Int32" Nullable="false" />
-          <Property Name="brickid" Type="Int32" />
-          <Property Name="ModerationStatusChangedByUserId" Type="Int32" />
-          <Property Name="ModerationStatusChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="TravellerId" Type="Int32" Nullable="false" />
+          <Property Name="AspnetUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -712,19 +727,10 @@
           <EntitySetMapping Name="Threads">
             <EntityTypeMapping TypeName="TravelogyDevModel.Thread">
               <MappingFragment StoreEntitySet="Thread">
-                <ScalarProperty Name="LastMessageId" ColumnName="LastMessageId" />
-                <ScalarProperty Name="FlaggedOn" ColumnName="FlaggedOn" />
-                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="AspnetUserId" ColumnName="AspnetUserId" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="AllowInvites" ColumnName="AllowInvites" />
-                <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
                 <ScalarProperty Name="Tags" ColumnName="Tags" />
-                <ScalarProperty Name="TotalReplies" ColumnName="TotalReplies" />
-                <ScalarProperty Name="TotalViews" ColumnName="TotalViews" />
-                <ScalarProperty Name="MostRecentUserId" ColumnName="MostRecentUserId" />
                 <ScalarProperty Name="MostRecentPostDate" ColumnName="MostRecentPostDate" />
-                <ScalarProperty Name="SafeFilterStatus" ColumnName="SafeFilterStatus" />
-                <ScalarProperty Name="ModerationStatus" ColumnName="ModerationStatus" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="AuthorUserId" ColumnName="AuthorUserId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -732,15 +738,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TripTemplates">
+            <EntityTypeMapping TypeName="TravelogyDevModel.TripTemplate">
+              <MappingFragment StoreEntitySet="TripTemplate">
+                <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
+                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DurationDaysMax" ColumnName="DurationDaysMax" />
+                <ScalarProperty Name="DurationDaysMin" ColumnName="DurationDaysMin" />
+                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
+                <ScalarProperty Name="TripProviderId" ColumnName="TripProviderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ThreadMessages">
             <EntityTypeMapping TypeName="TravelogyDevModel.ThreadMessage">
               <MappingFragment StoreEntitySet="ThreadMessage">
-                <ScalarProperty Name="ModerationStatusChangedDate" ColumnName="ModerationStatusChangedDate" />
-                <ScalarProperty Name="ModerationStatusChangedByUserId" ColumnName="ModerationStatusChangedByUserId" />
-                <ScalarProperty Name="brickid" ColumnName="brickid" />
-                <ScalarProperty Name="TodoCompleted" ColumnName="TodoCompleted" />
-                <ScalarProperty Name="ModerationStatus" ColumnName="ModerationStatus" />
-                <ScalarProperty Name="AuthorUserId" ColumnName="AuthorUserId" />
+                <ScalarProperty Name="AspnetUserId" ColumnName="AspnetUserId" />
+                <ScalarProperty Name="TravellerId" ColumnName="TravellerId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Body" ColumnName="Body" />
                 <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />

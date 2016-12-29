@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApplication1.Models;
+using DomingoBL;
+using DomingoDAL;
 
 namespace WebApplication1.Controllers
 {
@@ -217,6 +219,9 @@ namespace WebApplication1.Controllers
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
+            var _travellerProfile = new Traveller();
+            var _blError = TravellerProfileManager.GetTravellerProfile(User.Identity.GetUserId(), out _travellerProfile);
+            var _model = new ProfileViewModel() { Profile = _travellerProfile }; 
             return View();
         }
 

@@ -120,6 +120,9 @@
     <Compile Include="TripProvider.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TripTemplate.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
