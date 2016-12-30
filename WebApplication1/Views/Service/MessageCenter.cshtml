@@ -5,5 +5,10 @@
 
 @foreach (var item in Model.AllMessages)
 {
-    <h6>@item.Body <small>@item.CreateDate</small> </h6>
+    <h5>@item.Thread.Title <small>Discussion started: @item.Thread.CreatedDate</small> </h5>
+    foreach (var message in item.Messages)
+    {
+        <h6>@message.Body</h6>
+    }
+
 }

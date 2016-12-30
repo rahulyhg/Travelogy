@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomingoBL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,6 +26,6 @@ namespace WebApplication1.Models
         [Display(Name = "Description")]
         public string Description { get; set; }
 
-        public List<MessageViewModel> AllMessages { get; set; }
+        public List<MessageCollection> AllMessages { get; set; }
     }
 }

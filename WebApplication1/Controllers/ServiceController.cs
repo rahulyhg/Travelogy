@@ -41,15 +41,10 @@ namespace WebApplication1.Controllers
 
         public ActionResult MessageCenter()
         {
-            var _messageList = new List<ThreadMessage>();
+            var _messageList = new List<MessageCollection>();
             var _blError = ThreadManager.GetAllMessages(User.Identity.GetUserId(), out _messageList);
-            var model = new MessageListModel() { Header = "Your messages", Description = "Your travel queries",
-                AllMessages = new List<MessageViewModel>() };
+            var model = new MessageListModel() { Header = "Your messages", Description = "Your travel queries", AllMessages = _messageList};
 
-            foreach(var message in _messageList)
-            {
-                model.AllMessages.Add(new MessageViewModel() { Body = message.Body, CreateDate = message.CreatedDate } );
-            } 
             return View(model);
         }
 

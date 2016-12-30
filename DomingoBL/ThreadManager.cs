@@ -7,6 +7,16 @@ using System.Threading.Tasks;
 
 namespace DomingoBL
 {
+    /// <summary>
+    /// Thread + ThreadMessage collection
+    /// </summary>
+    public class MessageCollection
+    {
+        public Thread Thread { get; set; }
+
+        public List<ThreadMessage> Messages { get; set; }
+    }
+
     public class ThreadManager
     {
         public static DomingoBlError CreateThread(ThreadMessage tm, string title)
@@ -21,7 +31,8 @@ namespace DomingoBL
                         CreatedDate = DateTime.Now,                        
                         MostRecentPostDate = DateTime.Now,
                         Title = title,
-                        Tags = "message"
+                        Tags = "message",
+                        AspnetUserId = tm.AspnetUserId
                     };
                     context.Threads.Add(_thread);
                     context.SaveChanges();
@@ -39,7 +50,13 @@ namespace DomingoBL
             return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
         }
 
-        public static DomingoBlError AddToThread(ThreadMessage tm)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tm"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static DomingoBlError AddToThread(ThreadMessage tm, Thread t)
         {
             return new DomingoBlError() { ErrorCode = 100, ErrorMessage = "Not Implemented" };
         }
@@ -50,7 +67,7 @@ namespace DomingoBL
         /// <param name="AspnetUserId"></param>
         /// <param name="_messageList"></param>
         /// <returns></returns>
-        public static DomingoBlError GetAllMessages(string AspnetUserId, out List<ThreadMessage> _messageList)
+        public static DomingoBlError GetAllMessages(string AspnetUserId, out List<MessageCollection> _messageList)
         {
             _messageList = null;
 
@@ -58,10 +75,20 @@ namespace DomingoBL
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    var messages = context.ThreadMessages.Where(p => p.AspnetUserId == AspnetUserId);
-                    if(messages != null)
+                    var threads = context.Threads.Where(p => p.AspnetUserId == AspnetUserId);
+                    if(threads != null)
                     {
-                        _messageList = messages.ToList();
+                        _messageList = new List<MessageCollection>();
+
+                        foreach (var thread in threads)
+                        {
+                            var messages = context.ThreadMessages.Where(p => p.ThreadId == thread.Id);
+                            if(messages != null)
+                            {
+                                var _message = new MessageCollection() { Thread = thread, Messages = messages.ToList() };                                
+                                _messageList.Add(_message);
+                            }
+                        }
                     }
                 }
             }
