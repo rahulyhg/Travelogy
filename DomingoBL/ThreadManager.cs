@@ -31,6 +31,7 @@ namespace DomingoBL
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
+                    // create the Thread
                     var _thread = new Thread()
                     {
                         AuthorUserId = tm.TravellerId,
@@ -40,11 +41,16 @@ namespace DomingoBL
                         Tags = "message",
                         AspnetUserId = tm.AspnetUserId
                     };
+
+                    // save it to the DB
                     context.Threads.Add(_thread);
                     context.SaveChanges();
 
+                    // add the message with the ID 
                     context.ThreadMessages.Add(tm);
                     tm.ThreadId = _thread.Id;
+
+                    // commit
                     context.SaveChanges();
                 }
             }
@@ -67,9 +73,14 @@ namespace DomingoBL
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
+                    // update the MostRecentPostDate of the parent thread
                     var thread = context.Threads.FirstOrDefault(p => p.Id == tm.ThreadId);
                     thread.MostRecentPostDate = DateTime.Now;
+
+                    // add the message
                     context.ThreadMessages.Add(tm);
+
+                    // commit
                     context.SaveChanges();
                 }
             }
@@ -82,7 +93,7 @@ namespace DomingoBL
         }
 
         /// <summary>
-        /// 
+        /// Gets all messages for an user based on AspnetUserId
         /// </summary>
         /// <param name="AspnetUserId"></param>
         /// <param name="_messageList"></param>
@@ -95,11 +106,13 @@ namespace DomingoBL
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
+                    // get all the threads, sorted by the latest one first
                     var threads = context.Threads.Where(p => p.AspnetUserId == AspnetUserId).OrderByDescending(p => p.MostRecentPostDate);
                     if(threads != null)
                     {
                         _messageList = new List<MessageCollection>();
 
+                        // for all threads get the messages, latest one first
                         foreach (var thread in threads)
                         {
                             var messages = context.ThreadMessages.Where(p => p.ThreadId == thread.Id).OrderBy(p => p.CreatedDate);
