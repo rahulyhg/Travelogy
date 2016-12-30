@@ -34,16 +34,22 @@ namespace WebApplication1.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         public ActionResult Dashboard()
         {
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
         public ActionResult MessageCenter()
         {
             var _messageList = new List<MessageCollection>();
             var _blError = ThreadManager.GetAllMessages(User.Identity.GetUserId(), out _messageList);
-            var model = new MessageListModel() { Header = "Your messages", Description = "Your travel queries", AllMessages = _messageList};
+            var model = new MessageListModel() { AllMessages = _messageList};
 
             return View(model);
         }
@@ -54,6 +60,7 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult CreateThread(MessageViewModel _model)
         {
             var _message = new ThreadMessage() { TravellerId = 999, Body = _model.Body, CreatedDate = DateTime.Now, AspnetUserId = User.Identity.GetUserId() };
@@ -62,6 +69,26 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("MessageCenter");
             }
+
+            return RedirectToAction("MessageCenter");
+        }
+
+        [Authorize]
+        public ActionResult ReplyToThread(int threadId, string replyMessage)
+        {
+            if(!string.IsNullOrEmpty(replyMessage))
+            {
+                var threadMessage = new ThreadMessage()
+                {
+                    AspnetUserId = User.Identity.GetUserId(),
+                    ThreadId = threadId,
+                    Body = replyMessage,
+                    CreatedDate = DateTime.Now,
+                    TravellerId = 990
+                };
+
+                var _blError = ThreadManager.AddToThread(threadMessage);
+            }            
 
             return RedirectToAction("MessageCenter");
         }

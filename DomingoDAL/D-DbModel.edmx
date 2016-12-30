@@ -146,6 +146,13 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="200" />
           <Property Name="TravellerTypeId" Type="int" Nullable="false" />
           <Property Name="AspnetUserid" Type="nvarchar" MaxLength="50" />
+          <Property Name="TravellerType" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddressLine2" Type="nvarchar" MaxLength="200" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="TravelGroupSize" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TravellerType">
           <Key>
@@ -508,6 +515,13 @@
           <NavigationProperty Name="Traveller1" Relationship="TravelogyDevModel.FK_Traveller_Traveller" FromRole="Traveller" ToRole="Traveller1" />
           <NavigationProperty Name="Traveller2" Relationship="TravelogyDevModel.FK_Traveller_Traveller" FromRole="Traveller1" ToRole="Traveller" />
           <Property Name="AspnetUserid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TravellerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TravelGroupSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TravellerType">
           <Key>
@@ -709,6 +723,13 @@
           <EntitySetMapping Name="Travellers">
             <EntityTypeMapping TypeName="TravelogyDevModel.Traveller">
               <MappingFragment StoreEntitySet="Traveller">
+                <ScalarProperty Name="TravelGroupSize" ColumnName="TravelGroupSize" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="TravellerType" ColumnName="TravellerType" />
                 <ScalarProperty Name="AspnetUserid" ColumnName="AspnetUserid" />
                 <ScalarProperty Name="TravellerTypeId" ColumnName="TravellerTypeId" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

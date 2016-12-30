@@ -1,14 +1,39 @@
 ﻿@model WebApplication1.Models.MessageListModel
 
-<h3>@Model.Header</h3>
-<h5>@Model.Description</h5>
-
 @foreach (var item in Model.AllMessages)
 {
-    <h5>@item.Thread.Title <small>Discussion started: @item.Thread.CreatedDate</small> </h5>
-    foreach (var message in item.Messages)
-    {
-        <h6>@message.Body</h6>
-    }
+    <div class="row margin-bottom-20">
+        <div class="col-md-12">
+            <div class="panel panel-black">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="icon-tasks"></i> Discussion started: @item.Thread.CreatedDate</h3>
+                </div>
 
-}
+                <form action="/Service/ReplyToThread" >
+                    <input type="hidden" name="threadId" value="@item.Thread.Id" />
+                    <div class="panel-body">
+                        <h4>@item.Thread.Title</h4>
+                        @foreach (var message in item.Messages)
+                        {
+                            <h6>@message.CreatedDate</h6>
+                            <p>@message.Body</p>
+                        }
+                        <hr />
+                        <div class="padd-10">
+                            <textarea name="replyMessage" rows="3" cols="200" class="form-control" placeholder="Reply to the thread" required></textarea>
+                        </div>                        
+                        <div class="padd-10">
+                            <button type="submit" class="btn btn-orange pull-right">Reply</button>
+                        </div>
+                    </div>
+                </form>                
+            </div>
+        </div>
+    </div>
+ }
+
+
+
+    
+
+

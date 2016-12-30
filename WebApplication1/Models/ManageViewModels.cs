@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using DomingoDAL;
+//using System.Web.Mvc;
 
 namespace WebApplication1.Models
 {
@@ -24,6 +25,42 @@ namespace WebApplication1.Models
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Display(Name = "Address Line 1")]
+        public string AddressLine1 { get; set; }
+
+        [Display(Name = "Address Line 2")]
+        public string AddressLine2 { get; set; }
+
+        [Display(Name = "City or Town")]
+        public string City { get; set; }
+
+        [Display(Name = "Postal Code / Zip / PIN")]
+        public string PostCode { get; set; }
+
+        [Display(Name = "Country of residence")]
+        public string Country { get; set; }
+
+        [Display(Name = "What best describes how you travel:")]
+        public string TravelGroupSize { get; set; }
+
+        public IEnumerable<System.Web.Mvc.SelectListItem> ListOfCountries { get; set; }
+
+        public IEnumerable<System.Web.Mvc.SelectListItem> TravelGroupSizes
+        {
+            get
+            {
+                var dropdownItems = new List<System.Web.Mvc.SelectListItem>();
+                dropdownItems.AddRange(new[]{
+                            new System.Web.Mvc.SelectListItem() { Text = "Travel alone", Value = "Travel alone" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Travel with family", Value = "Travel with family" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Travel with a group", Value = "Travel with a group" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Young couple", Value = "Young couple" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Mature couple", Value = "Mature couple" }});
+
+                return dropdownItems;
+            }
+        }
 
     }
 

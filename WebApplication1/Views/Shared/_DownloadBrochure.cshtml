@@ -1,7 +1,9 @@
-﻿ <!--Tag Box v5-->
+﻿@model WebApplication1.Models._DownloadBrochureModel
+
+ <!--Tag Box v5-->
 <div class="row tag-box tag-box-v5">
     <div class="col-md-8">
-        <span>Download your brochure for xxxxx</span>
+        <span>Download your brochure for<br /> @Model.CircuitName</span>
     </div>
     <div class="col-md-4">
         <p><button class="btn-u btn-u-lg btn-u-red"><i class="icon-cloud-download"></i> Download Now</button></p>

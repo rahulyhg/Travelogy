@@ -188,7 +188,8 @@
     <div class="col-md-6 col-sm-6">
         @if (Request.IsAuthenticated)
         {
-            @Html.Partial("_StartTripPlanning")
+            var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = "Lake Baikal" };
+            @Html.Partial("_StartTripPlanning", _model)
         }
 
         else
@@ -199,7 +200,8 @@
     <div class="col-md-6 col-sm-6">
         @if (Request.IsAuthenticated)
         {
-            @Html.Partial("_DownloadBrochure")
+            var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = "Lake Baikal" };
+            @Html.Partial("_DownloadBrochure", _model)
         }
         else
         {

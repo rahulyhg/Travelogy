@@ -1,3 +1,14 @@
 ﻿@model WebApplication1.Models.TravelogyModelBase
 
-TripPlanning
+<div class="row">
+    <div class="col-md-12 padd-10">
+        <img class="img-responsive" src="~/Content/img/gallery/big/slider001.jpg" />
+    </div>
+</div>
+
+<h1>
+    Start planning - <small><a href="/circuit">Browse all circuits</a></small>
+</h1>
+<!--Lake Baikal-->
+@Html.Partial("LakeBaikal_TripPlannerWP")
+<!--End Lake Baikal--> 

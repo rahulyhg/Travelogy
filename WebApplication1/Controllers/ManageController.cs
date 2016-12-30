@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using WebApplication1.Models;
 using DomingoBL;
 using DomingoDAL;
+using System.Collections.Generic;
 
 namespace WebApplication1.Controllers
 {
@@ -233,15 +234,41 @@ namespace WebApplication1.Controllers
             var _blError = TravellerProfileManager.GetTravellerProfile(User.Identity.GetUserId(), out _travellerProfile);
 
             // if not found, create a new profile
-            if(_blError.ErrorCode != 0 || _travellerProfile == null)
+            if (_blError.ErrorCode != 0 || _travellerProfile == null)
             {
                 _travellerProfile = new Traveller();
             }
 
-            var _model = new ProfileViewModel() { FirstName = _travellerProfile.FirstName, LastName = _travellerProfile.LastName };
+            var _model = new ProfileViewModel()
+            {
+                FirstName = _travellerProfile.FirstName,
+                LastName = _travellerProfile.LastName,
+                AddressLine1 = _travellerProfile.AddressLine1,
+                AddressLine2 = _travellerProfile.AddressLine2,
+                City = _travellerProfile.City,
+                Country = _travellerProfile.Country,
+                TravelGroupSize = _travellerProfile.TravelGroupSize,
+                PostCode = _travellerProfile.PostCode,
+                ListOfCountries = _GetCountries()
+            };
             return View(_model);
         }
 
+
+        private IEnumerable<SelectListItem> _GetCountries()
+        {
+
+            var _countries = DomingoDataController
+                        .GetAllCountries()
+                        .Select(x =>
+                                new SelectListItem
+                                {
+                                    Value = x.Name,
+                                    Text = x.Name
+                                });
+
+            return new SelectList(_countries, "Value", "Text");
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -259,6 +286,13 @@ namespace WebApplication1.Controllers
 
             _travellerProfile.FirstName = profileView.FirstName;
             _travellerProfile.LastName = profileView.LastName;
+            _travellerProfile.AddressLine1 = profileView.AddressLine1;
+            _travellerProfile.AddressLine2 = profileView.AddressLine2;
+            _travellerProfile.City = profileView.City;
+            _travellerProfile.Country = profileView.Country;
+            _travellerProfile.PostCode = profileView.PostCode;
+            _travellerProfile.TravelGroupSize = profileView.TravelGroupSize;
+
             _travellerProfile.AspnetUserid = User.Identity.GetUserId();
 
             _blError = TravellerProfileManager.UpdateUserTravellerProfile(_travellerProfile);

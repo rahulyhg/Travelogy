@@ -189,6 +189,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ServiceModels.cs" />
     <Compile Include="Models\TravelogyModelBase.cs" />
+    <Compile Include="Models\_DownloadBrochureModel.cs" />
+    <Compile Include="Models\_StartTripPlanningViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1093,6 +1095,8 @@
     <Content Include="Views\Circuit\SupercarSuperbikeBritain.cshtml" />
     <Content Include="Views\Shared\_SubmitTripRequest.cshtml" />
     <Content Include="Views\Shared\_DownloadBrochure.cshtml" />
+    <Content Include="Views\Shared\LakeBaikal_TripPlannerWP.cshtml" />
+    <Content Include="Views\Shared\TransSiberian_TripPlannerWP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

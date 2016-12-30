@@ -30,7 +30,13 @@ namespace DomingoBL
                     if(_xtravellerObj != null)
                     {
                         _xtravellerObj.FirstName = _travellerObj.FirstName;
-                        _xtravellerObj.LastName = _travellerObj.LastName;                        
+                        _xtravellerObj.LastName = _travellerObj.LastName;
+                        _xtravellerObj.AddressLine1 = _travellerObj.AddressLine1;
+                        _xtravellerObj.AddressLine2 = _travellerObj.AddressLine2;
+                        _xtravellerObj.City = _travellerObj.City;
+                        _xtravellerObj.Country = _travellerObj.Country;
+                        _xtravellerObj.PostCode = _travellerObj.PostCode;
+                        _xtravellerObj.TravelGroupSize = _travellerObj.TravelGroupSize;
                     }
                                         
                     else // create it

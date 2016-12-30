@@ -15,17 +15,11 @@ namespace WebApplication1.Models
         [Display(Name = "Body")]
         public string Body { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }        
     }
 
     public class MessageListModel
     {
-        [Display(Name = "Header")]
-        public string Header { get; set; }
-
-        [Display(Name = "Description")]
-        public string Description { get; set; }
-
-        public List<MessageCollection> AllMessages { get; set; }
+        public List<MessageCollection> AllMessages { get; set; }        
     }
 }

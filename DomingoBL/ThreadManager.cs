@@ -19,6 +19,12 @@ namespace DomingoBL
 
     public class ThreadManager
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tm"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
         public static DomingoBlError CreateThread(ThreadMessage tm, string title)
         {
             try
@@ -54,11 +60,25 @@ namespace DomingoBL
         /// 
         /// </summary>
         /// <param name="tm"></param>
-        /// <param name="t"></param>
         /// <returns></returns>
-        public static DomingoBlError AddToThread(ThreadMessage tm, Thread t)
+        public static DomingoBlError AddToThread(ThreadMessage tm)
         {
-            return new DomingoBlError() { ErrorCode = 100, ErrorMessage = "Not Implemented" };
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var thread = context.Threads.FirstOrDefault(p => p.Id == tm.ThreadId);
+                    thread.MostRecentPostDate = DateTime.Now;
+                    context.ThreadMessages.Add(tm);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
         }
 
         /// <summary>
@@ -75,14 +95,14 @@ namespace DomingoBL
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    var threads = context.Threads.Where(p => p.AspnetUserId == AspnetUserId);
+                    var threads = context.Threads.Where(p => p.AspnetUserId == AspnetUserId).OrderByDescending(p => p.MostRecentPostDate);
                     if(threads != null)
                     {
                         _messageList = new List<MessageCollection>();
 
                         foreach (var thread in threads)
                         {
-                            var messages = context.ThreadMessages.Where(p => p.ThreadId == thread.Id);
+                            var messages = context.ThreadMessages.Where(p => p.ThreadId == thread.Id).OrderBy(p => p.CreatedDate);
                             if(messages != null)
                             {
                                 var _message = new MessageCollection() { Thread = thread, Messages = messages.ToList() };                                
