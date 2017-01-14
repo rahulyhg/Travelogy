@@ -1,0 +1,19 @@
+ Volume in drive C is OS
+ Volume Serial Number is D224-4299
+
+ Directory of C:\_CODE\TRAVELOGY\MVC-Portal\WebApplication1\WebApplication1\Content\css
+
+12/02/2016  22:19            52,789 animate.min.css
+14/04/2016  14:26           132,372 bootstrap.css
+29/12/2016  19:03           110,161 bootstrap.min.css
+25/09/2014  15:27                25 custom.css
+14/04/2016  01:49            28,759 font-awesome.min.css
+20/02/2016  14:36             6,951 magnific-popup.css
+19/09/2014  14:55             1,135 owl.carousel.css
+31/07/2014  11:23            18,552 parallax-slider.css
+20/10/2014  10:52            73,697 settings.css
+19/03/2014  07:36            15,934 smart-addons.css
+04/03/2014  13:34             2,126 smart-forms-ie8.css
+17/07/2014  23:34            61,914 smart-forms.css
+              12 File(s)        504,415 bytes
+               0 Dir(s)  42,676,494,336 bytes free

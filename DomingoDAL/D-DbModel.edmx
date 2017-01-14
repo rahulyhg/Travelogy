@@ -153,6 +153,7 @@
           <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
           <Property Name="TravelGroupSize" Type="nvarchar" MaxLength="50" />
+          <Property Name="PrimaryTraveller" Type="bit" />
         </EntityType>
         <EntityType Name="TravellerType">
           <Key>
@@ -522,6 +523,7 @@
           <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TravelGroupSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PrimaryTraveller" Type="Boolean" />
         </EntityType>
         <EntityType Name="TravellerType">
           <Key>
@@ -723,6 +725,7 @@
           <EntitySetMapping Name="Travellers">
             <EntityTypeMapping TypeName="TravelogyDevModel.Traveller">
               <MappingFragment StoreEntitySet="Traveller">
+                <ScalarProperty Name="PrimaryTraveller" ColumnName="PrimaryTraveller" />
                 <ScalarProperty Name="TravelGroupSize" ColumnName="TravelGroupSize" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="PostCode" ColumnName="PostCode" />

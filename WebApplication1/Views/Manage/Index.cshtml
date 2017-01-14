@@ -3,15 +3,59 @@
     ViewBag.Title = "Manage your account";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title. <small>Change your account settings</small></h2>
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h4>Change your account settings</h4>
+<p class="orange">@ViewBag.StatusMessage</p>
+<div>    
     <hr />
+    <div class="row servive-block margin-bottom-10">
+        @if (Model.HasPassword)
+        {
+            <div class="col-md-3 col-sm-6">
+                <div class="servive-block-in">
+                    <div><i class="icon-check"></i></div>
+                    <h4>Change Password</h4>     
+                    <p>You have a password for your local account, change it periodically.</p>               
+                    <h4 class="white">@Html.ActionLink("Change your password", "ChangePassword")</h4>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-3 col-sm-6">
+                <div class="servive-block-in">
+                    <div><i class="icon-check"></i></div>
+                    <h4>Create a Password</h4>                    
+                    <p>You have not set up a password for your account yet.</p>
+                    <h4 class="white">@Html.ActionLink("Create One Now", "SetPassword")</h4>
+                    <p>Make your account safer.</p>
+                </div>
+            </div>
+        }        
+
+        <div class="col-md-3 col-sm-6">
+            <div class="servive-block-in">
+                <div><i class="icon-rocket"></i></div>
+                <h4>Traveller profile</h4>                
+                <p>Update your travel preferences in your profile.</p>
+                <h4>@Html.ActionLink("Manage profile", "TravellerProfile")</h4>
+            </div>
+        </div>  
+
+        <div class="col-md-6 col-sm-6">
+            <h2>Manage linked external Accounts:</h2>
+            <h4>You have @Model.Logins.Count external login(s) associated</h4>
+            <p>@Html.ActionLink("Manage your external accounts", "ManageLogins").</p>
+        </div>              
+    </div>
+
+    <div class="row servive-block margin-bottom-10">
+        
+    </div>
+
     <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>
+        @*<dt>Password:</dt>*@
+        @*<dd>
             [
             @if (Model.HasPassword)
             {
@@ -20,23 +64,22 @@
             else
             {
                 @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>
-        <dt>External Logins:</dt>
-        <dd>
+            }]
+        </dd>*@
+        @*<dt>External Logins:</dt>*@
+        @*<dd>
             @Model.Logins.Count [
             @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>
+        </dd>*@
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
+
              See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                 for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
+
              Uncomment the following block after you have set up two-factor authentication
         *@
-        @*  
+        @*
             <dt>Phone Number:</dt>
             <dd>
                 @(Model.PhoneNumber ?? "None")

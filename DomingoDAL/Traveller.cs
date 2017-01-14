@@ -27,6 +27,7 @@ namespace DomingoDAL
         public string PostCode { get; set; }
         public string Country { get; set; }
         public string TravelGroupSize { get; set; }
+        public Nullable<bool> PrimaryTraveller { get; set; }
     
         public virtual Traveller Traveller1 { get; set; }
         public virtual Traveller Traveller2 { get; set; }

@@ -23,9 +23,37 @@ namespace WebApplication1
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/mainjs").Include(
+                      "~/content/js/main.js",
+                      "~/content/js/custom.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/css/bootstrap.css",
                       "~/Content/site.css"));
+
+            //bundles.Add(new StyleBundle("~/Content/css/styles").Include(
+            //            "~/Content/css/animate.min.css",
+            //            "~/Content/css/bootstrap.css",
+            //            "~/Content/css/bootstrap.min.css",
+            //            "~/Content/css/custom.css",
+            //            "~/Content/assets/plugins/font-awesome/css/font-awesome.css", 
+            //            "~/Content/css/font-awesome.min.css",
+            //            "~/Content/css/magnific-popup.css",
+            //            "~/Content/css/owl.carousel.css",
+            //            "~/Content/css/parallax-slider.css",
+            //            "~/Content/css/settings.css",
+            //            "~/Content/css/smart-addons.css",
+            //            "~/Content/css/smart-forms-ie8.css",
+            //            "~/Content/css/smart-forms.css",
+            //            "~/Content/css/styles/style.css",
+            //            "~/Content/assets/css/pages/page_log_reg_v1.css",
+            //            "~/Content/assets/css/pages/page_search.css",
+            //            "~/Content/css/styles/skin-orange.css",
+            //            "~/Content/assets/css/responsive.css"));
+
+
         }
     }
 }
+
+

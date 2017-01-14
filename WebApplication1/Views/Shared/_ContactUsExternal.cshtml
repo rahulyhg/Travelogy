@@ -1,6 +1,8 @@
 ﻿<div class="contact-us-two">
 
     <div class="row">
+    @if (!Request.IsAuthenticated)
+    {
         <div class="col-md-5">
             <!-- Contact Form -->
             <div class="contact-form">
@@ -27,8 +29,8 @@
                     <button type="reset" class="btn btn-default">Reset</button>
                 </form>
             </div>
-            <hr />
         </div>
+    }   
         <div class="col-md-7">
             <!-- Contact map -->
             <div class="contact-map">

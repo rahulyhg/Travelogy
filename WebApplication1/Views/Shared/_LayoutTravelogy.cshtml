@@ -24,8 +24,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @*@Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")*@
+    @*@Styles.Render("~/Content/css")*@
+    @*@Styles.Render("~/Content/css/styles")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
 
     <!-- Styles -->
     <!-- Bootstrap CSS -->
@@ -35,15 +36,16 @@
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Content/css/magnific-popup.css" rel="stylesheet">
-    <link href="~/Content/css/owl.carousel.css" rel="stylesheet">
-    <link href="~/Content/css/styles/style.css" rel="stylesheet">
+    <link href="~/Content/css/owl.carousel.css" rel="stylesheet">    
     <link href="~/Content/css/styles/skin-orange.css" rel="stylesheet" id="color_theme">
-    <link href="~/Content/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="~/Content/css/custom.css" rel="stylesheet">
     <link href="~/Content/assets/css/pages/page_log_reg_v1.css" rel="stylesheet">       
+    <link href="~/Content/assets/css/pages/page_search.css" rel="stylesheet">    
+    <link href="~/Content/css/styles/style.css" rel="stylesheet">
     <link href="~/Content/assets/css/style.css" rel="stylesheet">
-    <link href="~/Content/assets/css/pages/page_search.css" rel="stylesheet">
     <link href="~/Content/assets/css/responsive.css" rel="stylesheet">
+    <link href="~/Content/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/">     
@@ -63,7 +65,7 @@
     </script>
     <!--Google analytics Tracking ID UA-84715163-1-->
 </head>
-<body>
+<body> 
 
     <!-- Google Tag Manager (noscript) -->
     <noscript>
@@ -110,119 +112,120 @@
                             <h1><a href="/"><i class="fa fa-laptop"></i> Travelogy Club</a></h1>
                         </div>
                     </div>
-                    <div class="col-md-6">
-
+                    <div class="col-md-6 col-sm-12">
+                        
                         <!-- Navigation starts.  -->
                         <div class="navy">
-                            <ul>
-                                @if (Request.IsAuthenticated)
-                                {
-                                    <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
-                                    <li>@Html.ActionLink("My Profile", "TravellerProfile", "Manage")</li>
-                                    <li>@Html.ActionLink("My Messages", "MessageCenter", "Service")</li>
-                                }
-                                else
-                                {
-                                    <!-- Main menu -->
-                                    <li>
-                                        <a href="#">Circuits</a>
-                                        <ul>                                            
-                                            <li>
-                                                <a href="#">Asia</a>
-                                                <ul>
-                                                    <li>@Html.ActionLink("Eastern Himalaya - Motorcycle tour", "MotoEasternHimalaya", "Circuit")</li>
-                                                    <li>@Html.ActionLink("Eastern Himalaya - Backpacking", "BackpackEasternHimalaya", "Circuit")</li>
-                                                    <li>@Html.ActionLink("India and Nepal - Specialized Photography Tours", "PhotographyToursIndia", "Circuit")</li>
-                                                    <li>@Html.ActionLink("Lake Baikal and Buryat republic", "LakeBaikal", "Circuit")</li>
-                                                    <li>@Html.ActionLink("Trans-Mongolian journeys", "TransMongolian", "Circuit")</li>
-                                                    <li>@Html.ActionLink("Nomadic Mongolia", "Mongolia", "Circuit")</li>
-                                                    <li>@Html.ActionLink("Tibet - roof of the world", "Tibet", "Circuit")</li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="#">Africa</a>
-                                                <ul>
-                                                    <li>@Html.ActionLink("Kilimanjaro Climb", "Kilimanjaro", "Circuit")</li>
-                                                    <li>@Html.ActionLink("Safari in Tanzania", "TanzaniaSafari", "Circuit")</li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="#">Europe</a>
-                                                <ul>
-                                                    <li>@Html.ActionLink("Moscow and the Trans-Siberian", "TransSiberian", "Circuit")</li>
-                                                    <li>@Html.ActionLink("Scottish Isles", "ScottishIsles", "Circuit")</li>                                                    
-                                                    <li>@Html.ActionLink("Supercar & Superbike tours of Britain", "SupercarSuperbikeBritain", "Circuit")</li>                                               
-                                                </ul>
-                                            </li>
-                                            <li><a href="/Circuit">Browse All</a></li>
-                                        </ul>
-                                    </li>
+                        <ul>
+                            @if (Request.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
+                                <li>@Html.ActionLink("My Profile", "TravellerProfile", "Manage")</li>
+                                <li>@Html.ActionLink("My Messages", "MessageCenter", "Service")</li>
+                            }
+                            else
+                            {
+                                <!-- Main menu -->
+                                <li>
+                                    <a href="#">Circuits</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Asia</a>
+                                            <ul>
+                                                <li>@Html.ActionLink("Eastern Himalaya - Motorcycle tour", "MotoEasternHimalaya", "Circuit")</li>
+                                                <li>@Html.ActionLink("Eastern Himalaya - Backpacking", "BackpackEasternHimalaya", "Circuit")</li>
+                                                <li>@Html.ActionLink("India and Nepal - Specialized Photography Tours", "PhotographyToursIndia", "Circuit")</li>
+                                                <li>@Html.ActionLink("Lake Baikal and Buryat republic", "LakeBaikal", "Circuit")</li>
+                                                <li>@Html.ActionLink("Trans-Mongolian journeys", "TransMongolian", "Circuit")</li>
+                                                <li>@Html.ActionLink("Nomadic Mongolia", "Mongolia", "Circuit")</li>
+                                                <li>@Html.ActionLink("Tibet - roof of the world", "Tibet", "Circuit")</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Africa</a>
+                                            <ul>
+                                                <li>@Html.ActionLink("Kilimanjaro Climb", "Kilimanjaro", "Circuit")</li>
+                                                <li>@Html.ActionLink("Safari in Tanzania", "TanzaniaSafari", "Circuit")</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Europe</a>
+                                            <ul>
+                                                <li>@Html.ActionLink("Moscow and the Trans-Siberian", "TransSiberian", "Circuit")</li>
+                                                <li>@Html.ActionLink("Scottish Isles", "ScottishIsles", "Circuit")</li>
+                                                <li>@Html.ActionLink("Supercar & Superbike tours of Britain", "SupercarSuperbikeBritain", "Circuit")</li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/Circuit">Browse All</a></li>
+                                    </ul>
+                                </li>
 
-                                    <li>
-                                        <a href="#">Information</a>
-                                        <ul>
-                                            <li>@Html.ActionLink("F.A.Q.", "FAQ", "Information")</li>
-                                            <li>@Html.ActionLink("Privacy Policy", "Privacy", "Information")</li>
-                                            <li>@Html.ActionLink("Terms and Conditions", "TermsAndConditions", "Information")</li>
-                                        </ul>
-                                    </li>
-                                }                                
-                                <li>@Html.ActionLink("About Us", "AboutUs", "Information")</li> 
-                                <li>@Html.ActionLink("Contact Us", "ContactUs", "Information")</li> 
-                            </ul>
-                        </div>
-                        <!-- Navigation ends -->
+                                <li>
+                                    <a href="#">Information</a>
+                                    <ul>
+                                        <li>@Html.ActionLink("F.A.Q.", "FAQ", "Information")</li>
+                                        <li>@Html.ActionLink("Privacy Policy", "Privacy", "Information")</li>
+                                        <li>@Html.ActionLink("Terms and Conditions", "TermsAndConditions", "Information")</li>
+                                    </ul>
+                                </li>
 
+                                <li>@Html.ActionLink("About Us", "AboutUs", "Information")</li>
+                                <li>@Html.ActionLink("Contact Us", "ContactUs", "Information")</li>
+                            }                            
+                        </ul>
                     </div>
-                    <div class="col-md-3"><img src="~/Content/img/logo1-default.png" /></div>
+                    <!-- Navigation ends -->
+
                 </div>
+                <div class="col-md-3"><img src="~/Content/img/logo1-default.png" /></div>
             </div>
         </div>
+    </div>
 
-        <!-- Header two ends -->
-        <!-- Main content starts -->
+    <!-- Header two ends -->
+    <!-- Main content starts -->
 
-        <div class="main-block">
+    <div class="main-block">
 
-            <div class="container">
+        <div class="container">
 
-                @RenderBody()
+            @RenderBody()
 
-            </div>
         </div>
+    </div>
 
-        <!-- Main content ends -->
-        <!-- Foot Starts -->
+    <!-- Main content ends -->
+    <!-- Foot Starts -->
 
-        <div class="foot">
-            <!-- Container -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <!-- Foot Item -->
-                        <div class="foot-item">
-                            <!-- Heading -->
-                            <h5 class="bold"><i class="fa fa-user"></i>&nbsp;&nbsp;About</h5>
-                            <p class="orange">Travelogy club is a platform created to offer 360 degree solution for travel to exotic destinations.</p>
-                            <div class="brand-bg">
-                                <!-- Social Media Icons -->
-                                <a href="https://www.facebook.com/travelogyclub/" target="_blank" class="facebook"><i class="fa fa-facebook circle-3"></i></a>
-                                <a href="https://twitter.com/travelogyclub" target="_blank" class="twitter"><i class="fa fa-twitter circle-3"></i></a>
-                                <!--<a href="#" class="google-plus"><i class="fa fa-google-plus circle-3"></i></a>
-                                <a href="#" class="linkedin"><i class="fa fa-linkedin circle-3"></i></a>
-                                <a href="#" class="pinterest"><i class="fa fa-pinterest circle-3"></i></a>-->
-                            </div>
+    <div class="foot">
+        <!-- Container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <!-- Foot Item -->
+                    <div class="foot-item">
+                        <!-- Heading -->
+                        <h5 class="bold"><i class="fa fa-user"></i>&nbsp;&nbsp;About</h5>
+                        <p class="orange">Travelogy club is a platform created to offer 360 degree solution for travel to exotic destinations.</p>
+                        <div class="brand-bg">
+                            <!-- Social Media Icons -->
+                            <a href="https://www.facebook.com/travelogyclub/" target="_blank" class="facebook"><i class="fa fa-facebook circle-3"></i></a>
+                            <a href="https://twitter.com/travelogyclub" target="_blank" class="twitter"><i class="fa fa-twitter circle-3"></i></a>
+                            <!--<a href="#" class="google-plus"><i class="fa fa-google-plus circle-3"></i></a>
+                            <a href="#" class="linkedin"><i class="fa fa-linkedin circle-3"></i></a>
+                            <a href="#" class="pinterest"><i class="fa fa-pinterest circle-3"></i></a>-->
                         </div>
                     </div>
-                    <div class="col-md-7 col-sm-6">
-                        <!-- Foot Item -->
-                        <div class="foot-item">
-                            <!-- Heading -->
-                            <h5 class="bold"><i class="fa fa-building-o"></i>&nbsp;&nbsp;Contact Us</h5>
-                            <!-- Foot Item Content -->
-                            <div class="foot-item-content address">
-                                <p class="tel white">
-                                    @*<i class="fa fa-phone"></i> Tel : +91 80178 10994 (India) <br />*@
+                </div>
+                <div class="col-md-7 col-sm-6">
+                    <!-- Foot Item -->
+                    <div class="foot-item">
+                        <!-- Heading -->
+                        <h5 class="bold"><i class="fa fa-building-o"></i>&nbsp;&nbsp;Contact Us</h5>
+                        <!-- Foot Item Content -->
+                        <div class="foot-item-content address">
+                            <p class="tel white">
+                                @*<i class="fa fa-phone"></i> Tel : +91 80178 10994 (India) <br />*@
                                     <i class="fa fa-phone"></i>+44 208 560 2747 (U.K.)<br />
                                     <i class="fa fa-envelope"></i>  Mail : <a href="mailto:info@travelogyclub.com">info@travelogyclub.com</a><br />
                                     <i class="fa fa-calendar"></i> Business Hours : Sales 9:30 - 5:30 India and U.K. <br />
@@ -270,25 +273,25 @@
 
     <!-- Javascript files -->
     <!-- jQuery -->
-    <script src="~/Content/js/jquery.js"></script>
+    @*<script src="~/content/js/jquery.js"></script>
     <!-- Bootstrap JS -->
-    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/content/js/bootstrap.min.js"></script>
     <!-- Placeholders JS -->
-    <script src="~/Content/js/placeholders.js"></script>
+    <script src="~/content/js/placeholders.js"></script>
     <!-- Magnific Popup -->
-    <script src="~/Content/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/content/js/jquery.magnific-popup.min.js"></script>
     <!-- Owl carousel -->
-    <script src="~/Content/js/owl.carousel.min.js"></script>
+    <script src="~/content/js/owl.carousel.min.js"></script>
     <!-- Respond JS for IE8 -->
-    <script src="~/Content/js/respond.min.js"></script>
+    <script src="~/content/js/respond.min.js"></script>
     <!-- HTML5 Support for IE -->
-    <script src="~/Content/js/html5shiv.js"></script>
+    <script src="~/content/js/html5shiv.js"></script>
     <!-- Main JS -->
-    <script src="~/Content/js/main.js"></script>
+    <script src="~/content/js/main.js"></script>
 
     <!-- Javascript for this page -->
     <!-- Custom JS. Type your JS code in custom.js file -->
-    <script src="~/Content/js/custom.js"></script>
+    <script src="~/content/js/custom.js"></script>*@
 
     <!--
     Style switcher. This is just for demo purpose only.
@@ -299,7 +302,9 @@
 
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/mainjs")
     @RenderSection("scripts", required: false)
 </body>
 </html>
