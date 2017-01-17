@@ -117,7 +117,13 @@
     <Compile Include="TravellerType.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Trip.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TripProvider.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TripStep.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TripTemplate.cs">

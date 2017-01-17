@@ -50,6 +50,7 @@
     <Compile Include="ThreadManager.cs" />
     <Compile Include="TravellerProfileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TripManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomingoDAL\DomingoDAL.csproj">

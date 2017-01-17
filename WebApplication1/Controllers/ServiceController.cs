@@ -21,7 +21,9 @@ namespace WebApplication1.Controllers
         // GET: TripPlanning
         public ActionResult TripPlanning()
         {
-            return View();
+            var blError = TripManager.GetAllTripsForUser(User.Identity.GetUserId(), out var _allTrips);
+            var model = new TripModel { AllTrips = _allTrips };
+            return View(model);
         }
 
         // GET: Service

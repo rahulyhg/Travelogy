@@ -189,6 +189,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ServiceModels.cs" />
     <Compile Include="Models\TravelogyModelBase.cs" />
+    <Compile Include="Models\TripModel.cs" />
     <Compile Include="Models\_DownloadBrochureModel.cs" />
     <Compile Include="Models\_StartTripPlanningViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

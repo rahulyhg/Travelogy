@@ -140,7 +140,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="200" />
           <Property Name="LastName" Type="nvarchar" MaxLength="200" />
@@ -163,6 +163,20 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TripTemplateId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="StartLocation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="EndLocation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Travellerid" Type="int" Nullable="false" />
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="TripProvider">
           <Key>
             <PropertyRef Name="Id" />
@@ -179,6 +193,17 @@
           <Property Name="Telephone02" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Telephone03" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TripStep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TripId" Type="int" Nullable="false" />
+          <Property Name="Destination" Type="nvarchar" MaxLength="50" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
         </EntityType>
         <EntityType Name="TripTemplate">
           <Key>
@@ -260,18 +285,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Traveller_Traveller">
-          <End Role="Traveller" Type="Self.Traveller" Multiplicity="1" />
-          <End Role="Traveller1" Type="Self.Traveller" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Traveller">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Traveller1">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="TravelogyDevModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -288,7 +301,9 @@
           <EntitySet Name="ThreadMessage" EntityType="Self.ThreadMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Traveller" EntityType="Self.Traveller" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TravellerType" EntityType="Self.TravellerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trip" EntityType="Self.Trip" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripProvider" EntityType="Self.TripProvider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TripStep" EntityType="Self.TripStep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripTemplate" EntityType="Self.TripTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripTemplateDay" EntityType="Self.TripTemplateDay" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -306,10 +321,6 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Traveller_Traveller" Association="Self.FK_Traveller_Traveller">
-            <End Role="Traveller" EntitySet="Traveller" />
-            <End Role="Traveller1" EntitySet="Traveller" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -349,6 +360,8 @@
           <EntitySet Name="Threads" EntityType="TravelogyDevModel.Thread" />
           <EntitySet Name="TripTemplates" EntityType="TravelogyDevModel.TripTemplate" />
           <EntitySet Name="ThreadMessages" EntityType="TravelogyDevModel.ThreadMessage" />
+          <EntitySet Name="Trips" EntityType="TravelogyDevModel.Trip" />
+          <EntitySet Name="TripSteps" EntityType="TravelogyDevModel.TripStep" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -583,6 +596,31 @@
           <Property Name="TravellerId" Type="Int32" Nullable="false" />
           <Property Name="AspnetUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TripTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="StartLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="EndLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Travellerid" Type="Int32" Nullable="false" />
+          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TripStep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -788,6 +826,33 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Body" ColumnName="Body" />
                 <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trips">
+            <EntityTypeMapping TypeName="TravelogyDevModel.Trip">
+              <MappingFragment StoreEntitySet="Trip">
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="Travellerid" ColumnName="Travellerid" />
+                <ScalarProperty Name="EndLocation" ColumnName="EndLocation" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StartLocation" ColumnName="StartLocation" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="TripTemplateId" ColumnName="TripTemplateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripSteps">
+            <EntityTypeMapping TypeName="TravelogyDevModel.TripStep">
+              <MappingFragment StoreEntitySet="TripStep">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

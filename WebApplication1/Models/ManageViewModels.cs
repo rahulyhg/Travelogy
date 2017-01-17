@@ -46,7 +46,7 @@ namespace WebApplication1.Models
 
         public IEnumerable<System.Web.Mvc.SelectListItem> ListOfCountries { get; set; }
 
-        public IEnumerable<System.Web.Mvc.SelectListItem> TravelGroupSizes
+        public IEnumerable<System.Web.Mvc.SelectListItem> TravelGroupSizes    
         {
             get
             {

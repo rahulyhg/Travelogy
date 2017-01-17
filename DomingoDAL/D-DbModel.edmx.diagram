@@ -25,6 +25,8 @@
         <EntityTypeShape EntityType="TravelogyDevModel.Thread" Width="1.5" PointX="10.375" PointY="3.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.TripTemplate" Width="1.5" PointX="10.375" PointY="7.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.ThreadMessage" Width="1.5" PointX="3.375" PointY="10.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.Trip" Width="1.5" PointX="5.375" PointY="11.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.TripStep" Width="1.5" PointX="7.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
