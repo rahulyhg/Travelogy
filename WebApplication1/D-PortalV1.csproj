@@ -1683,6 +1683,8 @@
     <Content Include="Views\Shared\_DownloadBrochure.cshtml" />
     <Content Include="Views\Shared\LakeBaikal_TripPlannerWP.cshtml" />
     <Content Include="Views\Shared\TransSiberian_TripPlannerWP.cshtml" />
+    <Content Include="Views\Service\Trip.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

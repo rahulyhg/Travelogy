@@ -21,7 +21,8 @@ namespace WebApplication1.Controllers
         // GET: TripPlanning
         public ActionResult TripPlanning()
         {
-            var blError = TripManager.GetAllTripsForUser(User.Identity.GetUserId(), out var _allTrips);
+            List<Trip> _allTrips = null;
+            var blError = TripManager.GetAllTripsForUser(User.Identity.GetUserId(), out _allTrips);
             var model = new TripModel { AllTrips = _allTrips };
             return View(model);
         }
@@ -94,5 +95,27 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("MessageCenter");
         }
+
+        [Authorize]
+        public ActionResult CreateTrip(string templateAlias)
+        {
+            var _model = new TripViewModel() { AliasName = templateAlias };
+            return RedirectToAction("trip", _model);
+        }
+
+        [Authorize]
+        public ActionResult Trip(TripViewModel model)
+        {            
+            return View(model);
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            filterContext.ExceptionHandled = true;
+
+            // Redirect on error:
+            filterContext.Result = RedirectToAction("Error", "Home");            
+        }
+
     }
 }

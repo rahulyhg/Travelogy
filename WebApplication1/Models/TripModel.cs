@@ -10,4 +10,9 @@ namespace WebApplication1.Models
     {
         public List<Trip> AllTrips { get; set; }
     }
+
+    public class TripViewModel
+    {
+        public string AliasName { get; set; }
+    }
 }

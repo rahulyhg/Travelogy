@@ -167,7 +167,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TripTemplateId" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="datetime" />
           <Property Name="StartLocation" Type="nvarchar" MaxLength="50" />
@@ -198,7 +198,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TripId" Type="int" Nullable="false" />
           <Property Name="Destination" Type="nvarchar" MaxLength="50" />
           <Property Name="SortOrder" Type="int" Nullable="false" />
@@ -209,7 +209,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TripProviderId" Type="int" Nullable="false" />
           <Property Name="DestinationId" Type="int" Nullable="false" />
           <Property Name="DurationDaysMin" Type="int" />
@@ -223,7 +223,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TripTemplateId" Type="int" Nullable="false" />
           <Property Name="SubDestinationId" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
