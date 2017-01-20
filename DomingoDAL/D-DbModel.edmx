@@ -218,6 +218,8 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="100" />
           <Property Name="AdditionalHtml" Type="ntext" />
+          <Property Name="searchalias" Type="nvarchar" MaxLength="50" />
+          <Property Name="templateShortName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TripTemplateDay">
           <Key>
@@ -584,6 +586,8 @@
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ThumbnailPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="searchalias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="templateShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ThreadMessage">
           <Key>
@@ -806,6 +810,8 @@
           <EntitySetMapping Name="TripTemplates">
             <EntityTypeMapping TypeName="TravelogyDevModel.TripTemplate">
               <MappingFragment StoreEntitySet="TripTemplate">
+                <ScalarProperty Name="templateShortName" ColumnName="templateShortName" />
+                <ScalarProperty Name="searchalias" ColumnName="searchalias" />
                 <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
                 <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

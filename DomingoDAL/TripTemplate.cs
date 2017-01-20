@@ -23,5 +23,7 @@ namespace DomingoDAL
         public string Description { get; set; }
         public string ThumbnailPath { get; set; }
         public string AdditionalHtml { get; set; }
+        public string searchalias { get; set; }
+        public string templateShortName { get; set; }
     }
 }

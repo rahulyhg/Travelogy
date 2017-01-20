@@ -60,6 +60,9 @@ namespace WebApplication1.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        [Display(Name = "LoginFailureMessage")]
+        public string LoginFailureMessage { get; set; }
     }
 
     public class RegisterViewModel

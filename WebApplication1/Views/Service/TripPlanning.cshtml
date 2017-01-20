@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.TripModel
+﻿@model WebApplication1.Models.TripPlanningViewModel
 
 <div class="row">
     <div class="col-md-12 padd-10">
@@ -68,14 +68,36 @@
 }
 else // for logged in users
 {
-    if (Model.AllTrips == null || Model.AllTrips.Count == 0)
+    if (Model.AllTrips == null || Model.AllTrips.Count == 0) // user has not created any trip yet
     {
-        <h1>You have not planned any trip yet!</h1>
-        <h2>Start planning - <small><a href="/circuit">Browse all circuits</a></small></h2>
+        <div class="row tag-box tag-box-v5">
+            <div class="col-md-8">
+                <span>You have not planned any trip yet!</span>
+            </div>
+            <div class="col-md-4">
+                <a href="/circuit">
+                    <p><button class="btn-u btn-u-lg btn-u-orange"><i class="icon-cloud"></i> Browse all circuits...</button></p>
+                </a>                
+            </div>
+        </div>
+
+        <div class="row tag-box tag-box-v1">
+            <h1 class="orange">Featured circuits</h1>
+
+            <!--Lake Baikal-->
+            @Html.Partial("LakeBaikal_TripPlannerWP")
+            <!--End Lake Baikal-->
+            <!--TSR-->
+            @Html.Partial("TransSiberian_TripPlannerWP")
+            <!--End TSR-->
+        </div>
     }
+
+    // active trip
 
 }
 
-<!--Lake Baikal-->
-@Html.Partial("LakeBaikal_TripPlannerWP")
-<!--End Lake Baikal--> 
+
+
+
+

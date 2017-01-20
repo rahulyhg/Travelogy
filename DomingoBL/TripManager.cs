@@ -45,12 +45,73 @@ namespace DomingoBL
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="trip"></param>
         /// <returns></returns>
-        public static DomingoBlError CreateTrip()
+        public static DomingoBlError CreateTrip(Trip trip)
         {
             try
             {
-                return null;
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    // if the trip object is for a new trip
+                    // simply add it to the database table and save it
+                    if(trip.Id == 0)
+                    {
+                        context.Trips.Add(trip);
+                        context.SaveChanges();
+                    }
+                    
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="alias"></param>
+        /// <returns></returns>
+        public static DomingoBlError SearchTripTemplatesByAlias(string alias, out List<TripTemplate> templates)
+        {
+            try
+            {
+                templates = null;
+
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    templates = context.TripTemplates.Where(p => p.searchalias == alias).ToList();
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                templates = null;
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="templateId"></param>
+        /// <param name="template"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetTripTemplatesById(int templateId, out TripTemplate template)
+        {
+            template = null;
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    template = context.TripTemplates.Where(p => p.Id == templateId).FirstOrDefault();
+                }
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" }; 
             }
             catch (Exception ex)
             {

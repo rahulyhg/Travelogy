@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity;
 
 namespace WebApplication1.Controllers
 {
-    public class ServiceController : Controller
+    public class ServiceController : DomingoControllerBase
     {
         // GET: Service
         public ActionResult Index()
@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
         {
             List<Trip> _allTrips = null;
             var blError = TripManager.GetAllTripsForUser(User.Identity.GetUserId(), out _allTrips);
-            var model = new TripModel { AllTrips = _allTrips };
+            var model = new TripPlanningViewModel { AllTrips = _allTrips };
             return View(model);
         }
 
@@ -97,10 +97,29 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize]
-        public ActionResult CreateTrip(string templateAlias)
+        public ActionResult ListAllTripTemplates(string templateAlias)
         {
-            var _model = new TripViewModel() { AliasName = templateAlias };
-            return RedirectToAction("trip", _model);
+            var _availableTemplates = new List<TripTemplate>();
+            var _blError = TripManager.SearchTripTemplatesByAlias(templateAlias, out _availableTemplates);
+            var _model = new TripViewModel() { AliasName = templateAlias, AllTemplates = _availableTemplates };
+
+            return View("Trip", _model);
+            //return RedirectToAction("trip", _model);
+        }
+
+        [Authorize]
+        public ActionResult CreateTripFromTemplate(int templateId)
+        {
+            // get the trip template
+            TripTemplate _template = null;
+            var _blerror = TripManager.GetTripTemplatesById(templateId, out _template);
+
+            // assign the template to the view model
+            var _model = new TripViewModel();
+            _model.CreateTripTemplate = _template;
+            _model.CreateTripViewModel = new CreateTripViewModel() { TemplateId = _template.Id };
+
+            return View("Trip", _model);
         }
 
         [Authorize]
@@ -109,13 +128,25 @@ namespace WebApplication1.Controllers
             return View(model);
         }
 
-        protected override void OnException(ExceptionContext filterContext)
+        /// <summary>
+        /// Creates a new trip for the user
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateTrip(TripViewModel model)
         {
-            filterContext.ExceptionHandled = true;
-
-            // Redirect on error:
-            filterContext.Result = RedirectToAction("Error", "Home");            
+            // create a new Trip object from the form and save it
+            Trip trip = new Trip()
+            {
+                AspNetUserId = User.Identity.GetUserId(),
+                TripTemplateId = model.CreateTripViewModel.TemplateId,
+                StartDate = model.CreateTripViewModel.StartDate
+            };
+            
+            var _blError = TripManager.CreateTrip(trip);
+            return View("Trip", model);
         }
-
     }
 }

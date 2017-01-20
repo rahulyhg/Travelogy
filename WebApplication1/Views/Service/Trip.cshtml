@@ -1,4 +1,56 @@
 ﻿@model WebApplication1.Models.TripViewModel
 
-<h1>Your Trip</h1>
-<h2>@Model.AliasName</h2>
+<div class="row">
+    <div class="col-md-12 padd-10">
+        <img class="img-responsive" src="~/Content/img/gallery/big/slider001.jpg" />
+    </div>
+</div>
+
+
+@*if the user is looking at templates, list them*@ 
+@if (@Model.AllTemplates != null)
+{
+    <h1>Choose a Trip to start:</h1>
+
+    foreach (var _template in @Model.AllTemplates)
+    {
+        <div class="row tag-box tag-box-v5">
+            <div class="col-md-8">
+                <span>@_template.Name</span>
+                <h2>@_template.Description</h2>
+            </div>
+            <a href="/Service/CreateTripFromTemplate?templateId=@_template.Id">
+                <div class="col-md-4">
+                    <p><button class="btn-u btn-u-lg btn-u-orange"><i class="icon-cogs "></i> Create trip</button></p>
+                </div>
+            </a>
+        </div>
+    }
+}
+
+@*if the user is creating a new trip - show the form*@
+@if (Model.CreateTripTemplate != null)
+{
+    using (Html.BeginForm("CreateTrip", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken();
+
+        // the templateId
+        @Html.HiddenFor(p => p.CreateTripViewModel.TemplateId);
+
+
+
+        <div class="row tag-box tag-box-v2">
+            <div class="col-md-12">
+                <span>@Model.CreateTripTemplate.Name</span>
+                <h2>@Model.CreateTripTemplate.Description</h2>
+            </div>
+
+            <div class="col-md-12">
+                <p><button class="btn-u btn-u-lg btn-u-orange" type="submit"><i class="icon-cogs "></i> Create trip</button></p>
+            </div>
+        </div>
+
+    };
+}
+
