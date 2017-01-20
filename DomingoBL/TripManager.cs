@@ -8,6 +8,19 @@ using System.Threading.Tasks;
 
 namespace DomingoBL
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum TripStatus
+    {
+        planned,
+
+        booked,
+
+        archived
+    }
+
     /// <summary>
     /// 
     /// </summary>

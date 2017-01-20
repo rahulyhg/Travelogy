@@ -18,15 +18,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        // GET: TripPlanning
-        public ActionResult TripPlanning()
-        {
-            List<Trip> _allTrips = null;
-            var blError = TripManager.GetAllTripsForUser(User.Identity.GetUserId(), out _allTrips);
-            var model = new TripPlanningViewModel { AllTrips = _allTrips };
-            return View(model);
-        }
-
+        
         // GET: Service
         public ActionResult TravelLogistics()
         {
@@ -76,6 +68,12 @@ namespace WebApplication1.Controllers
             return RedirectToAction("MessageCenter");
         }
 
+        /// <summary>
+        /// Reply to a message - user (admin console is in a different method)
+        /// </summary>
+        /// <param name="threadId"></param>
+        /// <param name="replyMessage"></param>
+        /// <returns></returns>
         [Authorize]
         public ActionResult ReplyToThread(int threadId, string replyMessage)
         {
@@ -96,6 +94,42 @@ namespace WebApplication1.Controllers
             return RedirectToAction("MessageCenter");
         }
 
+        // GET: TripPlanning
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult TripPlanning()
+        {
+            var model = new TripPlanningViewModel();
+
+            if (Request.IsAuthenticated)
+            {
+                // find all trips for the user
+                List<Trip> _allTrips = null;
+                var blError = TripManager.GetAllTripsForUser(User.Identity.GetUserId(), out _allTrips);
+                model.AllTrips = _allTrips;
+
+                // find any active trip - to move to a business layer method
+                var _activeTrip = _allTrips.FirstOrDefault((p => (p.Status.Trim() == TripStatus.booked.ToString())
+                    || (p.Status.Trim() == TripStatus.planned.ToString())));
+
+                // if there IS an active trip - redirect to view
+                if (_activeTrip != null)
+                {
+                    var _tripViewModel = new TripViewModel() { ActiveTrip = _activeTrip };
+                    return View("Trip", _tripViewModel);
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// List all templates based on a search alias
+        /// </summary>
+        /// <param name="templateAlias"></param>
+        /// <returns></returns>
         [Authorize]
         public ActionResult ListAllTripTemplates(string templateAlias)
         {
@@ -103,10 +137,14 @@ namespace WebApplication1.Controllers
             var _blError = TripManager.SearchTripTemplatesByAlias(templateAlias, out _availableTemplates);
             var _model = new TripViewModel() { AliasName = templateAlias, AllTemplates = _availableTemplates };
 
-            return View("Trip", _model);
-            //return RedirectToAction("trip", _model);
+            return View("Trip", _model);            
         }
 
+        /// <summary>
+        /// method to create a form for trip based on a template
+        /// </summary>
+        /// <param name="templateId"></param>
+        /// <returns></returns>
         [Authorize]
         public ActionResult CreateTripFromTemplate(int templateId)
         {
@@ -117,19 +155,13 @@ namespace WebApplication1.Controllers
             // assign the template to the view model
             var _model = new TripViewModel();
             _model.CreateTripTemplate = _template;
-            _model.CreateTripViewModel = new CreateTripViewModel() { TemplateId = _template.Id };
+            _model.CreateTripViewModel = new CreateTripViewModel() { TemplateId = _template.Id, StartDate = DateTime.Now };
 
             return View("Trip", _model);
         }
 
-        [Authorize]
-        public ActionResult Trip(TripViewModel model)
-        {            
-            return View(model);
-        }
-
         /// <summary>
-        /// Creates a new trip for the user
+        /// Creates a new trip for the user - based on template and the user's inputs
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -142,11 +174,28 @@ namespace WebApplication1.Controllers
             {
                 AspNetUserId = User.Identity.GetUserId(),
                 TripTemplateId = model.CreateTripViewModel.TemplateId,
-                StartDate = model.CreateTripViewModel.StartDate
+                StartDate = model.CreateTripViewModel.StartDate,
+                Status = TripStatus.planned.ToString()
             };
             
             var _blError = TripManager.CreateTrip(trip);
+            List<Trip> _allTrips = null;
+            _blError = TripManager.GetAllTripsForUser(User.Identity.GetUserId(), out _allTrips);
+            model.AllTrips = _allTrips;
+            model.ActiveTrip = _allTrips.FirstOrDefault((p => (p.Status.Trim() == TripStatus.booked.ToString())
+                    || (p.Status.Trim() == TripStatus.planned.ToString())));
             return View("Trip", model);
+        }
+
+        /// <summary>
+        /// Show the view for Trip
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult Trip(TripViewModel model)
+        {
+            return View(model);
         }
     }
 }
