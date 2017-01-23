@@ -15,11 +15,20 @@ namespace WebApplication1.Models
         [Display(Name = "Body")]
         public string Body { get; set; }
 
-        public DateTime CreateDate { get; set; }        
+        public DateTime CreateDate { get; set; } 
+        
+        public int TripId { get; set; }       
     }
 
     public class MessageListModel
     {
         public List<MessageCollection> AllMessages { get; set; }        
+    }
+
+    public class MessageListItemViewModel
+    {
+        public MessageCollection MessageThread { get; set; }
+
+        public int TripId { get; set; }
     }
 }

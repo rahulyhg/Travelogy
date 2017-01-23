@@ -393,6 +393,7 @@ namespace WebApplication1.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            HttpContext.Session.Abandon(); // yuban - kill the session
             return RedirectToAction("Index", "Home");
         }
 
@@ -449,7 +450,8 @@ namespace WebApplication1.Controllers
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
-            }
+            }          
+
             return RedirectToAction("Index", "Home");
         }
 

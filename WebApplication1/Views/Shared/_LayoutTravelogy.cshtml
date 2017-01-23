@@ -119,9 +119,19 @@
                         <ul>
                             @if (Request.IsAuthenticated)
                             {
-                                <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
-                                <li>@Html.ActionLink("My Profile", "TravellerProfile", "Manage")</li>
-                                <li>@Html.ActionLink("My Messages", "MessageCenter", "Service")</li>
+                                if (ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
+                                {
+                                    <li>@Html.ActionLink("Dashboard", "index", "Admin")</li>
+                                    <li>@Html.ActionLink("Messages", "MessageCenter", "Admin")</li>
+                                    <li>@Html.ActionLink("Trips", "TripManagement", "Admin")</li>
+                                }
+
+                                else
+                                {
+                                    <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
+                                    <li>@Html.ActionLink("My Profile", "TravellerProfile", "Manage")</li>
+                                    <li>@Html.ActionLink("My Messages", "MessageCenter", "Service")</li>
+                                }
                             }
                             else
                             {

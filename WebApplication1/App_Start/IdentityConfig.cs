@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using WebApplication1.Models;
+using WebApplication1.Helpers;
 
 namespace WebApplication1
 {
@@ -38,6 +39,43 @@ namespace WebApplication1
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="AspNetUserId"></param>
+        /// <returns></returns>
+        public static bool IsTravelogyAdmin(string AspNetUserName)
+        {
+            if(string.IsNullOrEmpty(AspNetUserName))
+            {
+                return false;
+            }
+
+            if(HttpContext.Current.Session["IsTravelogyAdmin"] != null)                
+            {
+                if ((HttpContext.Current.Session["IsTravelogyAdmin"].ToString().ToUpper() == "TRUE"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            var isAdmin = DomingoBL.UserManager.IsTravelogyAdmin(AspNetUserName);
+            if(isAdmin)
+            {
+                HttpContext.Current.Session.Add("IsTravelogyAdmin", "TRUE");
+                return true;
+            }
+            else
+            {
+                HttpContext.Current.Session.Add("IsTravelogyAdmin", "FALSE");
+                return false;
+            }
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 

@@ -24,6 +24,56 @@ namespace DomingoBL
         /// </summary>
         /// <param name="tm"></param>
         /// <param name="title"></param>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
+        public static DomingoBlError CreateThreadforTrip(ThreadMessage tm, string title, int tripId)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    // create the Thread
+                    var _thread = new Thread()
+                    {
+                        AuthorUserId = tm.TravellerId,
+                        CreatedDate = DateTime.Now,
+                        MostRecentPostDate = DateTime.Now,
+                        Title = title,
+                        Tags = "message",                        
+                        AspnetUserId = tm.AspnetUserId
+                    };
+
+                    // save it to the DB
+                    context.Threads.Add(_thread);
+                    context.SaveChanges();
+
+                    // add the message with the ID 
+                    context.ThreadMessages.Add(tm);
+                    tm.ThreadId = _thread.Id;
+
+                    var trip = context.Trips.FirstOrDefault(p => p.Id == tripId);
+                    if(trip != null)
+                    {
+                        trip.ThreadId = _thread.Id;
+                    }
+
+                    // commit
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tm"></param>
+        /// <param name="title"></param>
         /// <returns></returns>
         public static DomingoBlError CreateThread(ThreadMessage tm, string title)
         {
@@ -131,6 +181,45 @@ namespace DomingoBL
             }
 
             return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_threadId"></param>
+        /// <param name="_thread"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetMessageThreadById(int _threadId, out MessageCollection _thread)
+        {
+            _thread = null;
+
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    // get the thread by id
+                    var thread = context.Threads.FirstOrDefault(p => p.Id == _threadId);
+
+                    // if found get the messages
+                    if(thread != null)
+                    {
+                        var messages = context.ThreadMessages.Where(p => p.ThreadId == thread.Id).OrderBy(p => p.CreatedDate);
+
+                        if (messages != null)
+                        {
+                            _thread = new MessageCollection() { Thread = thread, Messages = messages.ToList() };
+                            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+                        }                        
+                    }                   
+                }
+
+                return new DomingoBlError() { ErrorCode = 50, ErrorMessage = "No matching record found." };
+
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };                
+            }            
         }
     }
 }

@@ -1,0 +1,33 @@
+﻿@model WebApplication1.Models.MessageViewModel
+
+@if (Request.IsAuthenticated)
+{
+
+    <section id="ContactForm">
+        @using (Html.BeginForm("CreateThread", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "reg-page", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(m => m.TripId)
+
+            <div class="reg-header">
+                <h5>Send your message to the Travelogers</h5>
+            </div>
+
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon"><i class="icon-envelope-alt"></i></span>
+                @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", @placeholder = "Mention a Subject" })
+            </div>
+            <div class="input-group margin-bottom-20">
+                @Html.TextAreaFor(m => m.Body, new { @class = "form-control", @rows = 10, @cols = 200, @placeholder = "Send your message..." })
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" value="Start a discussion" class="btn-u pull-right" />
+                </div>
+            </div>
+        }
+    </section>
+}
+

@@ -1,39 +1,22 @@
 ﻿@model WebApplication1.Models.MessageListModel
 
+@*get all message threads for the user*@
 @foreach (var item in Model.AllMessages)
 {
-    <div class="row margin-bottom-20">
-        <div class="col-md-12">
-            <div class="panel panel-black">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="icon-tasks"></i> Discussion started: @item.Thread.CreatedDate</h3>
-                </div>
+    // pass the threads to the "_MessageThread" partial view
+    var _model = new WebApplication1.Models.MessageListItemViewModel() { MessageThread = item };
+    Html.RenderPartial("_MessageThread", _model);
+}
 
-                <form action="/Service/ReplyToThread" >
-                    <input type="hidden" name="threadId" value="@item.Thread.Id" />
-                    <div class="panel-body">
-                        <h4>@item.Thread.Title</h4>
-                        @foreach (var message in item.Messages)
-                        {
-                            <h6>@message.CreatedDate</h6>
-                            <p>@message.Body</p>
-                        }
-                        <hr />
-                        <div class="padd-10">
-                            <textarea name="replyMessage" rows="3" cols="200" class="form-control" placeholder="Reply to the thread" required></textarea>
-                        </div>                        
-                        <div class="padd-10">
-                            <button type="submit" class="btn btn-orange pull-right">Reply</button>
-                        </div>
-                    </div>
-                </form>                
-            </div>
-        </div>
-    </div>
- }
+
+@if (Request.IsAuthenticated)
+{
+    var _model = new WebApplication1.Models.MessageViewModel();
+    Html.RenderPartial("_MessageThreadStart", _model);
+}
 
 
 
-    
+
 
 

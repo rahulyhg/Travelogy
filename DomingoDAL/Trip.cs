@@ -23,5 +23,6 @@ namespace DomingoDAL
         public string EndLocation { get; set; }
         public int Travellerid { get; set; }
         public string AspNetUserId { get; set; }
+        public Nullable<int> ThreadId { get; set; }
     }
 }

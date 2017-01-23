@@ -1686,6 +1686,10 @@
     <Content Include="Views\Shared\TransSiberian_TripPlannerWP.cshtml" />
     <Content Include="Views\Service\Trip.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Shared\_MessageThread.cshtml" />
+    <Content Include="Views\Shared\_MessageThreadStart.cshtml" />
+    <Content Include="Views\Admin\MessageCenter.cshtml" />
+    <Content Include="Views\Admin\TripManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

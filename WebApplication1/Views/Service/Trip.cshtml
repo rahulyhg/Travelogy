@@ -64,9 +64,28 @@
             <h1>Your trip details</h1>
             <span>@Model.ActiveTrip.StartDate</span>
             <h2>@Model.ActiveTrip.Status</h2>
+            <h3>@Model.ActiveTrip.TripTemplateId</h3>
         </div>        
         <div class="col-md-4">
             <p><button class="btn-u btn-u-lg btn-u-orange"><i class="icon-cogs "></i> Edit trip</button></p>
         </div>        
     </div>
+
+    // if there are no messages sent for this trip - start a descussion
+    if(Model.ActiveTrip.ThreadId == null || Model.ActiveTrip.ThreadId == 0)
+    {
+        var _model = new WebApplication1.Models.MessageViewModel() {  TripId = Model.ActiveTrip.Id};
+        Html.RenderPartial("_MessageThreadStart", _model);
+    }
+
+    if (Model.ActiveTrip.ThreadId > 0)
+    {
+        DomingoBL.MessageCollection _thread = null;
+        DomingoBL.ThreadManager.GetMessageThreadById(Model.ActiveTrip.ThreadId.Value, out _thread);
+        if(_thread != null)
+        {
+            var _model = new WebApplication1.Models.MessageListItemViewModel() { MessageThread = _thread, TripId = Model.ActiveTrip.Id };
+            Html.RenderPartial("_MessageThread", _model);
+        }
+    }
 }

@@ -16,6 +16,9 @@ namespace WebApplication1.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string UserType { get; set; }
+        
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -31,5 +34,5 @@ namespace WebApplication1.Models
         {
             return new ApplicationDbContext();
         }
-    }
+    }    
 }

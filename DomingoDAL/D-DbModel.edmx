@@ -55,6 +55,7 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -176,6 +177,7 @@
           <Property Name="EndLocation" Type="nvarchar" MaxLength="50" />
           <Property Name="Travellerid" Type="int" Nullable="false" />
           <Property Name="AspNetUserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ThreadId" Type="int" />
         </EntityType>
         <EntityType Name="TripProvider">
           <Key>
@@ -413,6 +415,7 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="TravelogyDevModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="TravelogyDevModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="TravelogyDevModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="TravelogyDevModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -613,6 +616,7 @@
           <Property Name="EndLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Travellerid" Type="Int32" Nullable="false" />
           <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThreadId" Type="Int32" />
         </EntityType>
         <EntityType Name="TripStep">
           <Key>
@@ -661,6 +665,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="TravelogyDevModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -839,6 +844,7 @@
           <EntitySetMapping Name="Trips">
             <EntityTypeMapping TypeName="TravelogyDevModel.Trip">
               <MappingFragment StoreEntitySet="Trip">
+                <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
                 <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
                 <ScalarProperty Name="Travellerid" ColumnName="Travellerid" />
                 <ScalarProperty Name="EndLocation" ColumnName="EndLocation" />

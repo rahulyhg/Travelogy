@@ -3,8 +3,10 @@
 
 @if (Request.IsAuthenticated)
 {
-    
-    <section id="ContactForm">
+
+    Html.RenderPartial("_MessageThreadStart", Model);
+
+    @*<section id="ContactForm">
         @using (Html.BeginForm("CreateThread", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "reg-page", role = "form" }))
         {
             @Html.AntiForgeryToken()           
@@ -27,7 +29,7 @@
                 </div>
             </div>
         }
-    </section>
+    </section>*@
 }
 
 @*else

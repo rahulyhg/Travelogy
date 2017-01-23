@@ -54,6 +54,7 @@
     <Compile Include="TravellerProfileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TripManager.cs" />
+    <Compile Include="UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomingoDAL\DomingoDAL.csproj">

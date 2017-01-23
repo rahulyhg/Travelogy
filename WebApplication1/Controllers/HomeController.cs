@@ -16,6 +16,11 @@ namespace WebApplication1.Controllers
 
         public ActionResult Index()
         {
+            if (ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             return View();
         }
 

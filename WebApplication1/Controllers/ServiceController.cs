@@ -58,11 +58,35 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult CreateThread(MessageViewModel _model)
         {
-            var _message = new ThreadMessage() { TravellerId = 999, Body = _model.Body, CreatedDate = DateTime.Now, AspnetUserId = User.Identity.GetUserId() };
-            var _blError = ThreadManager.CreateThread(_message, _model.Subject);
+            var _message = new ThreadMessage()
+                {
+                    TravellerId = 999,
+                    Body = _model.Body,
+                    CreatedDate = DateTime.Now,                    
+                    AspnetUserId = User.Identity.GetUserId()
+                };
+
+            var _blError = new DomingoBlError();
+            if(_model.TripId == 0)
+            {
+                _blError = ThreadManager.CreateThread(_message, _model.Subject);
+            }
+            else
+            {
+                _blError = ThreadManager.CreateThreadforTrip(_message, _model.Subject, _model.TripId);
+            }
+            
             if (_blError.ErrorCode == 0)
             {
-                return RedirectToAction("MessageCenter");
+                if (_model.TripId == 0)
+                {
+                    return RedirectToAction("MessageCenter");
+                }
+
+                else
+                {
+                    return RedirectToAction("TripPlanning");
+                }
             }
 
             return RedirectToAction("MessageCenter");
@@ -73,9 +97,10 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <param name="threadId"></param>
         /// <param name="replyMessage"></param>
+        /// <param name="tripId"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult ReplyToThread(int threadId, string replyMessage)
+        public ActionResult ReplyToThread(int threadId, string replyMessage, int tripId)
         {
             if(!string.IsNullOrEmpty(replyMessage))
             {
@@ -89,9 +114,16 @@ namespace WebApplication1.Controllers
                 };
 
                 var _blError = ThreadManager.AddToThread(threadMessage);
-            }            
+            }
 
-            return RedirectToAction("MessageCenter");
+            if (tripId == 0)
+            {
+                return RedirectToAction("MessageCenter");
+            }
+            else
+            {
+                return RedirectToAction("TripPlanning");
+            }
         }
 
         // GET: TripPlanning
