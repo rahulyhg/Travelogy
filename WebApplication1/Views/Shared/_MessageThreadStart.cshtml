@@ -2,7 +2,6 @@
 
 @if (Request.IsAuthenticated)
 {
-
     <section id="ContactForm">
         @using (Html.BeginForm("CreateThread", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "reg-page", role = "form" }))
         {
@@ -10,9 +9,9 @@
 
             @Html.HiddenFor(m => m.TripId)
 
-            <div class="reg-header">
+            @*<div class="reg-header">
                 <h5>Send your message to the Travelogers</h5>
-            </div>
+            </div>*@
 
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="icon-envelope-alt"></i></span>

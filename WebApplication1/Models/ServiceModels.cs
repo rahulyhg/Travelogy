@@ -25,10 +25,15 @@ namespace WebApplication1.Models
         public List<MessageCollection> AllMessages { get; set; }        
     }
 
+    /// <summary>
+    /// Used for the partial view for one message : subject + messages
+    /// </summary>
     public class MessageListItemViewModel
     {
         public MessageCollection MessageThread { get; set; }
 
         public int TripId { get; set; }
+
+        public int AdminId { get; set; }
     }
 }

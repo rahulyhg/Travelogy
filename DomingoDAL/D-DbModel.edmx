@@ -136,6 +136,7 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="TravellerId" Type="int" Nullable="false" />
           <Property Name="AspnetUserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsAdmin" Type="bit" />
         </EntityType>
         <EntityType Name="Traveller">
           <Key>
@@ -233,6 +234,26 @@
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
           <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TravelogyDev.dbo.View_ThreadMessage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_ThreadMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ThreadId" />
+            <PropertyRef Name="Body" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="TravellerId" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ThreadId" Type="int" Nullable="false" />
+          <Property Name="Body" Type="text" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="TravellerId" Type="int" Nullable="false" />
+          <Property Name="AspnetUserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsAdmin" Type="bit" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -310,6 +331,18 @@
           <EntitySet Name="TripStep" EntityType="Self.TripStep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripTemplate" EntityType="Self.TripTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripTemplateDay" EntityType="Self.TripTemplateDay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_ThreadMessage" EntityType="Self.View_ThreadMessage" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_ThreadMessage].[Id] AS [Id], 
+    [View_ThreadMessage].[ThreadId] AS [ThreadId], 
+    [View_ThreadMessage].[Body] AS [Body], 
+    [View_ThreadMessage].[CreatedDate] AS [CreatedDate], 
+    [View_ThreadMessage].[TravellerId] AS [TravellerId], 
+    [View_ThreadMessage].[AspnetUserId] AS [AspnetUserId], 
+    [View_ThreadMessage].[IsAdmin] AS [IsAdmin], 
+    [View_ThreadMessage].[UserName] AS [UserName]
+    FROM [dbo].[View_ThreadMessage] AS [View_ThreadMessage]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -366,6 +399,7 @@
           <EntitySet Name="ThreadMessages" EntityType="TravelogyDevModel.ThreadMessage" />
           <EntitySet Name="Trips" EntityType="TravelogyDevModel.Trip" />
           <EntitySet Name="TripSteps" EntityType="TravelogyDevModel.TripStep" />
+          <EntitySet Name="View_ThreadMessage" EntityType="TravelogyDevModel.View_ThreadMessage" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -602,6 +636,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TravellerId" Type="Int32" Nullable="false" />
           <Property Name="AspnetUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsAdmin" Type="Boolean" />
         </EntityType>
         <EntityType Name="Trip">
           <Key>
@@ -628,6 +663,24 @@
           <Property Name="SortOrder" Type="Int32" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="View_ThreadMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ThreadId" />
+            <PropertyRef Name="Body" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="TravellerId" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ThreadId" Type="Int32" Nullable="false" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TravellerId" Type="Int32" Nullable="false" />
+          <Property Name="AspnetUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsAdmin" Type="Boolean" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -832,6 +885,7 @@
           <EntitySetMapping Name="ThreadMessages">
             <EntityTypeMapping TypeName="TravelogyDevModel.ThreadMessage">
               <MappingFragment StoreEntitySet="ThreadMessage">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
                 <ScalarProperty Name="AspnetUserId" ColumnName="AspnetUserId" />
                 <ScalarProperty Name="TravellerId" ColumnName="TravellerId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -865,6 +919,20 @@
                 <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
                 <ScalarProperty Name="Destination" ColumnName="Destination" />
                 <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_ThreadMessage">
+            <EntityTypeMapping TypeName="TravelogyDevModel.View_ThreadMessage">
+              <MappingFragment StoreEntitySet="View_ThreadMessage">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="AspnetUserId" ColumnName="AspnetUserId" />
+                <ScalarProperty Name="TravellerId" ColumnName="TravellerId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

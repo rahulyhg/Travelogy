@@ -43,5 +43,6 @@ namespace DomingoDAL
         public virtual DbSet<ThreadMessage> ThreadMessages { get; set; }
         public virtual DbSet<Trip> Trips { get; set; }
         public virtual DbSet<TripStep> TripSteps { get; set; }
+        public virtual DbSet<View_ThreadMessage> View_ThreadMessage { get; set; }
     }
 }

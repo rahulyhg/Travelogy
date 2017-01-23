@@ -12,7 +12,7 @@ namespace DomingoDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ThreadMessage
+    public partial class View_ThreadMessage
     {
         public int Id { get; set; }
         public int ThreadId { get; set; }
@@ -21,5 +21,6 @@ namespace DomingoDAL
         public int TravellerId { get; set; }
         public string AspnetUserId { get; set; }
         public Nullable<bool> IsAdmin { get; set; }
+        public string UserName { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace DomingoBL
     {
         public Thread Thread { get; set; }
 
-        public List<ThreadMessage> Messages { get; set; }
+        public List<View_ThreadMessage> Messages { get; set; }
     }
 
     public class ThreadManager
@@ -165,7 +165,7 @@ namespace DomingoBL
                         // for all threads get the messages, latest one first
                         foreach (var thread in threads)
                         {
-                            var messages = context.ThreadMessages.Where(p => p.ThreadId == thread.Id).OrderBy(p => p.CreatedDate);
+                            var messages = context.View_ThreadMessage.Where(p => p.ThreadId == thread.Id).OrderBy(p => p.CreatedDate);
                             if(messages != null)
                             {
                                 var _message = new MessageCollection() { Thread = thread, Messages = messages.ToList() };                                
@@ -181,6 +181,46 @@ namespace DomingoBL
             }
 
             return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_messageList"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetMessagesForAdmin(out List<MessageCollection> _messageList)
+        {
+            _messageList = null;
+
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    // get all the threads, sorted by the latest one first
+                    var threads = context.Threads.Select(p => p).OrderByDescending(p => p.MostRecentPostDate);
+                    if (threads != null)
+                    {
+                        _messageList = new List<MessageCollection>();
+
+                        // for all threads get the messages, latest one first
+                        foreach (var thread in threads)
+                        {
+                            var messages = context.View_ThreadMessage.Where(p => p.ThreadId == thread.Id).OrderBy(p => p.CreatedDate);
+                            if (messages != null)
+                            {
+                                var _message = new MessageCollection() { Thread = thread, Messages = messages.ToList() };
+                                _messageList.Add(_message);
+                            }
+                        }
+                    }
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
         }
 
         /// <summary>
@@ -203,7 +243,7 @@ namespace DomingoBL
                     // if found get the messages
                     if(thread != null)
                     {
-                        var messages = context.ThreadMessages.Where(p => p.ThreadId == thread.Id).OrderBy(p => p.CreatedDate);
+                        var messages = context.View_ThreadMessage.Where(p => p.ThreadId == thread.Id).OrderBy(p => p.CreatedDate);
 
                         if (messages != null)
                         {

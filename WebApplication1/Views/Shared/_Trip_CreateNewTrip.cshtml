@@ -1,0 +1,28 @@
+﻿@model WebApplication1.Models.TripViewModel
+
+@if (Model.CreateTripTemplate != null)
+{
+    using (Html.BeginForm("CreateTrip", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken();
+
+        // the templateId
+        @Html.HiddenFor(p => p.CreateTripViewModel.TemplateId);
+        @Html.HiddenFor(p => p.CreateTripViewModel.StartDate);
+
+        <div class="row tag-box tag-box-v2">
+            <div class="col-md-12">
+                <span>@Model.CreateTripTemplate.Name</span>
+                <h2>@Model.CreateTripTemplate.Description</h2>
+            </div>
+
+            <div class="col-md-12">
+                <p><button class="btn-u btn-u-lg btn-u-orange" type="submit"><i class="icon-cogs "></i> Create trip</button></p>
+            </div>
+
+            @*<h1>@Html.ValidationSummary()</h1>*@
+        </div>
+
+    };
+}
+

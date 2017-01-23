@@ -98,9 +98,10 @@ namespace WebApplication1.Controllers
         /// <param name="threadId"></param>
         /// <param name="replyMessage"></param>
         /// <param name="tripId"></param>
+        /// <param name="aDmin"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult ReplyToThread(int threadId, string replyMessage, int tripId)
+        public ActionResult ReplyToThread(int threadId, string replyMessage, int tripId, int aDmin = 0)
         {
             if(!string.IsNullOrEmpty(replyMessage))
             {
@@ -110,20 +111,25 @@ namespace WebApplication1.Controllers
                     ThreadId = threadId,
                     Body = replyMessage,
                     CreatedDate = DateTime.Now,
-                    TravellerId = 990
+                    TravellerId = 990,
+                    IsAdmin = aDmin > 0 ? true : false
                 };
 
                 var _blError = ThreadManager.AddToThread(threadMessage);
             }
 
-            if (tripId == 0)
+            if (aDmin > 0)
             {
-                return RedirectToAction("MessageCenter");
+                return RedirectToAction("MessageCenter", "Admin");
             }
-            else
+
+
+            if (tripId != 0)
             {
                 return RedirectToAction("TripPlanning");
             }
+
+            return RedirectToAction("MessageCenter");
         }
 
         // GET: TripPlanning

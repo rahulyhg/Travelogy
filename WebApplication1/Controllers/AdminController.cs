@@ -1,4 +1,5 @@
-﻿using DomingoDAL;
+﻿using DomingoBL;
+using DomingoDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Helpers;
 using WebApplication1.Models;
+using Microsoft.AspNet.Identity;
 
 namespace WebApplication1.Controllers
 {
@@ -30,7 +32,11 @@ namespace WebApplication1.Controllers
                 throw new ApplicationException("Unauthorized access of admin feature!");
             }
 
-            return View();
+            var _messageList = new List<MessageCollection>();
+            var _blError = ThreadManager.GetMessagesForAdmin(out _messageList);
+            var model = new MessageListModel() { AllMessages = _messageList };
+
+            return View(model);
         }
 
         [Authorize]

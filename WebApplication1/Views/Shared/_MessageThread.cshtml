@@ -10,12 +10,23 @@
             <form action="/Service/ReplyToThread">
                 <input type="hidden" name="threadId" value="@Model.MessageThread.Thread.Id" />
                 <input type="hidden" name="tripId" value="@Model.TripId" />
+                <input type="hidden" name="aDmin" value="@Model.AdminId" />
                 <div class="panel-body">
                     <h4>@Model.MessageThread.Thread.Title</h4>
                     @foreach (var message in Model.MessageThread.Messages)
                     {
-                        <h6>@message.CreatedDate</h6>
+                        if (message.IsAdmin == true)
+                        {
+                            <hr />
+                            <h4>Traveloger [@message.UserName] replied <small>on [@message.CreatedDate]</small></h4>
+                            <h6>@message.Body</h6>
+                        }
+                        else
+                        {
+                            <h5>[@message.UserName] wrote on <small class="orange"> @message.CreatedDate</small></h5>                            
                             <p>@message.Body</p>
+                        }
+
                     }
                     <hr />
                     <div class="padd-10">
