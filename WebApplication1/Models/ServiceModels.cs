@@ -22,7 +22,13 @@ namespace WebApplication1.Models
 
     public class MessageListModel
     {
-        public List<MessageCollection> AllMessages { get; set; }        
+        public List<MessageCollection> AllMessages { get; set; }
+
+        public List<MessageCollection> TripMessages { get; set; }
+
+        public List<MessageCollection> RecentMessages { get; set; }
+
+        public List<MessageCollection> OldMessages { get; set; }
     }
 
     /// <summary>

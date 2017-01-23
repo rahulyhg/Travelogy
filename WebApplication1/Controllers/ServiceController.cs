@@ -41,10 +41,40 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         [Authorize]
         public ActionResult MessageCenter()
-        {
-            var _messageList = new List<MessageCollection>();
-            var _blError = ThreadManager.GetAllMessages(User.Identity.GetUserId(), out _messageList);
-            var model = new MessageListModel() { AllMessages = _messageList};
+        {            
+            var _allMessages = new List<MessageCollection>(); // all messages
+            var _tripMessages = new List<MessageCollection>(); // trip related messages
+            var _recentMessages = new List<MessageCollection>(); // trip related messages
+            var _oldtMessages = new List<MessageCollection>(); // trip related messages
+
+            // get all messages for the user from the db
+            var _blError = ThreadManager.GetAllMessages(User.Identity.GetUserId(), out _allMessages);
+
+            // find the trip related messages and add to collection
+            foreach(var _thread in _allMessages)
+            {
+                if(_thread.Thread.tripthreadid.HasValue && _thread.Thread.tripthreadid.Value > 0)
+                {
+                    _tripMessages.Add(_thread);
+                }
+            }
+
+            // get upto three latest message threads into recent list
+            // rest in the old one
+            if(_allMessages.Count > 3)
+            {
+                _recentMessages.AddRange(_allMessages.GetRange(0,3));
+                _oldtMessages.AddRange(_allMessages.GetRange(3, _allMessages.Count-3));
+            }
+            else
+            {
+                _recentMessages = _allMessages;
+            }
+
+
+
+            // pass all objects to the view
+            var model = new MessageListModel() { TripMessages = _tripMessages, RecentMessages = _recentMessages, OldMessages = _oldtMessages};
 
             return View(model);
         }

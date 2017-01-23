@@ -1083,6 +1083,10 @@
     <Content Include="Content\img\gallery\big\7.jpg" />
     <Content Include="Content\img\gallery\big\8.jpg" />
     <Content Include="Content\img\gallery\big\slider001.jpg" />
+    <Content Include="Content\img\gallery\big\slider002.jpg" />
+    <Content Include="Content\img\gallery\big\slider003.jpg" />
+    <Content Include="Content\img\gallery\big\slider004.jpg" />
+    <Content Include="Content\img\gallery\big\TZS-S03.JPG" />
     <Content Include="Content\img\gallery\small\1.jpg" />
     <Content Include="Content\img\gallery\small\2.jpg" />
     <Content Include="Content\img\gallery\small\3.jpg" />

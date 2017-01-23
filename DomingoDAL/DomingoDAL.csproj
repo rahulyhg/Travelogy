@@ -129,6 +129,9 @@
     <Compile Include="TripTemplate.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="View_Thread.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="View_ThreadMessage.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>

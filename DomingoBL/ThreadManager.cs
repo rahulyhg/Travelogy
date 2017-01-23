@@ -12,7 +12,7 @@ namespace DomingoBL
     /// </summary>
     public class MessageCollection
     {
-        public Thread Thread { get; set; }
+        public View_Thread Thread { get; set; }
 
         public List<View_ThreadMessage> Messages { get; set; }
     }
@@ -157,7 +157,7 @@ namespace DomingoBL
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
                     // get all the threads, sorted by the latest one first
-                    var threads = context.Threads.Where(p => p.AspnetUserId == AspnetUserId).OrderByDescending(p => p.MostRecentPostDate);
+                    var threads = context.View_Thread.Where(p => p.AspnetUserId == AspnetUserId).OrderByDescending(p => p.MostRecentPostDate);
                     if(threads != null)
                     {
                         _messageList = new List<MessageCollection>();
@@ -197,7 +197,7 @@ namespace DomingoBL
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
                     // get all the threads, sorted by the latest one first
-                    var threads = context.Threads.Select(p => p).OrderByDescending(p => p.MostRecentPostDate);
+                    var threads = context.View_Thread.Select(p => p).OrderByDescending(p => p.MostRecentPostDate);
                     if (threads != null)
                     {
                         _messageList = new List<MessageCollection>();
@@ -238,7 +238,7 @@ namespace DomingoBL
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
                     // get the thread by id
-                    var thread = context.Threads.FirstOrDefault(p => p.Id == _threadId);
+                    var thread = context.View_Thread.FirstOrDefault(p => p.Id == _threadId);
 
                     // if found get the messages
                     if(thread != null)

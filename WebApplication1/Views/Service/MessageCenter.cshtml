@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-md-12 padd-10">
-        <img class="img-responsive" src="~/Content/img/gallery/big/slider001.jpg" />
+        <img class="img-responsive" src="~/Content/img/gallery/big/slider002.jpg" />
     </div>
 </div>
 
@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-12">
                     @*get all message threads for the user*@
-                    @foreach (var item in Model.AllMessages)
+                    @foreach (var item in Model.RecentMessages)
                     {
                         // pass the threads to the "_MessageThread" partial view
                         var _model = new WebApplication1.Models.MessageListItemViewModel() { MessageThread = item };
@@ -27,6 +27,7 @@
                 </div>                
             </div>
         </div>
+
         <div class="tab-pane" id="new_discussion">
             <h4>Start a new discussion</h4>
             @if (Request.IsAuthenticated)
@@ -35,13 +36,35 @@
                 Html.RenderPartial("_MessageThreadStart", _model);
             }
         </div>
+
         <div class="tab-pane" id="trip_messages">
             <h4>Trip related messages</h4>
-            <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/6.jpg"> <strong>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id.</strong> Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
+            <div class="row">
+                <div class="col-md-12">
+                    @*get all message threads for the user*@
+                    @foreach (var item in Model.TripMessages)
+                    {
+                        // pass the threads to the "_MessageThread" partial view
+                        var _model = new WebApplication1.Models.MessageListItemViewModel() { MessageThread = item };
+                        Html.RenderPartial("_MessageThread", _model);
+                    }
+                </div>
+            </div>
         </div>
+
         <div class="tab-pane" id="old_messages">
-            <h4>Heading Sample 4</h4>
-            <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/1.jpg"> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
+            <h4>Older messages</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    @*get all message threads for the user*@
+                    @foreach (var item in Model.OldMessages)
+                    {
+                        // pass the threads to the "_MessageThread" partial view
+                        var _model = new WebApplication1.Models.MessageListItemViewModel() { MessageThread = item };
+                        Html.RenderPartial("_MessageThread", _model);
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>

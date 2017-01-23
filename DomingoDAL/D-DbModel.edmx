@@ -235,6 +235,28 @@
           <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'TravelogyDev.dbo.View_Thread' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Thread">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="AuthorUserId" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="MostRecentPostDate" />
+            <PropertyRef Name="Tags" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AuthorUserId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="MostRecentPostDate" Type="datetime" Nullable="false" />
+          <Property Name="Tags" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="AspnetUserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="tripthreadid" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'TravelogyDev.dbo.View_ThreadMessage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="View_ThreadMessage">
           <Key>
@@ -331,6 +353,19 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_ThreadMessage' does not have
           <EntitySet Name="TripStep" EntityType="Self.TripStep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripTemplate" EntityType="Self.TripTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripTemplateDay" EntityType="Self.TripTemplateDay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_Thread" EntityType="Self.View_Thread" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Thread].[Id] AS [Id], 
+    [View_Thread].[Title] AS [Title], 
+    [View_Thread].[AuthorUserId] AS [AuthorUserId], 
+    [View_Thread].[CreatedDate] AS [CreatedDate], 
+    [View_Thread].[MostRecentPostDate] AS [MostRecentPostDate], 
+    [View_Thread].[Tags] AS [Tags], 
+    [View_Thread].[Type] AS [Type], 
+    [View_Thread].[AspnetUserId] AS [AspnetUserId], 
+    [View_Thread].[tripthreadid] AS [tripthreadid]
+    FROM [dbo].[View_Thread] AS [View_Thread]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="View_ThreadMessage" EntityType="Self.View_ThreadMessage" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_ThreadMessage].[Id] AS [Id], 
@@ -399,6 +434,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_ThreadMessage' does not have
           <EntitySet Name="ThreadMessages" EntityType="TravelogyDevModel.ThreadMessage" />
           <EntitySet Name="Trips" EntityType="TravelogyDevModel.Trip" />
           <EntitySet Name="TripSteps" EntityType="TravelogyDevModel.TripStep" />
+          <EntitySet Name="View_Thread" EntityType="TravelogyDevModel.View_Thread" />
           <EntitySet Name="View_ThreadMessage" EntityType="TravelogyDevModel.View_ThreadMessage" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
@@ -664,6 +700,26 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_ThreadMessage' does not have
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="View_Thread">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="AuthorUserId" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="MostRecentPostDate" />
+            <PropertyRef Name="Tags" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorUserId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MostRecentPostDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Tags" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="AspnetUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tripthreadid" Type="Int32" />
+        </EntityType>
         <EntityType Name="View_ThreadMessage">
           <Key>
             <PropertyRef Name="Id" />
@@ -919,6 +975,21 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_ThreadMessage' does not have
                 <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
                 <ScalarProperty Name="Destination" ColumnName="Destination" />
                 <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Thread">
+            <EntityTypeMapping TypeName="TravelogyDevModel.View_Thread">
+              <MappingFragment StoreEntitySet="View_Thread">
+                <ScalarProperty Name="tripthreadid" ColumnName="tripthreadid" />
+                <ScalarProperty Name="AspnetUserId" ColumnName="AspnetUserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="MostRecentPostDate" ColumnName="MostRecentPostDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="AuthorUserId" ColumnName="AuthorUserId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
