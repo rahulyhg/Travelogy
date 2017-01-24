@@ -11,26 +11,42 @@ using Microsoft.AspNet.Identity;
 
 namespace WebApplication1.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class AdminController : DomingoControllerBase
     {
-        [Authorize]
-        public ActionResult Index()
-        {
-            if(!ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
-            {
-                throw new ApplicationException("Unauthorized access of admin feature!");
-            }
-
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult MessageCenter()
+        /// <summary>
+        /// 
+        /// </summary>
+        private void _CheckForAdminAccess()
         {
             if (!ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
             {
                 throw new ApplicationException("Unauthorized access of admin feature!");
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult Index()
+        {
+            _CheckForAdminAccess();
+
+            return View();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult MessageCenter()
+        {
+            _CheckForAdminAccess();
 
             var _messageList = new List<MessageCollection>();
             var _blError = ThreadManager.GetMessagesForAdmin(out _messageList);
@@ -39,13 +55,14 @@ namespace WebApplication1.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         public ActionResult TripManagement()
         {
-            if (!ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
-            {
-                throw new ApplicationException("Unauthorized access of admin feature!");
-            }
+            _CheckForAdminAccess();
 
             return View();
         }

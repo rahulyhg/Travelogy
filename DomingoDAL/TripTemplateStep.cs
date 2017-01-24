@@ -12,17 +12,15 @@ namespace DomingoDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TripTemplate
+    public partial class TripTemplateStep
     {
         public int Id { get; set; }
-        public int TripProviderId { get; set; }
-        public int DestinationId { get; set; }
-        public Nullable<int> DurationDaysMin { get; set; }
-        public Nullable<int> DurationDaysMax { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int TripTemplateId { get; set; }
+        public string ShortDescription { get; set; }
+        public string LongDescription { get; set; }
+        public string DayTimeActivities { get; set; }
+        public string NightTimeActivities { get; set; }
         public string ThumbnailPath { get; set; }
         public string AdditionalHtml { get; set; }
-        public string SearchAlias { get; set; }
     }
 }

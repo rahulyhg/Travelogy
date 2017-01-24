@@ -36,7 +36,7 @@ namespace DomingoBL
         /// <param name="aspUserId"></param>
         /// <param name="trips"></param>
         /// <returns></returns>
-        public static DomingoBlError GetAllTripsForUser(string aspUserId, out List<Trip> trips)
+        public static DomingoBlError GetAllTripsForUser(string aspUserId, out List<View_Trip> trips)
         {
             trips = null;
 
@@ -44,7 +44,7 @@ namespace DomingoBL
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    trips = context.Trips.Where(p => p.AspNetUserId == aspUserId).ToList();
+                    trips = context.View_Trip.Where(p => p.AspNetUserId == aspUserId).ToList();
                 }
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
@@ -97,7 +97,7 @@ namespace DomingoBL
 
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    templates = context.TripTemplates.Where(p => p.searchalias == alias).ToList();
+                    templates = context.TripTemplates.Where(p => p.SearchAlias == alias).ToList();
                 }
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
@@ -138,14 +138,14 @@ namespace DomingoBL
         /// <param name="tripId"></param>
         /// <param name="trip"></param>
         /// <returns></returns>
-        public static DomingoBlError GetTripById(int tripId, out Trip trip)
+        public static DomingoBlError GetTripById(int tripId, out View_Trip trip)
         {
             trip = null;
             try
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    trip = context.Trips.Where(p => p.Id == tripId).FirstOrDefault();
+                    trip = context.View_Trip.Where(p => p.Id == tripId).FirstOrDefault();
                 }
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
             }

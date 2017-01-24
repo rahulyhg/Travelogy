@@ -115,7 +115,7 @@ namespace WebApplication1.Controllers
 
                 else
                 {
-                    Trip trip = null;
+                    View_Trip trip = null;
                     _blError = TripManager.GetTripById(_model.TripId, out trip);
                     var _tripViewModel = new TripViewModel() { ActiveTrip = trip };
                     return View("Trip", _tripViewModel);
@@ -177,7 +177,7 @@ namespace WebApplication1.Controllers
             if (Request.IsAuthenticated)
             {
                 // find all trips for the user
-                List<Trip> _allTrips = null;
+                List<View_Trip> _allTrips = null;
                 var blError = TripManager.GetAllTripsForUser(User.Identity.GetUserId(), out _allTrips);
                 model.AllTrips = _allTrips;
 
@@ -253,7 +253,9 @@ namespace WebApplication1.Controllers
             };
             
             var _blError = TripManager.CreateTrip(trip);
-            var _model = new TripViewModel() { ActiveTrip = trip };
+            View_Trip viewTrip = null;
+            _blError = TripManager.GetTripById(trip.Id, out viewTrip);
+            var _model = new TripViewModel() { ActiveTrip = viewTrip };
             return View("Trip", _model);
         }
 
@@ -265,7 +267,7 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult ViewTrip(int tripId)
         {
-            Trip trip = null;
+            View_Trip trip = null;
             var _blError = TripManager.GetTripById(tripId, out trip);
             var _model = new TripViewModel() { ActiveTrip = trip };
             return View("Trip", _model);
