@@ -8,76 +8,13 @@
 
 @if (!Request.IsAuthenticated)
 {
-    <div class="row">
-        <div class="img-box-3 text-center">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 padd-15">
-                    <h1>Use the Travelogy Trip Planner</h1>
-                    <h2 class="orange"><a href="/account/register">Sign up</a> and plan your next trip to exotic locations.</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <!-- Image Box #3 Item -->
-                    <div class="img-box-3-item">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/maps-and-flags-3.png" alt="" class="img-responsive" />
-                        </div>
-                        <h4>Plan your travel</h4>
-                        <div class="bor bg-black"></div>
-                        <p>Use out expert team to plan trips to extreme corners of the world.</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <!-- Image Box #3 Item -->
-                    <div class="img-box-3-item">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
-                        </div>
-                        <h4>Create Guidebooks</h4>
-                        <div class="bor bg-black"></div>
-                        <p> Get custom made guidebooks for yourself including your trip plan.</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <!-- Image Box #3 Item -->
-                    <div class="img-box-3-item">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/booking.png" alt="" class="img-responsive" />
-                        </div>
-                        <h4>Bookings</h4>
-                        <div class="bor bg-black"></div>
-                        <p>You can book accommodation and transfers through our partner Travel Agencies to get the best deals.</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <!-- Image Box #3 Item -->
-                    <div class="img-box-3-item">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/taxi-1.png" alt="" class="img-responsive" />
-                        </div>
-                        <h4><a href="Travel-Logistics.html">Travel Safe</a></h4>
-                        <div class="bor bg-black"></div>
-                        <p>Our partners are hand chosen local people who will ensure smooth travel.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row tag-box tag-box-v1">
-        <h1 class="orange">Featured circuits</h1>
-        <!--Lake Baikal-->
-        @Html.Partial("LakeBaikal_TripPlannerWP")
-        <!--End Lake Baikal-->
-        <!--TSR-->
-        @Html.Partial("TransSiberian_TripPlannerWP")
-        <!--End TSR-->
-    </div>
+    @Html.Partial("_TripPlanningNotLoggedInView")
 }
 else // for logged in users
 {
-    if (Model.AllTrips == null || Model.AllTrips.Count == 0) // user has not created any trip yet
+    // user has not created any trip yet
+    // show the create options
+    if (Model.AllTrips == null || Model.AllTrips.Count == 0)
     {
         <div class="row tag-box tag-box-v5">
             <div class="col-md-8">
@@ -102,10 +39,26 @@ else // for logged in users
         </div>
     }
 
+    // planned trips
+    else if(Model.PlannedTrips != null && Model.PlannedTrips.Count > 0)
+    {
+        foreach(var trip in Model.PlannedTrips)
+        {
+            <h1>@trip.StartDate -- @trip.Status Trip # @trip.Id</h1>
+            <h2><a href="/Service/ViewTrip?tripId=@trip.Id">View</a></h2>
+        }
 
-
-    // active trip
-
+        <div class="row tag-box tag-box-v5">
+            <div class="col-md-8">
+                <span>Planned more trips for future!</span>
+            </div>
+            <div class="col-md-4">
+                <a href="/circuit">
+                    <p><button class="btn-u btn-u-lg btn-u-orange"><i class="icon-cloud"></i> Browse all circuits...</button></p>
+                </a>
+            </div>
+        </div>
+    }
 }
 
 

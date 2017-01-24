@@ -139,7 +139,8 @@
         <div class="col-md-6 col-sm-6">
             @if (Request.IsAuthenticated)
             {
-                @Html.Partial("_StartTripPlanning")
+                var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = "Kilimanjaro" };
+                @Html.Partial("_StartTripPlanning", _model)
             }
 
             else

@@ -115,7 +115,10 @@ namespace WebApplication1.Controllers
 
                 else
                 {
-                    return RedirectToAction("TripPlanning");
+                    Trip trip = null;
+                    _blError = TripManager.GetTripById(_model.TripId, out trip);
+                    var _tripViewModel = new TripViewModel() { ActiveTrip = trip };
+                    return View("Trip", _tripViewModel);
                 }
             }
 
@@ -179,8 +182,7 @@ namespace WebApplication1.Controllers
                 model.AllTrips = _allTrips;
 
                 // find any active trip - to move to a business layer method
-                var _activeTrip = _allTrips.FirstOrDefault((p => (p.Status.Trim() == TripStatus.booked.ToString())
-                    || (p.Status.Trim() == TripStatus.planned.ToString())));
+                var _activeTrip = _allTrips.FirstOrDefault(p => (p.Status.Trim() == TripStatus.booked.ToString()));
 
                 // if there IS an active trip - redirect to view
                 if (_activeTrip != null)
@@ -188,6 +190,10 @@ namespace WebApplication1.Controllers
                     var _tripViewModel = new TripViewModel() { ActiveTrip = _activeTrip };
                     return View("Trip", _tripViewModel);
                 }
+
+                // else show all the planned trips
+                var _plannedTrips = _allTrips.Where(p => (p.Status.Trim() == TripStatus.planned.ToString())).ToList();
+                model.PlannedTrips = _plannedTrips;
             }
 
             return View(model);
@@ -247,12 +253,22 @@ namespace WebApplication1.Controllers
             };
             
             var _blError = TripManager.CreateTrip(trip);
-            List<Trip> _allTrips = null;
-            _blError = TripManager.GetAllTripsForUser(User.Identity.GetUserId(), out _allTrips);
-            model.AllTrips = _allTrips;
-            model.ActiveTrip = _allTrips.FirstOrDefault((p => (p.Status.Trim() == TripStatus.booked.ToString())
-                    || (p.Status.Trim() == TripStatus.planned.ToString())));
-            return View("Trip", model);
+            var _model = new TripViewModel() { ActiveTrip = trip };
+            return View("Trip", _model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult ViewTrip(int tripId)
+        {
+            Trip trip = null;
+            var _blError = TripManager.GetTripById(tripId, out trip);
+            var _model = new TripViewModel() { ActiveTrip = trip };
+            return View("Trip", _model);
         }
 
         /// <summary>

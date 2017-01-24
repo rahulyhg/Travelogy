@@ -21,12 +21,22 @@ namespace WebApplication1.Models
     //    /// 
     //    /// </summary>
     //    public Trip ActiveTrip { get; set; }
-    //}
-
+    //}    
     public class TripPlanningViewModel
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public List<Trip> AllTrips { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Trip> PlannedTrips { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public Trip ActiveTrip { get; set; }
     }
 

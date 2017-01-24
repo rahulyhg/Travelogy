@@ -13,6 +13,11 @@
                 <input type="hidden" name="aDmin" value="@Model.AdminId" />
                 <div class="panel-body">
                     <h4>@Model.MessageThread.Thread.Title</h4>
+                    @if(Model.TripId > 0)
+                    {
+                        <h5><a href="/Service/ViewTrip?tripId=@Model.TripId">View trip</a></h5>
+                    }
+
                     @foreach (var message in Model.MessageThread.Messages)
                     {
                         if (message.IsAdmin == true)

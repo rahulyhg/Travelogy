@@ -68,12 +68,12 @@ namespace DomingoBL
                 {
                     // if the trip object is for a new trip
                     // simply add it to the database table and save it
-                    if(trip.Id == 0)
+                    if (trip.Id == 0)
                     {
                         context.Trips.Add(trip);
                         context.SaveChanges();
                     }
-                    
+
                 }
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
@@ -124,7 +124,30 @@ namespace DomingoBL
                 {
                     template = context.TripTemplates.Where(p => p.Id == templateId).FirstOrDefault();
                 }
-                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" }; 
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <param name="trip"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetTripById(int tripId, out Trip trip)
+        {
+            trip = null;
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    trip = context.Trips.Where(p => p.Id == tripId).FirstOrDefault();
+                }
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
             }
             catch (Exception ex)
             {

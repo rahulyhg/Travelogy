@@ -1696,6 +1696,7 @@
     <Content Include="Views\Admin\TripManagement.cshtml" />
     <Content Include="Views\Shared\_Trip_ShowTemplates.cshtml" />
     <Content Include="Views\Shared\_Trip_CreateNewTrip.cshtml" />
+    <Content Include="Views\Shared\_TripPlanningNotLoggedInView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
