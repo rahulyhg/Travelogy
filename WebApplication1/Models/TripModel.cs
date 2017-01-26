@@ -1,4 +1,5 @@
-﻿using DomingoDAL;
+﻿using DomingoBL.BlObjects;
+using DomingoDAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -80,16 +81,27 @@ namespace WebApplication1.Models
         /// <summary>
         /// 
         /// </summary>
-        public List<TripTemplate> AllTemplates { get; set; }        
+        public List<BlTripTemplate> AllTemplates { get; set; }        
 
         /// <summary>
         /// 
         /// </summary>
-        public TripTemplate CreateTripTemplate { get; set; }
+        public BlTripTemplate CreateTripTemplate { get; set; }
         
         /// <summary>
         /// 
         /// </summary>
         public CreateTripViewModel CreateTripViewModel { get; set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EditTripViewModel
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public View_Trip ActiveTrip { get; set; }
     }
 }

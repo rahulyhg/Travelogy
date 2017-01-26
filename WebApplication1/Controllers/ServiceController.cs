@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using Microsoft.AspNet.Identity;
+using DomingoBL.BlObjects;
 
 namespace WebApplication1.Controllers
 {
@@ -207,7 +208,7 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult ListAllTripTemplates(string templateAlias)
         {
-            var _availableTemplates = new List<TripTemplate>();
+            var _availableTemplates = new List<BlTripTemplate>();
             var _blError = TripManager.SearchTripTemplatesByAlias(templateAlias, out _availableTemplates);
             var _model = new TripViewModel() { AliasName = templateAlias, AllTemplates = _availableTemplates };
 
@@ -223,13 +224,13 @@ namespace WebApplication1.Controllers
         public ActionResult CreateTripFromTemplate(int templateId)
         {
             // get the trip template
-            TripTemplate _template = null;
+            BlTripTemplate _template = null;
             var _blerror = TripManager.GetTripTemplatesById(templateId, out _template);
 
             // assign the template to the view model
             var _model = new TripViewModel();
             _model.CreateTripTemplate = _template;
-            _model.CreateTripViewModel = new CreateTripViewModel() { TemplateId = _template.Id, StartDate = DateTime.Now };
+            _model.CreateTripViewModel = new CreateTripViewModel() { TemplateId = _template.DlTemplate.Id, StartDate = DateTime.Now };
 
             return View("Trip", _model);
         }
@@ -271,6 +272,20 @@ namespace WebApplication1.Controllers
             var _blError = TripManager.GetTripById(tripId, out trip);
             var _model = new TripViewModel() { ActiveTrip = trip };
             return View("Trip", _model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult EditTrip(int tripId)
+        {
+            View_Trip trip = null;
+            var _blError = TripManager.GetTripById(tripId, out trip);
+            var _model = new EditTripViewModel() { ActiveTrip = trip };
+            return View("EditTrip", _model);
         }
 
         /// <summary>

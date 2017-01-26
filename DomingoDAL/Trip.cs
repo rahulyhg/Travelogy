@@ -24,5 +24,9 @@ namespace DomingoDAL
         public int Travellerid { get; set; }
         public string AspNetUserId { get; set; }
         public Nullable<int> ThreadId { get; set; }
+        public string Description { get; set; }
+        public int PaxAdults { get; set; }
+        public Nullable<int> PaxMinors { get; set; }
+        public string TripType { get; set; }
     }
 }

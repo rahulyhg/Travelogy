@@ -12,9 +12,16 @@
 
         <div class="row tag-box tag-box-v2">
             <div class="col-md-12">
-                <span>@Model.CreateTripTemplate.Name</span>
-                <h2>@Model.CreateTripTemplate.Description</h2>
+                <h1>@Model.CreateTripTemplate.DlTemplate.Name</h1>
+                <h2>@Model.CreateTripTemplate.DlTemplate.Description</h2>
             </div>
+
+            @foreach(var step in Model.CreateTripTemplate.DlTemplateSteps)
+            {
+                <h5>@step.ShortDescription</h5>
+                <p>@step.LongDescription</p>
+            }
+
 
             <div class="col-md-12">
                 <p><button class="btn-u btn-u-lg btn-u-orange" type="submit"><i class="icon-cogs "></i> Create trip</button></p>

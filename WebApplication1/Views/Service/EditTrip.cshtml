@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.TripViewModel
+﻿@model WebApplication1.Models.EditTripViewModel
 
 <div class="row">
     <div class="col-md-12 padd-10">
@@ -6,22 +6,7 @@
     </div>
 </div>
 
-
-@*if the user is looking at templates, list them*@ 
-
-@if (@Model.AllTemplates != null)
-{
-    Html.RenderPartial("_Trip_ShowTemplates", Model);
-}        
-
-@*if the user is creating a new trip - show the form*@
-@if (Model.CreateTripTemplate != null)
-{
-    Html.RenderPartial("_Trip_CreateNewTrip", Model);    
-}
-
-
-@*if there is an active trip ---*@ 
+@*if there is an active trip ---*@
 @if (Model.ActiveTrip != null)
 {
     <div class="tab-v1">
@@ -35,16 +20,11 @@
             <div class="tab-pane active" id="details">
                 <div class="row">
                     <div class="col-md-8">
-                        <h1>Your trip details</h1>
+                        <h1>Edit trip</h1>
                         <span>@Model.ActiveTrip.StartDate</span>
                         <h2>@Model.ActiveTrip.Status</h2>
                         <h3>@Model.ActiveTrip.Id</h3>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.Id">
-                            <p><button class="btn-u btn-u-lg btn-u-orange"><i class="icon-cogs "></i> Edit trip</button></p>
-                        </a>
-                    </div>
+                    </div>                    
                 </div>
             </div>
             <div class="tab-pane" id="booking">
@@ -54,7 +34,7 @@
             </div>
             <div class="tab-pane" id="messages">
                 <h4>Messages for your trip [@Model.ActiveTrip.Id]</h4>
-                @{ 
+                @{
                     // if there are no messages sent for this trip - start a descussion
                     if (Model.ActiveTrip.ThreadId == null || Model.ActiveTrip.ThreadId == 0)
                     {
@@ -72,7 +52,7 @@
                             Html.RenderPartial("_MessageThread", _model);
                         }
                     }
-                }                
+                }
             </div>
             <div class="tab-pane" id="settings">
                 <h4>Heading Sample 4</h4>

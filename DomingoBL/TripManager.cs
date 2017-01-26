@@ -1,4 +1,5 @@
-﻿using DomingoDAL;
+﻿using DomingoBL.BlObjects;
+using DomingoDAL;
 
 using System;
 using System.Collections.Generic;
@@ -71,6 +72,13 @@ namespace DomingoBL
                     if (trip.Id == 0)
                     {
                         context.Trips.Add(trip);
+
+                        // get the steps from the template
+                        foreach(var tripStep in _CopyTripSteps(trip.TripTemplateId, context))
+                        {
+                            context.TripSteps.Add(tripStep);
+                        }
+
                         context.SaveChanges();
                     }
 
@@ -84,20 +92,48 @@ namespace DomingoBL
             }
         }
 
+        private static List<TripStep> _CopyTripSteps(int tripTemplateId, TravelogyDevEntities1 context)
+        {
+            var tripSteps = new List<TripStep>();
+            var templateSteps = context.TripTemplateSteps.Where(p => p.TripTemplateId == tripTemplateId);
+            foreach(var templateStep in templateSteps)
+            {
+                var tripStep = new TripStep()
+                {
+                    ShortDescription = templateStep.ShortDescription,
+                    LongDescription = templateStep.LongDescription,
+                    NightStay = templateStep.NightStay                     
+                };
+                tripSteps.Add(tripStep);
+            }
+            return tripSteps;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="alias"></param>
         /// <returns></returns>
-        public static DomingoBlError SearchTripTemplatesByAlias(string alias, out List<TripTemplate> templates)
+        public static DomingoBlError SearchTripTemplatesByAlias(string alias, out List<BlTripTemplate> templates)
         {
             try
             {
-                templates = null;
+                templates = new List<BlTripTemplate>();
 
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    templates = context.TripTemplates.Where(p => p.SearchAlias == alias).ToList();
+                    // search for trmplates with the search alias
+                    var dbTemplateSearchRes = context.TripTemplates.Where(p => p.SearchAlias == alias).ToList();
+
+                    // iterate through the results and populate the business layer object
+                    foreach(var dbTemplate in dbTemplateSearchRes)
+                    {
+                        // add the template and then the steps
+                        var _blTripTemplateObj = new BlTripTemplate() { DlTemplate = dbTemplate };
+                        _blTripTemplateObj.DlTemplateSteps = context.TripTemplateSteps.Where(p => p.TripTemplateId == dbTemplate.Id).ToList();
+
+                        templates.Add(_blTripTemplateObj);
+                    }
                 }
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
@@ -115,14 +151,18 @@ namespace DomingoBL
         /// <param name="templateId"></param>
         /// <param name="template"></param>
         /// <returns></returns>
-        public static DomingoBlError GetTripTemplatesById(int templateId, out TripTemplate template)
+        public static DomingoBlError GetTripTemplatesById(int templateId, out BlTripTemplate template)
         {
-            template = null;
+            template = new BlTripTemplate();
             try
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    template = context.TripTemplates.Where(p => p.Id == templateId).FirstOrDefault();
+                    // add the template db obj to the bl object
+                    template.DlTemplate = context.TripTemplates.Where(p => p.Id == templateId).FirstOrDefault();                    
+
+                    // add the template steps
+                    template.DlTemplateSteps = context.TripTemplateSteps.Where(p => p.TripTemplateId == templateId).ToList();                    
                 }
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
             }

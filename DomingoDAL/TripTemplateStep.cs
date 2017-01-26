@@ -18,9 +18,8 @@ namespace DomingoDAL
         public int TripTemplateId { get; set; }
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
-        public string DayTimeActivities { get; set; }
-        public string NightTimeActivities { get; set; }
         public string ThumbnailPath { get; set; }
         public string AdditionalHtml { get; set; }
+        public string NightStay { get; set; }
     }
 }

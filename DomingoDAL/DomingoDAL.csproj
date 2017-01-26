@@ -120,6 +120,12 @@
     <Compile Include="Trip.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TripBookingAccommodation.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TripBookingTransport.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TripProvider.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
