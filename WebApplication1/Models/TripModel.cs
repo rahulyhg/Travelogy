@@ -28,17 +28,17 @@ namespace WebApplication1.Models
         /// <summary>
         /// 
         /// </summary>
-        public List<View_Trip> AllTrips { get; set; }
+        public List<BlViewTrip> AllTrips { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public List<View_Trip> PlannedTrips { get; set; }
+        public List<BlViewTrip> PlannedTrips { get; set; }
         
         /// <summary>
         /// 
         /// </summary>
-        public View_Trip ActiveTrip { get; set; }
+        public BlViewTrip ActiveTrip { get; set; }
     }
 
     /// <summary>
@@ -71,12 +71,12 @@ namespace WebApplication1.Models
         /// <summary>
         /// 
         /// </summary>
-        public List<View_Trip> AllTrips { get; set; }
+        public List<BlViewTrip> AllTrips { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public View_Trip ActiveTrip { get; set; }
+        public BlViewTrip ActiveTrip { get; set; }
 
         /// <summary>
         /// 
@@ -102,6 +102,6 @@ namespace WebApplication1.Models
         /// <summary>
         /// 
         /// </summary>
-        public View_Trip ActiveTrip { get; set; }
+        public BlViewTrip ActiveTrip { get; set; }
     }
 }

@@ -44,8 +44,8 @@ else // for logged in users
     {
         foreach(var trip in Model.PlannedTrips)
         {
-            <h1>@trip.StartDate -- @trip.Status Trip # @trip.Id</h1>
-            <h2><a href="/Service/ViewTrip?tripId=@trip.Id">View</a></h2>
+            <h1>@trip.DlTripView.StartDate -- @trip.DlTripView.Status Trip # @trip.DlTripView.Id</h1>
+            <h2><a href="/Service/ViewTrip?tripId=@trip.DlTripView.Id">View</a></h2>
         }
 
         <div class="row tag-box tag-box-v5">

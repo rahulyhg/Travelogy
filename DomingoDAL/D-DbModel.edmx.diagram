@@ -33,6 +33,7 @@
         <EntityTypeShape EntityType="TravelogyDevModel.TripTemplateStep" Width="1.5" PointX="4.375" PointY="10.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.TripBookingAccommodation" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.TripBookingTransport" Width="1.5" PointX="13.75" PointY="4.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.View_TripStep" Width="1.5" PointX="13.75" PointY="9.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

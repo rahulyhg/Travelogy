@@ -6,58 +6,68 @@
     </div>
 </div>
 
-@*if there is an active trip ---*@
+@*if there is an active trip for rditing ---*@
 @if (Model.ActiveTrip != null)
 {
-    <div class="tab-v1">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#details" data-toggle="tab">Trip Details</a></li>
-            <li><a href="#booking" data-toggle="tab">Booking details</a></li>
-            <li><a href="#messages" data-toggle="tab">Messages</a></li>
-            <li><a href="#settings" data-toggle="tab">Settings</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="details">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h1>Edit trip</h1>
-                        <span>@Model.ActiveTrip.StartDate</span>
-                        <h2>@Model.ActiveTrip.Status</h2>
-                        <h3>@Model.ActiveTrip.Id</h3>
-                    </div>                    
+    using (Html.BeginForm("SaveTrip", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken();
+        @Html.HiddenFor(p => p.ActiveTrip.DlTripView.Id);
+
+        <div class="tab-v1">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#details" data-toggle="tab">Trip Summary</a></li>
+                <li><a href="#booking" data-toggle="tab">Booking details</a></li>
+                <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="details">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1>Edit trip</h1>
+                            <span>@Model.ActiveTrip.DlTripView.StartDate</span>
+                            <h2>@Model.ActiveTrip.DlTripView.Status</h2>
+                            <h3>@Model.ActiveTrip.DlTripView.Id</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+
+                            @for (int x = 0; x < Model.ActiveTrip.DlTripStepsView.Count; x++)
+                            {
+                                var tripStep = Model.ActiveTrip.DlTripStepsView[x];
+
+                                @Html.HiddenFor(p => p.ActiveTrip.DlTripStepsView[x].Id)
+                                
+                                <h5>@tripStep.ShortDescription</h5>
+                                <p>@tripStep.LongDescription</p>
+                                <hr />
+                                <p>
+                                    @Html.TextAreaFor(p => p.ActiveTrip.DlTripStepsView[x].TravellerNote)
+                                </p>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="booking">
+                    <img alt="" class="pull-left lft-img-margin img-width-200" src="assets/img/main/5.jpg">
+                    <h4>Heading Sample 2</h4>
+                    <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, <strong>ac adipiscing nunc.</strong> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac <strong>interdum ullamcorper.</strong></p>
+                </div>                
+                <div class="tab-pane" id="settings">
+                    <h4>Heading Sample 4</h4>
+                    <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/1.jpg"> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
                 </div>
             </div>
-            <div class="tab-pane" id="booking">
-                <img alt="" class="pull-left lft-img-margin img-width-200" src="assets/img/main/5.jpg">
-                <h4>Heading Sample 2</h4>
-                <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, <strong>ac adipiscing nunc.</strong> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac <strong>interdum ullamcorper.</strong></p>
-            </div>
-            <div class="tab-pane" id="messages">
-                <h4>Messages for your trip [@Model.ActiveTrip.Id]</h4>
-                @{
-                    // if there are no messages sent for this trip - start a descussion
-                    if (Model.ActiveTrip.ThreadId == null || Model.ActiveTrip.ThreadId == 0)
-                    {
-                        var _model = new WebApplication1.Models.MessageViewModel() { TripId = Model.ActiveTrip.Id };
-                        Html.RenderPartial("_MessageThreadStart", _model);
-                    }
+        </div>
 
-                    if (Model.ActiveTrip.ThreadId > 0)
-                    {
-                        DomingoBL.MessageCollection _thread = null;
-                        DomingoBL.ThreadManager.GetMessageThreadById(Model.ActiveTrip.ThreadId.Value, out _thread);
-                        if (_thread != null)
-                        {
-                            var _model = new WebApplication1.Models.MessageListItemViewModel() { MessageThread = _thread, TripId = Model.ActiveTrip.Id };
-                            Html.RenderPartial("_MessageThread", _model);
-                        }
-                    }
-                }
-            </div>
-            <div class="tab-pane" id="settings">
-                <h4>Heading Sample 4</h4>
-                <p><img alt="" class="pull-right rgt-img-margin img-width-200" src="assets/img/main/1.jpg"> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, consectetur id. Donec eget orci metus, ac adipiscing nunc. <strong>Pellentesque fermentum</strong>, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper.</p>
+        <div class="row">
+            <div class="col-md-12">
+                <p><button class="btn-u btn-u-lg btn-u-orange" type="submit"><i class="icon-cogs "></i> Save trip</button></p>
             </div>
         </div>
-    </div>
-} @*end of active trip section*@
+
+        <h1>@Html.ValidationSummary()</h1>
+    };
+} @*end of edit trip section*@

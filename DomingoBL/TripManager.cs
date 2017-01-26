@@ -37,15 +37,21 @@ namespace DomingoBL
         /// <param name="aspUserId"></param>
         /// <param name="trips"></param>
         /// <returns></returns>
-        public static DomingoBlError GetAllTripsForUser(string aspUserId, out List<View_Trip> trips)
+        public static DomingoBlError GetAllTripsForUser(string aspUserId, out List<BlViewTrip> trips)
         {
-            trips = null;
+            trips = new List<BlViewTrip>();
 
             try
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    trips = context.View_Trip.Where(p => p.AspNetUserId == aspUserId).ToList();
+                    var dlTrips = context.View_Trip.Where(p => p.AspNetUserId == aspUserId).ToList();
+                    foreach(var dlTrip in dlTrips)
+                    {
+                        var dlTripSteps = context.View_TripStep.Where(p => p.TripId == dlTrip.Id);
+                        var blTrip = new BlViewTrip() { DlTripView = dlTrip, DlTripStepsView = dlTripSteps.ToList() };
+                        trips.Add(blTrip);
+                    }
                 }
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
@@ -72,9 +78,10 @@ namespace DomingoBL
                     if (trip.Id == 0)
                     {
                         context.Trips.Add(trip);
+                        context.SaveChanges();
 
                         // get the steps from the template
-                        foreach(var tripStep in _CopyTripSteps(trip.TripTemplateId, context))
+                        foreach (var tripStep in _CopyTripSteps(trip.TripTemplateId, trip.Id, context))
                         {
                             context.TripSteps.Add(tripStep);
                         }
@@ -92,7 +99,85 @@ namespace DomingoBL
             }
         }
 
-        private static List<TripStep> _CopyTripSteps(int tripTemplateId, TravelogyDevEntities1 context)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trip"></param>
+        /// <param name="tripSteps"></param>
+        /// <returns></returns>
+        public static DomingoBlError SaveUserTripChanges(View_Trip trip, List<View_TripStep> tripSteps)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var _dbTrip = context.Trips.Find(trip.Id);
+                    if(_dbTrip != null)
+                    {
+                        _dbTrip.StartLocation = trip.StartLocation;
+                    }
+
+                    // save user notes
+                    foreach(var tripStep in tripSteps)
+                    {
+                        var _dbTripStep = context.TripSteps.Find(tripStep.Id);
+                        if(_dbTripStep != null)
+                        {
+                            _dbTripStep.TravellerNote = tripStep.TravellerNote;
+                        }
+                    }
+
+                    context.SaveChanges();  
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trip"></param>
+        /// <param name="tripSteps"></param>
+        /// <returns></returns>
+        public static DomingoBlError SaveAdminTripChanges(View_Trip trip, List<View_TripStep> tripSteps)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var _dbTrip = context.Trips.Find(trip.Id);
+                    if (_dbTrip != null)
+                    {
+                        _dbTrip.StartLocation = trip.StartLocation;
+                    }
+
+                    // save user notes
+                    foreach (var tripStep in tripSteps)
+                    {
+                        var _dbTripStep = context.TripSteps.Find(tripStep.Id);
+                        if (_dbTripStep != null)
+                        {
+                            _dbTripStep.TravelogerNote = tripStep.TravelogerNote;
+                        }
+                    }
+
+                    context.SaveChanges();
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+        private static List<TripStep> _CopyTripSteps(int tripTemplateId, int tripId, TravelogyDevEntities1 context)
         {
             var tripSteps = new List<TripStep>();
             var templateSteps = context.TripTemplateSteps.Where(p => p.TripTemplateId == tripTemplateId);
@@ -100,6 +185,8 @@ namespace DomingoBL
             {
                 var tripStep = new TripStep()
                 {
+                    TripId = tripId,
+                    TripTemplateStepId = templateStep.Id,
                     ShortDescription = templateStep.ShortDescription,
                     LongDescription = templateStep.LongDescription,
                     NightStay = templateStep.NightStay                     
@@ -176,16 +263,18 @@ namespace DomingoBL
         /// 
         /// </summary>
         /// <param name="tripId"></param>
-        /// <param name="trip"></param>
+        /// <param name="viewTrip"></param>
         /// <returns></returns>
-        public static DomingoBlError GetTripById(int tripId, out View_Trip trip)
+        public static DomingoBlError GetTripById(int tripId, out BlViewTrip viewTrip)
         {
-            trip = null;
+            viewTrip = new BlViewTrip();
             try
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    trip = context.View_Trip.Where(p => p.Id == tripId).FirstOrDefault();
+                    var dlTripSteps = context.View_TripStep.Where(p => p.TripId == tripId);
+                    viewTrip.DlTripView = context.View_Trip.Where(p => p.Id == tripId).FirstOrDefault();
+                    viewTrip.DlTripStepsView = dlTripSteps.ToList();
                 }
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
             }

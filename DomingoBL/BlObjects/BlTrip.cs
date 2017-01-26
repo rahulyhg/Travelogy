@@ -22,4 +22,20 @@ namespace DomingoBL.BlObjects
         /// </summary>
         public List<TripStep> DlTripSteps { get; set; }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BlViewTrip
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public View_Trip DlTripView { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<View_TripStep> DlTripStepsView { get; set; }
+    }
 }

@@ -147,6 +147,9 @@
     <Compile Include="View_Trip.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="View_TripStep.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
