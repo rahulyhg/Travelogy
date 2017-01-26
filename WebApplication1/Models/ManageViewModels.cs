@@ -16,7 +16,26 @@ namespace WebApplication1.Models
         public bool BrowserRemembered { get; set; }
     }
 
-    public class ProfileViewModel
+    public class TravellerInterestCheckModel
+    {
+        public int Id
+        {
+            get;
+            set;
+        }
+        public string Name
+        {
+            get;
+            set;
+        }
+        public bool Checked
+        {
+            get;
+            set;
+        }
+    }
+
+    public class TravellerProfileViewModel
     {
         //public AspNetUser User { get; set; }
 
@@ -25,6 +44,16 @@ namespace WebApplication1.Models
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [StringLength(14)]
+        [Display(Name = "Telephone Number")]
+        [RegularExpression(@"^\+(?:[0-9]?){6,14}[0-9]$", ErrorMessage = "Please enter a valid Telephone number")]
+        public string Telephone { get; set; }
+
+        [StringLength(14)]        
+        [RegularExpression(@"^\+[0-9]{1,3}\.[0-9]{4,14}(?:x.+)?$", ErrorMessage = "Please enter a valid Mobile number")]
+        [Display(Name = "Mobile Number")]
+        public string Mobile { get; set; }
 
         [Display(Name = "Address Line 1")]
         public string AddressLine1 { get; set; }
@@ -44,6 +73,11 @@ namespace WebApplication1.Models
         [Display(Name = "What best describes how you travel:")]
         public string TravelGroupSize { get; set; }
 
+        [Display(Name = "What is usually your travel style:")]
+        public string TravelStyle { get; set; }
+
+        public List<TravellerInterestCheckModel> TravellerInterests { get; set; }
+
         public IEnumerable<System.Web.Mvc.SelectListItem> ListOfCountries { get; set; }
 
         public IEnumerable<System.Web.Mvc.SelectListItem> TravelGroupSizes    
@@ -52,11 +86,28 @@ namespace WebApplication1.Models
             {
                 var dropdownItems = new List<System.Web.Mvc.SelectListItem>();
                 dropdownItems.AddRange(new[]{
+                            new System.Web.Mvc.SelectListItem() { Text = "--- please select one ---", Value = "" },
                             new System.Web.Mvc.SelectListItem() { Text = "Travel alone", Value = "Travel alone" },
                             new System.Web.Mvc.SelectListItem() { Text = "Travel with family", Value = "Travel with family" },
                             new System.Web.Mvc.SelectListItem() { Text = "Travel with a group", Value = "Travel with a group" },
                             new System.Web.Mvc.SelectListItem() { Text = "Young couple", Value = "Young couple" },
                             new System.Web.Mvc.SelectListItem() { Text = "Mature couple", Value = "Mature couple" }});
+
+                return dropdownItems;
+            }
+        }
+
+        public IEnumerable<System.Web.Mvc.SelectListItem> TravelStyles
+        {
+            get
+            {
+                var dropdownItems = new List<System.Web.Mvc.SelectListItem>();
+                dropdownItems.AddRange(new[]{
+                        new System.Web.Mvc.SelectListItem() { Text = "--- please select one ---", Value = "" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Backpacker", Value = "Backpacker" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Budget Traveller", Value = "Budget Traveller" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Mid Range", Value = "Mid Range" },                            
+                            new System.Web.Mvc.SelectListItem() { Text = "Luxury", Value = "Luxury" }});
 
                 return dropdownItems;
             }

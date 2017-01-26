@@ -10,6 +10,7 @@ using WebApplication1.Models;
 using DomingoBL;
 using DomingoDAL;
 using System.Collections.Generic;
+using System.Text;
 
 namespace WebApplication1.Controllers
 {
@@ -239,22 +240,49 @@ namespace WebApplication1.Controllers
                 _travellerProfile = new Traveller();
             }
 
-            var _model = new ProfileViewModel()
+            var _model = new TravellerProfileViewModel()
             {
                 FirstName = _travellerProfile.FirstName,
                 LastName = _travellerProfile.LastName,
+                Telephone = _travellerProfile.Telephone,
+                Mobile = _travellerProfile.Mobile,
                 AddressLine1 = _travellerProfile.AddressLine1,
                 AddressLine2 = _travellerProfile.AddressLine2,
                 City = _travellerProfile.City,
                 Country = _travellerProfile.Country,
                 TravelGroupSize = _travellerProfile.TravelGroupSize,
                 PostCode = _travellerProfile.PostCode,
+                TravelStyle = _travellerProfile.TravelStyle,
                 ListOfCountries = _GetCountries()
             };
+
+            if(string.IsNullOrEmpty(_travellerProfile.TravelInterests))
+            {
+                _travellerProfile.TravelInterests = string.Empty;
+            }
+
+            _model.TravellerInterests = new List<TravellerInterestCheckModel>()
+            {
+                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Adventure") > 0 , Name = "Adventure", Id = 1000 },
+                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Motorcycling") > 0, Name = "Motorcycling", Id = 1001 },
+                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Backpacking") > 0, Name = "Backpacking", Id = 1002 },
+                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Rock-Climbing") > 0, Name = "Rock-Climbing", Id = 1003 },
+                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("High-Altitude-Climbing") > 0, Name = "High-Altitude-Climbing", Id = 1004 },
+                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Railway-Holidays") > 0, Name = "Railway-Holidays", Id = 1005 },
+                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Self_Drive-Holidays") > 0, Name = "Self_Drive-Holidays", Id = 1006 },
+                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Beach-Holidays") > 0, Name = "Beach-Holidays", Id = 1007 },
+                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Historic-Places") > 0, Name = "Historic-Places", Id = 1008 },
+                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Desert-Safari") > 0, Name = "Desert-Safari", Id = 1009 },
+                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Travel_Photography") > 0, Name = "Travel_Photography", Id = 1010 }
+            };
+
             return View(_model);
         }
 
-
+        /// <summary>
+        /// Gets all the countries from DB
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<SelectListItem> _GetCountries()
         {
 
@@ -270,9 +298,31 @@ namespace WebApplication1.Controllers
             return new SelectList(_countries, "Value", "Text");
         }
 
+        /// <summary>
+        /// Parse the interests check boxes and create a string to store in DB - crude method but ok for stage 1
+        /// </summary>
+        /// <param name="travellerInterests"></param>
+        /// <returns></returns>
+        private string _GetInterests(List<TravellerInterestCheckModel> travellerInterests)
+        {
+            StringBuilder interests = new StringBuilder();
+
+            foreach (var travellerInterestCheckBox in travellerInterests)
+            {
+                if (travellerInterestCheckBox.Checked) { interests.AppendFormat("%%{0}%%", travellerInterestCheckBox.Name); }
+            }
+
+            return interests.ToString();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="profileView"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveTravellerProfile(ProfileViewModel profileView)
+        public ActionResult SaveTravellerProfile(TravellerProfileViewModel profileView)
         {
             Traveller _travellerProfile = null;
             // get the traveller profile, if exists
@@ -286,12 +336,16 @@ namespace WebApplication1.Controllers
 
             _travellerProfile.FirstName = profileView.FirstName;
             _travellerProfile.LastName = profileView.LastName;
+            _travellerProfile.Telephone = profileView.Telephone;
+            _travellerProfile.Mobile = profileView.Mobile;
             _travellerProfile.AddressLine1 = profileView.AddressLine1;
             _travellerProfile.AddressLine2 = profileView.AddressLine2;
             _travellerProfile.City = profileView.City;
             _travellerProfile.Country = profileView.Country;
             _travellerProfile.PostCode = profileView.PostCode;
             _travellerProfile.TravelGroupSize = profileView.TravelGroupSize;
+            _travellerProfile.TravelStyle = profileView.TravelStyle;
+            _travellerProfile.TravelInterests = _GetInterests(profileView.TravellerInterests);
 
             _travellerProfile.AspnetUserid = User.Identity.GetUserId();
 
@@ -299,6 +353,8 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("TravellerProfile");
         }
+
+        
 
         //
         // POST: /Manage/ChangePassword

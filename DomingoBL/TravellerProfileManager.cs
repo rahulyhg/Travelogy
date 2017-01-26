@@ -31,12 +31,16 @@ namespace DomingoBL
                     {
                         _xtravellerObj.FirstName = _travellerObj.FirstName;
                         _xtravellerObj.LastName = _travellerObj.LastName;
+                        _xtravellerObj.Telephone = _travellerObj.Telephone;
+                        _xtravellerObj.Mobile = _travellerObj.Mobile;
                         _xtravellerObj.AddressLine1 = _travellerObj.AddressLine1;
                         _xtravellerObj.AddressLine2 = _travellerObj.AddressLine2;
                         _xtravellerObj.City = _travellerObj.City;
                         _xtravellerObj.Country = _travellerObj.Country;
                         _xtravellerObj.PostCode = _travellerObj.PostCode;
                         _xtravellerObj.TravelGroupSize = _travellerObj.TravelGroupSize;
+                        _xtravellerObj.TravelStyle = _travellerObj.TravelStyle;
+                        _xtravellerObj.TravelInterests = _travellerObj.TravelInterests;
                     }
                                         
                     else // create it

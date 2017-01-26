@@ -36,7 +36,6 @@ namespace DomingoDAL
         public virtual DbSet<DestinationTravelOption> DestinationTravelOptions { get; set; }
         public virtual DbSet<SubDestination> SubDestinations { get; set; }
         public virtual DbSet<TripProvider> TripProviders { get; set; }
-        public virtual DbSet<Traveller> Travellers { get; set; }
         public virtual DbSet<TravellerType> TravellerTypes { get; set; }
         public virtual DbSet<Thread> Threads { get; set; }
         public virtual DbSet<ThreadMessage> ThreadMessages { get; set; }
@@ -50,5 +49,6 @@ namespace DomingoDAL
         public virtual DbSet<TripBookingAccommodation> TripBookingAccommodations { get; set; }
         public virtual DbSet<TripBookingTransport> TripBookingTransports { get; set; }
         public virtual DbSet<View_TripStep> View_TripStep { get; set; }
+        public virtual DbSet<Traveller> Travellers { get; set; }
     }
 }

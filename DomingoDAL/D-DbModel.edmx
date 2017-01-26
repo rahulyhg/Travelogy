@@ -155,7 +155,10 @@
           <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
           <Property Name="TravelGroupSize" Type="nvarchar" MaxLength="50" />
-          <Property Name="PrimaryTraveller" Type="bit" />
+          <Property Name="TravelStyle" Type="nvarchar" MaxLength="50" />
+          <Property Name="TravelInterests" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="TravellerType">
           <Key>
@@ -533,12 +536,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="DestinationTravelOptions" EntityType="TravelogyDevModel.DestinationTravelOption" />
           <EntitySet Name="SubDestinations" EntityType="TravelogyDevModel.SubDestination" />
           <EntitySet Name="TripProviders" EntityType="TravelogyDevModel.TripProvider" />
-          <EntitySet Name="Travellers" EntityType="TravelogyDevModel.Traveller" />
           <EntitySet Name="TravellerTypes" EntityType="TravelogyDevModel.TravellerType" />
-          <AssociationSet Name="FK_Traveller_Traveller" Association="TravelogyDevModel.FK_Traveller_Traveller">
-            <End Role="Traveller" EntitySet="Travellers" />
-            <End Role="Traveller1" EntitySet="Travellers" />
-          </AssociationSet>
           <EntitySet Name="Threads" EntityType="TravelogyDevModel.Thread" />
           <EntitySet Name="ThreadMessages" EntityType="TravelogyDevModel.ThreadMessage" />
           <EntitySet Name="Trips" EntityType="TravelogyDevModel.Trip" />
@@ -551,6 +549,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="TripBookingAccommodations" EntityType="TravelogyDevModel.TripBookingAccommodation" />
           <EntitySet Name="TripBookingTransports" EntityType="TravelogyDevModel.TripBookingTransport" />
           <EntitySet Name="View_TripStep" EntityType="TravelogyDevModel.View_TripStep" />
+          <EntitySet Name="Travellers" EntityType="TravelogyDevModel.Traveller" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -707,27 +706,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="Telephone03" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Traveller">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="TravellerTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Traveller1" Relationship="TravelogyDevModel.FK_Traveller_Traveller" FromRole="Traveller" ToRole="Traveller1" />
-          <NavigationProperty Name="Traveller2" Relationship="TravelogyDevModel.FK_Traveller_Traveller" FromRole="Traveller1" ToRole="Traveller" />
-          <Property Name="AspnetUserid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TravellerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TravelGroupSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PrimaryTraveller" Type="Boolean" />
-        </EntityType>
         <EntityType Name="TravellerType">
           <Key>
             <PropertyRef Name="Id" />
@@ -736,18 +714,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_Traveller_Traveller">
-          <End Type="TravelogyDevModel.Traveller" Role="Traveller" Multiplicity="1" />
-          <End Type="TravelogyDevModel.Traveller" Role="Traveller1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Traveller">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Traveller1">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Thread">
           <Key>
             <PropertyRef Name="Id" />
@@ -934,6 +900,28 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="TravelogerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Traveller">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TravellerTypeId" Type="Int32" Nullable="false" />
+          <Property Name="AspnetUserid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TravellerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TravelGroupSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TravelStyle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TravelInterests" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1070,26 +1058,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Website" ColumnName="Website" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Travellers">
-            <EntityTypeMapping TypeName="TravelogyDevModel.Traveller">
-              <MappingFragment StoreEntitySet="Traveller">
-                <ScalarProperty Name="PrimaryTraveller" ColumnName="PrimaryTraveller" />
-                <ScalarProperty Name="TravelGroupSize" ColumnName="TravelGroupSize" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
-                <ScalarProperty Name="TravellerType" ColumnName="TravellerType" />
-                <ScalarProperty Name="AspnetUserid" ColumnName="AspnetUserid" />
-                <ScalarProperty Name="TravellerTypeId" ColumnName="TravellerTypeId" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1281,6 +1249,29 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
                 <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
                 <ScalarProperty Name="Destination" ColumnName="Destination" />
                 <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Travellers">
+            <EntityTypeMapping TypeName="TravelogyDevModel.Traveller">
+              <MappingFragment StoreEntitySet="Traveller">
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="TravelInterests" ColumnName="TravelInterests" />
+                <ScalarProperty Name="TravelStyle" ColumnName="TravelStyle" />
+                <ScalarProperty Name="TravelGroupSize" ColumnName="TravelGroupSize" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="TravellerType" ColumnName="TravellerType" />
+                <ScalarProperty Name="AspnetUserid" ColumnName="AspnetUserid" />
+                <ScalarProperty Name="TravellerTypeId" ColumnName="TravellerTypeId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

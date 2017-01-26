@@ -35,10 +35,9 @@
             <div class="tab-pane active" id="details">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Your trip details</h1>
-                        <span>@Model.ActiveTrip.DlTripView.StartDate</span>
-                        <h2>@Model.ActiveTrip.DlTripView.Status</h2>
-                        <h3>@Model.ActiveTrip.DlTripView.Id</h3>
+                        <h1>Your trip @Model.ActiveTrip.DlTripView.Name</h1>
+                        <h2>Planned date: @Model.ActiveTrip.DlTripView.StartDate.Value.ToShortDateString()</h2>
+                        <h2>Status: @Model.ActiveTrip.DlTripView.Status</h2>                        
                     </div>                    
                 </div>
                 <div class="row">
@@ -54,6 +53,17 @@
                         {
                             <h5>@tripStep.ShortDescription</h5>
                             <p>@tripStep.LongDescription</p>
+                            if (!string.IsNullOrEmpty(tripStep.TravellerNote))
+                            {
+                                <h5>Your Notes:</h5>
+                                <p>@tripStep.TravellerNote</p>
+                            }
+
+                            if (!string.IsNullOrEmpty(tripStep.TravelogerNote))
+                            {
+                                <h5>Your Notes:</h5>
+                                <p>@tripStep.TravelogerNote</p>
+                            }
                         }
                     </div>
                 </div>
