@@ -1700,6 +1700,12 @@
     <Content Include="Views\Shared\_Trip_CreateNewTrip.cshtml" />
     <Content Include="Views\Shared\_TripPlanningNotLoggedInView.cshtml" />
     <Content Include="Views\Service\EditTrip.cshtml" />
+    <Content Include="Views\Admin\Destinations.cshtml" />
+    <Content Include="Views\Admin\TripTemplates.cshtml" />
+    <Content Include="Views\Admin\CreateTripTemplate.cshtml" />
+    <Content Include="Views\Admin\EditTripTemplate.cshtml" />
+    <Content Include="Views\Admin\_EditTripTemplateStep.cshtml" />
+    <Content Include="Views\Admin\Trips.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

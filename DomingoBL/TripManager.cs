@@ -283,5 +283,30 @@ namespace DomingoBL
                 return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <param name="trip"></param>
+        /// <returns></returns>
+        public static DomingoBlError Admin_GetTripById(int tripId, out BlTrip trip)
+        {
+            trip = new BlTrip();
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var dlTripSteps = context.TripSteps.Where(p => p.TripId == tripId);
+                    trip.DlTrip = context.Trips.Find(tripId);
+                    trip.DlTripSteps = dlTripSteps.ToList();
+                }
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
     }
 }

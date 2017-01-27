@@ -21,5 +21,6 @@ namespace DomingoDAL
         public string ThumbnailPath { get; set; }
         public string AdditionalHtml { get; set; }
         public string NightStay { get; set; }
+        public string TripTemplateStepIdentifier { get; set; }
     }
 }

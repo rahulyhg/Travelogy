@@ -267,6 +267,7 @@
           <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="255" />
           <Property Name="AdditionalHtml" Type="ntext" />
           <Property Name="NightStay" Type="nvarchar" MaxLength="255" />
+          <Property Name="TripTemplateStepIdentifier" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TravelogyDev.dbo.View_Thread' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -859,6 +860,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NightStay" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TripTemplateStepIdentifier" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TripBookingAccommodation">
           <Key>
@@ -1202,6 +1204,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="TripTemplateSteps">
             <EntityTypeMapping TypeName="TravelogyDevModel.TripTemplateStep">
               <MappingFragment StoreEntitySet="TripTemplateStep">
+                <ScalarProperty Name="TripTemplateStepIdentifier" ColumnName="TripTemplateStepIdentifier" />
                 <ScalarProperty Name="NightStay" ColumnName="NightStay" />
                 <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
                 <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
