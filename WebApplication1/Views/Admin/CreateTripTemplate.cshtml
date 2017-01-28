@@ -1,7 +1,7 @@
 ﻿@model DomingoDAL.TripTemplate
 
 <div>
-    @using (Html.BeginForm()) 
+    @using (Html.BeginForm("SaveTripTemplate", "Admin", new { ReturnUrl = "" }))
     {
         @Html.AntiForgeryToken()
         

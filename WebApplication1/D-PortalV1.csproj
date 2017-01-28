@@ -1706,6 +1706,13 @@
     <Content Include="Views\Admin\EditTripTemplate.cshtml" />
     <Content Include="Views\Admin\_EditTripTemplateStep.cshtml" />
     <Content Include="Views\Admin\Trips.cshtml" />
+    <Content Include="Views\Admin\TripProviders.cshtml" />
+    <Content Include="Views\Admin\EditTripProvider.cshtml" />
+    <Content Include="Views\Admin\CreateTripProvider.cshtml" />
+    <Content Include="Views\Admin\TripBookingAccommodations.cshtml" />
+    <Content Include="Views\Admin\EditTripBookingAccommodation.cshtml" />
+    <Content Include="Views\Admin\TripBookingTransports.cshtml" />
+    <Content Include="Views\Admin\EditTripBookingTransport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

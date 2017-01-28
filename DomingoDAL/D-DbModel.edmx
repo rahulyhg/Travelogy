@@ -196,6 +196,13 @@
           <Property Name="EstimatedCost" Type="money" Nullable="false" />
           <Property Name="TripId" Type="int" Nullable="false" />
           <Property Name="TripStepId" Type="int" />
+          <Property Name="CheckinDate" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+          <Property Name="PropertyName" Type="nvarchar" MaxLength="100" />
+          <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="SpecialRequests" Type="nchar" MaxLength="10" />
+          <Property Name="CheckoutDate" Type="datetime" />
         </EntityType>
         <EntityType Name="TripBookingTransport">
           <Key>
@@ -206,6 +213,12 @@
           <Property Name="EstimatedCost" Type="money" Nullable="false" />
           <Property Name="TripId" Type="int" Nullable="false" />
           <Property Name="TripStepId" Type="int" />
+          <Property Name="BookingDate" Type="datetime" />
+          <Property Name="BookingStatus" Type="nvarchar" MaxLength="20" />
+          <Property Name="TransportFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransportTo" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdminNotes" Type="nvarchar" MaxLength="500" />
+          <Property Name="TravellerNotes" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="TripProvider">
           <Key>
@@ -871,6 +884,13 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="EstimatedCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="TripId" Type="Int32" Nullable="false" />
           <Property Name="TripStepId" Type="Int32" />
+          <Property Name="CheckinDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SpecialRequests" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CheckoutDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="TripBookingTransport">
           <Key>
@@ -881,6 +901,12 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="EstimatedCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="TripId" Type="Int32" Nullable="false" />
           <Property Name="TripStepId" Type="Int32" />
+          <Property Name="BookingDate" Type="DateTime" Precision="3" />
+          <Property Name="BookingStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TransportFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransportTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TravellerNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="View_TripStep">
           <Key>
@@ -1218,6 +1244,13 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="TripBookingAccommodations">
             <EntityTypeMapping TypeName="TravelogyDevModel.TripBookingAccommodation">
               <MappingFragment StoreEntitySet="TripBookingAccommodation">
+                <ScalarProperty Name="CheckoutDate" ColumnName="CheckoutDate" />
+                <ScalarProperty Name="SpecialRequests" ColumnName="SpecialRequests" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CheckinDate" ColumnName="CheckinDate" />
                 <ScalarProperty Name="TripStepId" ColumnName="TripStepId" />
                 <ScalarProperty Name="TripId" ColumnName="TripId" />
                 <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
@@ -1229,6 +1262,12 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="TripBookingTransports">
             <EntityTypeMapping TypeName="TravelogyDevModel.TripBookingTransport">
               <MappingFragment StoreEntitySet="TripBookingTransport">
+                <ScalarProperty Name="TravellerNotes" ColumnName="TravellerNotes" />
+                <ScalarProperty Name="AdminNotes" ColumnName="AdminNotes" />
+                <ScalarProperty Name="TransportTo" ColumnName="TransportTo" />
+                <ScalarProperty Name="TransportFrom" ColumnName="TransportFrom" />
+                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
                 <ScalarProperty Name="TripStepId" ColumnName="TripStepId" />
                 <ScalarProperty Name="TripId" ColumnName="TripId" />
                 <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />

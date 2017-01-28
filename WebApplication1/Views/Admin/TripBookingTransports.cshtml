@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DomingoDAL.TripBookingTransport>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstimatedCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TripId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TripStepId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminNotes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TravellerNotes)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransportType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TripId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TripStepId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransportFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransportTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminNotes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TravellerNotes)
+            </td>
+            <td>
+                @Html.ActionLink("Manage", "EditTripBookingTransport", new { id=item.Id }) 
+            </td>
+        </tr>
+    }
+    
+    </table>
+</div>
+

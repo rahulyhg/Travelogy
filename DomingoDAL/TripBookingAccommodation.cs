@@ -19,5 +19,12 @@ namespace DomingoDAL
         public decimal EstimatedCost { get; set; }
         public int TripId { get; set; }
         public Nullable<int> TripStepId { get; set; }
+        public Nullable<System.DateTime> CheckinDate { get; set; }
+        public string Status { get; set; }
+        public string Notes { get; set; }
+        public string PropertyName { get; set; }
+        public string PropertyAddress { get; set; }
+        public string SpecialRequests { get; set; }
+        public Nullable<System.DateTime> CheckoutDate { get; set; }
     }
 }
