@@ -193,6 +193,8 @@
     <Content Include="Scripts\dbo.Traveller.Table.sql" />
     <Content Include="Scripts\dbo.TravellerType.Table.sql" />
     <Content Include="Scripts\dbo.Trip.Table.sql" />
+    <Content Include="Scripts\dbo.TripBookingAccommodation.Table.sql" />
+    <Content Include="Scripts\dbo.TripBookingTransport.Table.sql" />
     <Content Include="Scripts\dbo.TripProvider.Table.sql" />
     <Content Include="Scripts\dbo.TripStep.Table.sql" />
     <Content Include="Scripts\dbo.TripTemplate.Table.sql" />
@@ -200,6 +202,7 @@
     <Content Include="Scripts\dbo.View_Thread.View.sql" />
     <Content Include="Scripts\dbo.View_ThreadMessage.View.sql" />
     <Content Include="Scripts\dbo.View_Trip.View.sql" />
+    <Content Include="Scripts\dbo.View_TripStep.View.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
