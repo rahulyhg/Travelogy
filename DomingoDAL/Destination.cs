@@ -19,5 +19,10 @@ namespace DomingoDAL
         public string Tagline { get; set; }
         public string Description { get; set; }
         public string ThumbnailPath { get; set; }
+        public string CircuitUrl { get; set; }
+        public string BestTimeToVisit { get; set; }
+        public string TravelStyles { get; set; }
+        public string TemplateSearchAlias { get; set; }
+        public string TourContinent { get; set; }
     }
 }

@@ -134,7 +134,9 @@ namespace WebApplication1.Controllers
         {
             BlViewTrip trip = null;
             var _blError = TripManager.GetTripById(tripId, out trip);
-            var _model = new EditTripViewModel() { ActiveTrip = trip };
+            List<BlTripTemplate> _relatedTemplates = null;
+            _blError = TripManager.SearchTripTemplatesByAlias(trip.DlTripView.SearchAlias, out _relatedTemplates, trip.DlTripView.TripTemplateId);
+            var _model = new EditTripViewModel() { ActiveTrip = trip, RelatedTemplates = _relatedTemplates };
             return View("EditTrip", _model);
         }
 

@@ -129,6 +129,15 @@
                                 else
                                 {
                                     <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
+                                    <li>
+                                        <a href="#">Circuits</a>
+                                        <ul>
+                                            <li>@Html.ActionLink("Asia", "Asia", "Circuit")</li>
+                                            <li>@Html.ActionLink("Africa", "Africa", "Circuit")</li>
+                                            <li>@Html.ActionLink("Europe", "Europe", "Circuit")</li>
+                                            <li><a href="/Circuit">Browse All</a></li>
+                                        </ul>
+                                    </li>
                                     <li>@Html.ActionLink("My Profile", "TravellerProfile", "Manage")</li>
                                     <li>@Html.ActionLink("My Messages", "MessageCenter", "Service")</li>
                                 }
@@ -140,33 +149,9 @@
                                 <li>
                                     <a href="#">Circuits</a>
                                     <ul>
-                                        <li>
-                                            <a href="#">Asia</a>
-                                            <ul>
-                                                <li>@Html.ActionLink("Eastern Himalaya - Motorcycle tour", "MotoEasternHimalaya", "Circuit")</li>
-                                                <li>@Html.ActionLink("Eastern Himalaya - Backpacking", "BackpackEasternHimalaya", "Circuit")</li>
-                                                <li>@Html.ActionLink("India and Nepal - Specialized Photography Tours", "PhotographyToursIndia", "Circuit")</li>
-                                                <li>@Html.ActionLink("Lake Baikal and Buryat republic", "LakeBaikal", "Circuit")</li>
-                                                <li>@Html.ActionLink("Trans-Mongolian journeys", "TransMongolian", "Circuit")</li>
-                                                <li>@Html.ActionLink("Nomadic Mongolia", "Mongolia", "Circuit")</li>
-                                                <li>@Html.ActionLink("Tibet - roof of the world", "Tibet", "Circuit")</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">Africa</a>
-                                            <ul>
-                                                <li>@Html.ActionLink("Kilimanjaro Climb", "Kilimanjaro", "Circuit")</li>
-                                                <li>@Html.ActionLink("Safari in Tanzania", "TanzaniaSafari", "Circuit")</li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">Europe</a>
-                                            <ul>
-                                                <li>@Html.ActionLink("Moscow and the Trans-Siberian", "TransSiberian", "Circuit")</li>
-                                                <li>@Html.ActionLink("Scottish Isles", "ScottishIsles", "Circuit")</li>
-                                                <li>@Html.ActionLink("Supercar & Superbike tours of Britain", "SupercarSuperbikeBritain", "Circuit")</li>
-                                            </ul>
-                                        </li>
+                                        <li>@Html.ActionLink("Asia", "Asia", "Circuit")</li>
+                                        <li>@Html.ActionLink("Africa", "Africa", "Circuit")</li>
+                                        <li>@Html.ActionLink("Europe", "Europe", "Circuit")</li>
                                         <li><a href="/Circuit">Browse All</a></li>
                                     </ul>
                                 </li>

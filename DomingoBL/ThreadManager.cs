@@ -124,7 +124,7 @@ namespace DomingoBL
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
                     // update the MostRecentPostDate of the parent thread
-                    var thread = context.Threads.FirstOrDefault(p => p.Id == tm.ThreadId);
+                    var thread = context.Threads.Find(tm.ThreadId);
                     thread.MostRecentPostDate = DateTime.Now;
 
                     // add the message
@@ -188,7 +188,7 @@ namespace DomingoBL
         /// </summary>
         /// <param name="_messageList"></param>
         /// <returns></returns>
-        public static DomingoBlError GetMessagesForAdmin(out List<MessageCollection> _messageList)
+        public static DomingoBlError GetMessagesForAdmin(out List<Thread> _messageList)
         {
             _messageList = null;
 
@@ -197,22 +197,8 @@ namespace DomingoBL
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
                     // get all the threads, sorted by the latest one first
-                    var threads = context.View_Thread.Select(p => p).OrderByDescending(p => p.MostRecentPostDate);
-                    if (threads != null)
-                    {
-                        _messageList = new List<MessageCollection>();
-
-                        // for all threads get the messages, latest one first
-                        foreach (var thread in threads)
-                        {
-                            var messages = context.View_ThreadMessage.Where(p => p.ThreadId == thread.Id).OrderBy(p => p.CreatedDate);
-                            if (messages != null)
-                            {
-                                var _message = new MessageCollection() { Thread = thread, Messages = messages.ToList() };
-                                _messageList.Add(_message);
-                            }
-                        }
-                    }
+                    var threads = context.Threads.Select(p => p).OrderByDescending(p => p.MostRecentPostDate);
+                    _messageList = threads.ToList();
                 }
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };

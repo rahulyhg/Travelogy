@@ -131,7 +131,7 @@ namespace WebApplication1.Controllers
 
             if (aDmin > 0)
             {
-                return RedirectToAction("MessageCenter", "Admin");
+                return RedirectToAction("Message", "Admin", new { @id = threadId });
             }
 
 

@@ -26,5 +26,6 @@ namespace DomingoDAL
         public Nullable<int> ThreadId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string SearchAlias { get; set; }
     }
 }

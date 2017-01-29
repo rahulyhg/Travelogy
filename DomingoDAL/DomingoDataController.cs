@@ -11,24 +11,24 @@ namespace DomingoDAL
     /// </summary>
     public class DomingoDataController : IDataController
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public List<Destination> GetAllDestinations()
-        {
-            using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
-            {
-                var _allDestinations = from _destination in context.Destinations
-                                                        select _destination;
-                if(_allDestinations != null)
-                {
-                    return _allDestinations.ToList();
-                }
-            }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <returns></returns>
+        //public List<Destination> GetAllDestinations()
+        //{
+        //    using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+        //    {
+        //        var _allDestinations = from _destination in context.Destinations
+        //                                                select _destination;
+        //        if(_allDestinations != null)
+        //        {
+        //            return _allDestinations.ToList();
+        //        }
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
         /// <summary>
         /// 

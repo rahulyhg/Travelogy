@@ -7,7 +7,17 @@
 
 @if (Request.IsAuthenticated)
 {
-    @Html.Partial("_TripPlannerOverview")
+    List<DomingoBL.BlObjects.BlViewTrip> _allTrips = null;
+    var blError = DomingoBL.TripManager.GetAllTripsForUserByName(User.Identity.Name, out _allTrips);
+    if(_allTrips != null && _allTrips.Count > 0)
+    {
+        <h1>Your upcoming trip with Travelogy</h1>
+        @Html.Partial("_TripPlanningPlannedTripSummary", _allTrips[0]);
+    }
+    else
+    {
+        @Html.Partial("_TripPlannerAdvert")
+    }
 }
 
 else
@@ -23,87 +33,7 @@ else
     </div>
     <!--End Tag Box v5-->
 
-}
+    @Html.Partial("_TripPlannerAdvert")
 
-
-@*<div class="jumbotron">
-    @if (Request.IsAuthenticated)
-    {
-        <h2>Embark on a new adventure</h2>
-        <p class="lead">Travelogy club is a platform for 360 degree solution for travel to exotic destinations.</p>
-        <p><a href="/Service/Tripplanning" class="btn btn-orange">Start planning your next trip &raquo;</a></p>
-    }
-    else
-    {
-        <h2>Embark on a new adventure</h2>
-        <p class="lead">Travelogy club is a platform for 360 degree solution for travel to exotic destinations.</p>
-        <h1><a href="/Account/Register" class="btn btn-orange">Join the club &raquo;</a></h1>
-    }
-
-</div>*@
-
-<div class="row">
-    <div class="img-box-3 text-center">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 padd-15">
-                <h1>Use the Travelogy Trip Planner</h1>
-                <h2 class="orange">Plan your next trip to exotic locations.</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3 col-sm-6">
-                <!-- Image Box #3 Item -->
-                <div class="img-box-3-item">
-                    <div class="img-box-3-icon">
-                        <img src="~/content/img/flat-icons/maps-and-flags-3.png" alt="" class="img-responsive" />
-                    </div>
-                    <h4>Plan your travel</h4>
-                    <div class="bor bg-black"></div>
-                    <p>Use out expert team to plan trips to extreme corners of the world.</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <!-- Image Box #3 Item -->
-                <div class="img-box-3-item">
-                    <div class="img-box-3-icon">
-                        <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
-                    </div>
-                    <h4>Create Guidebooks</h4>
-                    <div class="bor bg-black"></div>
-                    <p> Get custom made guidebooks for yourself including your trip plan.</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <!-- Image Box #3 Item -->
-                <div class="img-box-3-item">
-                    <div class="img-box-3-icon">
-                        <img src="~/content/img/flat-icons/booking.png" alt="" class="img-responsive" />
-                    </div>
-                    <h4>Bookings</h4>
-                    <div class="bor bg-black"></div>
-                    <p>You can book accommodation and transfers through our partner Travel Agencies to get the best deals.</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <!-- Image Box #3 Item -->
-                <div class="img-box-3-item">
-                    <div class="img-box-3-icon">
-                        <img src="~/content/img/flat-icons/taxi-1.png" alt="" class="img-responsive" />
-                    </div>
-                    <h4><a href="Travel-Logistics.html">Travel Safe</a></h4>
-                    <div class="bor bg-black"></div>
-                    <p>Our partners are hand chosen local people who will ensure smooth travel.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-@if (Request.IsAuthenticated)
-{
-    <a href="/Service/Tripplanning"><h1 class="text-center">Start Planning now!</h1></a>
-}
-else
-{
     <a href="/Account/Register"> <h1 class="text-center">Join now to start using the Travelogy Trip Planner</h1></a>
 }

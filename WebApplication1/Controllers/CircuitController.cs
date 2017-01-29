@@ -1,4 +1,5 @@
-﻿using DomingoDAL;
+﻿using DomingoBL;
+using DomingoDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,40 @@ namespace WebApplication1.Controllers
 {
     public class CircuitController : Controller
     {
-        // GET: Circuit
+        // GET: Circuit - get all circuits
         public ActionResult Index()
         {
-            var _dataController = new DomingoDataController();
-            var _allDestinations = _dataController.GetAllDestinations();
-            CircuitModelBase circuitModel = new CircuitModelBase() { AllDestinations = _allDestinations };
-            return View(circuitModel);
+            List<Destination> _destinations = null;
+            var blError = DestinationManager.GetAllDestinations(out _destinations);
+            var _model = new CircuitModelBase() { AllDestinations = _destinations, CircuitName = "All Destinations" };
+            return View(_model);
+        }
+
+        // GET: Circuit - get all circuits for asia
+        public ActionResult Asia()
+        {
+            List<Destination> _destinations = null;
+            var blError = DestinationManager.GetDestinationsForContinent("asia", out _destinations);
+            var _model = new CircuitModelBase() { AllDestinations = _destinations, CircuitName = "Asia" };
+            return View(_model);
+        }
+
+        // GET: Circuit - get all circuits for Africa
+        public ActionResult Africa()
+        {
+            List<Destination> _destinations = null;
+            var blError = DestinationManager.GetDestinationsForContinent("africa", out _destinations);
+            var _model = new CircuitModelBase() { AllDestinations = _destinations, CircuitName = "Africa" };
+            return View(_model);
+        }
+
+        // GET: Circuit - get all circuits for Europe
+        public ActionResult Europe()
+        {
+            List<Destination> _destinations = null;
+            var blError = DestinationManager.GetDestinationsForContinent("europe", out _destinations);
+            var _model = new CircuitModelBase() { AllDestinations = _destinations, CircuitName = "Europe" };
+            return View(_model);
         }
 
         public ActionResult Kilimanjaro()

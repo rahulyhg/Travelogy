@@ -65,6 +65,38 @@ namespace DomingoBL
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="aspUserId"></param>
+        /// <param name="trips"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetAllTripsForUserByName(string aspUserName, out List<BlViewTrip> trips)
+        {
+            trips = new List<BlViewTrip>();
+
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var aspNetUser = context.AspNetUsers.Where(p => p.UserName == aspUserName).FirstOrDefault();
+                    var dlTrips = context.View_Trip.Where(p => p.AspNetUserId == aspNetUser.Id).ToList();
+                    foreach (var dlTrip in dlTrips)
+                    {
+                        var dlTripSteps = context.View_TripStep.Where(p => p.TripId == dlTrip.Id);
+                        var blTrip = new BlViewTrip() { DlTripView = dlTrip, DlTripStepsView = dlTripSteps.ToList() };
+                        trips.Add(blTrip);
+                    }
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
         public static DomingoBlError CreateTrip(Trip trip)
@@ -201,7 +233,7 @@ namespace DomingoBL
         /// </summary>
         /// <param name="alias"></param>
         /// <returns></returns>
-        public static DomingoBlError SearchTripTemplatesByAlias(string alias, out List<BlTripTemplate> templates)
+        public static DomingoBlError SearchTripTemplatesByAlias(string alias, out List<BlTripTemplate> templates, int discardTemplateId = 0)
         {
             try
             {
@@ -210,7 +242,12 @@ namespace DomingoBL
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
                     // search for trmplates with the search alias
-                    var dbTemplateSearchRes = context.TripTemplates.Where(p => p.SearchAlias == alias).ToList();
+                    var dbTemplateSearchRes = context.TripTemplates.Where(p => p.SearchAlias == alias);
+
+                    if(discardTemplateId > 0)
+                    {
+                        dbTemplateSearchRes = dbTemplateSearchRes.Where(p => p.Id != discardTemplateId);
+                    }
 
                     // iterate through the results and populate the business layer object
                     foreach(var dbTemplate in dbTemplateSearchRes)

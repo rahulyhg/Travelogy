@@ -272,11 +272,24 @@ namespace WebApplication1.Controllers
         {
             _CheckForAdminAccess();
 
-            var _messageList = new List<MessageCollection>();
+            var _messageList = new List<Thread>();
             var _blError = ThreadManager.GetMessagesForAdmin(out _messageList);
-            var model = new MessageListModel() { AllMessages = _messageList };
+            //var model = new MessageListModel() { AllMessages = _messageList };
 
-            return View(model);
+            return View(_messageList);
+        }
+
+        [Authorize]
+        public ActionResult Message(int id)
+        {
+            var _messageList = new MessageCollection();
+            var _blError = ThreadManager.GetMessageThreadById(id, out _messageList);
+
+            var _model = new MessageListModel();
+            _model.AllMessages = new List<MessageCollection>();
+            _model.AllMessages.Add(_messageList);
+
+            return View(_model);
         }
 
         /// <summary>

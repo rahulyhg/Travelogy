@@ -71,3 +71,12 @@
         <h1>@Html.ValidationSummary()</h1>
     };
 } @*end of edit trip section*@
+
+
+@if(Model.RelatedTemplates != null)
+{
+    foreach(var template in Model.RelatedTemplates)
+    {
+        <h1>@template.DlTemplate.Name</h1>
+    }
+}

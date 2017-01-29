@@ -1677,7 +1677,7 @@
     <Content Include="Views\Service\Dashboard.cshtml" />
     <Content Include="Views\Service\MessageCenter.cshtml" />
     <Content Include="Views\Manage\TravellerProfile.cshtml" />
-    <Content Include="Views\Home\_TripPlannerOverview.cshtml" />
+    <Content Include="Views\Shared\_TripPlannerOverview.cshtml" />
     <Content Include="Views\Circuit\MotoEasternHimalaya.cshtml" />
     <Content Include="Views\Circuit\BackpackEasternHimalaya.cshtml" />
     <Content Include="Views\Circuit\PhotographyToursIndia.cshtml" />
@@ -1713,6 +1713,16 @@
     <Content Include="Views\Admin\EditTripBookingAccommodation.cshtml" />
     <Content Include="Views\Admin\TripBookingTransports.cshtml" />
     <Content Include="Views\Admin\EditTripBookingTransport.cshtml" />
+    <Content Include="Views\Admin\Message.cshtml" />
+    <Content Include="Views\Shared\_TripPlanningPlannedTripSummary.cshtml" />
+    <Content Include="Views\Shared\_TripPlannerAdvert.cshtml" />
+    <Content Include="Views\Shared\_DestinationWidget.cshtml" />
+    <Content Include="Views\Circuit\Asia.cshtml" />
+    <Content Include="Views\Circuit\Africa.cshtml" />
+    <Content Include="Views\Circuit\Europe.cshtml" />
+    <Content Include="Views\Shared\_AsiaCircuitsCarousel.cshtml" />
+    <Content Include="Views\Shared\_AfricaCircuitsCarousel.cshtml" />
+    <Content Include="Views\Shared\_EuropeCircuitsCarousel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

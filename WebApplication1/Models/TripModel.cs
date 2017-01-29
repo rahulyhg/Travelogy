@@ -103,5 +103,10 @@ namespace WebApplication1.Models
         /// 
         /// </summary>
         public BlViewTrip ActiveTrip { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<BlTripTemplate> RelatedTemplates { get; set; }
     }
 }

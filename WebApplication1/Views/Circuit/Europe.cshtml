@@ -1,12 +1,6 @@
 ﻿@model WebApplication1.Models.CircuitModelBase
 
-@Html.Partial("_HomepageCarousel")
-
-<div class="divider-1"></div>
-
-<div class="block-heading-two">
-    <h3><span>Featured circuits</span></h3>
-</div>	
+@Html.Partial("_EuropeCircuitsCarousel")
 
 <div class="row">
     @foreach (var item in Model.AllDestinations)
