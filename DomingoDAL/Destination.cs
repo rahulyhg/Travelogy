@@ -24,5 +24,6 @@ namespace DomingoDAL
         public string TravelStyles { get; set; }
         public string TemplateSearchAlias { get; set; }
         public string TourContinent { get; set; }
+        public int Weightage { get; set; }
     }
 }

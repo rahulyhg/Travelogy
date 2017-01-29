@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<DomingoDAL.Destination>
 
 
-    <p>
+    <h4>
         @Html.ActionLink("Create New", "CreateDestination")
-    </p>
+    </h4>
+    <h1>Manage Destinations:</h1>
     <table class="table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Tagline)
             </th>
@@ -23,9 +21,11 @@
     
     @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
+            <td colspan="4">
+                <h5 class="orange">@Html.DisplayFor(modelItem => item.Name) [@Html.DisplayFor(modelItem => item.Weightage)]  &nbsp; - <small>@Html.ActionLink("Edit", "EditDestination", new { id = item.Id })</small> </h5>
+            </td>            
+        </tr>
+        <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Tagline)
             </td>
@@ -33,13 +33,10 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ThumbnailPath)
+                @*@Html.DisplayFor(modelItem => item.ThumbnailPath)*@
+                <img src="@item.ThumbnailPath" class="img-responsive" style="max-width:100px;" />
             </td>
-            <td>
-                @Html.ActionLink("Edit", "EditDestination", new { id=item.Id }) |
-                @Html.ActionLink("Details", "DestinationDetails", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "DeleteDestination", new { id=item.Id })
-            </td>
+            
         </tr>
     }    
     </table>

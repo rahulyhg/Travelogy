@@ -117,6 +117,16 @@
                         <!-- Navigation starts.  -->
                         <div class="navy">
                         <ul>
+                            <li>
+                                <a href="#">Circuits</a>
+                                <ul>
+                                    <li>@Html.ActionLink("Asia", "Asia", "Circuit")</li>
+                                    <li>@Html.ActionLink("Africa", "Africa", "Circuit")</li>
+                                    <li>@Html.ActionLink("Europe", "Europe", "Circuit")</li>
+                                    <li><a href="/Circuit">Browse All</a></li>
+                                </ul>
+                            </li>
+
                             @if (Request.IsAuthenticated)
                             {
                                 if (ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
@@ -129,15 +139,6 @@
                                 else
                                 {
                                     <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
-                                    <li>
-                                        <a href="#">Circuits</a>
-                                        <ul>
-                                            <li>@Html.ActionLink("Asia", "Asia", "Circuit")</li>
-                                            <li>@Html.ActionLink("Africa", "Africa", "Circuit")</li>
-                                            <li>@Html.ActionLink("Europe", "Europe", "Circuit")</li>
-                                            <li><a href="/Circuit">Browse All</a></li>
-                                        </ul>
-                                    </li>
                                     <li>@Html.ActionLink("My Profile", "TravellerProfile", "Manage")</li>
                                     <li>@Html.ActionLink("My Messages", "MessageCenter", "Service")</li>
                                 }
@@ -146,16 +147,6 @@
                             {
                                 <!-- Main menu -->
                                 <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
-                                <li>
-                                    <a href="#">Circuits</a>
-                                    <ul>
-                                        <li>@Html.ActionLink("Asia", "Asia", "Circuit")</li>
-                                        <li>@Html.ActionLink("Africa", "Africa", "Circuit")</li>
-                                        <li>@Html.ActionLink("Europe", "Europe", "Circuit")</li>
-                                        <li><a href="/Circuit">Browse All</a></li>
-                                    </ul>
-                                </li>
-
                                 <li>
                                     <a href="#">Information</a>
                                     <ul>

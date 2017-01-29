@@ -56,6 +56,75 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult EditDestination(int id)
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var _model = context.Destinations.Find(id);
+            return View(_model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult SaveDestination(Destination model)
+        {
+            _CheckForAdminAccess();
+
+            if(model != null)
+            {
+                using (var context = new TravelogyDevEntities1())
+                {
+                    if (model.Id == 0)
+                    {
+                        context.Destinations.Add(model);
+                        context.SaveChanges();
+                    }
+
+                    else
+                    {
+                        var _dbDestinationObj = context.Destinations.Find(model.Id);
+                        if(_dbDestinationObj != null)
+                        {
+                            _dbDestinationObj.BestTimeToVisit = model.BestTimeToVisit;
+                            _dbDestinationObj.CircuitUrl = model.CircuitUrl;
+                            _dbDestinationObj.Description = model.Description;
+                            _dbDestinationObj.Name = model.Name;
+                            _dbDestinationObj.Tagline = model.Tagline;
+                            _dbDestinationObj.TemplateSearchAlias = model.TemplateSearchAlias;
+                            _dbDestinationObj.ThumbnailPath = model.ThumbnailPath;
+                            _dbDestinationObj.TourContinent = model.TourContinent;
+                            _dbDestinationObj.TravelStyles = model.TravelStyles;
+                            _dbDestinationObj.Weightage = model.Weightage;
+
+                            context.SaveChanges();
+                        }
+                    }
+                }   
+            }
+
+            if(model.Id > 0)
+            {
+                return RedirectToAction("EditDestination", new { @id = model.Id});
+            }
+
+            else
+            {
+                return RedirectToAction("Destinations");
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         [Authorize]
         public ActionResult TripTemplates()

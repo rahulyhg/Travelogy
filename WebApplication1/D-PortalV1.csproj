@@ -1723,6 +1723,7 @@
     <Content Include="Views\Shared\_AsiaCircuitsCarousel.cshtml" />
     <Content Include="Views\Shared\_AfricaCircuitsCarousel.cshtml" />
     <Content Include="Views\Shared\_EuropeCircuitsCarousel.cshtml" />
+    <Content Include="Views\Admin\EditDestination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

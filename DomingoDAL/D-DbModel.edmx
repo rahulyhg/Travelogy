@@ -70,14 +70,15 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Tagline" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="500" />
-          <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tagline" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="256" />
           <Property Name="CircuitUrl" Type="nvarchar" MaxLength="200" />
           <Property Name="BestTimeToVisit" Type="nvarchar" MaxLength="200" />
           <Property Name="TravelStyles" Type="nvarchar" MaxLength="200" />
           <Property Name="TemplateSearchAlias" Type="nvarchar" MaxLength="50" />
           <Property Name="TourContinent" Type="nvarchar" MaxLength="50" />
+          <Property Name="Weightage" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DestinationCountry">
           <Key>
@@ -86,6 +87,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DestinationId" Type="int" Nullable="false" />
           <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="DestinationLink">
           <Key>
@@ -273,6 +275,7 @@
           <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="100" />
           <Property Name="AdditionalHtml" Type="ntext" />
           <Property Name="SearchAlias" Type="nvarchar" MaxLength="10" />
+          <Property Name="Weightage" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TripTemplateStep">
           <Key>
@@ -667,14 +670,15 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Tagline" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ThumbnailPath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tagline" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailPath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="CircuitUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="BestTimeToVisit" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TravelStyles" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TemplateSearchAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TourContinent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Weightage" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DestinationCountry">
           <Key>
@@ -683,6 +687,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DestinationId" Type="Int32" Nullable="false" />
           <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DestinationLink">
           <Key>
@@ -853,6 +858,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="ThumbnailPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SearchAlias" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Weightage" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="View_Trip">
           <Key>
@@ -1034,6 +1040,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="Destinations">
             <EntityTypeMapping TypeName="TravelogyDevModel.Destination">
               <MappingFragment StoreEntitySet="Destination">
+                <ScalarProperty Name="Weightage" ColumnName="Weightage" />
                 <ScalarProperty Name="TourContinent" ColumnName="TourContinent" />
                 <ScalarProperty Name="TemplateSearchAlias" ColumnName="TemplateSearchAlias" />
                 <ScalarProperty Name="TravelStyles" ColumnName="TravelStyles" />
@@ -1050,6 +1057,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="DestinationCountries">
             <EntityTypeMapping TypeName="TravelogyDevModel.DestinationCountry">
               <MappingFragment StoreEntitySet="DestinationCountry">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1214,6 +1222,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="TripTemplates">
             <EntityTypeMapping TypeName="TravelogyDevModel.TripTemplate">
               <MappingFragment StoreEntitySet="TripTemplate">
+                <ScalarProperty Name="Weightage" ColumnName="Weightage" />
                 <ScalarProperty Name="SearchAlias" ColumnName="SearchAlias" />
                 <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
                 <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />

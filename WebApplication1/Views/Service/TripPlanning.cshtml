@@ -29,22 +29,25 @@ else // for logged in users
 
         <div class="row tag-box tag-box-v1">
             <h1 class="orange">Featured circuits</h1>
-
-            <!--Lake Baikal-->
-            @Html.Partial("LakeBaikal_TripPlannerWP")
-            <!--End Lake Baikal-->
-            <!--TSR-->
-            @Html.Partial("TransSiberian_TripPlannerWP")
-            <!--End TSR-->
+            <div class="row">
+                @foreach (var item in Model.SuggestedDestinations)
+                {
+                    <div class="col-md-12 col-sm-12">
+                        @Html.Partial("_DestinationWidget", item)
+                    </div>
+                }
+            </div>
         </div>
+
+        
     }
 
     // planned trips
-    else if(Model.PlannedTrips != null && Model.PlannedTrips.Count > 0)
+    else if (Model.PlannedTrips != null && Model.PlannedTrips.Count > 0)
     {
-        foreach(var trip in Model.PlannedTrips)
+        foreach (var trip in Model.PlannedTrips)
         {
-            Html.RenderPartial("_TripPlanningPlannedTripSummary", trip);            
+            Html.RenderPartial("_TripPlanningPlannedTripSummary", trip);
         }
 
         <div class="row tag-box tag-box-v5">

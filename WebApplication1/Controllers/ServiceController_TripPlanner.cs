@@ -45,6 +45,9 @@ namespace WebApplication1.Controllers
                 // else show all the planned trips
                 var _plannedTrips = _allTrips.Where(p => (p.DlTripView.Status.Trim() == TripStatus.planned.ToString())).ToList();
                 model.PlannedTrips = _plannedTrips;
+                List<Destination> _destinations = null;
+                blError = DestinationManager.GetTopDestinations("", 3, out _destinations);
+                model.SuggestedDestinations = _destinations;
             }
 
             return View(model);

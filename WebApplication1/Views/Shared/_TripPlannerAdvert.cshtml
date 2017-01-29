@@ -3,8 +3,18 @@
     <div class="img-box-3 text-center">
         <div class="row">
             <div class="col-md-12 col-sm-12 padd-15">
-                <h1>Use the Travelogy Trip Planner</h1>
-                <h2 class="orange">Plan your next trip to exotic locations.</h2>
+                @if (Request.IsAuthenticated)
+                {
+                    <h1>Use the Travelogy Trip Planner</h1>
+                    <h2 class="orange">Plan your next trip to exotic locations.</h2>
+                    <div class="margin-bottom-20"></div>
+                    <p> <a href="/Service/Tripplanning" class="btn-u btn-u-lg btn-u-orange"><i class="icon-signin"></i> &nbsp; Start Now</a></p>
+                }
+                else
+                {
+                    <h1>Use the Travelogy Trip Planner </h1>
+                }                
+                
             </div>
         </div>
         <div class="row">

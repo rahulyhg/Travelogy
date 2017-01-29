@@ -24,9 +24,10 @@ namespace DomingoBL
 
             try
             {
+                // get all desitions that matches the continent, reverse order by weightage
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    destinations = context.Destinations.Where(p => p.TourContinent == continent).ToList();                    
+                    destinations = context.Destinations.Where(p => p.TourContinent == continent).OrderByDescending(p => p.Weightage).ToList();                    
                 }
             }
 
@@ -49,12 +50,57 @@ namespace DomingoBL
 
             try
             {
+                // get all desitions, reverse order by weightage
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    var _allDestinations = from _destination in context.Destinations select _destination;
+                    var _allDestinations = context.Destinations.Select(p => p).OrderByDescending(p => p.Weightage);
                     if (_allDestinations != null)
                     {
                         destinations = _allDestinations.ToList();
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="continent"></param>
+        /// <param name="topRecs"></param>
+        /// <param name="destinations"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetTopDestinations(string continent, int topRecs, out List<Destination> destinations)
+        {
+            destinations = null;
+
+            try
+            {
+                // get all desitions, reverse order by weightage
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var _allDestinations = string.IsNullOrEmpty(continent) ?
+                            context.Destinations.Select(p => p).OrderByDescending(p => p.Weightage)
+                            : context.Destinations.Where(p => p.TourContinent == continent).OrderByDescending(p => p.Weightage);
+
+                    if (_allDestinations != null)
+                    {
+                        if(_allDestinations.Count() > topRecs)
+                        {
+                            destinations = _allDestinations.Take(topRecs).ToList();
+                        }
+
+                        else
+                        {
+                            destinations = _allDestinations.ToList();
+                        }
+                        
                     }
                 }
             }

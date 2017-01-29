@@ -39,6 +39,11 @@ namespace WebApplication1.Models
         /// 
         /// </summary>
         public BlViewTrip ActiveTrip { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Destination> SuggestedDestinations { get; set; }
     }
 
     /// <summary>
