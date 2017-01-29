@@ -170,5 +170,31 @@ namespace WebApplication1.Controllers
         {
             return View(model);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripStepId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult AddTripBookingAccommodation(int tripStepId, int tripId)
+        {
+            var model = new TripBookingAccommodation() { TripStepId = tripStepId, TripId = tripId };
+            return View("AccommodationBooking", model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveTripBookingAccommodation(TripBookingAccommodation model)
+        {
+            string test = model.PropertyName;
+            return View("AccommodationBooking", model);
+        }
     }
 }

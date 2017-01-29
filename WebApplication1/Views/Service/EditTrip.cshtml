@@ -41,10 +41,10 @@
                                 
                                 <h5>@tripStep.ShortDescription</h5>
                                 <p>@tripStep.LongDescription</p>
+                                <h5>Add notes:</h5>
+                                <p>@Html.TextAreaFor(p => p.ActiveTrip.DlTripStepsView[x].TravellerNote, new { @class = "form-control" })</p>
+                                <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId">Add Accommodation</a>
                                 <hr />
-                                <p>
-                                    @Html.TextAreaFor(p => p.ActiveTrip.DlTripStepsView[x].TravellerNote)
-                                </p>
                             }
 
                         </div>
