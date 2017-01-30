@@ -76,43 +76,18 @@
 
     <div class="outer">
 
-        <!-- Top bar starts -->
-        <div class="top-bar">
-            <div class="container">
-
-                <!-- Contact starts -->
-                <div class="tb-contact pull-left">
-                    <!-- Email -->
-                    Contact us at: &nbsp;&nbsp;
-                    <i class="fa fa-envelope color"></i> &nbsp; <a href="mailto:info@travelogyclub.com">info@travelogyclub.com</a>
-                    &nbsp;&nbsp;
-                    <!-- Phone -->
-                    @*<i class="fa fa-phone color"></i> &nbsp; +91 80178 10994 (India) &nbsp;&nbsp; +44 208 560 2747 (U.K.)*@
-                </div>
-                <!-- Contact ends -->
-
-                <div class="tb-contact pull-right">
-                    @Html.Partial("_LoginPartial")
-                </div>
-
-                <div class="clearfix"></div>
-            </div>
-        </div>
-
-        <!-- Top bar ends -->
         <!-- Header two Starts -->
         <div class="header-2">
 
             <!-- Container -->
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
-                        <!-- Logo section -->
-                        <div class="logo">
-                            <h1><a href="/"><i class="fa fa-laptop"></i> Travelogy Club</a></h1>
-                        </div>
+                    <div class="col-md-3 col-sm-12 text-center">
+                        <h1><a href="/">Travelogy Club @*<i class="fa fa-calendar"></i>*@</a></h1>
+                        <h5 class="orange">The Science of Travelling</h5>                        
                     </div>
-                    <div class="col-md-6 col-sm-12">
+                    
+                    <div class="col-md-7 col-sm-12 text-center">
                         
                         <!-- Navigation starts.  -->
                         <div class="navy">
@@ -153,35 +128,37 @@
                                         <li>@Html.ActionLink("F.A.Q.", "FAQ", "Information")</li>
                                         <li>@Html.ActionLink("Privacy Policy", "Privacy", "Information")</li>
                                         <li>@Html.ActionLink("Terms and Conditions", "TermsAndConditions", "Information")</li>
+                                        <li>@Html.ActionLink("About Us", "AboutUs", "Information")</li>
+                                        <li>@Html.ActionLink("Contact Us", "ContactUs", "Information")</li>
                                     </ul>
-                                </li>
-
-                                <li>@Html.ActionLink("About Us", "AboutUs", "Information")</li>
-                                <li>@Html.ActionLink("Contact Us", "ContactUs", "Information")</li>
+                                </li>                                
                             }                            
-                        </ul>
+
+                            @*Login menu items*@
+                            @Html.Partial("_LoginPartial")
+                        </ul>                        
                     </div>
                     <!-- Navigation ends -->
-
                 </div>
-                <div class="col-md-3"><img src="~/Content/img/logo1-default.png" /></div>
+                
+                    <div class="col-md-2 col-sm-12 text-center">
+                        <div class="margin-bottom-10"></div>
+                        <img src="~/Content/img/logo1-default-small.png" />
+                    </div>
             </div>
         </div>
     </div>
-
     <!-- Header two ends -->
+        
+
     <!-- Main content starts -->
-
     <div class="main-block">
-
         <div class="container">
-
             @RenderBody()
-
         </div>
     </div>
-
     <!-- Main content ends -->
+
     <!-- Foot Starts -->
 
     <div class="foot">

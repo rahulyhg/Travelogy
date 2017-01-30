@@ -8,7 +8,7 @@
         foreach (AuthenticationDescription p in loginProviders)
         {
             @*<li><a href="#">Login with @p.Caption</a></li>*@
-            <li>@Html.ActionLink(string.Format("Login with {0}", p.Caption), "ExternalLogin", "Account", routeValues: new { @provider = p.AuthenticationType }, htmlAttributes: null )</li>
+            <li class="orange">@Html.ActionLink(string.Format("Login with {0}", p.Caption), "ExternalLogin", "Account", routeValues: new { @provider = p.AuthenticationType }, htmlAttributes: null )</li>
         }                
     }
 }
