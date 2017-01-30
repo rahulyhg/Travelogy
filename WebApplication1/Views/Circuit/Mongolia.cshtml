@@ -197,12 +197,7 @@
 }
 else
 {
-    <div class="row tag-box tag-box-v2 padd-15 text-center">
-        <h2>
-            <a href="/Circuit" class="btn-u btn-u-lg btn-u-orange">Join the club and start planning. <i class="icon-signin"></i></a> &nbsp; Or, simply &nbsp;
-            <a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-u-lg btn-u-orange"><i class="icon-facebook"></i> &nbsp; Login with Facebook</a>
-        </h2>
-    </div>
+    @Html.Partial("_JoinNowTripPlanning")
 
     @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = "Mongolia" });
 }

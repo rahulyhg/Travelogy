@@ -1,8 +1,8 @@
-﻿@model WebApplication1.Models.CircuitModelBase
-
-@*@{
-    Layout = "";
-}*@
+﻿@{
+    ViewBag.Title = "Climbing Kilimanjaro";
+    ViewBag.Description = "Tailor made climbing trips to Mount Kilimanjaro";
+    ViewBag.KeyWords = "Kilimanjaro, Trips to Kilimanjaro, Kilimanjaro Climb, Trips to Tanzania, Tanzania, Masaimara, Serengeti, Safari, African Safari";
+}
 
 <div class="blog-three">
     <div class="row">
@@ -66,10 +66,10 @@
                     <h1>Climbing Kilimanjaro</h1>
                     <!-- Blog meta -->
                     <!-- Paragraph -->
-                    <h4>
+                    <p>
                         Kilimanjaro is the tallest lone standing mountain in the world! At Uhuru peak, 5895 m above sea level, you can stand on a glacier right on the equator.
                         You can then look at the clouds below you. Make new friends on the way up and on your way down. All this in the middle of the incredible landscape of Africa!
-                    </h4>
+                    </p>
                 </div>
             </div>
             <!-- Blog item ends -->
@@ -136,18 +136,20 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-12 col-sm-12">
             @if (Request.IsAuthenticated)
-            {
-                var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = "Kilimanjaro" };
-                @Html.Partial("_StartTripPlanning", _model)
+            {                
+                @Html.Partial("_StartTripPlanning", new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = "Kilimanjaro" })
             }
 
             else
             {
                 @Html.Partial("_JoinNowTripPlanning")
+
+                @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = "Kilimanjaro" });
             }
         </div>
+        <div class="margin-bottom-20"></div>
         <div class="col-md-6 col-sm-6">
             <!-- Blog item starts -->
             <div class="blog-three-item">
