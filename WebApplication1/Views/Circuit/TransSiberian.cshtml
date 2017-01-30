@@ -61,11 +61,11 @@
                     <h1>Travel on the longest running trains for a Trans-Siberian adventure</h1>
                     <!-- Blog meta -->
                     <!-- Paragraph -->
-                    <h4>
+                    <p>
                         The Trans Siberian Railway runs across the Russian south, connecting west to the far east. At 9,289 km it is the world's longest railway stretch.
                         Crossing seven time zones, trains take 7-8 days to complete the Journey - from Moscow to Vladivostok. There are countless places to venture out on this vast stretch.
                         From the forests of Taiga to the Lake Baikal, exciting adventures await.
-                    </h4>
+                    </p>
                 </div>
             </div>
             <!-- Blog item ends -->
@@ -136,11 +136,10 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-12 col-sm-12">
             @if (Request.IsAuthenticated)
-            {
-                var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = "Trans Siberian" };
-                @Html.Partial("_StartTripPlanning", _model)
+            {                
+                @Html.Partial("_StartTripPlanning", new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = "Trans Siberian" })
             }
 
             else
@@ -148,7 +147,7 @@
                 @Html.Partial("_JoinNowTripPlanning")
             }
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-12 col-sm-12">
             @if (Request.IsAuthenticated)
             {
                 var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = "Trans Siberian" };
@@ -156,7 +155,7 @@
             }
             else
             {
-                @Html.Partial("_SubmitTripRequest")
+                @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = "Trans Siberian" })
             }
         </div>
     </div>

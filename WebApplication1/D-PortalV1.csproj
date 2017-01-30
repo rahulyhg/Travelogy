@@ -195,6 +195,7 @@
     <Compile Include="Models\TripModel.cs" />
     <Compile Include="Models\_DownloadBrochureModel.cs" />
     <Compile Include="Models\_StartTripPlanningViewModel.cs" />
+    <Compile Include="Models\_SubmitTripRequestViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
