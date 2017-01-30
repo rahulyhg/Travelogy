@@ -1,0 +1,47 @@
+﻿@model WebApplication1.Models.MessageListItemViewModel
+
+<div class="row margin-bottom-20">
+    <div class="col-md-12">
+        <div class="panel panel-black">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="icon-tasks"></i> Discussion started: @Model.MessageThread.Thread.CreatedDate</h3>
+            </div>
+
+            <form action="/Service/ReplyToThread">
+                <input type="hidden" name="threadId" value="@Model.MessageThread.Thread.Id" />
+                <input type="hidden" name="tripId" value="@Model.TripId" />
+                <input type="hidden" name="aDmin" value="@Model.AdminId" />
+                <div class="panel-body">
+                    <h4>@Model.MessageThread.Thread.Title</h4>
+                    @if(Model.TripId > 0)
+                    {
+                        <h5><a href="/Service/ViewTrip?tripId=@Model.TripId">View trip</a></h5>
+                    }
+
+                    @foreach (var message in Model.MessageThread.Messages)
+                    {
+                        if (message.IsAdmin == true)
+                        {
+                            <hr />
+                            <h4>Traveloger [@message.UserName] replied <small>on [@message.CreatedDate]</small></h4>
+                            <h6>@message.Body</h6>
+                        }
+                        else
+                        {
+                            <h5>[@message.UserName] wrote on <small class="orange"> @message.CreatedDate</small></h5>                            
+                            <p>@message.Body</p>
+                        }
+
+                    }
+                    <hr />
+                    <div class="padd-10">
+                        <textarea name="replyMessage" rows="3" cols="200" class="form-control" placeholder="Reply to the thread" required></textarea>
+                    </div>
+                    <div class="padd-10">
+                        <button type="submit" class="btn btn-orange pull-right">Reply</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿@model WebApplication1.Models.MessageListModel
+
+<h1> Admin message center </h1>
+
+@*get all message threads for the admin*@
+@foreach (var item in Model.AllMessages)
+{
+    // pass the threads to the "_MessageThread" partial view
+    var _model = new WebApplication1.Models.MessageListItemViewModel() { MessageThread = item , AdminId = 100};
+    Html.RenderPartial("_MessageThread", _model);
+}

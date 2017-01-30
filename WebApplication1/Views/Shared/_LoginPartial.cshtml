@@ -14,9 +14,11 @@
     }
 }
 else
-{
+{    
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Join us", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        @Html.Partial("_ExternalLoginListTopNavPartial", new WebApplication1.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Join us", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>        
     </ul>
+    
 }

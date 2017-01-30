@@ -1,0 +1,67 @@
+﻿@model WebApplication1.Models.TripPlanningViewModel
+
+<div class="row">
+    <div class="col-md-12 padd-10">
+        <img class="img-responsive" src="~/Content/img/gallery/big/slider001.jpg" />
+    </div>
+</div>
+
+@if (!Request.IsAuthenticated)
+{
+    @Html.Partial("_TripPlanningNotLoggedInView")
+}
+else // for logged in users
+{
+    // user has not created any trip yet
+    // show the create options
+    if (Model.AllTrips == null || Model.AllTrips.Count == 0)
+    {
+        <div class="row tag-box tag-box-v5">
+            <div class="col-md-8">
+                <span>You have not planned any trip yet!</span>
+            </div>
+            <div class="col-md-4">
+                <a href="/circuit">
+                    <p><button class="btn-u btn-u-lg btn-u-orange"><i class="icon-cloud"></i> Browse all circuits...</button></p>
+                </a>                
+            </div>
+        </div>
+
+        <div class="row tag-box tag-box-v1">
+            <h1 class="orange">Featured circuits</h1>
+
+            <!--Lake Baikal-->
+            @Html.Partial("LakeBaikal_TripPlannerWP")
+            <!--End Lake Baikal-->
+            <!--TSR-->
+            @Html.Partial("TransSiberian_TripPlannerWP")
+            <!--End TSR-->
+        </div>
+    }
+
+    // planned trips
+    else if(Model.PlannedTrips != null && Model.PlannedTrips.Count > 0)
+    {
+        foreach(var trip in Model.PlannedTrips)
+        {
+            <h1>@trip.StartDate -- @trip.Status Trip # @trip.Id</h1>
+            <h2><a href="/Service/ViewTrip?tripId=@trip.Id">View</a></h2>
+        }
+
+        <div class="row tag-box tag-box-v5">
+            <div class="col-md-8">
+                <span>Planned more trips for future!</span>
+            </div>
+            <div class="col-md-4">
+                <a href="/circuit">
+                    <p><button class="btn-u btn-u-lg btn-u-orange"><i class="icon-cloud"></i> Browse all circuits...</button></p>
+                </a>
+            </div>
+        </div>
+    }
+}
+
+
+
+
+

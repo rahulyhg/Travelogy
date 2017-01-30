@@ -1,0 +1,15 @@
+﻿@model WebApplication1.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() > 0)
+    {
+        foreach (AuthenticationDescription p in loginProviders)
+        {
+            @*<li><a href="#">Login with @p.Caption</a></li>*@
+            <li>@Html.ActionLink(string.Format("Login with {0}", p.Caption), "ExternalLogin", "Account", routeValues: new { @provider = p.AuthenticationType }, htmlAttributes: null )</li>
+        }                
+    }
+}
+

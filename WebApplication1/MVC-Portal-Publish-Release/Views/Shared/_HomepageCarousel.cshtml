@@ -1,0 +1,116 @@
+﻿<!-- Carousel -->
+<!-- Bootstrap carousel usage
+    Bootstrap carousel should have id. Below i am using "bs-carousel-X". Where "X" denotes number". If a page has more than 1 carousel, then add the new carousel with the id "bs-carousel-1", "bs-carousel-2". You also need to update the id in, "carousel indicators" section and "carousel control" section.
+
+    Carousel comes with 3 main data attributes which you can customize. They are...
+    data-interval - Time delay between item cycle. Default value "5000".
+    data-pause - Pause on hover. Default value "pause".
+    data-wrap - Continues cycle or stop at the end. Default value "true".
+-->
+<!-- Outer layer -->
+<div id="bs-carousel-2" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover" data-wrap="true">
+    <!-- Bootstrap indicators. If you don't need indicators, remove the below section -->
+    <ol class="carousel-indicators">
+        <li data-target="#bs-carousel-2" data-slide-to="0" class="active"></li>
+        <li data-target="#bs-carousel-2" data-slide-to="1"></li>
+        <li data-target="#bs-carousel-2" data-slide-to="2"></li>
+        <li data-target="#bs-carousel-2" data-slide-to="3"></li>
+        <li data-target="#bs-carousel-2" data-slide-to="4"></li>
+        <li data-target="#bs-carousel-2" data-slide-to="5"></li>
+        <li data-target="#bs-carousel-2" data-slide-to="6"></li>
+        <li data-target="#bs-carousel-2" data-slide-to="7"></li>
+    </ol>
+    <!-- Slides. You can also add captions -->
+    <div class="carousel-inner">
+        <!-- Item, First item should have extra class "active" -->
+
+        <div class="item active">
+            <img src="~/Content/img/backgrounds/TRV-S4.jpg" alt="">
+            <div class="carousel-caption c-bottom-left">
+                <!-- Heading -->
+                <h4>Kilimanjaro</h4>
+                <!-- Para -->
+                <p>Kilimanjaro is the tallest lone standing mountain in the world! At Uhuru peak, 5895 m above sea level, you can stand on a glacier right on the equator.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="~/Content/img/backgrounds/TRV-S3.jpg" alt="">
+            <div class="carousel-caption c-bottom-right">
+                <!-- Heading -->
+                <h4>Serengeti</h4>
+                <!-- Para -->
+                <p>Serengeti offers unparalleled closeness to the wild animals! Spread over 30,000 sq.km this region hosts the world's largest migration of animals every year.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <!-- Image -->
+            <img src="~/Content/img/backgrounds/TRV-S1.jpg" alt="">
+            <!-- Caption -->
+            <div class="carousel-caption c-middle-right">
+                <!-- Heading -->
+                <h4>Lake Baikal</h4>
+                <!-- Para -->
+                <p>Lake baikal holds 20% of all the liquid fresh water in the world! Called the Pearl of Siberia this lake is made of drinkable clean water.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="~/Content/img/backgrounds/TRV-S2.jpg" alt="">
+            <div class="carousel-caption c-bottom-left">
+                <!-- Heading -->
+                <h4>Svalbard Island</h4>
+                <!-- Para -->
+                <p>Only 1300 km south of the North Pole - this island has 2500 human inhabitants and 3000 polar bears.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="~/Content/img/backgrounds/TRV-S8.jpg" alt="">
+            <div class="carousel-caption c-bottom-right">
+                <!-- Heading -->
+                <h4>The highland cow</h4>
+                <!-- Para -->
+                <p>Seen in the Scottish highlands and the islands of the Inner and the Oouter Hebrides, they resemble pre-historic animals.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="~/Content/img/backgrounds/TRV-S5.jpg" alt="">
+            <div class="carousel-caption c-left-big">
+                <!-- Heading -->
+                <h4>Trans Siberian</h4>
+                <!-- Para -->
+                <p>The Trans Siberian Railway runs across the Russian south, connecting west to the far east. At 9,289 km it is the world's longest railway stretch. Crossing seven time zones, trains take 7-8 days to complete the Journey.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="~/Content/img/backgrounds/TRV-S6.jpg" alt="">
+            <div class="carousel-caption c-bottom-left">
+                <!-- Heading -->
+                <h4>Nomadic Mongolia</h4>
+                <!-- Para -->
+                <p>Mongolia has 3 million humans and 60 million animals. And more than 85% of the roads are un-paved.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="~/Content/img/backgrounds/TRV-S7.jpg" alt="">
+            <div class="carousel-caption c-right-big">
+                <!-- Heading -->
+                <h4>Devotees in Tibet</h4>
+                <!-- Para -->
+                <p>This is where rich cultural heritage, mythical stories and fascinating landscapes meet. Religion is central to the lives of Tibetan buddhists.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Carousel controls (arrows). If you don't need controls, remove the below section -->
+    <a class="left carousel-control" href="#bs-carousel-2" role="button" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#bs-carousel-2" role="button" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+    </a>
+</div>

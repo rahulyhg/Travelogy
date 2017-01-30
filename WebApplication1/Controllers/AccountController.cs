@@ -272,9 +272,15 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/ExternalLogin
-        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ExternalLogin(string provider)
+        {
+            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = "" }));
+        }
+
+       //
+       // POST: /Account/ExternalLogin
+       [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)

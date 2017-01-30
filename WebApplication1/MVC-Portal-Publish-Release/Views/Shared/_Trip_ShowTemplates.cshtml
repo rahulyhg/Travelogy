@@ -1,0 +1,23 @@
+﻿@model WebApplication1.Models.TripViewModel
+
+@if (@Model.AllTemplates != null)
+{
+    <h1>Choose a Trip to start:</h1>
+
+    foreach (var _template in @Model.AllTemplates)
+    {
+        <div class="row tag-box tag-box-v5">
+            <div class="col-md-8">
+                <span>@_template.Name</span>
+                <h2>@_template.Description</h2>
+            </div>
+            <a href="/Service/CreateTripFromTemplate?templateId=@_template.Id">
+                <div class="col-md-4">
+                    <p><button class="btn-u btn-u-lg btn-u-orange"><i class="icon-cogs "></i> Create trip</button></p>
+                </div>
+            </a>
+        </div>
+    }
+}
+
+
