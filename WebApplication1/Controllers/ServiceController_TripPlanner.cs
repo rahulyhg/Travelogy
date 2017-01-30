@@ -171,6 +171,11 @@ namespace WebApplication1.Controllers
             return View(model);
         }
 
+        public ActionResult AddCircuitToTrip(int tripId)
+        {
+            return View();
+        }
+
         /// <summary>
         /// 
         /// </summary>

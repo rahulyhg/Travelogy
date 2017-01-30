@@ -132,7 +132,7 @@ namespace DomingoBL
         }
 
         /// <summary>
-        /// 
+        /// saves user's changes to the trip
         /// </summary>
         /// <param name="trip"></param>
         /// <param name="tripSteps"></param>
@@ -146,7 +146,12 @@ namespace DomingoBL
                     var _dbTrip = context.Trips.Find(trip.Id);
                     if(_dbTrip != null)
                     {
-                        _dbTrip.StartLocation = trip.StartLocation;
+                        if(trip.StartDate.HasValue)
+                        {
+                            _dbTrip.StartDate = trip.StartDate;
+                        }
+                                                
+                        _dbTrip.StartLocation = trip.StartLocation;                        
                     }
 
                     // save user notes

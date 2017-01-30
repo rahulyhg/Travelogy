@@ -23,11 +23,15 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="details">
                     <div class="row">
-                        <div class="col-md-8">
-                            <h1>Edit trip</h1>
-                            <span>@Model.ActiveTrip.DlTripView.StartDate</span>
-                            <h2>@Model.ActiveTrip.DlTripView.Status</h2>
-                            <h3>@Model.ActiveTrip.DlTripView.Id</h3>
+                        <div class="col-md-3 col-sm-12">                            
+                            <h5>Planned start date: @if (Model.ActiveTrip.DlTripView.StartDate.HasValue) { @Model.ActiveTrip.DlTripView.StartDate.Value.ToShortDateString()}</h5>
+                            <p>Change to: @Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartDate, new { @class = "form-control", type = "date" })</p>
+                            <p>Start Location: @Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartLocation, new { @class = "form-control" }) </p>
+                            <h5>Current status: @Model.ActiveTrip.DlTripView.Status</h5>
+                            <h5>ID: @Model.ActiveTrip.DlTripView.Id</h5>
+                        </div>
+                        <div class="col-md-6">                            
+                                                        
                         </div>
                     </div>
                     <div class="row">

@@ -7,10 +7,11 @@
     <div class="search-blocks search-blocks-top-yellow">
         <div class="row">
             <div class="col-md-4 search-img">
-                <img class="img-responsive" src="assets/img/new/img10.jpg" alt="">
+                <img class="img-responsive" src="@Model.DlTripView.ThumbnailPath" alt="">
                 <ul class="list-unstyled">
-                    <li><i class="icon-calendar"></i>  Trip starts: @Model.DlTripView.StartDate.Value.ToShortDateString()</li>
-                    <li><i class="icon-map-marker"></i> Trip starts: New York, US</li>
+                    <li><i class="icon-calendar"></i>  Trip starts on: @if (Model.DlTripView.StartDate.HasValue)
+                    { @Model.DlTripView.StartDate.Value.ToShortDateString() }</li>
+                    <li><i class="icon-map-marker"></i> Trip starts at: @Model.DlTripView.StartLocation</li>
                 </ul>
             </div>
             <div class="col-md-8">
@@ -22,8 +23,12 @@
                     <li><i class="icon-star"></i></li>
                     <li><i class="icon-star"></i></li>
                 </ul>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum.</p>
-                <h2><a href="/Service/ViewTrip?tripId=@Model.DlTripView.Id" class="orange">View details</a></h2>
+                <p>@Model.DlTripView.Description</p>
+                <p>
+                    <a href="/Service/ViewTrip?tripId=@Model.DlTripView.Id" class="btn btn-orange">View trip</a>
+                    <a href="/Service/EditTrip?tripId=@Model.DlTripView.Id" class="btn btn-orange">Edit trip</a>
+                    <a href="/Service/AddCircuitToTrip?tripId=@Model.DlTripView.Id" class="btn btn-orange">Add another circuit</a>
+                </p>                
             </div>
         </div>
     </div>

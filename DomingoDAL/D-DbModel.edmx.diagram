@@ -22,17 +22,17 @@
         <EntityTypeShape EntityType="TravelogyDevModel.TravellerType" Width="1.5" PointX="8.375" PointY="1.125" />
         <EntityTypeShape EntityType="TravelogyDevModel.Thread" Width="1.5" PointX="10.625" PointY="0.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.ThreadMessage" Width="1.5" PointX="10.625" PointY="3.5" />
-        <EntityTypeShape EntityType="TravelogyDevModel.Trip" Width="1.5" PointX="8.5" PointY="9.375" />
-        <EntityTypeShape EntityType="TravelogyDevModel.TripStep" Width="1.5" PointX="10.25" PointY="9.375" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_Thread" Width="1.5" PointX="14" PointY="0.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_ThreadMessage" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.TripTemplate" Width="1.5" PointX="8.5" PointY="6.25" />
-        <EntityTypeShape EntityType="TravelogyDevModel.View_Trip" Width="1.5" PointX="12" PointY="9.375" />
         <EntityTypeShape EntityType="TravelogyDevModel.TripTemplateStep" Width="1.5" PointX="4.375" PointY="10.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.TripBookingAccommodation" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.TripBookingTransport" Width="1.5" PointX="13.75" PointY="4.75" />
-        <EntityTypeShape EntityType="TravelogyDevModel.View_TripStep" Width="1.5" PointX="13.75" PointY="9.375" />
         <EntityTypeShape EntityType="TravelogyDevModel.Traveller" Width="1.5" PointX="11.375" PointY="13.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.Trip" Width="1.5" PointX="6.375" PointY="10.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.TripStep" Width="1.5" PointX="8.375" PointY="10.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.View_Trip" Width="1.5" PointX="11.375" PointY="8.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.View_TripStep" Width="1.5" PointX="13.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
