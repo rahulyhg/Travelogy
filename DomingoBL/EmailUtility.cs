@@ -49,13 +49,32 @@ namespace DomingoBL.EmailManagement
 
             HtmlEmailTemplate processedTemplate = ProcessTemplate(emailTemplate, parameters);
             MailMessage objMessage = new MailMessage();
+            objMessage.From = new MailAddress("processedTemplate.FromAddress", "processedTemplate.FromName");
 
             try
             {
-                objMessage.From = new MailAddress("processedTemplate.FromAddress", "processedTemplate.FromName");
-
                 foreach (MailAddress address in deliveryAddresses)
                 {
+                    objMessage.From = new MailAddress("processedTemplate.FromAddress", "processedTemplate.FromName");
+                    objMessage.Subject = "processedTemplate.Subject";
+                    objMessage.IsBodyHtml = true;
+                    objMessage.Body = "processedTemplate.Body";
+
+                    objMessage.To.Clear();
+                    objMessage.To.Add(address);
+
+                    try
+                    {
+                        SmtpClient objSmtpClient = new SmtpClient();
+                        objSmtpClient.Send(objMessage);
+
+                        // save the mail to DB 
+                    }
+                    catch (Exception)
+                    {
+                        // Log
+
+                    }
                 }
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
