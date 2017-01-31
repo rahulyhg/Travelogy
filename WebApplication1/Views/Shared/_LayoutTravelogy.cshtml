@@ -113,7 +113,7 @@
                                 else
                                 {
                                     <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
-                                    <li>@Html.ActionLink("My Profile", "TravellerProfile", "Manage")</li>
+                                    <li>@Html.ActionLink("Travel Profile", "TravellerProfile", "Manage")</li>
                                     <li>@Html.ActionLink("My Messages", "MessageCenter", "Service")</li>
                                 }
                             }
@@ -135,16 +135,20 @@
 
                             @*Login menu items*@
                             @Html.Partial("_LoginPartial")
-                        </ul>                        
+                        </ul>                                               
                     </div>
                     <!-- Navigation ends -->
+                </div>                
+                <div class="col-md-2 col-sm-12 text-center">
+                    <div class="margin-bottom-10"></div>
+                    <img src="~/Content/img/logo1-default-small.png" />
+                   @* *@
                 </div>
-                
-                    <div class="col-md-2 col-sm-12 text-center">
-                        <div class="margin-bottom-10"></div>
-                        <img src="~/Content/img/logo1-default-small.png" />
-                    </div>
             </div>
+                @if (Request.IsAuthenticated)
+                {
+                    @Html.Partial("_LogoutPartial")                    
+                }
         </div>
     </div>
     <!-- Header two ends -->

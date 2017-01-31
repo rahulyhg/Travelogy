@@ -882,6 +882,29 @@
     <Content Include="Content\img\dividers\1.png" />
     <Content Include="Content\img\dividers\2.png" />
     <Content Include="Content\img\dividers\3.png" />
+    <Content Include="Content\img\eastern-himalaya\55150e35-50e2-4f05-a958-c105b02fd8c9.jpg" />
+    <Content Include="Content\img\eastern-himalaya\b3dc8446-75e3-40cb-9e0c-d038a0d86c18.jpg" />
+    <Content Include="Content\img\eastern-himalaya\bd605210-de3f-4e23-8eb9-71177704da02.jpg" />
+    <Content Include="Content\img\eastern-himalaya\bhutan-monks.jpg" />
+    <Content Include="Content\img\eastern-himalaya\butan01.jpg" />
+    <Content Include="Content\img\eastern-himalaya\camping-small.jpg" />
+    <Content Include="Content\img\eastern-himalaya\HD-StreetBob.png" />
+    <Content Include="Content\img\eastern-himalaya\Kawasaki-Versys.png" />
+    <Content Include="Content\img\eastern-himalaya\nepal-small-2.jpg" />
+    <Content Include="Content\img\eastern-himalaya\nepal-small.jpg" />
+    <Content Include="Content\img\eastern-himalaya\nepal-trek-small.jpg" />
+    <Content Include="Content\img\eastern-himalaya\RE-Bullet-350.png" />
+    <Content Include="Content\img\eastern-himalaya\RE-Bullet-500.png" />
+    <Content Include="Content\img\eastern-himalaya\RE-Himalayan.png" />
+    <Content Include="Content\img\eastern-himalaya\RE-Thunderbird.png" />
+    <Content Include="Content\img\eastern-himalaya\sandakfu-landrover.jpg" />
+    <Content Include="Content\img\eastern-himalaya\sandakfu-lodge.jpg" />
+    <Content Include="Content\img\eastern-himalaya\sandakfu-winter.jpg" />
+    <Content Include="Content\img\eastern-himalaya\selapass-arunachal.jpg" />
+    <Content Include="Content\img\eastern-himalaya\sikkim01.jpg" />
+    <Content Include="Content\img\eastern-himalaya\sikkim02.jpg" />
+    <Content Include="Content\img\eastern-himalaya\sikkim03.jpg" />
+    <Content Include="Content\img\eastern-himalaya\tigers-nest.jpg" />
     <Content Include="Content\img\ecommerce\items\1-1.png" />
     <Content Include="Content\img\ecommerce\items\1-2.png" />
     <Content Include="Content\img\ecommerce\items\1-3.png" />
@@ -1727,7 +1750,7 @@
     <Content Include="Views\Admin\EditDestination.cshtml" />
     <Content Include="Views\Service\AccommodationBooking.cshtml" />
     <Content Include="Views\Service\AddCircuitToTrip.cshtml" />
-    <Content Include="Views\Shared\_ExternalLoginListTopNavPartial.cshtml" />
+    <Content Include="Views\Shared\_LogoutPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

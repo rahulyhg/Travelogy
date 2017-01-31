@@ -110,6 +110,28 @@
           <Property Name="TripSource" Type="nvarchar" MaxLength="50" />
           <Property Name="IndicativeCost" Type="money" />
         </EntityType>
+        <EntityType Name="HtmlEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HtmlEmailTemplateId" Type="int" Nullable="false" />
+          <Property Name="EmailText" Type="text" Nullable="false" />
+          <Property Name="EmailSubject" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="EmailTitle" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="MessageTypeId" Type="int" Nullable="false" />
+          <Property Name="FromAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="FromName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ToAddress" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="HtmlEmailTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="HtmlTemplate" Type="text" Nullable="false" />
+        </EntityType>
         <EntityType Name="SubDestination">
           <Key>
             <PropertyRef Name="Id" />
@@ -434,6 +456,18 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HtmlEmail_HtmlEmailTemplate">
+          <End Role="HtmlEmailTemplate" Type="Self.HtmlEmailTemplate" Multiplicity="1" />
+          <End Role="HtmlEmail" Type="Self.HtmlEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HtmlEmailTemplate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HtmlEmail">
+              <PropertyRef Name="HtmlEmailTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="TravelogyDevModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -445,6 +479,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="DestinationCountry" EntityType="Self.DestinationCountry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DestinationLink" EntityType="Self.DestinationLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DestinationTravelOption" EntityType="Self.DestinationTravelOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HtmlEmail" EntityType="Self.HtmlEmail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HtmlEmailTemplate" EntityType="Self.HtmlEmailTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubDestination" EntityType="Self.SubDestination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Thread" EntityType="Self.Thread" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThreadMessage" EntityType="Self.ThreadMessage" Schema="dbo" store:Type="Tables" />
@@ -533,6 +569,10 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_HtmlEmail_HtmlEmailTemplate" Association="Self.FK_HtmlEmail_HtmlEmailTemplate">
+            <End Role="HtmlEmailTemplate" EntitySet="HtmlEmailTemplate" />
+            <End Role="HtmlEmail" EntitySet="HtmlEmail" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -576,6 +616,12 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="TripSteps" EntityType="TravelogyDevModel.TripStep" />
           <EntitySet Name="View_Trip" EntityType="TravelogyDevModel.View_Trip" />
           <EntitySet Name="View_TripStep" EntityType="TravelogyDevModel.View_TripStep" />
+          <EntitySet Name="HtmlEmails" EntityType="TravelogyDevModel.HtmlEmail" />
+          <EntitySet Name="HtmlEmailTemplates" EntityType="TravelogyDevModel.HtmlEmailTemplate" />
+          <AssociationSet Name="FK_HtmlEmail_HtmlEmailTemplate" Association="TravelogyDevModel.FK_HtmlEmail_HtmlEmailTemplate">
+            <End Role="HtmlEmailTemplate" EntitySet="HtmlEmailTemplates" />
+            <End Role="HtmlEmail" EntitySet="HtmlEmails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -972,6 +1018,42 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="TravelogerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="HtmlEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HtmlEmailTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="EmailText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmailSubject" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="EmailTitle" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="MessageTypeId" Type="Int32" Nullable="false" />
+          <Property Name="FromAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FromName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ToAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HtmlEmailTemplate" Relationship="TravelogyDevModel.FK_HtmlEmail_HtmlEmailTemplate" FromRole="HtmlEmail" ToRole="HtmlEmailTemplate" />
+        </EntityType>
+        <EntityType Name="HtmlEmailTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HtmlTemplate" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HtmlEmails" Relationship="TravelogyDevModel.FK_HtmlEmail_HtmlEmailTemplate" FromRole="HtmlEmailTemplate" ToRole="HtmlEmail" />
+        </EntityType>
+        <Association Name="FK_HtmlEmail_HtmlEmailTemplate">
+          <End Type="TravelogyDevModel.HtmlEmailTemplate" Role="HtmlEmailTemplate" Multiplicity="1" />
+          <End Type="TravelogyDevModel.HtmlEmail" Role="HtmlEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HtmlEmailTemplate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HtmlEmail">
+              <PropertyRef Name="HtmlEmailTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1346,6 +1428,30 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
                 <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
                 <ScalarProperty Name="Destination" ColumnName="Destination" />
                 <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HtmlEmails">
+            <EntityTypeMapping TypeName="TravelogyDevModel.HtmlEmail">
+              <MappingFragment StoreEntitySet="HtmlEmail">
+                <ScalarProperty Name="ToAddress" ColumnName="ToAddress" />
+                <ScalarProperty Name="FromName" ColumnName="FromName" />
+                <ScalarProperty Name="FromAddress" ColumnName="FromAddress" />
+                <ScalarProperty Name="MessageTypeId" ColumnName="MessageTypeId" />
+                <ScalarProperty Name="EmailTitle" ColumnName="EmailTitle" />
+                <ScalarProperty Name="EmailSubject" ColumnName="EmailSubject" />
+                <ScalarProperty Name="EmailText" ColumnName="EmailText" />
+                <ScalarProperty Name="HtmlEmailTemplateId" ColumnName="HtmlEmailTemplateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HtmlEmailTemplates">
+            <EntityTypeMapping TypeName="TravelogyDevModel.HtmlEmailTemplate">
+              <MappingFragment StoreEntitySet="HtmlEmailTemplate">
+                <ScalarProperty Name="HtmlTemplate" ColumnName="HtmlTemplate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
