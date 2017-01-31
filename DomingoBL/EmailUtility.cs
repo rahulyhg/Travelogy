@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using DomingoDAL;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,14 +45,14 @@ namespace DomingoBL.EmailManagement
         public DomingoBlError SendEmail(string emailAlias, List<MailAddress> deliveryAddresses, Dictionary<String, String> parameters)
         {
             Logger logger = LogManager.GetCurrentClassLogger();
-            EmailTemplate emailTemplate = new EmailTemplate();
+            HtmlEmailTemplate emailTemplate = new HtmlEmailTemplate();
 
-            EmailTemplate processedTemplate = ProcessTemplate(emailTemplate, parameters);
+            HtmlEmailTemplate processedTemplate = ProcessTemplate(emailTemplate, parameters);
             MailMessage objMessage = new MailMessage();
 
             try
             {
-                objMessage.From = new MailAddress(processedTemplate.FromAddress, processedTemplate.FromName);
+                objMessage.From = new MailAddress("processedTemplate.FromAddress", "processedTemplate.FromName");
 
                 foreach (MailAddress address in deliveryAddresses)
                 {
@@ -68,7 +69,7 @@ namespace DomingoBL.EmailManagement
                     return new DomingoBlError()
                     {
                         ErrorCode = 100,
-                        ErrorMessage = string.Format("From address is not a valid email address: {0} -- {1}", processedTemplate.FromAddress, ex)
+                        ErrorMessage = string.Format("From address is not a valid email address: {0} -- {1}", "processedTemplate.FromAddress", ex)
                     };
                 }
                 else
@@ -89,15 +90,12 @@ namespace DomingoBL.EmailManagement
         /// <param name="template"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        protected EmailTemplate ProcessTemplate(EmailTemplate template, Dictionary<String, String> parameters)
+        protected HtmlEmailTemplate ProcessTemplate(HtmlEmailTemplate template, Dictionary<String, String> parameters)
         {
-            EmailTemplate processedTemplate = new EmailTemplate();                
+            HtmlEmailTemplate processedTemplate = new HtmlEmailTemplate();                
 
-            processedTemplate.Alias = template.Alias;
-            processedTemplate.Body = ReplaceFields(template.Body, parameters);
-            processedTemplate.FromAddress = ReplaceFields(template.FromAddress, parameters).ToLower();
-            processedTemplate.FromName = ReplaceFields(template.FromName, parameters);
-            processedTemplate.Subject = ReplaceFields(template.Subject, parameters);
+            processedTemplate.Name = template.Name;
+            processedTemplate.HtmlTemplate = ReplaceFields(template.HtmlTemplate, parameters);           
 
             return processedTemplate;
         }

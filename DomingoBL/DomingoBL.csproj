@@ -50,9 +50,7 @@
     <Compile Include="BlObjects\BlTripTemplate.cs" />
     <Compile Include="DestinationManager.cs" />
     <Compile Include="DomingoBlError.cs" />
-    <Compile Include="EmailManagement\EmailManager.cs" />
-    <Compile Include="EmailManagement\EmailTemplate.cs" />
-    <Compile Include="EmailManagement\EmailUtility.cs" />
+    <Compile Include="EmailUtility.cs" />
     <Compile Include="ThreadManager.cs" />
     <Compile Include="TravellerProfileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
