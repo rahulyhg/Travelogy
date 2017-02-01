@@ -11,7 +11,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult Error()
         {
-            return View();
+            return View("Error");
         }
 
         public ActionResult Index()

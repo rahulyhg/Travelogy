@@ -6,9 +6,12 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace DomingoBL.EmailManagement
-{
+{   
+
     /// <summary>
     /// 
     /// </summary>
@@ -18,13 +21,14 @@ namespace DomingoBL.EmailManagement
         /// 
         /// </summary>
         /// <param name="emailAlias"></param>
-        /// <param name="deliveryAddress"></param>
+        /// <param name="emailAddress"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public DomingoBlError SendEmail(string emailAlias, MailAddress deliveryAddress, Dictionary<String, String> parameters)
+        public DomingoBlError SendEmail(string emailAlias, string emailAddress, Dictionary<String, String> parameters)
         {
             try
             {
+                MailAddress deliveryAddress = new MailAddress(emailAddress);                
                 List<MailAddress> deliveryAddresses = new List<MailAddress>();
                 deliveryAddresses.Add(deliveryAddress);
                 return SendEmail(emailAlias, deliveryAddresses, parameters);
@@ -44,36 +48,41 @@ namespace DomingoBL.EmailManagement
         /// <returns></returns>
         public DomingoBlError SendEmail(string emailAlias, List<MailAddress> deliveryAddresses, Dictionary<String, String> parameters)
         {
-            Logger logger = LogManager.GetCurrentClassLogger();
-            HtmlEmailTemplate emailTemplate = new HtmlEmailTemplate();
-
-            HtmlEmailTemplate processedTemplate = ProcessTemplate(emailTemplate, parameters);
-            MailMessage objMessage = new MailMessage();
-            objMessage.From = new MailAddress("processedTemplate.FromAddress", "processedTemplate.FromName");
-
             try
             {
-                foreach (MailAddress address in deliveryAddresses)
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    objMessage.From = new MailAddress("processedTemplate.FromAddress", "processedTemplate.FromName");
-                    objMessage.Subject = "processedTemplate.Subject";
-                    objMessage.IsBodyHtml = true;
-                    objMessage.Body = "processedTemplate.Body";
-
-                    objMessage.To.Clear();
-                    objMessage.To.Add(address);
-
-                    try
+                    // get the xml template from DB
+                    HtmlEmailTemplate emailTemplate = context.HtmlEmailTemplates.Where(p => p.Alias == emailAlias).FirstOrDefault();
+                    if(emailTemplate == null)
                     {
-                        SmtpClient objSmtpClient = new SmtpClient();
-                        objSmtpClient.Send(objMessage);
+                        return new DomingoBlError() { ErrorCode = 200, ErrorMessage = "Invalid template alias" };
+                    }
+
+                    // replace the parameters into the template
+                    HtmlEmail processedTemplate = ProcessTemplate(emailTemplate, parameters);
+                    MailMessage objMessage = new MailMessage();
+                    objMessage.From = new MailAddress(processedTemplate.FromAddress, processedTemplate.FromName);
+
+                    foreach (MailAddress address in deliveryAddresses)
+                    {
+                        processedTemplate.ToAddress = address.Address;
+
+                        // construct the SMTP mail and send
+                        objMessage.From = new MailAddress(processedTemplate.FromAddress, processedTemplate.FromName);
+                        objMessage.Subject = processedTemplate.EmailSubject;
+                        objMessage.IsBodyHtml = true;
+                        objMessage.Body = processedTemplate.EmailText;
+                        objMessage.To.Clear();
+                        objMessage.To.Add(address);
+                                                
+                        //SmtpClient objSmtpClient = new SmtpClient();
+                        //objSmtpClient.Send(objMessage);
 
                         // save the mail to DB 
-                    }
-                    catch (Exception)
-                    {
-                        // Log
-
+                        // to save the mail on DB                        
+                        context.HtmlEmails.Add(processedTemplate);
+                        context.SaveChanges();
                     }
                 }
 
@@ -83,23 +92,11 @@ namespace DomingoBL.EmailManagement
             // exception part
             catch (FormatException ex)
             {
-                if (processedTemplate != null)
+                return new DomingoBlError()
                 {
-                    return new DomingoBlError()
-                    {
-                        ErrorCode = 100,
-                        ErrorMessage = string.Format("From address is not a valid email address: {0} -- {1}", "processedTemplate.FromAddress", ex)
-                    };
-                }
-                else
-                {
-                    return new DomingoBlError()
-                    {
-                        ErrorCode = 100,
-                        ErrorMessage = string.Format("From address is not a valid email address : {0}", ex)
-                    };
-                }
-                
+                    ErrorCode = 100,
+                    ErrorMessage = string.Format("Error : {0}", ex)
+                };
             }
         }
 
@@ -109,12 +106,13 @@ namespace DomingoBL.EmailManagement
         /// <param name="template"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        protected HtmlEmailTemplate ProcessTemplate(HtmlEmailTemplate template, Dictionary<String, String> parameters)
+        protected HtmlEmail ProcessTemplate(HtmlEmailTemplate template, Dictionary<String, String> parameters)
         {
-            HtmlEmailTemplate processedTemplate = new HtmlEmailTemplate();                
-
-            processedTemplate.Name = template.Name;
-            processedTemplate.HtmlTemplate = ReplaceFields(template.HtmlTemplate, parameters);           
+            HtmlEmail processedTemplate = new HtmlEmail();
+            processedTemplate.EmailSubject = ReplaceFields(template.Subject, parameters);
+            processedTemplate.EmailText = ReplaceFields(template.Body, parameters);
+            processedTemplate.FromAddress = template.FromAddress;
+            processedTemplate.FromName = template.FromName;
 
             return processedTemplate;
         }
@@ -128,7 +126,10 @@ namespace DomingoBL.EmailManagement
         private string ReplaceFields(string field, Dictionary<String, String> parameters)
         {
             foreach (KeyValuePair<string, string> param in parameters)
+            {
                 field = field.Replace("[" + param.Key + "]", param.Value);
+            }
+
             return field;
         }
     }

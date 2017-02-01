@@ -33,9 +33,8 @@
         <EntityTypeShape EntityType="TravelogyDevModel.TripStep" Width="1.5" PointX="8.375" PointY="10.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_Trip" Width="1.5" PointX="11.375" PointY="8.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_TripStep" Width="1.5" PointX="13.375" PointY="8.75" />
-        <EntityTypeShape EntityType="TravelogyDevModel.HtmlEmail" Width="1.5" PointX="15.625" PointY="14" />
-        <EntityTypeShape EntityType="TravelogyDevModel.HtmlEmailTemplate" Width="1.5" PointX="13.375" PointY="14.5" />
-        <AssociationConnector Association="TravelogyDevModel.FK_HtmlEmail_HtmlEmailTemplate" />
+        <EntityTypeShape EntityType="TravelogyDevModel.HtmlEmail" Width="1.5" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.HtmlEmailTemplate" Width="1.5" PointX="3.375" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

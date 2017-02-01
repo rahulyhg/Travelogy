@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApplication1.Models;
+using DomingoBL.EmailManagement;
+using System.Collections.Generic;
 
 namespace WebApplication1.Controllers
 {
@@ -160,8 +162,13 @@ namespace WebApplication1.Controllers
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    var emailUtility = new EmailUtility();
+                    var emailParams = new Dictionary<String, String>();
+                    emailParams.Add("UserName", model.Email);
+                    emailParams.Add("ActivationLink", callbackUrl);
+                    emailUtility.SendEmail("ConfirmEmail", model.Email, emailParams);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return RedirectToAction("Index", "Home");

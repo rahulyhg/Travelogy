@@ -14,17 +14,13 @@ namespace DomingoDAL
     
     public partial class HtmlEmailTemplate
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HtmlEmailTemplate()
-        {
-            this.HtmlEmails = new HashSet<HtmlEmail>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
-        public string HtmlTemplate { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HtmlEmail> HtmlEmails { get; set; }
+        public string Alias { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+        public string FromAddress { get; set; }
+        public string FromName { get; set; }
+        public string Description { get; set; }
     }
 }

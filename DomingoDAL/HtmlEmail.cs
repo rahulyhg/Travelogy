@@ -15,15 +15,11 @@ namespace DomingoDAL
     public partial class HtmlEmail
     {
         public int Id { get; set; }
-        public int HtmlEmailTemplateId { get; set; }
         public string EmailText { get; set; }
         public string EmailSubject { get; set; }
         public string EmailTitle { get; set; }
-        public int MessageTypeId { get; set; }
         public string FromAddress { get; set; }
         public string FromName { get; set; }
         public string ToAddress { get; set; }
-    
-        public virtual HtmlEmailTemplate HtmlEmailTemplate { get; set; }
     }
 }
