@@ -47,6 +47,22 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        // GET: Contact Us form submisison thanks
+        public ActionResult ContactUsThanks()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Contact us form submit - 
+        ///     a. Send a thank you mail to customer
+        ///     b. Create a lead in CRM
+        /// </summary>
+        /// <param name="FIRST_NAME"></param>
+        /// <param name="LAST_NAME"></param>
+        /// <param name="EMAIL"></param>
+        /// <param name="TRIP_REQUEST"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ContactUsFormSubmitAsync(string FIRST_NAME, string LAST_NAME, string EMAIL, string TRIP_REQUEST)
@@ -56,9 +72,9 @@ namespace WebApplication1.Controllers
             test = EMAIL;
             test = TRIP_REQUEST;
 
-            var blError = UserManager.CreateCrmLead(FIRST_NAME, LAST_NAME, EMAIL, TRIP_REQUEST);
+            var blError = await UserManager.CreateCrmLead(FIRST_NAME, LAST_NAME, EMAIL, TRIP_REQUEST);
 
-            return View("ContactUsThanks");
+            return RedirectToAction("ContactUsThanks");
         }
 
         // GET: TermsAndConditions
