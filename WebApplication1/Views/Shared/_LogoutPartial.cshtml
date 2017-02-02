@@ -2,7 +2,7 @@
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-        {
+    {
         @Html.AntiForgeryToken()
         
         <div class="row pull-right">
@@ -11,7 +11,17 @@
                 | @Html.ActionLink("Account settings", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                 | <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
             </div>    
-        </div>        
-            @*<button type="submit" class="btn-u">Logout</button>*@
+        </div>
+        if (!ApplicationUserManager.UserEmailVerified(User.Identity.GetUserName()))
+        {
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>Your account email has not been verified!</h2>
+                    <h1><a href="/Account/Verify">Click here to verify!</a></h1>
+                </div>
+            </div>            
         }
+    }
+
+
 }

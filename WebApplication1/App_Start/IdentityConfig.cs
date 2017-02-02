@@ -44,6 +44,51 @@ namespace WebApplication1
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="AspNetUserName"></param>
+        /// <returns></returns>
+        public static bool UserEmailVerified(string AspNetUserName)
+        {
+            if (string.IsNullOrEmpty(AspNetUserName))
+            {
+                return false;
+            }
+
+            if (HttpContext.Current.Session["UserEmailVerified"] != null)
+            {
+                if ((HttpContext.Current.Session["UserEmailVerified"].ToString().ToUpper() == "TRUE"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            var emailVerified = DomingoBL.UserManager.IsUserEmailVerified(AspNetUserName);
+            if (emailVerified)
+            {
+                HttpContext.Current.Session.Add("UserEmailVerified", "TRUE");
+                return true;
+            }
+            else
+            {
+                HttpContext.Current.Session.Add("UserEmailVerified", "FALSE");
+                return false;
+            }            
+        }
+
+        public static void SetUserEmailVerified(string AspNetUserName)
+        {
+            if (HttpContext.Current.Session["UserEmailVerified"] != null)
+            {
+                HttpContext.Current.Session["UserEmailVerified"] = true;
+            }                
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="AspNetUserId"></param>
         /// <returns></returns>
         public static bool IsTravelogyAdmin(string AspNetUserName)

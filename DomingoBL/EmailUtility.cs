@@ -1,4 +1,5 @@
 ﻿using DomingoDAL;
+using mailinblue;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -75,9 +76,29 @@ namespace DomingoBL.EmailManagement
                         objMessage.Body = processedTemplate.EmailText;
                         objMessage.To.Clear();
                         objMessage.To.Add(address);
-                                                
+
                         //SmtpClient objSmtpClient = new SmtpClient();
                         //objSmtpClient.Send(objMessage);
+
+                        var sendinBlue = new API("ICdw29ZamvD0WXcJ"); // sendinblue access key from the portal
+                        Dictionary<string, Object> data = new Dictionary<string, Object>();
+                        Dictionary<string, string> to = new Dictionary<string, string>();
+                        to.Add(address.Address, address.DisplayName);
+                        List<string> from_name = new List<string>();
+                        from_name.Add(processedTemplate.FromAddress);
+                        from_name.Add(processedTemplate.FromName);
+                        //List<string> attachment = new List<string>();
+                        //attachment.Add("https://domain.com/path-to-file/filename1.pdf");
+                        //attachment.Add("https://domain.com/path-to-file/filename2.jpg");
+
+                        data.Add("to", to);
+                        data.Add("from", from_name);
+                        data.Add("subject", processedTemplate.EmailSubject);
+                        data.Add("html", processedTemplate.EmailText);
+                        //data.Add("attachment", attachment);
+
+                        Object sendEmail = sendinBlue.send_email(data);
+                        Console.WriteLine(sendEmail);
 
                         // save the mail to DB 
                         // to save the mail on DB                        

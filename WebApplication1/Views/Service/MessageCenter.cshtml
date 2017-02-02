@@ -1,10 +1,13 @@
 ﻿@model WebApplication1.Models.MessageListModel
 
-<div class="row">
-    <div class="col-md-12 padd-10">
-        <img class="img-responsive" src="~/Content/img/gallery/big/slider002.jpg" />
+@Html.Partial("_HomepageCarousel")
+
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs margin-bottom-20">
+    <div class="container">
+        <h1 class="pull-left">Message centre</h1>        
     </div>
-</div>
+</div><!--/breadcrumbs-->
 
 <div class="tab-v1">
     <ul class="nav nav-tabs">

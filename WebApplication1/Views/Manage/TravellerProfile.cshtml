@@ -1,10 +1,13 @@
 ﻿@model WebApplication1.Models.TravellerProfileViewModel
 
-<div class="row">
-    <div class="col-md-12 padd-10">        
-        <img class="img-responsive" src="~/Content/img/gallery/big/slider004.jpg" />
+@Html.Partial("_HomepageCarousel")
+
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs margin-bottom-20">
+    <div class="container">
+        <h1 class="pull-left">Your travel profile</h1>        
     </div>
-</div>
+</div><!--/breadcrumbs-->
 
 @using (Html.BeginForm("SaveTravellerProfile", "Manage", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
 {
@@ -17,7 +20,8 @@
             <li><a href="#travel_settings" data-toggle="tab">Settings</a></li>
         </ul>
     </div>
-    <div class="tab-content">
+    <div class="tab-content">          
+
         @* Tab for personal_details*@
         <div class="tab-pane active" id="personal_details">
             <div class="panel panel-orange">
