@@ -112,4 +112,9 @@ namespace WebApplication1.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class VerifyEmailViewModel
+    {
+        public string Mode { get; set; }
+    }
 }

@@ -1,9 +1,31 @@
-﻿<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <div class="error-v1">
-            <span class="error-v1-title">Done!</span>
-            <span>Please check your email.</span>
-            <p>We have sent a link to verify your mail.</p>            
+﻿@model WebApplication1.Models.VerifyEmailViewModel
+
+@Html.Partial("_HomepageCarousel")
+
+@if (Model.Mode == "codegenerated")
+{
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="error-v1">
+                <span>We have sent a code!</span>
+                <span>Please check your email.</span>
+                <p>We have sent a link to verify your mail. Please log in to the email account and click the link to verify it, and activate your account.</p>
+            </div>
         </div>
     </div>
-</div>
+}
+
+else
+{
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="error-v1">
+                <span>Request a verification code.</span>
+                <div class="margin-bottom-20"></div>
+                <a href="/Account/GenerateVerifyCode" class="btn-u btn-large">Resend Verification Code</a>
+                <div class="margin-bottom-20"></div>
+                <p>We will send a link to verify your account to the E-mail address you have signed up with. Please log in to the email account and click the link to verify it, and activate your account.</p>
+            </div>
+        </div>
+    </div>
+}

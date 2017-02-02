@@ -25,10 +25,10 @@ namespace DomingoBL.EmailManagement
         /// <param name="emailAddress"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public DomingoBlError SendEmail(string emailAlias, string emailAddress, Dictionary<String, String> parameters)
+        public async Task<DomingoBlError> SendEmail(string emailAlias, string emailAddress, Dictionary<String, String> parameters)
         {
             try
-            {
+            {                
                 MailAddress deliveryAddress = new MailAddress(emailAddress);                
                 List<MailAddress> deliveryAddresses = new List<MailAddress>();
                 deliveryAddresses.Add(deliveryAddress);

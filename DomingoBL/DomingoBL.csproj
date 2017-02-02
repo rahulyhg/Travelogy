@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BlObjects\BlTrip.cs" />
     <Compile Include="BlObjects\BlTripTemplate.cs" />
+    <Compile Include="CapsupleCrmGateway.cs" />
     <Compile Include="DestinationManager.cs" />
     <Compile Include="DomingoBlError.cs" />
     <Compile Include="EmailUtility.cs" />

@@ -1,6 +1,13 @@
 ﻿@model WebApplication1.Models.CircuitModelBase
 
-@Html.Partial("_EuropeCircuitsCarousel")
+@*@Html.Partial("_EuropeCircuitsCarousel")*@
+@Html.Partial("_HomepageCarousel")
+
+<div class="breadcrumbs margin-bottom-20">
+    <div class="container">
+        <h1 class="pull-left">Top circuits in Europe</h1>
+    </div>
+</div><!--/breadcrumbs-->
 
 <div class="row">
     @foreach (var item in Model.AllDestinations)

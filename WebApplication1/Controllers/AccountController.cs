@@ -145,21 +145,37 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
-        public async Task<ActionResult> Verify()
+        public ActionResult Verify()
+        {
+            var model = new VerifyEmailViewModel() { Mode = "just like that" };
+            return View(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        public async Task<ActionResult> GenerateVerifyCode()
         {
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(User.Identity.GetUserId());
-            var model = new RegisterViewModel() { Email = User.Identity.GetUserName() };
-            var user = UserManager.FindByEmail(model.Email);
+            var _regViewModel = new RegisterViewModel() { Email = User.Identity.GetUserName() };
+            var user = UserManager.FindByEmail(_regViewModel.Email);
 
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
             var emailUtility = new EmailUtility();
             var emailParams = new Dictionary<String, String>();
-            emailParams.Add("UserName", model.Email);
+            emailParams.Add("UserName", _regViewModel.Email);
             emailParams.Add("ActivationLink", callbackUrl);
-            emailUtility.SendEmail("VerifiyEmail2", model.Email, emailParams);
+            emailUtility.SendEmail("VerifiyEmail2", _regViewModel.Email, emailParams);
 
-            return View();
+            var model = new VerifyEmailViewModel() { Mode = "codegenerated" };
+            return View("Verify", model);
         }
 
         //
