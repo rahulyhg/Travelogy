@@ -11,18 +11,53 @@ namespace WebApplication1.Models
     /// <summary>
     /// 
     /// </summary>
-    //public class TripModel
-    //{
-    //    /// <summary>
-    //    /// 
-    //    /// </summary>
-    //    public List<Trip> AllTrips { get; set; }
+    public class AccommodationBookingViewModel
+    {
+        public int TripStepId { get; set; }
 
-    //    /// <summary>
-    //    /// 
-    //    /// </summary>
-    //    public Trip ActiveTrip { get; set; }
-    //}    
+        public int TripId { get; set; }
+
+        [Required(ErrorMessage = "Please select a type of Accommodation")]
+        [Display(Name = "Type of Accommodation")]
+        public string AccommodationType { get; set; }
+
+        [Display(Name = "Check in Date")]
+        [Required]
+        public DateTime CheckinDate { get; set; }
+
+        [Display(Name = "Check out Date")]
+        [Required]
+        public DateTime CheckoutDate { get; set; }
+
+        [Display(Name = "Your message")]
+        public string Notes { get; set; }
+
+        [Display(Name = "Special Requests")]
+        public string SpecialRequests { get; set; }        
+
+        public IEnumerable<System.Web.Mvc.SelectListItem> ListOfAccommodationTypes
+        {
+            get
+            {
+                var dropdownItems = new List<System.Web.Mvc.SelectListItem>();
+                dropdownItems.AddRange(new[]{
+                            new System.Web.Mvc.SelectListItem() { Text = "--- please select one ---", Value = "" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Hostel Private room", Value = "Hostel Private room" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Hostel Bunk Bed", Value = "Hostel Bunk Bed" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Hotel - Budget", Value = "Hotel - Budget" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Hotel - Mid Range", Value = "Hotel - Mid Range" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Hotel - Luxury", Value = "Hotel - Luxury" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Other - please specify", Value = "Other" }});
+
+                return dropdownItems;
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class TripPlanningViewModel
     {
         /// <summary>
@@ -102,6 +137,11 @@ namespace WebApplication1.Models
         /// 
         /// </summary>
         public CreateTripViewModel CreateTripViewModel { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<BlTripTemplate> RelatedTemplates { get; set; }
     }
 
     /// <summary>
@@ -118,5 +158,21 @@ namespace WebApplication1.Models
         /// 
         /// </summary>
         public List<BlTripTemplate> RelatedTemplates { get; set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class TripTemplateWidgetViewModel
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public BlTripTemplate TripTemplate { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int TripId { get; set; }
     }
 }

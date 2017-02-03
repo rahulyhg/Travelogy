@@ -10,37 +10,7 @@
 
     foreach (var _template in @Model.AllTemplates)
     {
-        <div class="search-blocks search-blocks-colored search-blocks-grey">
-            <div class="row">
-                <div class="col-md-3 search-img">
-                    <img class="img-responsive" src="@_template.DlTemplate.ThumbnailPath" alt="">
-                    <ul class="list-unstyled">
-                        <li><i class="icon-briefcase"></i>@_template.DlTemplate.Name</li>
-                        <li><i class="icon-map-marker"></i>@_template.DlTemplate.Name</li>
-                    </ul>
-                </div>
-                <div class="col-md-9">
-                    <h2><a href="#">@_template.DlTemplate.Name</a></h2>
-                    <ul class="list-unstyled search-rating">
-                        <li><i class="icon-star"></i></li>
-                        <li><i class="icon-star"></i></li>
-                        <li><i class="icon-star"></i></li>
-                        <li><i class="icon-star"></i></li>
-                        <li><i class="icon-star"></i></li>
-                    </ul>
-                    <h2 class="white">Typical duration: @_template.DlTemplate.DurationDaysMin - @_template.DlTemplate.DurationDaysMax Days</h2>
-                    <p>@_template.DlTemplate.Description</p>                    
-                </div>
-                <div class="col-md-12 text-right">
-                    <a href="/Service/CreateTripFromTemplate?templateId=@_template.DlTemplate.Id" class="btn-u btn-u-lg btn-u-orange">Add circuit to my trip <i class="icon-cogs "></i></a>
-                </div>
-            </div>
-        </div>
-
-        if (!string.IsNullOrEmpty(_template.DlTemplate.AdditionalHtml))
-        {
-            @Html.Raw(_template.DlTemplate.AdditionalHtml)            
-        }
+        @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = 0, TripTemplate = _template })
     }
 }
 

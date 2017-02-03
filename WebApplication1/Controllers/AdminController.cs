@@ -110,15 +110,7 @@ namespace WebApplication1.Controllers
                 }   
             }
 
-            if(model.Id > 0)
-            {
-                return RedirectToAction("EditDestination", new { @id = model.Id});
-            }
-
-            else
-            {
-                return RedirectToAction("Destinations");
-            }
+            return RedirectToAction("Destinations");
 
         }
 
@@ -326,9 +318,7 @@ namespace WebApplication1.Controllers
                 }
             }
 
-            var context2 = new TravelogyDevEntities1();
-            var _tripTemplate = context2.TripTemplates.Find(templateStep.TripTemplateId);
-            return View("EditTripTemplate", _tripTemplate);
+            return RedirectToAction("EditTripTemplate", new { @id = templateStep.TripTemplateId });
 
         }
 

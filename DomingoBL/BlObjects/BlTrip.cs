@@ -37,5 +37,10 @@ namespace DomingoBL.BlObjects
         /// 
         /// </summary>
         public List<View_TripStep> DlTripStepsView { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<View_TripBookingAccommodation> DlBookingsView { get; set; }
     }
 }

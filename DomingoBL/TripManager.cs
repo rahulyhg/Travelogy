@@ -28,9 +28,6 @@ namespace DomingoBL
     public class TripManager
     {
 
-        //public static DomingoBlError GetCurrentTripForUser(string aspUserId, out Trip currentTrip)
-        //{ }
-
         /// <summary>
         /// 
         /// </summary>
@@ -45,11 +42,16 @@ namespace DomingoBL
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
+                    // get all trips for the user
                     var dlTrips = context.View_Trip.Where(p => p.AspNetUserId == aspUserId).ToList();
                     foreach(var dlTrip in dlTrips)
                     {
+                        // get all the steps and bookings and add to the BL object
                         var dlTripSteps = context.View_TripStep.Where(p => p.TripId == dlTrip.Id);
-                        var blTrip = new BlViewTrip() { DlTripView = dlTrip, DlTripStepsView = dlTripSteps.ToList() };
+                        var dlTripBookings = context.View_TripBookingAccommodation.Where(p => p.TripId == dlTrip.Id);
+                        var blTrip = new BlViewTrip() { DlTripView = dlTrip }; 
+                        blTrip.DlTripStepsView = (dlTripSteps != null) ? dlTripSteps.ToList() : null;
+                        blTrip.DlBookingsView = (dlTripBookings != null) ? dlTripBookings.ToList() : null;
                         trips.Add(blTrip);
                     }
                 }
@@ -154,6 +156,11 @@ namespace DomingoBL
                     {
                         // update the Templates field of the trip
                         var _dbTrip = context.Trips.Find(trip.Id);
+                        if(_dbTrip.Templates.Contains(tripTemplateId.ToString()))
+                        {
+                            return new DomingoBlError() { ErrorCode = 100, ErrorMessage = "Duplicate Template" };
+                        }
+
                         _dbTrip.Templates = string.Format("{0};{1}", _dbTrip.Templates, tripTemplateId);
 
                         // get the steps from the template and add them to this trip
@@ -208,6 +215,41 @@ namespace DomingoBL
                     }
 
                     context.SaveChanges();  
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accommodation"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> SaveTripBookingAccommodationAsync(TripBookingAccommodation accommodation)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    if (accommodation.Id == 0)
+                    {
+                        context.TripBookingAccommodations.Add(accommodation);
+                        await context.SaveChangesAsync();
+                    }
+
+                    else
+                    {
+                        var _dbAccommodation = context.TripBookingAccommodations.Find(accommodation.Id);
+                        if(_dbAccommodation != null)
+                        {
+                            // save 
+                        }
+                    }
                 }
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
@@ -356,6 +398,7 @@ namespace DomingoBL
                     var dlTripSteps = context.View_TripStep.Where(p => p.TripId == tripId);
                     viewTrip.DlTripView = context.View_Trip.Where(p => p.Id == tripId).FirstOrDefault();
                     viewTrip.DlTripStepsView = dlTripSteps.ToList();
+                    viewTrip.DlBookingsView = context.View_TripBookingAccommodation.Where(p => p.TripId == tripId).ToList();
                 }
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
             }

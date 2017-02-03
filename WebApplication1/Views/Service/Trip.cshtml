@@ -20,6 +20,38 @@
 @*if there is an active trip ---*@ 
 @if (Model.ActiveTrip != null)
 {
+    <div class="headline">
+        <h2>Your trip to: @Model.ActiveTrip.DlTripView.Name</h2> 
+        <div class="pull-right">
+            <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.DlTripView.Id" class="btn btn-orange"> Edit trip &nbsp; <i class="icon-edit"></i></a>
+        </div>        
+    </div>    
+    <div class="row">
+        <div class="col-sm-4 info-blocks">
+            <i class="icon-calendar icon-info-blocks"></i>
+            <div class="info-blocks-in">
+                <h3>Planned date: @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()</h3>
+                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
+            </div>
+        </div>
+        <div class="col-sm-4 info-blocks">
+            <i class="icon-ok-sign icon-info-blocks"></i>
+            <div class="info-blocks-in">
+                <h3>Status: @Model.ActiveTrip.DlTripView.Status</h3>
+                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
+            </div>
+        </div>
+        <div class="col-sm-4 info-blocks">
+            <i class="icon-map-marker icon-info-blocks"></i>
+            <div class="info-blocks-in">
+                <h3>Starts at: @Model.ActiveTrip.DlTripView.StartLocation</h3>
+                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
+            </div>
+        </div>
+    </div>
+
+    <hr class="margin-bottom-40">   
+
     <div class="tab-v1">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#details" data-toggle="tab">Trip Details</a></li>
@@ -29,20 +61,6 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="details">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>Your trip @Model.ActiveTrip.DlTripView.Name</h1>
-                        <h2>Planned date: @Model.ActiveTrip.DlTripView.StartDate.Value.ToShortDateString()</h2>
-                        <h2>Status: @Model.ActiveTrip.DlTripView.Status</h2>                        
-                    </div>                    
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.DlTripView.Id">
-                            <p><button class="btn-u btn-u-lg btn-u-orange"><i class="icon-cogs "></i> Edit trip</button></p>
-                        </a>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         @foreach(var tripStep in Model.ActiveTrip.DlTripStepsView)
@@ -65,9 +83,7 @@
                 </div>
             </div>
             <div class="tab-pane" id="booking">
-                <img alt="" class="pull-left lft-img-margin img-width-200" src="assets/img/main/5.jpg">
-                <h4>Heading Sample 2</h4>
-                <p>Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, <strong>ac adipiscing nunc.</strong> Vivamus imperdiet condimentum diam, eget placerat felis consectetur id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum id. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac interdum ullamcorper. Donec eget orci metus, ac adipiscing nunc. Pellentesque fermentum, ante ac <strong>interdum ullamcorper.</strong></p>
+                @Html.Partial("_TripBookings", Model)
             </div>
             <div class="tab-pane" id="messages">
                 <h4>Messages for your trip [@Model.ActiveTrip.DlTripView.Id]</h4>
@@ -98,4 +114,18 @@
             </div>
         </div>
     </div>
-} @*end of active trip section*@
+
+    if (Model.RelatedTemplates != null && Model.RelatedTemplates.Count > 0)
+    {
+
+        <div class="headline">
+            <h2>Related trips</h2>             
+        </div> 
+
+        foreach (var template in Model.RelatedTemplates)
+        {
+            @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = Model.ActiveTrip.DlTripView.Id, TripTemplate = template })
+        }
+    }
+
+ } @*end of active trip section*@

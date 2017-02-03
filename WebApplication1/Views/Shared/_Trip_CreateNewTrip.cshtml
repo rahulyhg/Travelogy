@@ -36,7 +36,7 @@
                 <div class="row margin-bottom-20">
                     @Html.Raw(Model.CreateTripTemplate.DlTemplate.AdditionalHtml)
                 </div>
-            }
+            }   
 
 
 
@@ -47,8 +47,8 @@
                 <p>@step.LongDescription</p>
             }
             </div>
-            <div class="col-md-12 text-right">
-                @Html.TextBoxFor(p => p.CreateTripViewModel.StartDate, new { @class = "form-control", type = "date" })
+            <div class="col-md-3">@Html.TextBoxFor(p => p.CreateTripViewModel.StartDate, new { @class = "form-control", type = "date" })</div>
+            <div class="col-md-12 text-right">                
                 <p><button class="btn-u btn-u-lg btn-u-orange" type="submit"><i class="icon-cogs "></i> Add to my trip</button></p>
             </div>
         </div>

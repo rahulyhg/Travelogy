@@ -53,5 +53,6 @@ namespace DomingoDAL
         public virtual DbSet<TripTemplateStep> TripTemplateSteps { get; set; }
         public virtual DbSet<View_Trip> View_Trip { get; set; }
         public virtual DbSet<View_TripStep> View_TripStep { get; set; }
+        public virtual DbSet<View_TripBookingAccommodation> View_TripBookingAccommodation { get; set; }
     }
 }

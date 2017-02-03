@@ -123,7 +123,21 @@ namespace WebApplication1.Controllers
         {
             BlViewTrip trip = null;
             var _blError = TripManager.GetTripById(tripId, out trip);
-            var _model = new TripViewModel() { ActiveTrip = trip };
+            List<BlTripTemplate> _allTemplates = null;
+            List<BlTripTemplate> _relatedTemplates = new List<BlTripTemplate>();
+            _blError = TripManager.SearchTripTemplatesByAlias(trip.DlTripView.TemplateSearchAlias, out _allTemplates);
+
+            if (_allTemplates != null)
+            {
+                foreach (var template in _allTemplates)
+                {
+                    if (!trip.DlTripView.Templates.Contains(template.DlTemplate.Id.ToString()))
+                    {
+                        _relatedTemplates.Add(template);
+                    }
+                }
+            }
+            var _model = new TripViewModel() { ActiveTrip = trip, RelatedTemplates = _relatedTemplates };
             return View("Trip", _model);
         }
 
@@ -164,11 +178,8 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveTrip(EditTripViewModel model)
         {
-            BlViewTrip viewTrip = null;
             var _blError = TripManager.SaveUserTripChanges(model.ActiveTrip.DlTripView, model.ActiveTrip.DlTripStepsView);
-            _blError = TripManager.GetTripById(model.ActiveTrip.DlTripView.Id, out viewTrip);
-            var _tripModel = new TripViewModel() { ActiveTrip = viewTrip };
-            return View("Trip", _tripModel);
+            return RedirectToAction("ViewTrip", new { @tripId = model.ActiveTrip.DlTripView.Id });
         }
 
 
@@ -215,7 +226,7 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddCircuitToTripSubmit(TripViewModel model)
         {
-            var blError = TripManager.AddTemplateToTrip(model.ActiveTrip.DlTripView, model.ActiveTrip.DlTripView.Id);
+            var blError = TripManager.AddTemplateToTrip(model.ActiveTrip.DlTripView, model.CreateTripTemplate.DlTemplate.Id);
             return RedirectToAction("ViewTrip", new { tripId = model.ActiveTrip.DlTripView.Id });            
         }
 
@@ -227,7 +238,7 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult AddTripBookingAccommodation(int tripStepId, int tripId)
         {
-            var model = new TripBookingAccommodation() { TripStepId = tripStepId, TripId = tripId };
+            var model = new AccommodationBookingViewModel() { TripStepId = tripStepId, TripId = tripId };
             return View("AccommodationBooking", model);
         }
 
@@ -239,10 +250,21 @@ namespace WebApplication1.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveTripBookingAccommodation(TripBookingAccommodation model)
+        public async System.Threading.Tasks.Task<ActionResult> SaveTripBookingAccommodationAsync(AccommodationBookingViewModel model)
         {
-            string test = model.PropertyName;
-            return View("AccommodationBooking", model);
+            var accommodation = new TripBookingAccommodation()
+            {
+                AccommodationType = model.AccommodationType,
+                CheckinDate = model.CheckinDate,
+                CheckoutDate = model.CheckoutDate,
+                Notes = model.Notes,
+                SpecialRequests = model.SpecialRequests,
+                TripId = model.TripId,
+                TripStepId = model.TripStepId
+            };
+            
+            var blError = await TripManager.SaveTripBookingAccommodationAsync(accommodation);
+            return RedirectToAction("EditTrip", new { @tripId = model.TripId });
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class CircuitModelBase : TravelogyModelBase
+    public class CircuitModelBase : DomingoModelBase
     {
         public string CircuitName { get; set; }
 

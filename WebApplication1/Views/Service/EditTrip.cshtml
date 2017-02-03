@@ -14,6 +14,12 @@
         @Html.AntiForgeryToken();
         @Html.HiddenFor(p => p.ActiveTrip.DlTripView.Id);
 
+        <div class="row">
+            <div class="col-md-12">
+                <p><button class="btn-u btn-u-orange" type="submit"><i class="icon-cogs "></i> Save trip</button></p>
+            </div>
+        </div>
+
         <div class="tab-v1">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#details" data-toggle="tab">Trip Summary</a></li>
@@ -47,7 +53,8 @@
                                 <p>@tripStep.LongDescription</p>
                                 <h5>Add notes:</h5>
                                 <p>@Html.TextAreaFor(p => p.ActiveTrip.DlTripStepsView[x].TravellerNote, new { @class = "form-control" })</p>
-                                <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId">Add Accommodation</a>
+                                <button class="btn btn-default" type="submit">Save Notes</button>
+                                <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId">Request Accommodation</a>
                                 <hr />
                             }
 
@@ -68,7 +75,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <p><button class="btn-u btn-u-lg btn-u-orange" type="submit"><i class="icon-cogs "></i> Save trip</button></p>
+                <p><button class="btn-u btn-u-orange" type="submit"><i class="icon-cogs "></i> Save trip</button></p>
             </div>
         </div>
 
@@ -77,11 +84,10 @@
 } @*end of edit trip section*@
 
 
-@if(Model.RelatedTemplates != null)
+@if (Model.RelatedTemplates != null)
 {
-    foreach(var template in Model.RelatedTemplates)
+    foreach (var template in Model.RelatedTemplates)
     {
-        <h1>@template.DlTemplate.Name</h1>
-        <a href="/Service/AddCircuitToTrip?tripId=@Model.ActiveTrip.DlTripView.Id&templateId=@template.DlTemplate.Id" class="btn-u btn-u-lg btn-u-orange">Add this circuit to Trip</a>
+        @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = Model.ActiveTrip.DlTripView.Id, TripTemplate = template })
     }
 }
