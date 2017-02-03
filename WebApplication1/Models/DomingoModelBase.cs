@@ -11,6 +11,8 @@ namespace WebApplication1.Models
     public class DomingoModelBase
     {
         public string PageName { get; set; }
+
+        public DomingoDAL.Destination Destination { get; set; }
     }
 
     /// <summary>

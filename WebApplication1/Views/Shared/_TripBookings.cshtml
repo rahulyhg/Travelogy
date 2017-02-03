@@ -1,10 +1,10 @@
-﻿@model WebApplication1.Models.TripViewModel
+﻿@model DomingoBL.BlObjects.BlViewTrip
 
-@if (Model.ActiveTrip != null)
+@if (Model != null)
 {
-    if (Model.ActiveTrip.DlBookingsView != null)
+    if (Model.DlBookingsView != null)
     {
-        foreach (var _booking in Model.ActiveTrip.DlBookingsView)
+        foreach (var _booking in Model.DlBookingsView)
         {
             <div class="row portfolio-item margin-bottom-50">
                 <!-- Content Info -->

@@ -234,6 +234,11 @@ namespace DomingoBL
         {
             try
             {
+                if(accommodation.CheckoutDate < accommodation.CheckinDate)
+                {
+                    return new DomingoBlError() { ErrorCode = 100, ErrorMessage = "Check out date cannot be earlier than the Check in date." };
+                }
+
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
                     if (accommodation.Id == 0)

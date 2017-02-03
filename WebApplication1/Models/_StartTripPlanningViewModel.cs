@@ -11,5 +11,10 @@ namespace WebApplication1.Models
         /// 
         /// </summary>
         public string CircuitName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TemplateAlias { get; set; }
     }
 }

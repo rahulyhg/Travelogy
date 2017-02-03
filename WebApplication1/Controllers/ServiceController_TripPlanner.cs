@@ -264,7 +264,16 @@ namespace WebApplication1.Controllers
             };
             
             var blError = await TripManager.SaveTripBookingAccommodationAsync(accommodation);
-            return RedirectToAction("EditTrip", new { @tripId = model.TripId });
+            if(blError.ErrorCode == 0)
+            {
+                return RedirectToAction("EditTrip", new { @tripId = model.TripId });
+            }
+            else
+            {
+                ModelState.AddModelError("blError.ErrorMessage", blError.ErrorMessage);
+                return View("AccommodationBooking", model);
+            }
+            
         }
     }
 }

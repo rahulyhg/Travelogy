@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="tab-pane" id="booking">
-                @Html.Partial("_TripBookings", Model)
+                @Html.Partial("_TripBookings", Model.ActiveTrip)
             </div>
             <div class="tab-pane" id="messages">
                 <h4>Messages for your trip [@Model.ActiveTrip.DlTripView.Id]</h4>

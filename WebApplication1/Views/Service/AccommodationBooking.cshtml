@@ -64,10 +64,11 @@
                 <div class="col-md-10">
                     <input type="submit" value="Save" class="btn btn-default" />
                     <input type="reset" value="Reset" class="btn btn-default" />
-                </div>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>                
             </div>
         </div>
+
+        @Html.ValidationMessage("blError.ErrorMessage", new { @class = "text-danger" })
     }
 
     <div>
