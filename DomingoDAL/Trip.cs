@@ -15,7 +15,6 @@ namespace DomingoDAL
     public partial class Trip
     {
         public int Id { get; set; }
-        public int TripTemplateId { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public string StartLocation { get; set; }
         public string Status { get; set; }
@@ -28,5 +27,8 @@ namespace DomingoDAL
         public int PaxAdults { get; set; }
         public Nullable<int> PaxMinors { get; set; }
         public string TripType { get; set; }
+        public string TemplateSearchAlias { get; set; }
+        public int DestinationId { get; set; }
+        public string Templates { get; set; }
     }
 }

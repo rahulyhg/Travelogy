@@ -83,7 +83,7 @@ namespace WebApplication1.Controllers
             // assign the template to the view model
             var _model = new TripViewModel();
             _model.CreateTripTemplate = _template;
-            _model.CreateTripViewModel = new CreateTripViewModel() { TemplateId = _template.DlTemplate.Id, StartDate = DateTime.Now };
+            _model.CreateTripViewModel = new CreateTripViewModel() { DestinationId = _template.DlTemplate.DestinationId, TemplateId = _template.DlTemplate.Id, StartDate = DateTime.Now };
 
             return View("Trip", _model);
         }
@@ -101,12 +101,12 @@ namespace WebApplication1.Controllers
             Trip trip = new Trip()
             {
                 AspNetUserId = User.Identity.GetUserId(),
-                TripTemplateId = model.CreateTripViewModel.TemplateId,
-                StartDate = model.CreateTripViewModel.StartDate,
-                Status = TripStatus.planned.ToString()
+                DestinationId = model.CreateTripViewModel.DestinationId,
+                StartDate = model.CreateTripViewModel.StartDate,                
+                Status = TripStatus.planned.ToString()                
             };
 
-            var _blError = TripManager.CreateTrip(trip);
+            var _blError = TripManager.CreateTrip(trip, model.CreateTripViewModel.TemplateId);
             BlViewTrip viewTrip = null;
             _blError = TripManager.GetTripById(trip.Id, out viewTrip);
             var _model = new TripViewModel() { ActiveTrip = viewTrip };
@@ -137,8 +137,20 @@ namespace WebApplication1.Controllers
         {
             BlViewTrip trip = null;
             var _blError = TripManager.GetTripById(tripId, out trip);
-            List<BlTripTemplate> _relatedTemplates = null;
-            _blError = TripManager.SearchTripTemplatesByAlias(trip.DlTripView.SearchAlias, out _relatedTemplates, trip.DlTripView.TripTemplateId);
+            List<BlTripTemplate> _allTemplates = null;
+            List<BlTripTemplate> _relatedTemplates = new List<BlTripTemplate>();
+            _blError = TripManager.SearchTripTemplatesByAlias(trip.DlTripView.TemplateSearchAlias, out _allTemplates);
+
+            if(_allTemplates != null)
+            {
+                foreach(var template in _allTemplates)
+                {
+                    if(!trip.DlTripView.Templates.Contains(template.DlTemplate.Id.ToString()))
+                    {
+                        _relatedTemplates.Add(template);
+                    }
+                }
+            }
             var _model = new EditTripViewModel() { ActiveTrip = trip, RelatedTemplates = _relatedTemplates };
             return View("EditTrip", _model);
         }
@@ -171,9 +183,40 @@ namespace WebApplication1.Controllers
             return View(model);
         }
 
-        public ActionResult AddCircuitToTrip(int tripId)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <param name="templateId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult AddCircuitToTrip(int tripId, int templateId = 0)
         {
-            return View();
+            BlViewTrip trip = null;
+            var _blError = TripManager.GetTripById(tripId, out trip);
+
+            var model = new TripViewModel();
+            model.ActiveTrip = trip;
+
+            BlTripTemplate template = null;
+            TripManager.GetTripTemplatesById(templateId, out template);
+            model.CreateTripTemplate = template;
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddCircuitToTripSubmit(TripViewModel model)
+        {
+            var blError = TripManager.AddTemplateToTrip(model.ActiveTrip.DlTripView, model.ActiveTrip.DlTripView.Id);
+            return RedirectToAction("ViewTrip", new { tripId = model.ActiveTrip.DlTripView.Id });            
         }
 
         /// <summary>

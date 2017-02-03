@@ -214,7 +214,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TripTemplateId" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" />
           <Property Name="StartLocation" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="nchar" MaxLength="10" />
@@ -227,6 +226,9 @@
           <Property Name="PaxAdults" Type="int" Nullable="false" />
           <Property Name="PaxMinors" Type="int" />
           <Property Name="TripType" Type="nvarchar" MaxLength="10" />
+          <Property Name="TemplateSearchAlias" Type="nvarchar" MaxLength="10" />
+          <Property Name="DestinationId" Type="int" Nullable="false" />
+          <Property Name="Templates" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="TripBookingAccommodation">
           <Key>
@@ -288,12 +290,13 @@
           <Property Name="SortOrder" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" />
           <Property Name="EndDate" Type="date" />
-          <Property Name="TripTemplateStepId" Type="int" />
+          <Property Name="TripTemplateStepId" Type="int" Nullable="false" />
           <Property Name="ShortDescription" Type="nvarchar" MaxLength="50" />
           <Property Name="LongDescription" Type="ntext" />
           <Property Name="NightStay" Type="nvarchar" MaxLength="255" />
           <Property Name="TravellerNote" Type="ntext" />
           <Property Name="TravelogerNote" Type="ntext" />
+          <Property Name="TripTemplateId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TripTemplate">
           <Key>
@@ -310,6 +313,8 @@
           <Property Name="AdditionalHtml" Type="ntext" />
           <Property Name="SearchAlias" Type="nvarchar" MaxLength="10" />
           <Property Name="Weightage" Type="int" Nullable="false" />
+          <Property Name="BestTimeToVisit" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartLocation" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TripTemplateStep">
           <Key>
@@ -371,12 +376,12 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_Trip' does not have a primar
         <EntityType Name="View_Trip">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="TripTemplateId" />
             <PropertyRef Name="Travellerid" />
             <PropertyRef Name="AspNetUserId" />
+            <PropertyRef Name="Templates" />
+            <PropertyRef Name="Name" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="TripTemplateId" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" />
           <Property Name="StartLocation" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="nchar" MaxLength="10" />
@@ -385,10 +390,11 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_Trip' does not have a primar
           <Property Name="Travellerid" Type="int" Nullable="false" />
           <Property Name="AspNetUserId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ThreadId" Type="int" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="500" />
-          <Property Name="SearchAlias" Type="nvarchar" MaxLength="10" />
-          <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="100" />
+          <Property Name="Templates" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="TemplateSearchAlias" Type="nvarchar" MaxLength="10" />
+          <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -397,14 +403,15 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
             <PropertyRef Name="Id" />
             <PropertyRef Name="TripId" />
             <PropertyRef Name="SortOrder" />
+            
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="TripId" Type="int" Nullable="false" />
           <Property Name="Destination" Type="nvarchar" MaxLength="50" />
           <Property Name="SortOrder" Type="int" Nullable="false" />
-          <Property Name="StartDate" Type="datetime" />
-          <Property Name="EndDate" Type="datetime" />
-          <Property Name="TripTemplateStepId" Type="int" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="TripTemplateStepId" Type="int" Nullable="false" />
           <Property Name="ShortDescription" Type="nvarchar" MaxLength="50" />
           <Property Name="LongDescription" Type="ntext" />
           <Property Name="NightStay" Type="nvarchar" MaxLength="255" />
@@ -522,7 +529,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="View_Trip" EntityType="Self.View_Trip" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_Trip].[Id] AS [Id], 
-    [View_Trip].[TripTemplateId] AS [TripTemplateId], 
     [View_Trip].[StartDate] AS [StartDate], 
     [View_Trip].[StartLocation] AS [StartLocation], 
     [View_Trip].[Status] AS [Status], 
@@ -531,9 +537,10 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
     [View_Trip].[Travellerid] AS [Travellerid], 
     [View_Trip].[AspNetUserId] AS [AspNetUserId], 
     [View_Trip].[ThreadId] AS [ThreadId], 
+    [View_Trip].[Templates] AS [Templates], 
     [View_Trip].[Name] AS [Name], 
     [View_Trip].[Description] AS [Description], 
-    [View_Trip].[SearchAlias] AS [SearchAlias], 
+    [View_Trip].[TemplateSearchAlias] AS [TemplateSearchAlias], 
     [View_Trip].[ThumbnailPath] AS [ThumbnailPath]
     FROM [dbo].[View_Trip] AS [View_Trip]</DefiningQuery>
           </EntitySet>
@@ -604,18 +611,18 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="ThreadMessages" EntityType="TravelogyDevModel.ThreadMessage" />
           <EntitySet Name="View_Thread" EntityType="TravelogyDevModel.View_Thread" />
           <EntitySet Name="View_ThreadMessage" EntityType="TravelogyDevModel.View_ThreadMessage" />
-          <EntitySet Name="TripTemplates" EntityType="TravelogyDevModel.TripTemplate" />
-          <EntitySet Name="TripTemplateSteps" EntityType="TravelogyDevModel.TripTemplateStep" />
           <EntitySet Name="TripBookingAccommodations" EntityType="TravelogyDevModel.TripBookingAccommodation" />
           <EntitySet Name="TripBookingTransports" EntityType="TravelogyDevModel.TripBookingTransport" />
           <EntitySet Name="Travellers" EntityType="TravelogyDevModel.Traveller" />
-          <EntitySet Name="Trips" EntityType="TravelogyDevModel.Trip" />
-          <EntitySet Name="TripSteps" EntityType="TravelogyDevModel.TripStep" />
-          <EntitySet Name="View_Trip" EntityType="TravelogyDevModel.View_Trip" />
-          <EntitySet Name="View_TripStep" EntityType="TravelogyDevModel.View_TripStep" />
           <EntitySet Name="HtmlEmails" EntityType="TravelogyDevModel.HtmlEmail" />
           <EntitySet Name="HtmlEmailTemplates" EntityType="TravelogyDevModel.HtmlEmailTemplate" />
           <EntitySet Name="AspNetUserSessions" EntityType="TravelogyDevModel.AspNetUserSession" />
+          <EntitySet Name="Trips" EntityType="TravelogyDevModel.Trip" />
+          <EntitySet Name="TripSteps" EntityType="TravelogyDevModel.TripStep" />
+          <EntitySet Name="TripTemplates" EntityType="TravelogyDevModel.TripTemplate" />
+          <EntitySet Name="TripTemplateSteps" EntityType="TravelogyDevModel.TripTemplateStep" />
+          <EntitySet Name="View_Trip" EntityType="TravelogyDevModel.View_Trip" />
+          <EntitySet Name="View_TripStep" EntityType="TravelogyDevModel.View_TripStep" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -850,35 +857,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="IsAdmin" Type="Boolean" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="TripTemplate">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TripProviderId" Type="Int32" Nullable="false" />
-          <Property Name="DestinationId" Type="Int32" Nullable="false" />
-          <Property Name="DurationDaysMin" Type="Int32" />
-          <Property Name="DurationDaysMax" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ThumbnailPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SearchAlias" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Weightage" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TripTemplateStep">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TripTemplateId" Type="Int32" Nullable="false" />
-          <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NightStay" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TripTemplateStepIdentifier" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="TripBookingAccommodation">
           <Key>
             <PropertyRef Name="Id" />
@@ -934,84 +912,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Trip">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TripTemplateId" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="0" />
-          <Property Name="StartLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="EndLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Travellerid" Type="Int32" Nullable="false" />
-          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ThreadId" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="PaxAdults" Type="Int32" Nullable="false" />
-          <Property Name="PaxMinors" Type="Int32" />
-          <Property Name="TripType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="TripStep">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TripId" Type="Int32" Nullable="false" />
-          <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SortOrder" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="TripTemplateStepId" Type="Int32" />
-          <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NightStay" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TravellerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TravelogerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="View_Trip">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="TripTemplateId" />
-            <PropertyRef Name="Travellerid" />
-            <PropertyRef Name="AspNetUserId" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TripTemplateId" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="0" />
-          <Property Name="StartLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="EndLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Travellerid" Type="Int32" Nullable="false" />
-          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ThreadId" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="SearchAlias" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="ThumbnailPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="View_TripStep">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="TripId" />
-            <PropertyRef Name="SortOrder" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TripId" Type="Int32" Nullable="false" />
-          <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SortOrder" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="TripTemplateStepId" Type="Int32" />
-          <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NightStay" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TravellerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TravelogerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="HtmlEmail">
           <Key>
             <PropertyRef Name="Id" />
@@ -1045,6 +945,119 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ActionTimeStamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ActionUrl" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="StartLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="EndLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Travellerid" Type="Int32" Nullable="false" />
+          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThreadId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PaxAdults" Type="Int32" Nullable="false" />
+          <Property Name="PaxMinors" Type="Int32" />
+          <Property Name="TripType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TemplateSearchAlias" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationId" Type="Int32" Nullable="false" />
+          <Property Name="Templates" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TripStep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="TripTemplateStepId" Type="Int32" Nullable="false" />
+          <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NightStay" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TravellerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TravelogerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TripTemplateId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TripTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TripProviderId" Type="Int32" Nullable="false" />
+          <Property Name="DestinationId" Type="Int32" Nullable="false" />
+          <Property Name="DurationDaysMin" Type="Int32" />
+          <Property Name="DurationDaysMax" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SearchAlias" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Weightage" Type="Int32" Nullable="false" />
+          <Property Name="BestTimeToVisit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TripTemplateStep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TripTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NightStay" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TripTemplateStepIdentifier" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="View_Trip">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Travellerid" />
+            <PropertyRef Name="AspNetUserId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Templates" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="StartLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="EndLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Travellerid" Type="Int32" Nullable="false" />
+          <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThreadId" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="TemplateSearchAlias" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailPath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Templates" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="View_TripStep">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TripId" />
+            <PropertyRef Name="SortOrder" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="TripTemplateStepId" Type="Int32" Nullable="false" />
+          <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NightStay" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TravellerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TravelogerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1258,37 +1271,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TripTemplates">
-            <EntityTypeMapping TypeName="TravelogyDevModel.TripTemplate">
-              <MappingFragment StoreEntitySet="TripTemplate">
-                <ScalarProperty Name="Weightage" ColumnName="Weightage" />
-                <ScalarProperty Name="SearchAlias" ColumnName="SearchAlias" />
-                <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
-                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="DurationDaysMax" ColumnName="DurationDaysMax" />
-                <ScalarProperty Name="DurationDaysMin" ColumnName="DurationDaysMin" />
-                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
-                <ScalarProperty Name="TripProviderId" ColumnName="TripProviderId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TripTemplateSteps">
-            <EntityTypeMapping TypeName="TravelogyDevModel.TripTemplateStep">
-              <MappingFragment StoreEntitySet="TripTemplateStep">
-                <ScalarProperty Name="TripTemplateStepIdentifier" ColumnName="TripTemplateStepIdentifier" />
-                <ScalarProperty Name="NightStay" ColumnName="NightStay" />
-                <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
-                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
-                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
-                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
-                <ScalarProperty Name="TripTemplateId" ColumnName="TripTemplateId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TripBookingAccommodations">
             <EntityTypeMapping TypeName="TravelogyDevModel.TripBookingAccommodation">
               <MappingFragment StoreEntitySet="TripBookingAccommodation">
@@ -1347,83 +1329,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Trips">
-            <EntityTypeMapping TypeName="TravelogyDevModel.Trip">
-              <MappingFragment StoreEntitySet="Trip">
-                <ScalarProperty Name="TripType" ColumnName="TripType" />
-                <ScalarProperty Name="PaxMinors" ColumnName="PaxMinors" />
-                <ScalarProperty Name="PaxAdults" ColumnName="PaxAdults" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
-                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
-                <ScalarProperty Name="Travellerid" ColumnName="Travellerid" />
-                <ScalarProperty Name="EndLocation" ColumnName="EndLocation" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="StartLocation" ColumnName="StartLocation" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="TripTemplateId" ColumnName="TripTemplateId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TripSteps">
-            <EntityTypeMapping TypeName="TravelogyDevModel.TripStep">
-              <MappingFragment StoreEntitySet="TripStep">
-                <ScalarProperty Name="TravelogerNote" ColumnName="TravelogerNote" />
-                <ScalarProperty Name="TravellerNote" ColumnName="TravellerNote" />
-                <ScalarProperty Name="NightStay" ColumnName="NightStay" />
-                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
-                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
-                <ScalarProperty Name="TripTemplateStepId" ColumnName="TripTemplateStepId" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="Destination" ColumnName="Destination" />
-                <ScalarProperty Name="TripId" ColumnName="TripId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_Trip">
-            <EntityTypeMapping TypeName="TravelogyDevModel.View_Trip">
-              <MappingFragment StoreEntitySet="View_Trip">
-                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
-                <ScalarProperty Name="SearchAlias" ColumnName="SearchAlias" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
-                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
-                <ScalarProperty Name="Travellerid" ColumnName="Travellerid" />
-                <ScalarProperty Name="EndLocation" ColumnName="EndLocation" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="StartLocation" ColumnName="StartLocation" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="TripTemplateId" ColumnName="TripTemplateId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_TripStep">
-            <EntityTypeMapping TypeName="TravelogyDevModel.View_TripStep">
-              <MappingFragment StoreEntitySet="View_TripStep">
-                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
-                <ScalarProperty Name="TravelogerNote" ColumnName="TravelogerNote" />
-                <ScalarProperty Name="TravellerNote" ColumnName="TravellerNote" />
-                <ScalarProperty Name="NightStay" ColumnName="NightStay" />
-                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
-                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
-                <ScalarProperty Name="TripTemplateStepId" ColumnName="TripTemplateStepId" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="Destination" ColumnName="Destination" />
-                <ScalarProperty Name="TripId" ColumnName="TripId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="HtmlEmails">
             <EntityTypeMapping TypeName="TravelogyDevModel.HtmlEmail">
               <MappingFragment StoreEntitySet="HtmlEmail">
@@ -1457,6 +1362,119 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
                 <ScalarProperty Name="ActionUrl" ColumnName="ActionUrl" />
                 <ScalarProperty Name="ActionTimeStamp" ColumnName="ActionTimeStamp" />
                 <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trips">
+            <EntityTypeMapping TypeName="TravelogyDevModel.Trip">
+              <MappingFragment StoreEntitySet="Trip">
+                <ScalarProperty Name="Templates" ColumnName="Templates" />
+                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
+                <ScalarProperty Name="TemplateSearchAlias" ColumnName="TemplateSearchAlias" />
+                <ScalarProperty Name="TripType" ColumnName="TripType" />
+                <ScalarProperty Name="PaxMinors" ColumnName="PaxMinors" />
+                <ScalarProperty Name="PaxAdults" ColumnName="PaxAdults" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="Travellerid" ColumnName="Travellerid" />
+                <ScalarProperty Name="EndLocation" ColumnName="EndLocation" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StartLocation" ColumnName="StartLocation" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripSteps">
+            <EntityTypeMapping TypeName="TravelogyDevModel.TripStep">
+              <MappingFragment StoreEntitySet="TripStep">
+                <ScalarProperty Name="TripTemplateId" ColumnName="TripTemplateId" />
+                <ScalarProperty Name="TravelogerNote" ColumnName="TravelogerNote" />
+                <ScalarProperty Name="TravellerNote" ColumnName="TravellerNote" />
+                <ScalarProperty Name="NightStay" ColumnName="NightStay" />
+                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="TripTemplateStepId" ColumnName="TripTemplateStepId" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripTemplates">
+            <EntityTypeMapping TypeName="TravelogyDevModel.TripTemplate">
+              <MappingFragment StoreEntitySet="TripTemplate">
+                <ScalarProperty Name="StartLocation" ColumnName="StartLocation" />
+                <ScalarProperty Name="BestTimeToVisit" ColumnName="BestTimeToVisit" />
+                <ScalarProperty Name="Weightage" ColumnName="Weightage" />
+                <ScalarProperty Name="SearchAlias" ColumnName="SearchAlias" />
+                <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
+                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DurationDaysMax" ColumnName="DurationDaysMax" />
+                <ScalarProperty Name="DurationDaysMin" ColumnName="DurationDaysMin" />
+                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
+                <ScalarProperty Name="TripProviderId" ColumnName="TripProviderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripTemplateSteps">
+            <EntityTypeMapping TypeName="TravelogyDevModel.TripTemplateStep">
+              <MappingFragment StoreEntitySet="TripTemplateStep">
+                <ScalarProperty Name="TripTemplateStepIdentifier" ColumnName="TripTemplateStepIdentifier" />
+                <ScalarProperty Name="NightStay" ColumnName="NightStay" />
+                <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
+                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
+                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="TripTemplateId" ColumnName="TripTemplateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Trip">
+            <EntityTypeMapping TypeName="TravelogyDevModel.View_Trip">
+              <MappingFragment StoreEntitySet="View_Trip">
+                <ScalarProperty Name="Templates" ColumnName="Templates" />
+                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
+                <ScalarProperty Name="TemplateSearchAlias" ColumnName="TemplateSearchAlias" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="Travellerid" ColumnName="Travellerid" />
+                <ScalarProperty Name="EndLocation" ColumnName="EndLocation" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StartLocation" ColumnName="StartLocation" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_TripStep">
+            <EntityTypeMapping TypeName="TravelogyDevModel.View_TripStep">
+              <MappingFragment StoreEntitySet="View_TripStep">
+                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
+                <ScalarProperty Name="TravelogerNote" ColumnName="TravelogerNote" />
+                <ScalarProperty Name="TravellerNote" ColumnName="TravellerNote" />
+                <ScalarProperty Name="NightStay" ColumnName="NightStay" />
+                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="TripTemplateStepId" ColumnName="TripTemplateStepId" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

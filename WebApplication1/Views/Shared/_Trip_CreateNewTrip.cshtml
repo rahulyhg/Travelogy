@@ -1,35 +1,57 @@
 ﻿@model WebApplication1.Models.TripViewModel
 
+
 @if (Model.CreateTripTemplate != null)
 {
+    <div class="headline"><h2>Create a trip plan:</h2></div>
+
     using (Html.BeginForm("CreateTrip", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken();
 
         // the templateId
         @Html.HiddenFor(p => p.CreateTripViewModel.TemplateId);
-        @Html.HiddenFor(p => p.CreateTripViewModel.StartDate);
+        @*@Html.HiddenFor(p => p.CreateTripViewModel.StartDate);*@
+        @*@Html.HiddenFor(p => p.CreateTripViewModel.DestinationId);*@
 
-        <div class="row tag-box tag-box-v2">
-            <div class="col-md-12">
-                <h1>@Model.CreateTripTemplate.DlTemplate.Name</h1>
-                <h2>@Model.CreateTripTemplate.DlTemplate.Description</h2>
+        <div class="container blog-full-width">
+            <div class="blog margin-bottom-20">
+                <div class="blog-img">
+                    <img class="img-responsive" src="@Model.CreateTripTemplate.DlTemplate.ThumbnailPath" alt="">
+                </div>
+                <h2><a href="#">@Model.CreateTripTemplate.DlTemplate.Name</a></h2>
+                <div class="blog-post-tags">
+                    <ul class="list-unstyled list-inline blog-info">
+                        <li><i class="icon-calendar"></i> February 02, 2013</li>
+                        <li><i class="icon-pencil"></i> Diana Anderson</li>
+                        <li><i class="icon-comments"></i> <a href="#">24 Comments</a></li>
+                        <li><i class="icon-tags"></i> Technology, Education, Internet, Media</li>
+                    </ul>
+                </div>
+                <p>@Model.CreateTripTemplate.DlTemplate.Description</p>
             </div>
 
-            @foreach(var step in Model.CreateTripTemplate.DlTemplateSteps)
+            @if (!String.IsNullOrEmpty(Model.CreateTripTemplate.DlTemplate.AdditionalHtml))
             {
-                <h5>@step.ShortDescription</h5>
-                <p>@step.LongDescription</p>
+                <div class="row margin-bottom-20">
+                    @Html.Raw(Model.CreateTripTemplate.DlTemplate.AdditionalHtml)
+                </div>
             }
 
 
-            <div class="col-md-12">
-                <p><button class="btn-u btn-u-lg btn-u-orange" type="submit"><i class="icon-cogs "></i> Create trip</button></p>
+
+            <div class="media margin-bottom-20">
+            @foreach (var step in Model.CreateTripTemplate.DlTemplateSteps)
+            {
+                <h3>@step.ShortDescription</h3>
+                <p>@step.LongDescription</p>
+            }
             </div>
-
-            @*<h1>@Html.ValidationSummary()</h1>*@
+            <div class="col-md-12 text-right">
+                @Html.TextBoxFor(p => p.CreateTripViewModel.StartDate, new { @class = "form-control", type = "date" })
+                <p><button class="btn-u btn-u-lg btn-u-orange" type="submit"><i class="icon-cogs "></i> Add to my trip</button></p>
+            </div>
         </div>
-
     };
 }
 

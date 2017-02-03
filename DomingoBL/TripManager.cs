@@ -99,7 +99,7 @@ namespace DomingoBL
         /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
-        public static DomingoBlError CreateTrip(Trip trip)
+        public static DomingoBlError CreateTrip(Trip trip, int tripTemplateId)
         {
             try
             {
@@ -109,11 +109,16 @@ namespace DomingoBL
                     // simply add it to the database table and save it
                     if (trip.Id == 0)
                     {
+                        var template = context.TripTemplates.Find(tripTemplateId);
+                        trip.Templates = tripTemplateId.ToString();
+                        trip.TemplateSearchAlias = template.SearchAlias;
+                        trip.DestinationId = template.DestinationId;
+
                         context.Trips.Add(trip);
                         context.SaveChanges();
 
                         // get the steps from the template
-                        foreach (var tripStep in _CopyTripSteps(trip.TripTemplateId, trip.Id, context))
+                        foreach (var tripStep in _CopyTripSteps(tripTemplateId, trip.Id, context))
                         {
                             context.TripSteps.Add(tripStep);
                         }
@@ -123,6 +128,44 @@ namespace DomingoBL
 
                 }
 
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trip"></param>
+        /// <param name="tripTemplateId"></param>
+        /// <returns></returns>
+        public static DomingoBlError AddTemplateToTrip(View_Trip trip, int tripTemplateId)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    // if the trip object is for a new trip
+                    // simply add it to the database table and save it
+                    if (trip.Id > 0)
+                    {
+                        // update the Templates field of the trip
+                        var _dbTrip = context.Trips.Find(trip.Id);
+                        _dbTrip.Templates = string.Format("{0};{1}", _dbTrip.Templates, tripTemplateId);
+
+                        // get the steps from the template and add them to this trip
+                        foreach (var tripStep in _CopyTripSteps(tripTemplateId, trip.Id, context))
+                        {
+                            context.TripSteps.Add(tripStep);
+                        }
+
+                        context.SaveChanges();
+                    }
+
+                }
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
             }
             catch (Exception ex)
@@ -214,6 +257,7 @@ namespace DomingoBL
                 return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
             }
         }
+
         private static List<TripStep> _CopyTripSteps(int tripTemplateId, int tripId, TravelogyDevEntities1 context)
         {
             var tripSteps = new List<TripStep>();
@@ -238,7 +282,7 @@ namespace DomingoBL
         /// </summary>
         /// <param name="alias"></param>
         /// <returns></returns>
-        public static DomingoBlError SearchTripTemplatesByAlias(string alias, out List<BlTripTemplate> templates, int discardTemplateId = 0)
+        public static DomingoBlError SearchTripTemplatesByAlias(string alias, out List<BlTripTemplate> templates)
         {
             try
             {
@@ -247,12 +291,7 @@ namespace DomingoBL
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
                     // search for trmplates with the search alias
-                    var dbTemplateSearchRes = context.TripTemplates.Where(p => p.SearchAlias == alias);
-
-                    if(discardTemplateId > 0)
-                    {
-                        dbTemplateSearchRes = dbTemplateSearchRes.Where(p => p.Id != discardTemplateId);
-                    }
+                    var dbTemplateSearchRes = context.TripTemplates.Where(p => p.SearchAlias == alias);                    
 
                     // iterate through the results and populate the business layer object
                     foreach(var dbTemplate in dbTemplateSearchRes)

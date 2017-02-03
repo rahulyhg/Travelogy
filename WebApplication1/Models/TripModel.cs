@@ -54,6 +54,11 @@ namespace WebApplication1.Models
         /// <summary>
         /// 
         /// </summary>
+        public int DestinationId { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public int TemplateId { get; set; }
 
         /// <summary>

@@ -25,5 +25,7 @@ namespace DomingoDAL
         public string AdditionalHtml { get; set; }
         public string SearchAlias { get; set; }
         public int Weightage { get; set; }
+        public string BestTimeToVisit { get; set; }
+        public string StartLocation { get; set; }
     }
 }

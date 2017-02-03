@@ -82,5 +82,6 @@
     foreach(var template in Model.RelatedTemplates)
     {
         <h1>@template.DlTemplate.Name</h1>
+        <a href="/Service/AddCircuitToTrip?tripId=@Model.ActiveTrip.DlTripView.Id&templateId=@template.DlTemplate.Id" class="btn-u btn-u-lg btn-u-orange">Add this circuit to Trip</a>
     }
 }

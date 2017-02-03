@@ -275,5 +275,9 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/mainjs")
     @RenderSection("scripts", required: false)
+
+    $(document).ready(function(){
+    $(".datepicker").datepicker();
+    });
 </body>
 </html>
