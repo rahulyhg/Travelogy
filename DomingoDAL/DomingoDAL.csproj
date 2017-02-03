@@ -68,6 +68,9 @@
     <Compile Include="AspNetUserLogin.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AspNetUserSession.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Country.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>

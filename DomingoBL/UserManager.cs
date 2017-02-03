@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DomingoBL
 {
-    public class UserManager
+    public class DomingoUserManager
     {
         /// <summary>
         /// 
@@ -16,9 +16,10 @@ namespace DomingoBL
         /// <param name="FIRST_NAME"></param>
         /// <param name="LAST_NAME"></param>
         /// <param name="EMAIL"></param>
+        /// <param name="PHONE"></param>
         /// <param name="TRIP_REQUEST"></param>
         /// <returns></returns>
-        public static async Task<DomingoBlError> CreateCrmLead(string FIRST_NAME, string LAST_NAME, string EMAIL, string TRIP_REQUEST)
+        public static async Task<DomingoBlError> CreateCrmLead(string FIRST_NAME, string LAST_NAME, string EMAIL, string PHONE, string TRIP_REQUEST)
         {
             try
             {
@@ -30,7 +31,32 @@ namespace DomingoBL
 
                 // create a lead in the capsule CRM
                 var gateway = new CapsupleCrmGateway();
-                var crmResponse = await gateway.CreateCapsuleLead(FIRST_NAME, LAST_NAME, EMAIL, TRIP_REQUEST);               
+                var crmResponse = await gateway.CreateCapsuleLead(FIRST_NAME, LAST_NAME, EMAIL, PHONE, TRIP_REQUEST);               
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> TraceSession(string userId, string url)
+        {
+            try
+            {
+                var session = new AspNetUserSession() { AspNetUserId = userId, ActionTimeStamp = DateTime.Now, ActionUrl = url };
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    context.AspNetUserSessions.Add(session);
+                    await context.SaveChangesAsync();
+                }
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
             }

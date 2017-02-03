@@ -10,41 +10,38 @@
         </div>
 
         <!-- Appointment content -->
-        <form class="form" id="form1" name="form1" role="form" action="https://travelogyadmin.wufoo.com/forms/z1hu3bu21fh65e3/#public" method="post"
-              accept-charset="UTF-8" autocomplete="off" enctype="multipart/form-data">
-            <!--<input type="hidden" name="FORM_ID" value="bc313251-2d8c-495f-ae19-4befcca7896e">
-            <input type="hidden" name="COMPLETE_URL" value="http://travelogyclub.com/v2/formsubmitted.html">-->
-            <input type="hidden" name="Field9" value="@Model.CircuitName" />
-            <input type="hidden" id="idstamp" name="idstamp" value="UM/i5yyERB+UWFQXc6pI54V6xc1iORz8HPxsKOTFbp8=" />
+        <form class="form" role="form" action="/Information/SubmitTripRequestAsync" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="CIRCUIT" value="@Model.CircuitName" />            
 
             <div class="row">
                 <div class="col-md-6 col-sm-6">
                     <div class="form-group">
-                        <input class="form-control" type="text" id="Field1" name="Field1" placeholder="First Name (required)" required>
+                        <input class="form-control" type="text" id="FIRST_NAME" name="FIRST_NAME" placeholder="First Name (required)" required>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div class="form-group">
-                        <input class="form-control" type="text" id="Field2" name="Field2" placeholder="Last Name (required)" required>
+                        <input class="form-control" type="text" id="LAST_NAME" name="LAST_NAME" placeholder="Last Name (required)" required>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 col-sm-6">
                     <div class="form-group">
-                        <input class="form-control" type="email" id="Field3" name="Field3" placeholder="Email (required)" required>
+                        <input class="form-control" type="email" id="EMAIL" name="EMAIL" placeholder="Email (required)" required>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div class="form-group">
-                        <input class="form-control" type="text" id="Field4" name="Field4" placeholder="Phone number (Optional)">
+                        <input class="form-control" type="text" id="PHONE" name="PHONE" placeholder="Phone number (Optional)">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="form-group">
-                        <textarea class="form-control" id="Field13" name="Field13"
+                        <textarea class="form-control" id="TRIP_REQUEST" name="TRIP_REQUEST"
                                   rows="3" placeholder="Write more about your enquiry. If you wish to visit somewhere which has not been listed above, do not hesitate to write that to us. Your wish is our command."></textarea>
                     </div>
                     <div class="form-group">

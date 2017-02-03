@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using WebApplication1.Models;
 using DomingoBL.EmailManagement;
 using System.Collections.Generic;
+using DomingoBL;
 
 namespace WebApplication1.Controllers
 {
@@ -81,13 +82,17 @@ namespace WebApplication1.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    // trace the login
+                    DomingoUserManager.TraceSession(model.Email, "/Account/Login - Success");
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
+                    DomingoUserManager.TraceSession(model.Email, "/Account/Login - Lockout");
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
+                    DomingoUserManager.TraceSession(model.Email, "/Account/Login - Invalid login attempt");
                     model.LoginFailureMessage = "Sorry your login details do not match!";
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
@@ -194,15 +199,20 @@ namespace WebApplication1.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
+                    // Send an email with this link                   
+
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     var emailUtility = new EmailUtility();
                     var emailParams = new Dictionary<String, String>();
                     emailParams.Add("UserName", model.Email);
                     emailParams.Add("ActivationLink", callbackUrl);
-                    emailUtility.SendEmail("VerifiyEmail", model.Email, emailParams);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    // create a task for sending the verification mail
+                    var blEmail = emailUtility.SendEmail("VerifiyEmail", model.Email, emailParams);                   
+
+                    // create a CRM lead
+                    var blCrm = DomingoBL.DomingoUserManager.CreateCrmLead(user.Id, user.Id, model.Email, "----", "Web Registration");                    
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -268,7 +278,7 @@ namespace WebApplication1.Controllers
                 emailParams.Add("ResetPasswordLink", callbackUrl);
                 emailUtility.SendEmail("ResetPasswordEmail", model.Email, emailParams);
 
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                // await DomingoUserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 

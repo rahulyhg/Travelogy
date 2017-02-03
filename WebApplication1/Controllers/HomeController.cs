@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DomingoBL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace WebApplication1.Controllers
 {
@@ -21,13 +23,17 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("Index", "Admin");
             }
 
+            if (Request.IsAuthenticated)
+            {
+                DomingoUserManager.TraceSession(User.Identity.GetUserName(), "/Home");
+            }
+
             return View();
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

@@ -35,6 +35,7 @@
         <EntityTypeShape EntityType="TravelogyDevModel.View_TripStep" Width="1.5" PointX="13.375" PointY="8.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.HtmlEmail" Width="1.5" PointX="13.375" PointY="13.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.HtmlEmailTemplate" Width="1.5" PointX="3.375" PointY="14.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.AspNetUserSession" Width="1.5" PointX="5.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

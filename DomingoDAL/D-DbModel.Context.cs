@@ -52,5 +52,6 @@ namespace DomingoDAL
         public virtual DbSet<View_TripStep> View_TripStep { get; set; }
         public virtual DbSet<HtmlEmail> HtmlEmails { get; set; }
         public virtual DbSet<HtmlEmailTemplate> HtmlEmailTemplates { get; set; }
+        public virtual DbSet<AspNetUserSession> AspNetUserSessions { get; set; }
     }
 }

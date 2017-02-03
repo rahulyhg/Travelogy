@@ -2,15 +2,14 @@
 
 <!--Destination-->
 <div class="row blog blog-medium margin-bottom-40">
-    <div class="col-md-5">
+    <div class="col-md-12">
+        <h2>@Model.Name - <small>@Model.Tagline</small></h2>
+    </div>
+    <div class="col-md-3 smart-container">
         <img class="img-responsive" src="@Model.ThumbnailPath" alt="">
     </div>
-    <div class="col-md-7">
-        <h2>@Model.Name - <small>@Model.Tagline</small>  </h2>
-        <ul class="list-unstyled list-inline blog-info">
-            <li><i class="icon-calendar"></i> @Model.BestTimeToVisit</li>            
-            <li><i class="icon-tags"></i> @Model.TravelStyles</li>
-        </ul>
+    <div class="col-md-6">        
+        
         <p>@Model.Description</p>
         <p>
             @if (Request.IsAuthenticated)
@@ -23,6 +22,12 @@
             }
             <a class="btn-u btn-u-small" href="@Model.CircuitUrl"><i class="icon-location-arrow"></i>&nbsp; Explore</a>
         </p>
+    </div>
+    <div class="col-md-3">
+        <ul class="list-unstyled list-inline blog-info">
+            <li><i class="icon-calendar"></i> @Model.BestTimeToVisit</li>
+            <li><i class="icon-tags"></i> @Model.TravelStyles</li>
+        </ul>
     </div>
 </div>
 <!--Destination--> 

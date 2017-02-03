@@ -65,14 +65,30 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ContactUsFormSubmitAsync(string FIRST_NAME, string LAST_NAME, string EMAIL, string TRIP_REQUEST)
+        public async Task<ActionResult> ContactUsFormSubmitAsync(string FIRST_NAME, string LAST_NAME, string EMAIL, string TRIP_REQUEST, string PHONE)
         {
-            string test = FIRST_NAME;
-            test = LAST_NAME;
-            test = EMAIL;
-            test = TRIP_REQUEST;
+            var blError = await DomingoUserManager.CreateCrmLead(FIRST_NAME, LAST_NAME, EMAIL, PHONE, TRIP_REQUEST);
 
-            var blError = await UserManager.CreateCrmLead(FIRST_NAME, LAST_NAME, EMAIL, TRIP_REQUEST);
+            return RedirectToAction("ContactUsThanks");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="FIRST_NAME"></param>
+        /// <param name="LAST_NAME"></param>
+        /// <param name="EMAIL"></param>
+        /// <param name="CIRCUIT"></param>
+        /// <param name="PHONE"></param>
+        /// <param name="TRIP_REQUEST"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SubmitTripRequestAsync(string FIRST_NAME, string LAST_NAME, string EMAIL, string CIRCUIT, string PHONE, string TRIP_REQUEST)
+        {
+            TRIP_REQUEST = string.Format("Circuit requested for: {0} -- User comment: {1}", CIRCUIT, TRIP_REQUEST);
+
+            var blError = await DomingoUserManager.CreateCrmLead(FIRST_NAME, LAST_NAME, EMAIL, PHONE, TRIP_REQUEST);
 
             return RedirectToAction("ContactUsThanks");
         }

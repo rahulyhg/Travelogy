@@ -12,6 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using WebApplication1.Models;
 using WebApplication1.Helpers;
+using DomingoBL;
 
 namespace WebApplication1
 {
@@ -33,7 +34,7 @@ namespace WebApplication1
         }
     }
 
-    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
+    // Configure the application user manager used in this application. DomingoUserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
@@ -65,7 +66,7 @@ namespace WebApplication1
                 }
             }
 
-            var emailVerified = DomingoBL.UserManager.IsUserEmailVerified(AspNetUserName);
+            var emailVerified = DomingoUserManager.IsUserEmailVerified(AspNetUserName);
             if (emailVerified)
             {
                 HttpContext.Current.Session.Add("UserEmailVerified", "TRUE");
@@ -110,7 +111,7 @@ namespace WebApplication1
                 }
             }
 
-            var isAdmin = DomingoBL.UserManager.IsTravelogyAdmin(AspNetUserName);
+            var isAdmin = DomingoUserManager.IsTravelogyAdmin(AspNetUserName);
             if(isAdmin)
             {
                 HttpContext.Current.Session.Add("IsTravelogyAdmin", "TRUE");
