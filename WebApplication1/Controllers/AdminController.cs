@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 using WebApplication1.Helpers;
 using WebApplication1.Models;
 using Microsoft.AspNet.Identity;
@@ -74,40 +75,13 @@ namespace WebApplication1.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult SaveDestination(Destination model)
+        public async Task<ActionResult> SaveDestinationAsync(Destination model)
         {
             _CheckForAdminAccess();
 
-            if(model != null)
+            if (model != null)
             {
-                using (var context = new TravelogyDevEntities1())
-                {
-                    if (model.Id == 0)
-                    {
-                        context.Destinations.Add(model);
-                        context.SaveChanges();
-                    }
-
-                    else
-                    {
-                        var _dbDestinationObj = context.Destinations.Find(model.Id);
-                        if(_dbDestinationObj != null)
-                        {
-                            _dbDestinationObj.BestTimeToVisit = model.BestTimeToVisit;
-                            _dbDestinationObj.CircuitUrl = model.CircuitUrl;
-                            _dbDestinationObj.Description = model.Description;
-                            _dbDestinationObj.Name = model.Name;
-                            _dbDestinationObj.Tagline = model.Tagline;
-                            _dbDestinationObj.TemplateSearchAlias = model.TemplateSearchAlias;
-                            _dbDestinationObj.ThumbnailPath = model.ThumbnailPath;
-                            _dbDestinationObj.TourContinent = model.TourContinent;
-                            _dbDestinationObj.TravelStyles = model.TravelStyles;
-                            _dbDestinationObj.Weightage = model.Weightage;
-
-                            context.SaveChanges();
-                        }
-                    }
-                }   
+                await AdminUtility.SaveDestination(model);
             }
 
             return RedirectToAction("Destinations");
@@ -182,38 +156,13 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize]
-        public ActionResult SaveTripProvider(TripProvider model)
+        public async Task<ActionResult> SaveTripProviderAsync(TripProvider model)
         {
             _CheckForAdminAccess();
 
             if (model != null)
             {
-                using (var context = new TravelogyDevEntities1())
-                {
-                    if (model.Id == 0)
-                    {
-                        context.TripProviders.Add(model);
-                        context.SaveChanges();
-                    }
-
-                    else
-                    {
-                        var _tripProvider = context.TripProviders.Find(model.Id);
-                        _tripProvider.Address = model.Address;
-                        _tripProvider.Description = model.Description;
-                        _tripProvider.EmailAddressCustSupport = model.EmailAddressCustSupport;
-                        _tripProvider.EmailAddressMarketingSales = model.EmailAddressMarketingSales;
-                        _tripProvider.EmailAddressPrimary = model.EmailAddressPrimary;
-                        _tripProvider.Name = model.Name;
-                        _tripProvider.Telephone01 = model.Telephone01;
-                        _tripProvider.Telephone02 = model.Telephone02;
-                        _tripProvider.Telephone03 = model.Telephone03;
-                        _tripProvider.Type = model.Type;
-                        _tripProvider.Website = model.Website;
-
-                        context.SaveChanges();
-                    }
-                }
+                await AdminUtility.SaveTripProvider(model);
             }
 
             return RedirectToAction("TripTemplates");
@@ -252,28 +201,11 @@ namespace WebApplication1.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult SaveTripTemplate(TripTemplate template)
+        public async Task<ActionResult> SaveTripTemplateAsync(TripTemplate template)
         {
             _CheckForAdminAccess();
 
-            if (template != null)
-            {
-                using (var context = new TravelogyDevEntities1())
-                {
-                    if (template.Id > 0)
-                    {
-                        var _tripTemmplate = context.TripTemplates.Find(template.Id);
-                        _tripTemmplate.Description = template.Description;
-                        context.SaveChanges();
-                    }
-
-                    else
-                    {
-                        context.TripTemplates.Add(template);
-                        context.SaveChanges();
-                    }
-                }
-            }
+            await AdminUtility.SaveTripTemplate(template);
 
             return RedirectToAction("TripTemplates");
         }
@@ -284,38 +216,13 @@ namespace WebApplication1.Controllers
         /// <param name="templateStep"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult SaveTripTemplateStep(TripTemplateStep templateStep)
+        public async Task<ActionResult> SaveTripTemplateStepAsync(TripTemplateStep templateStep)
         {
             _CheckForAdminAccess();
 
             if (templateStep != null)
             {
-                using (var context = new TravelogyDevEntities1())
-                {
-                    var _tripTemmplateStep = context.TripTemplateSteps.Where(p => p.TripTemplateId == templateStep.TripTemplateId
-                            && p.TripTemplateStepIdentifier == templateStep.TripTemplateStepIdentifier).FirstOrDefault();
-
-                    if (_tripTemmplateStep != null)
-                    {
-                        _tripTemmplateStep.ShortDescription = templateStep.ShortDescription;
-                        _tripTemmplateStep.LongDescription = templateStep.LongDescription;
-                        _tripTemmplateStep.NightStay = templateStep.NightStay;
-                        context.SaveChanges();
-                    }
-
-                    if (string.IsNullOrEmpty(templateStep.TripTemplateStepIdentifier))
-                    {
-                        _tripTemmplateStep = new TripTemplateStep()
-                        {
-                            TripTemplateId = templateStep.TripTemplateId,
-                            ShortDescription = templateStep.ShortDescription,
-                            LongDescription = templateStep.LongDescription,
-                            NightStay = templateStep.NightStay
-                        };
-
-                        var _blError = TripStepManager.CreateTriptemplateStep(_tripTemmplateStep);
-                    }
-                }
+                await AdminUtility.SaveTripTemplateStep(templateStep);
             }
 
             return RedirectToAction("EditTripTemplate", new { @id = templateStep.TripTemplateId });

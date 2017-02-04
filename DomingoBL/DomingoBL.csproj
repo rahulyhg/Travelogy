@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminUtility.cs" />
     <Compile Include="BlObjects\BlTrip.cs" />
     <Compile Include="BlObjects\BlTripTemplate.cs" />
     <Compile Include="CapsupleCrmGateway.cs" />
