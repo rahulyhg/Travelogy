@@ -28,8 +28,18 @@ namespace DomingoBL
                         if (template.Id > 0)
                         {
                             var _tripTemmplate = context.TripTemplates.Find(template.Id);
+                            _tripTemmplate.SearchAlias = template.SearchAlias;
+                            _tripTemmplate.DestinationId = template.DestinationId;
+                            _tripTemmplate.StartLocation = template.StartLocation;
+                            _tripTemmplate.Weightage = template.Weightage;
+                            _tripTemmplate.DurationDaysMin = template.DurationDaysMin;
+                            _tripTemmplate.DurationDaysMax = template.DurationDaysMax;
+                            _tripTemmplate.BestTimeToVisit = template.BestTimeToVisit;
+                            _tripTemmplate.Name = template.Name;                            
                             _tripTemmplate.Description = template.Description;
                             _tripTemmplate.ThumbnailPath = template.ThumbnailPath;
+                            
+
                             await context.SaveChangesAsync();
                         }
 
@@ -63,9 +73,11 @@ namespace DomingoBL
 
                         if (_tripTemmplateStep != null)
                         {
+                            
                             _tripTemmplateStep.ShortDescription = templateStep.ShortDescription;
                             _tripTemmplateStep.LongDescription = templateStep.LongDescription;
                             _tripTemmplateStep.NightStay = templateStep.NightStay;
+                            _tripTemmplateStep.ThumbnailPath = templateStep.ThumbnailPath;
                             await context.SaveChangesAsync();
                         }
 
@@ -76,7 +88,8 @@ namespace DomingoBL
                                 TripTemplateId = templateStep.TripTemplateId,
                                 ShortDescription = templateStep.ShortDescription,
                                 LongDescription = templateStep.LongDescription,
-                                NightStay = templateStep.NightStay
+                                NightStay = templateStep.NightStay,
+                                ThumbnailPath = templateStep.ThumbnailPath
                             };
 
                             context.TripTemplateSteps.Add(_tripTemmplateStep);

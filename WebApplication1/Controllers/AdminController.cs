@@ -165,7 +165,7 @@ namespace WebApplication1.Controllers
                 await AdminUtility.SaveTripProvider(model);
             }
 
-            return RedirectToAction("TripTemplates");
+            return RedirectToAction("TripProviders");
         }
 
         /// <summary>
@@ -178,7 +178,13 @@ namespace WebApplication1.Controllers
             _CheckForAdminAccess();
 
             var _tripTemmplate = new TripTemplate();
-            return View(_tripTemmplate);
+            var model = new AdminEditTripTemplateViewModel()
+            {
+                TripTemplate = _tripTemmplate,
+                DestinationList = AdminModel.GetDestinationsSelectList(),
+                TripProviderList = AdminModel.GetTripProvidersSelectList()
+            };
+            return View(model);
         }
 
         /// <summary>  
@@ -192,7 +198,19 @@ namespace WebApplication1.Controllers
 
             var context = new TravelogyDevEntities1();
             var _tripTemmplate = context.TripTemplates.Find(id);
-            return View(_tripTemmplate);
+            if(_tripTemmplate == null)
+            {
+                RedirectToAction("CreateTripTemplate");
+            }
+
+            var model = new AdminEditTripTemplateViewModel()
+            {
+                TripTemplate = _tripTemmplate,
+                DestinationList = AdminModel.GetDestinationsSelectList(),
+                TripProviderList = AdminModel.GetTripProvidersSelectList()
+            };
+
+            return View(model);
         }
 
         /// <summary>
@@ -201,11 +219,11 @@ namespace WebApplication1.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Authorize]
-        public async Task<ActionResult> SaveTripTemplateAsync(TripTemplate template)
+        public async Task<ActionResult> SaveTripTemplateAsync(AdminEditTripTemplateViewModel model)
         {
             _CheckForAdminAccess();
 
-            await AdminUtility.SaveTripTemplate(template);
+            await AdminUtility.SaveTripTemplate(model.TripTemplate);
 
             return RedirectToAction("TripTemplates");
         }

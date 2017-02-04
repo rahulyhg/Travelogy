@@ -99,8 +99,8 @@ namespace WebApplication1.Models
         /// <summary>
         /// 
         /// </summary>
-        [Display(Name = "StartDate")]
-        public DateTime StartDate { get; set; }
+        [Display(Name = "Trip Star tDate")]
+        public DateTime? StartDate { get; set; }
     }
 
     /// <summary>

@@ -11,7 +11,16 @@
         <div class="col-sm-4 info-blocks">
             <i class="icon-calendar icon-info-blocks"></i>
             <div class="info-blocks-in">
-                <h3>Planned date: @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()</h3>
+                <h3>Planned date: 
+                    @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
+                    {
+                        @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()
+                    }
+                    else
+                    {
+                        @Html.Raw("Not planned")
+                    }
+                </h3>
                 <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
             </div>
         </div>

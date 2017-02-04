@@ -102,7 +102,7 @@ namespace WebApplication1.Controllers
             {
                 AspNetUserId = User.Identity.GetUserId(),
                 DestinationId = model.CreateTripViewModel.DestinationId,
-                StartDate = model.CreateTripViewModel.StartDate,                
+                StartDate = model.CreateTripViewModel.StartDate,
                 Status = TripStatus.planned.ToString()                
             };
 

@@ -437,5 +437,35 @@ namespace DomingoBL
                 return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripProviders"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetAllTripProviders(out List<TripProvider> tripProviders)
+        {
+            tripProviders = null;
+
+            try
+            {
+                // get all desitions, reverse order by weightage
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var _dbTripProviders = context.TripProviders.Select(p => p);
+                    if (_dbTripProviders != null)
+                    {
+                        tripProviders = _dbTripProviders.ToList();
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
     }
 }

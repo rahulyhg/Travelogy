@@ -9,36 +9,8 @@ namespace DomingoDAL
     /// <summary>
     /// 
     /// </summary>
-    public class DomingoDataController : IDataController
+    public class DomingoDataController
     {
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <returns></returns>
-        //public List<Destination> GetAllDestinations()
-        //{
-        //    using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
-        //    {
-        //        var _allDestinations = from _destination in context.Destinations
-        //                                                select _destination;
-        //        if(_allDestinations != null)
-        //        {
-        //            return _allDestinations.ToList();
-        //        }
-        //    }
-
-        //    return null;
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public List<TripProvider> GetAllTripProviders()
-        {
-            throw new NotImplementedException();
-        }
-        
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +36,7 @@ namespace DomingoDAL
 
                 return null;
             }
-        }            
+        }       
 
     }
 }
