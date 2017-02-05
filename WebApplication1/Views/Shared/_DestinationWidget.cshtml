@@ -1,33 +1,33 @@
 ﻿@model DomingoDAL.Destination
 
+
+
 <!--Destination-->
-<div class="row blog blog-medium margin-bottom-40">
-    <div class="col-md-12">
-        <h2>@Model.Name - <small>@Model.Tagline</small></h2>
-    </div>
-    <div class="col-md-3 smart-container">
-        <img class="img-responsive" src="@Model.ThumbnailPath" alt="">
-    </div>
-    <div class="col-md-6">        
-        
-        <p>@Model.Description</p>
-        <p>
-            @if (Request.IsAuthenticated)
-            {
-                <a class="btn-u btn-u-small" href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateSearchAlias"><i class="icon-location-arrow"></i>&nbsp; Create a Trip plan</a>
-            }
-            else
-            {
-                <a class="btn-u btn-u-small" href="/account/register"><i class="icon-location-arrow"></i>&nbsp; Join and Create Trip plan</a>
-            }
-            <a class="btn-u btn-u-small" href="@Model.CircuitUrl"><i class="icon-location-arrow"></i>&nbsp; Explore</a>
-        </p>
-    </div>
-    <div class="col-md-3">
-        <ul class="list-unstyled list-inline blog-info">
-            <li><i class="icon-calendar"></i> @Model.BestTimeToVisit</li>
-            <li><i class="icon-tags"></i> @Model.TravelStyles</li>
-        </ul>
-    </div>
+<div class="col-md-3 col-sm-12">
+    <div class="thumbnails thumbnail-style">        
+        <div class="caption">
+            <h3><a class="hover-effect" href="@Model.CircuitUrl">@Model.Name</a></h3>            
+        </div>
+        <img class="img-responsive" src="@Model.ThumbnailPath" alt="" />
+        <div class="caption">
+            <h5>@Model.Tagline</h5>
+            <p><i class="icon-calendar"></i> @Model.BestTimeToVisit</p>
+            <p><i class="icon-tags"></i> @Model.TravelStyles</p>
+            <div class="margin-bottom-10"></div>
+            <p>@Model.Description</p>            
+            <p>
+                @if (Request.IsAuthenticated)
+                {
+                    <p class="orange">Browse all the trip ideas for @Model.Name</p>
+                    <a class="btn-u btn-u-small" href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateSearchAlias"><i class="icon-location-arrow"></i>&nbsp; Plan a trip</a>
+                }
+                else
+                {
+                    <a class="btn-u btn-u-small" href="/account/register"><i class="icon-location-arrow"></i>&nbsp; Join and plan trips</a>
+                }
+            </p>
+        </div>
+    </div>   
 </div>
+
 <!--Destination--> 

@@ -112,5 +112,30 @@ namespace DomingoBL
 
             return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="alias"></param>
+        /// <param name="destinations"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetDestinationForAlias(string alias, out Destination destination)
+        {
+            destination = null;
+
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    destination = context.Destinations.Where(p => p.Alias == alias).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
     }
 }

@@ -88,6 +88,9 @@
           <Property Name="TemplateSearchAlias" Type="nvarchar" MaxLength="50" />
           <Property Name="TourContinent" Type="nvarchar" MaxLength="50" />
           <Property Name="Weightage" Type="int" Nullable="false" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="50" />
+          <Property Name="MetaDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="MetaKeywords" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="DestinationCountry">
           <Key>
@@ -777,6 +780,9 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="TemplateSearchAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TourContinent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Weightage" Type="Int32" Nullable="false" />
+          <Property Name="Alias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MetaDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MetaKeywords" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DestinationCountry">
           <Key>
@@ -1204,6 +1210,9 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="Destinations">
             <EntityTypeMapping TypeName="TravelogyDevModel.Destination">
               <MappingFragment StoreEntitySet="Destination">
+                <ScalarProperty Name="MetaKeywords" ColumnName="MetaKeywords" />
+                <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
                 <ScalarProperty Name="Weightage" ColumnName="Weightage" />
                 <ScalarProperty Name="TourContinent" ColumnName="TourContinent" />
                 <ScalarProperty Name="TemplateSearchAlias" ColumnName="TemplateSearchAlias" />

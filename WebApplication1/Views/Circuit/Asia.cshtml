@@ -9,12 +9,29 @@
     </div>
 </div><!--/breadcrumbs-->
 
-<div class="row">    
-    @foreach (var item in Model.AllDestinations)
+
+@for (var i = 0; i < Model.AllDestinations.Count; i++)
+{
+    if (i % 4 == 0)
     {
-        <div class="col-md-12 col-sm-12">
-            @Html.Partial("_DestinationWidget", item)
-        </div>        
-    }   
-</div>
+        @Html.Raw("<div class=\"row\">");
+    }
+
+    {
+        var item = Model.AllDestinations[i];
+        @Html.Partial("_DestinationWidget", item)
+    }
+
+    if (i % 4 == 3)
+    {
+        @Html.Raw("</div>");
+    }
+
+    if (i == Model.AllDestinations.Count - 1)
+    {
+        @Html.Raw("</div>");
+    }
+
+}   
+
 

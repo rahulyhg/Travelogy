@@ -25,5 +25,8 @@ namespace DomingoDAL
         public string TemplateSearchAlias { get; set; }
         public string TourContinent { get; set; }
         public int Weightage { get; set; }
+        public string Alias { get; set; }
+        public string MetaDescription { get; set; }
+        public string MetaKeywords { get; set; }
     }
 }

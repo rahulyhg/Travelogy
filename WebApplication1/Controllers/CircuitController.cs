@@ -85,7 +85,10 @@ namespace WebApplication1.Controllers
 
         public ActionResult LakeBaikal()
         {
-            return View();
+            var destination = new Destination();
+            var blError = DestinationManager.GetDestinationForAlias("LakeBaikal", out destination);
+            var model = new DomingoModelBase() { PageName = "Lake Baikal Trips", Destination = destination };
+            return View(model);
         }
 
         public ActionResult TransMongolian()

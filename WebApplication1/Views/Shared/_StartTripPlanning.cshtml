@@ -1,5 +1,27 @@
 ﻿@model WebApplication1.Models._StartTripPlanningViewModel
 
 
-<h1>Create your @Model.CircuitName trip now</h1>
-<a class="btn-u btn-u-small" href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateAlias"><i class="icon-location-arrow"></i>&nbsp; Create a Trip plan</a>
+<div class="row margin-bottom-40">
+    <div class="col-md-12 col-sm-12">
+        <div class="pricing hover-effect">
+            <div class="pricing-head">
+                <h3>Plan your trip now</h3>
+                <h4>
+                    <i>Use our FREE online trip planner</i> 
+                    <span>Plan exciting trips to @Model.CircuitName</span>
+                </h4>
+            </div>
+            <ul class="pricing-content list-unstyled">
+                <li><i class="icon-tags"></i> Browse our trip ideas for @Model.CircuitName</li>
+                <li><i class="icon-asterisk"></i>Choose one and cutomize it</li>
+                <li><i class="icon-mail-reply"></i>Collaborate with our Travelogers</li>
+                <li><i class="icon-star"></i>Request for accommodation and Transfers </li>                
+            </ul>
+            <div class="pricing-footer">
+                <a class="btn-u btn-u-small" href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateAlias">
+                    <i class="icon-location-arrow"></i>&nbsp; Look up all @Model.CircuitName trips
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
