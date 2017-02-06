@@ -2,20 +2,29 @@
 
 @if (@Model != null && @Model.DlTripView != null)
 {
-    <h5>Trip # @Model.DlTripView.Id</h5>
+    <h3>Trip to @Model.DlTripView.Name from @Model.DlTripView.StartLocation [Status: @Model.DlTripView.Status]</h3>
 
     <div class="search-blocks search-blocks-top-yellow">
         <div class="row">
             <div class="col-md-4 search-img">
-                <img class="img-responsive" src="@Model.DlTripView.ThumbnailPath" alt="">
+                <img class="img-responsive img-border" src="@Model.DlTripView.ThumbnailPath" alt="">
                 <ul class="list-unstyled">
-                    <li><i class="icon-calendar"></i>  Trip starts on: @if (Model.DlTripView.StartDate.HasValue)
-                    { @Model.DlTripView.StartDate.Value.ToShortDateString() }</li>
+                    <li><i class="icon-calendar"></i>  
+                        Trip starts on: 
+                        @if (Model.DlTripView.StartDate.HasValue)
+                        { 
+                            @Model.DlTripView.StartDate.Value.ToShortDateString() 
+                        }
+                        else
+                        {
+                            Html.Raw("Not planned yet");
+                        }
+                    </li>
                     <li><i class="icon-map-marker"></i> Trip starts at: @Model.DlTripView.StartLocation</li>
                 </ul>
             </div>
             <div class="col-md-8">
-                <h2><a href="#">@Model.DlTripView.Name</a></h2>
+                <h2><a href="">Your trip to @Model.DlTripView.Name</a></h2>
                 <ul class="list-unstyled search-rating">
                     <li><i class="icon-star"></i></li>
                     <li><i class="icon-star"></i></li>
@@ -25,8 +34,7 @@
                 </ul>
                 <p>@Model.DlTripView.Description</p>
                 <p>
-                    <a href="/Service/ViewTrip?tripId=@Model.DlTripView.Id" class="btn btn-orange">View trip</a>
-                    <a href="/Service/EditTrip?tripId=@Model.DlTripView.Id" class="btn btn-orange">Edit trip</a>                    
+                    <a href="/Service/ViewTrip?tripId=@Model.DlTripView.Id" class="btn btn-orange">Manage trip</a>                    
                 </p>                
             </div>
         </div>

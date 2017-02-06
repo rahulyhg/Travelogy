@@ -144,14 +144,15 @@
                 </div>                
                 <div class="col-md-2 col-sm-12 text-center">
                     <div class="margin-bottom-10"></div>
-                    <img src="~/Content/img/logo1-default-small.png" />
-                   @* *@
+                    <a href="/">
+                        <img src="~/Content/img/logo1-default-small.png" />
+                    </a>                                       
                 </div>
             </div>
-                @if (Request.IsAuthenticated)
-                {
-                    @Html.Partial("_LogoutPartial")                    
-                }
+            @if (Request.IsAuthenticated)
+            {
+                @Html.Partial("_LogoutPartial")                    
+            }
         </div>
     </div>
     <!-- Header two ends -->

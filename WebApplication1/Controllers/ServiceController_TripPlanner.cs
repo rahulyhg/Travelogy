@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <param name="templateAlias"></param>
         /// <returns></returns>
-        [Authorize]
+        //[Authorize]
         public ActionResult ListAllTripTemplates(string templateAlias)
         {
             var _availableTemplates = new List<BlTripTemplate>();

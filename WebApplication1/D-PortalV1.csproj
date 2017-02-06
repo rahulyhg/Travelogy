@@ -9368,11 +9368,8 @@
     <Content Include="Views\Service\MessageCenter.cshtml" />
     <Content Include="Views\Manage\TravellerProfile.cshtml" />
     <Content Include="Views\Shared\_TripPlannerOverview.cshtml" />
-    <Content Include="Views\Circuit\MotoEasternHimalaya.cshtml" />
-    <Content Include="Views\Circuit\BackpackEasternHimalaya.cshtml" />
     <Content Include="Views\Circuit\PhotographyToursIndia.cshtml" />
     <Content Include="Views\Circuit\LakeBaikal.cshtml" />
-    <Content Include="Views\Circuit\TransMongolian.cshtml" />
     <Content Include="Views\Circuit\Mongolia.cshtml" />
     <Content Include="Views\Circuit\Tibet.cshtml" />
     <Content Include="Views\Circuit\SupercarSuperbikeBritain.cshtml" />
@@ -9420,6 +9417,10 @@
     <Content Include="Views\Information\ContactUsThanks.cshtml" />
     <Content Include="Views\Shared\_TripBookings.cshtml" />
     <Content Include="Views\Shared\_TripTemplateWidget.cshtml" />
+    <Content Include="Views\Shared\_DestinationWidgetMicro.cshtml" />
+    <Content Include="Views\Circuit\EasternHimalaya.cshtml" />
+    <Content Include="Views\Circuit\India.cshtml" />
+    <Content Include="Views\Circuit\WesternHimalaya.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

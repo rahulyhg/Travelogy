@@ -82,8 +82,16 @@
 } @*end of edit trip section*@
 
 
-@if (Model.RelatedTemplates != null)
+@if (Model.RelatedTemplates != null && Model.RelatedTemplates.Count > 0)
 {
+
+    <div class="headline">
+        <h2>Related trips</h2>
+    </div>
+        <div class="margin-bottom-20">
+            <p class="orange">Following Trip(s) are suggested for you to add to the current trip. You can combine multiple circuits to plan a longer trip.</p>
+        </div>
+
     foreach (var template in Model.RelatedTemplates)
     {
         @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = Model.ActiveTrip.DlTripView.Id, TripTemplate = template })

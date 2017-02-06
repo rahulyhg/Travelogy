@@ -133,7 +133,9 @@ namespace DomingoBL
                             var _dbDestinationObj = context.Destinations.Find(model.Id);
                             if (_dbDestinationObj != null)
                             {
+                                _dbDestinationObj.Alias = model.Alias;
                                 _dbDestinationObj.BestTimeToVisit = model.BestTimeToVisit;
+                                _dbDestinationObj.Country = model.Country;
                                 _dbDestinationObj.CircuitUrl = model.CircuitUrl;
                                 _dbDestinationObj.Description = model.Description;
                                 _dbDestinationObj.Name = model.Name;

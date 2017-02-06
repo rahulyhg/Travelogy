@@ -71,14 +71,6 @@ $(".b-tooltip").tooltip();
 
 $(".b-popover").popover();
 
-/* ************** */
-/* Magnific Popup */
-/* ************** */
-
-$(document).ready(function() {
-  $('.lightbox').magnificPopup({type:'image'});
-});
-
 /* *************** */
 /* Custom Dropdown */
 /* *************** */
@@ -142,4 +134,11 @@ $(document).ready(function() {
 	});
 });
 
+/* ************** */
+/* Magnific Popup */
+/* ************** */
+
+$(document).ready(function () {
+    $('.lightbox').magnificPopup({ type: 'image' });
+});
 

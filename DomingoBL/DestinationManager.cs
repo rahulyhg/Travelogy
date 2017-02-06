@@ -42,6 +42,33 @@ namespace DomingoBL
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="country"></param>
+        /// <param name="destinations"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetDestinationsForCountry(string country, out List<Destination> destinations)
+        {
+            destinations = null;
+
+            try
+            {
+                // get all desitions that matches the continent, reverse order by weightage
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    destinations = context.Destinations.Where(p => p.Country == country).OrderByDescending(p => p.Weightage).ToList();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="destinations"></param>
         /// <returns></returns>
         public static DomingoBlError GetAllDestinations(out List<Destination> destinations)
@@ -54,6 +81,37 @@ namespace DomingoBL
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
                     var _allDestinations = context.Destinations.Select(p => p).OrderByDescending(p => p.Weightage);
+                    if (_allDestinations != null)
+                    {
+                        destinations = _allDestinations.ToList();
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="destinations"></param>
+        /// <param name="top"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetTopDestinations(out List<Destination> destinations, int top)
+        {
+            destinations = null;
+
+            try
+            {
+                // get all desitions, reverse order by weightage
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var _allDestinations = context.Destinations.Select(p => p).OrderByDescending(p => p.Weightage).Take(top);
                     if (_allDestinations != null)
                     {
                         destinations = _allDestinations.ToList();

@@ -1,1 +1,95 @@
-﻿Tibet
+﻿@model WebApplication1.Models.DomingoModelBase
+
+@{
+    if (Model != null && Model.Destination != null)
+    {
+        ViewBag.Description = Model.Destination.MetaDescription;
+        ViewBag.KeyWords = Model.Destination.MetaKeywords;
+    }
+}
+
+@Html.Partial("_HomepageCarousel")
+
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs margin-bottom-40">
+    <div class="container">
+        <h1 class="pull-left">Tibet</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="/Circuit/Asia">Asia</a></li>            
+            <li class="active">Tibet</li>
+        </ul>
+    </div>
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<div class="container">
+    <div class="row blog-page blog-item">
+        <div class="col-md-12 md-margin-bottom-60">
+            <div class="blog-post-tags">
+                <ul class="list-unstyled list-inline blog-info">
+                    <li><i class="icon-calendar"></i> February 02, 2013</li>
+                    <li><i class="icon-pencil"></i> Diana Anderson</li>
+                    <li><i class="icon-comments"></i> <a href="#">24 Comments</a></li>
+                </ul>
+                <ul class="list-unstyled list-inline blog-tags">
+                    <li>
+                        <i class="icon-tags"></i>
+                        <a href="#">Technology</a>
+                        <a href="#">Education</a>
+                        <a href="#">Internet</a>
+                        <a href="#">Media</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="blog margin-bottom-40">
+                <h2>Visit the magical lands</h2>
+            </div>
+            <p>Called the roof of the world, the Tibetan plateau is nothing short of a magical world. This is where rich cultural heritage, mythical stories and fascinating landscapes meet. Relatively unknown to the outside world in the modern times, Tibet recently opened up for foreign tourism. Take this opportunity to travel to the lands that were so vastly travelled in the ancient times.</p>
+            <div class="blog-img">
+                <img class="img-responsive" src="~/Content/img/Tibet/Tibet-s02.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="margin-bottom-30">
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            @if (Request.IsAuthenticated)
+            {
+                if (Model != null && Model.Destination != null)
+                {
+                    var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = Model.Destination.Name, TemplateAlias = Model.Destination.TemplateSearchAlias };
+                    @Html.Partial("_StartTripPlanning", _model)
+                }
+            }
+
+            else
+            {
+                @Html.Partial("_JoinNowTripPlanning")
+            }
+        </div>
+        <div class="col-md-6 col-sm-6">
+            @if (Request.IsAuthenticated)
+            {
+                if (Model != null && Model.Destination != null)
+                {
+                    var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = Model.Destination.Name };
+                    @Html.Partial("_DownloadBrochure", _model)
+                }
+            }
+            else
+            {
+                if (Model != null && Model.Destination != null)
+                {
+                    @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = Model.Destination.Name });
+                }
+            }
+        </div>
+    </div>
+</div>
+
+

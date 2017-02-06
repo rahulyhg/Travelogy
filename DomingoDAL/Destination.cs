@@ -28,5 +28,6 @@ namespace DomingoDAL
         public string Alias { get; set; }
         public string MetaDescription { get; set; }
         public string MetaKeywords { get; set; }
+        public string Country { get; set; }
     }
 }

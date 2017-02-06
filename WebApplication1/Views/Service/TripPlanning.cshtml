@@ -40,19 +40,35 @@ else // for logged in users
             </div>
         </div>
 
-        <div class="row tag-box tag-box-v1">
-            <h1 class="orange">Featured circuits</h1>
-            <div class="row">
-                @foreach (var item in Model.SuggestedDestinations)
-                {
-                    <div class="col-md-12 col-sm-12">
-                        @Html.Partial("_DestinationWidget", item)
-                    </div>
-                }
+        <div class="container">
+            <div class="row tag-box tag-box-v1">
+                <h1 class="orange">Featured circuits</h1>
+                <div class="row">
+                    @for (var i = 0; i < Model.SuggestedDestinations.Count; i++)
+                    {
+                        if (i % 4 == 0)
+                        {
+                            @Html.Raw("<div class=\"row\">");
+                        }
+
+                        {
+                            var item = Model.SuggestedDestinations[i];
+                            @Html.Partial("_DestinationWidget", item)
+                        }
+
+                        if (i % 4 == 3)
+                        {
+                            @Html.Raw("</div>");
+                        }
+
+                        if (i == Model.SuggestedDestinations.Count - 1)
+                        {
+                            @Html.Raw("</div>");
+                        }
+                    }                    
+                </div>
             </div>
         </div>
-
-        
     }
 
     // planned trips
