@@ -92,6 +92,7 @@
           <Property Name="MetaDescription" Type="nvarchar" MaxLength="500" />
           <Property Name="MetaKeywords" Type="nvarchar" MaxLength="500" />
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="DestinationCountry">
           <Key>
@@ -157,6 +158,23 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="2000" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagAlias" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TagDisplay" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TagMap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TagId" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="50" />
+          <Property Name="ObjectType" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Thread">
           <Key>
@@ -521,6 +539,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="HtmlEmail" EntityType="Self.HtmlEmail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HtmlEmailTemplate" EntityType="Self.HtmlEmailTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubDestination" EntityType="Self.SubDestination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TagMap" EntityType="Self.TagMap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Thread" EntityType="Self.Thread" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThreadMessage" EntityType="Self.ThreadMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Traveller" EntityType="Self.Traveller" Schema="dbo" store:Type="Tables" />
@@ -676,6 +696,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="View_Trip" EntityType="TravelogyDevModel.View_Trip" />
           <EntitySet Name="View_TripStep" EntityType="TravelogyDevModel.View_TripStep" />
           <EntitySet Name="View_TripBookingAccommodation" EntityType="TravelogyDevModel.View_TripBookingAccommodation" />
+          <EntitySet Name="Tags" EntityType="TravelogyDevModel.Tag" />
+          <EntitySet Name="TagMaps" EntityType="TravelogyDevModel.TagMap" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -785,6 +807,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="MetaDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="MetaKeywords" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShortDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DestinationCountry">
           <Key>
@@ -1141,6 +1164,25 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagAlias" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TagDisplay" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TagMap">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TagId" />
+            <PropertyRef Name="ObjectType" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TagId" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1212,6 +1254,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="Destinations">
             <EntityTypeMapping TypeName="TravelogyDevModel.Destination">
               <MappingFragment StoreEntitySet="Destination">
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="MetaKeywords" ColumnName="MetaKeywords" />
                 <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
@@ -1584,6 +1627,25 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
                 <ScalarProperty Name="TripId" ColumnName="TripId" />
                 <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
                 <ScalarProperty Name="AccommodationType" ColumnName="AccommodationType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="TravelogyDevModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="TagDisplay" ColumnName="TagDisplay" />
+                <ScalarProperty Name="TagAlias" ColumnName="TagAlias" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TagMaps">
+            <EntityTypeMapping TypeName="TravelogyDevModel.TagMap">
+              <MappingFragment StoreEntitySet="TagMap">
+                <ScalarProperty Name="ObjectType" ColumnName="ObjectType" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

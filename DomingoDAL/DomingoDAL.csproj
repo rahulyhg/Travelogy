@@ -114,6 +114,12 @@
     <Compile Include="SubDestination.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tag.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TagMap.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Thread.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>

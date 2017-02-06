@@ -136,6 +136,7 @@ namespace DomingoBL
                                 _dbDestinationObj.Alias = model.Alias;
                                 _dbDestinationObj.BestTimeToVisit = model.BestTimeToVisit;
                                 _dbDestinationObj.Country = model.Country;
+                                _dbDestinationObj.ShortDescription = model.ShortDescription;
                                 _dbDestinationObj.CircuitUrl = model.CircuitUrl;
                                 _dbDestinationObj.Description = model.Description;
                                 _dbDestinationObj.Name = model.Name;

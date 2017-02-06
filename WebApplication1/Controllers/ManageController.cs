@@ -261,20 +261,19 @@ namespace WebApplication1.Controllers
                 _travellerProfile.TravelInterests = string.Empty;
             }
 
-            _model.TravellerInterests = new List<TravellerInterestCheckModel>()
+            // get the tags and create the check boxes for the traveller profile
+            List<Tag> tags = null;
+            var blError = TagManager.GetAllTags(out tags);
+
+            _model.TravellerInterests = new List<TravellerInterestCheckModel>();
+
+            foreach (var tag in tags)
             {
-                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Adventure") > 0 , Name = "Adventure", Id = 1000 },
-                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Motorcycling") > 0, Name = "Motorcycling", Id = 1001 },
-                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Backpacking") > 0, Name = "Backpacking", Id = 1002 },
-                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Rock-Climbing") > 0, Name = "Rock-Climbing", Id = 1003 },
-                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("High-Altitude-Climbing") > 0, Name = "High-Altitude-Climbing", Id = 1004 },
-                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Railway-Holidays") > 0, Name = "Railway-Holidays", Id = 1005 },
-                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Self_Drive-Holidays") > 0, Name = "Self_Drive-Holidays", Id = 1006 },
-                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Beach-Holidays") > 0, Name = "Beach-Holidays", Id = 1007 },
-                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Historic-Places") > 0, Name = "Historic-Places", Id = 1008 },
-                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Desert-Safari") > 0, Name = "Desert-Safari", Id = 1009 },
-                new TravellerInterestCheckModel(){ Checked = _travellerProfile.TravelInterests.IndexOf("Travel_Photography") > 0, Name = "Travel_Photography", Id = 1010 }
-            };
+                _model.TravellerInterests.Add(new TravellerInterestCheckModel()
+                {
+                    Checked = _travellerProfile.TravelInterests.IndexOf(tag.TagDisplay) > 0, Id = tag.Id, Name = tag.TagDisplay
+                });
+            }
 
             return View(_model);
         }

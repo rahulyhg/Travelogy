@@ -56,6 +56,7 @@
     <Compile Include="DestinationManager.cs" />
     <Compile Include="DomingoBlError.cs" />
     <Compile Include="EmailUtility.cs" />
+    <Compile Include="TagManager.cs" />
     <Compile Include="ThreadManager.cs" />
     <Compile Include="TravellerProfileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
