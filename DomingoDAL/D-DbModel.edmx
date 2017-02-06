@@ -1175,8 +1175,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
         <EntityType Name="TagMap">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="TagId" />
-            <PropertyRef Name="ObjectType" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="TagId" Type="Int32" Nullable="false" />

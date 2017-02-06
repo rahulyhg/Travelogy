@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomingoDAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,9 @@ namespace WebApplication1.Models
     {
         public string PageName { get; set; }
 
-        public DomingoDAL.Destination Destination { get; set; }
+        public Destination Destination { get; set; }
+
+        public List<Tag> DestinationTags { get; set; }
     }
 
     /// <summary>
