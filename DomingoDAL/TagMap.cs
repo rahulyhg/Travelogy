@@ -18,5 +18,6 @@ namespace DomingoDAL
         public int TagId { get; set; }
         public string Notes { get; set; }
         public string ObjectType { get; set; }
+        public int ObjectId { get; set; }
     }
 }

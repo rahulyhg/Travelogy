@@ -153,6 +153,9 @@
     <Compile Include="TripTemplateStep.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="View_TagDestination.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="View_Thread.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>

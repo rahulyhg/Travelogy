@@ -10,7 +10,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class CircuitController : DomingoControllerBase
+    public partial class CircuitController : DomingoControllerBase
     {
         // GET: Circuit - get all circuits
         public ActionResult Index()
@@ -26,57 +26,7 @@ namespace WebApplication1.Controllers
             return View(_model);
         }
 
-        // GET: Circuit - get all circuits for India
-        public ActionResult India()
-        {
-            List<Destination> _destinations = null;
-            var blError = DestinationManager.GetDestinationsForCountry("India", out _destinations);
-            if (blError.ErrorCode != 0 || _destinations == null || _destinations.Count == 0)
-            {
-                throw new ApplicationException(blError.ErrorMessage);
-            }
-
-            var _model = new CircuitModelBase() { AllDestinations = _destinations, CircuitName = "India" };
-            return View(_model);
-        }
-
-        // all indian destinations here
-        public ActionResult EasternHimalaya()
-        {
-            var destination = new Destination();
-            var blError = DestinationManager.GetDestinationForAlias("EasternHimalaya", out destination);
-            if (blError.ErrorCode != 0 || destination == null)
-            {
-                throw new ApplicationException(blError.ErrorMessage);
-            }
-
-            var model = new DomingoModelBase() { PageName = "Trips in Eastern Himalayas", Destination = destination };
-            return View(model);
-        }
-
-        public ActionResult WesternHimalaya()
-        {
-            var destination = new Destination();
-            var blError = DestinationManager.GetDestinationForAlias("WesternHimalaya", out destination);
-            if (blError.ErrorCode != 0 || destination == null)
-            {
-                throw new ApplicationException(blError.ErrorMessage);
-            }
-            var model = new DomingoModelBase() { PageName = "Trips in Western Himalayas", Destination = destination };
-            return View(model);
-        }
-
-        public ActionResult PhotographyToursIndia()
-        {
-            var destination = new Destination();
-            var blError = DestinationManager.GetDestinationForAlias("PhotographyToursIndia", out destination);
-            if (blError.ErrorCode != 0 || destination == null)
-            {
-                throw new ApplicationException(blError.ErrorMessage);
-            }
-            var model = new DomingoModelBase() { PageName = "Photography Tours in India", Destination = destination };
-            return View(model);
-        }
+        
 
         // GET: Circuit - get all circuits for asia
         public ActionResult Asia()
@@ -155,28 +105,49 @@ namespace WebApplication1.Controllers
 
         public ActionResult ScottishIsles()
         {
+            // get the destination object
             var destination = new Destination();
             var blError = DestinationManager.GetDestinationForAlias("ScottishIsles", out destination);
             if (blError.ErrorCode != 0 || destination == null)
             {
                 throw new ApplicationException(blError.ErrorMessage);
             }
-            var model = new DomingoModelBase() { PageName = "Trips to the Scottish Isles", Destination = destination };
+
+            // get all the tags for this destination
+            List<View_TagDestination> tags = null;
+            _GetTagsForDestination(destination, out blError, out tags);
+            var model = new DomingoModelBase() { PageName = "Trips to the Scottish Isles", Destination = destination, DestinationTags = tags};
+
             return View(model);
         }
 
         
-
         public ActionResult LakeBaikal()
         {
+            // get the destination object
             var destination = new Destination();
             var blError = DestinationManager.GetDestinationForAlias("LakeBaikal", out destination);
             if (blError.ErrorCode != 0 || destination == null)
             {
                 throw new ApplicationException(blError.ErrorMessage);
             }
-            var model = new DomingoModelBase() { PageName = "Lake Baikal Trips", Destination = destination };
+
+            // get all the tags for this destination
+            List<View_TagDestination> tags;
+            _GetTagsForDestination(destination, out blError, out tags);
+
+            var model = new DomingoModelBase() { PageName = "Trips to Lake Baikal", Destination = destination, DestinationTags = tags };
             return View(model);
+        }
+
+        private static void _GetTagsForDestination(Destination destination, out DomingoBlError blError, out List<View_TagDestination> tags)
+        {
+            tags = null;
+            blError = TagManager.GetTagsForDestination(destinationId: destination.Id, tags: out tags);
+            if (blError.ErrorCode != 0)
+            {
+                throw new ApplicationException(blError.ErrorMessage);
+            }
         }
 
         public ActionResult Mongolia()

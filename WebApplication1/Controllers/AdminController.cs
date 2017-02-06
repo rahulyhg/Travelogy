@@ -72,6 +72,19 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult CreateDestination()
+        {
+            _CheckForAdminAccess();
+
+            var _model = new Destination();
+            return View(_model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [Authorize]

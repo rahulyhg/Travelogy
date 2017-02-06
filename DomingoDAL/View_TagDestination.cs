@@ -12,11 +12,11 @@ namespace DomingoDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Tag
+    public partial class View_TagDestination
     {
-        public int Id { get; set; }
-        public string TagAlias { get; set; }
         public string TagDisplay { get; set; }
         public string TagDescription { get; set; }
+        public int TagId { get; set; }
+        public int DestinationId { get; set; }
     }
 }

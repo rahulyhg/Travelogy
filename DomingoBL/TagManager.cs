@@ -35,5 +35,30 @@ namespace DomingoBL
 
             return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="destinationId"></param>
+        /// <param name="tags"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetTagsForDestination(int destinationId, out List<View_TagDestination> tags)
+        {
+            tags = null;
+
+            try
+            {
+                using (var context = new TravelogyDevEntities1())
+                {
+                    tags = context.View_TagDestination.Where(p => p.DestinationId == destinationId).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
     }
 }

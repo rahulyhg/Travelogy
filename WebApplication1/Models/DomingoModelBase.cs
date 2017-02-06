@@ -15,7 +15,7 @@ namespace WebApplication1.Models
 
         public Destination Destination { get; set; }
 
-        public List<Tag> DestinationTags { get; set; }
+        public List<View_TagDestination> DestinationTags { get; set; }
     }
 
     /// <summary>

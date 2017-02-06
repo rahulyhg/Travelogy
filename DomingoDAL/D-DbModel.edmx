@@ -166,15 +166,17 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TagAlias" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TagDisplay" Type="nvarchar" MaxLength="20" />
+          <Property Name="TagDescription" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TagMap">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TagId" Type="int" Nullable="false" />
           <Property Name="Notes" Type="nvarchar" MaxLength="50" />
           <Property Name="ObjectType" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ObjectId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Thread">
           <Key>
@@ -350,6 +352,18 @@
           <Property Name="AdditionalHtml" Type="ntext" />
           <Property Name="NightStay" Type="nvarchar" MaxLength="255" />
           <Property Name="TripTemplateStepIdentifier" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TravelogyDev.dbo.View_TagDestination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_TagDestination">
+          <Key>
+            <PropertyRef Name="TagId" />
+            <PropertyRef Name="DestinationId" />
+          </Key>
+          <Property Name="TagDisplay" Type="nvarchar" MaxLength="20" />
+          <Property Name="TagDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="TagId" Type="int" Nullable="false" />
+          <Property Name="DestinationId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TravelogyDev.dbo.View_Thread' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -552,6 +566,14 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="TripStep" EntityType="Self.TripStep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripTemplate" EntityType="Self.TripTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripTemplateStep" EntityType="Self.TripTemplateStep" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_TagDestination" EntityType="Self.View_TagDestination" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_TagDestination].[TagDisplay] AS [TagDisplay], 
+    [View_TagDestination].[TagDescription] AS [TagDescription], 
+    [View_TagDestination].[TagId] AS [TagId], 
+    [View_TagDestination].[DestinationId] AS [DestinationId]
+    FROM [dbo].[View_TagDestination] AS [View_TagDestination]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="View_Thread" EntityType="Self.View_Thread" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_Thread].[Id] AS [Id], 
@@ -698,6 +720,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="View_TripBookingAccommodation" EntityType="TravelogyDevModel.View_TripBookingAccommodation" />
           <EntitySet Name="Tags" EntityType="TravelogyDevModel.Tag" />
           <EntitySet Name="TagMaps" EntityType="TravelogyDevModel.TagMap" />
+          <EntitySet Name="View_TagDestination" EntityType="TravelogyDevModel.View_TagDestination" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1171,15 +1194,27 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TagAlias" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="TagDisplay" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TagDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TagMap">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TagId" Type="Int32" Nullable="false" />
           <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ObjectType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="View_TagDestination">
+          <Key>
+            <PropertyRef Name="TagId" />
+            <PropertyRef Name="DestinationId" />
+          </Key>
+          <Property Name="TagDisplay" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TagDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TagId" Type="Int32" Nullable="false" />
+          <Property Name="DestinationId" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1632,6 +1667,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="Tags">
             <EntityTypeMapping TypeName="TravelogyDevModel.Tag">
               <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="TagDescription" ColumnName="TagDescription" />
                 <ScalarProperty Name="TagDisplay" ColumnName="TagDisplay" />
                 <ScalarProperty Name="TagAlias" ColumnName="TagAlias" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1641,10 +1677,21 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="TagMaps">
             <EntityTypeMapping TypeName="TravelogyDevModel.TagMap">
               <MappingFragment StoreEntitySet="TagMap">
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="ObjectType" ColumnName="ObjectType" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="TagId" ColumnName="TagId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_TagDestination">
+            <EntityTypeMapping TypeName="TravelogyDevModel.View_TagDestination">
+              <MappingFragment StoreEntitySet="View_TagDestination">
+                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="TagDescription" ColumnName="TagDescription" />
+                <ScalarProperty Name="TagDisplay" ColumnName="TagDisplay" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

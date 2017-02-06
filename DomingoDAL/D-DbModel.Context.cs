@@ -56,5 +56,6 @@ namespace DomingoDAL
         public virtual DbSet<View_TripBookingAccommodation> View_TripBookingAccommodation { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<TagMap> TagMaps { get; set; }
+        public virtual DbSet<View_TagDestination> View_TagDestination { get; set; }
     }
 }
