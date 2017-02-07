@@ -14,13 +14,21 @@
                 <p><i class="icon-calendar"></i> Ideal for: @Model.BestTimeToVisit</p>
                 <p><i class="icon-tags"></i> Suitable for: @Model.TravelStyles</p>
                 <div class="margin-bottom-10"></div>
-                <a class="hover-effect" href="@Model.CircuitUrl"><h2 class="orange">View details</h2></a>
-                <p>@Model.Description</p>
-                <p>
+                <a class="hover-effect" href="@Model.CircuitUrl"><h2 class="orange">View details</h2></a>                
+                    @if (Model.Description.Length > 200)
+                    {
+                        var desc = Model.Description.Substring(0, 200) + "...";
+                        <p>@desc</p>
+                    }
+                    else
+                    {
+                        <p>Model.Description</p>
+                    }                
+                    <p>
                     @if (Request.IsAuthenticated)
                     {
-                    <p class="orange">Browse all the trip ideas for @Model.Name</p>
-                    <a class="btn-u btn-u-small" href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateSearchAlias"><i class="icon-location-arrow"></i>&nbsp; Plan a trip</a>
+                        <p class="orange">Browse all the trip ideas for @Model.Name</p>
+                        <a class="btn-u btn-u-small" href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateSearchAlias"><i class="icon-location-arrow"></i>&nbsp; Plan a trip</a>
                     }
                     else
                     {

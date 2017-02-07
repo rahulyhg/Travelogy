@@ -4,32 +4,46 @@
 {
     if (Model.DlBookingsView != null)
     {
-        foreach (var _booking in Model.DlBookingsView)
+        if (Model.DlBookingsView.Count == 0)
         {
             <div class="row portfolio-item margin-bottom-50">
-                <!-- Content Info -->
                 <div class="col-md-12 md-margin-bottom-40">
-                    <h2>@_booking.ShortDescription : @_booking.AccommodationType on @_booking.CheckinDate.Value.ToShortDateString() -- Status: @_booking.Status</h2>
-                    <p>At vero eos et accusamus et iusto odio dignissimos <a href="#">ducimus qui blanditiis</a> praesentium voluptatum condimentum eleifend enim a feugiat. Pellentesque viverra vehicula sem ut volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <div class="row portfolio-item1">                        
-                        <div class="col-xs-6">
-                            <ul class="list-unstyled">
-                                <li><i class="icon-globe color-green"></i> Best Quality Ever</li>
-                                <li><i class="icon-comments color-green"></i> 24 Hours Support</li>
-                            </ul>
-                        </div>  
-                        <div class="col-xs-6">
-                            <ul class="list-unstyled">
-                                <li><i class="icon-dropbox color-green"></i> 25GB For Free</li>
-                                <li><i class="icon-cloud color-green"></i> Cloud Hosting</li>                                
-                            </ul>
-                        </div>                        
-                    </div>
-                    <p><a class="btn-u btn-u-large" href="/Service/ViewAccommodationBooking?id=@_booking.Id">View booking details</a></p>
+                    <h1>No accommodation has been booked for this trip.</h1>
                 </div>
-                <!-- End Content Info -->  
             </div>
         }
+
+        else
+        {
+            foreach (var _booking in Model.DlBookingsView)
+            {
+                <div class="row portfolio-item margin-bottom-50">
+                    <!-- Content Info -->
+                    <div class="col-md-12 md-margin-bottom-40">
+                        <h3>@_booking.ShortDescription : @_booking.AccommodationType on @_booking.CheckinDate.Value.ToShortDateString()</h3>
+                        <h4>Status: @_booking.Status</h4>
+                        <p>At vero eos et accusamus et iusto odio dignissimos <a href="#">ducimus qui blanditiis</a> praesentium voluptatum condimentum eleifend enim a feugiat. Pellentesque viverra vehicula sem ut volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <div class="row portfolio-item1">
+                            <div class="col-xs-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="icon-globe color-green"></i> Best Quality Ever</li>
+                                    <li><i class="icon-comments color-green"></i> 24 Hours Support</li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="icon-dropbox color-green"></i> 25GB For Free</li>
+                                    <li><i class="icon-cloud color-green"></i> Cloud Hosting</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p><a class="btn-u btn-u-large" href="/Service/ViewAccommodationBooking?id=@_booking.Id">View booking details</a></p>
+                    </div>
+                    <!-- End Content Info -->
+                </div>
+            }
+        }
+
     }
 
     else

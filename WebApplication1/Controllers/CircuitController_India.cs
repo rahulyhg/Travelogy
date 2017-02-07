@@ -10,21 +10,8 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public partial class CircuitController : DomingoControllerBase
-    {
-        // GET: Circuit - get all circuits for India
-        public ActionResult India()
-        {
-            List<Destination> _destinations = null;
-            var blError = DestinationManager.GetDestinationsForCountry("India", out _destinations);
-            if (blError.ErrorCode != 0 || _destinations == null || _destinations.Count == 0)
-            {
-                throw new ApplicationException(blError.ErrorMessage);
-            }
-
-            var _model = new CircuitModelBase() { AllDestinations = _destinations, CircuitName = "India" };
-            return View(_model);
-        }
+    public partial class IndiaController : DomingoControllerBase
+    {       
 
         // all indian destinations here
         public ActionResult EasternHimalaya()
@@ -215,7 +202,7 @@ namespace WebApplication1.Controllers
             // get all the tags for this destination
             List<View_TagDestination> tags;
             _GetTagsForDestination(destination, out blError, out tags);
-            var model = new DomingoModelBase() { PageName = "urban Adventures in India", Destination = destination, DestinationTags = tags };
+            var model = new DomingoModelBase() { PageName = "Urban Adventures in India", Destination = destination, DestinationTags = tags };
             return View(model);
         }
 
@@ -248,6 +235,22 @@ namespace WebApplication1.Controllers
             List<View_TagDestination> tags;
             _GetTagsForDestination(destination, out blError, out tags);
             var model = new DomingoModelBase() { PageName = "Spiritual Tourism in India", Destination = destination, DestinationTags = tags };
+            return View(model);
+        }
+
+        public ActionResult FestivalsOfIndia()
+        {
+            var destination = new Destination();
+            var blError = DestinationManager.GetDestinationForAlias("FestivalsOfIndia", out destination);
+            if (blError.ErrorCode != 0 || destination == null)
+            {
+                throw new ApplicationException(blError.ErrorMessage);
+            }
+
+            // get all the tags for this destination
+            List<View_TagDestination> tags;
+            _GetTagsForDestination(destination, out blError, out tags);
+            var model = new DomingoModelBase() { PageName = "Festivals in India", Destination = destination, DestinationTags = tags };
             return View(model);
         }
     }

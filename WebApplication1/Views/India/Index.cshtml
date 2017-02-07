@@ -1,0 +1,34 @@
+﻿@model WebApplication1.Models.CircuitModelBase
+
+@*@Html.Partial("_AfricaCircuitsCarousel")*@
+@Html.Partial("_HomepageCarousel")
+
+<div class="breadcrumbs margin-bottom-20">
+    <div class="container">
+        <h1 class="pull-left">Top circuits in India</h1>
+    </div>
+</div><!--/breadcrumbs-->
+
+@for (var i = 0; i < Model.AllDestinations.Count; i++)
+{
+    if (i % 4 == 0)
+    {
+        @Html.Raw("<div class=\"row\">");
+    }
+
+    {
+        var item = Model.AllDestinations[i];
+        @Html.Partial("_DestinationWidgetMicro", item)
+    }
+
+    if (i % 4 == 3)
+    {
+        @Html.Raw("</div>");
+    }
+
+    if (i == Model.AllDestinations.Count - 1)
+    {
+        @Html.Raw("</div>");
+    }
+
+}

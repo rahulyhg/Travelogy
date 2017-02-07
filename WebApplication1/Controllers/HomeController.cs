@@ -5,10 +5,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using DomingoDAL;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : DomingoControllerBase
     {
 
         public ActionResult Error()
@@ -29,7 +31,7 @@ namespace WebApplication1.Controllers
             }
 
             return View();
-        }
+        }       
 
         public ActionResult About()
         {

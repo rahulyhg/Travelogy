@@ -1,80 +1,37 @@
 ﻿@model WebApplication1.Models.DomingoModelBase
 
-<div class="blog-three">
-    <div class="row">
-        <!-- Mainbar column -->
-        <div class="col-md-12">
+@{
+    if (Model != null && Model.Destination != null)
+    {
+        ViewBag.Description = Model.Destination.MetaDescription;
+        ViewBag.KeyWords = Model.Destination.MetaKeywords;
+    }
+}
 
-            <div class="blog-three-item">
-                <!-- blog three slider -->
-                <!-- Carousel -->
-                <!-- Bootstrap carousel usage
-                    Bootstrap carousel should have id. Below i am using "bs-carousel-X". Where "X" denotes number". If a page has more than 1 carousel, then add the new carousel with the id "bs-carousel-1", "bs-carousel-2". You also need to update the id in, "carousel indicators" section and "carousel control" section.
+@Html.Partial("_HomepageCarousel")
 
-                    Carousel comes with 3 main data attributes which you can customize. They are...
-                    data-interval - Time delay between item cycle. Default value "5000".
-                    data-pause - Pause on hover. Default value "pause".
-                    data-wrap - Continues cycle or stop at the end. Default value "true".
-                -->
-                <!-- Outer layer -->
-                <div id="bs-carousel-1" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover" data-wrap="true">
-                    <!-- Bootstrap indicators. If you don't need indicators, remove the below section -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#bs-carousel-1" data-slide-to="0" class="active"></li>
-                        <li data-target="#bs-carousel-1" data-slide-to="1"></li>
-                        <li data-target="#bs-carousel-1" data-slide-to="2"></li>
-                        <li data-target="#bs-carousel-1" data-slide-to="3"></li>
-                        <li data-target="#bs-carousel-1" data-slide-to="4"></li>
-                    </ol>
-                    <!-- Slides. You can also add captions -->
-                    <div class="carousel-inner">
-                        <!-- Item, First item should have extra class "active" -->
-                        <div class="item active">
-                            <!-- Image -->
-                            <img src="~/Content/img/Trans-Siberian/TSR-S01.jpg" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="~/Content/img/Trans-Siberian/TSR-S02.jpg" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="~/Content/img/Trans-Siberian/TSR-S03.jpg" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="~/Content/img/Trans-Siberian/TSR-S04.jpg" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="~/Content/img/Trans-Siberian/TSR-S05.jpg" alt="">
-                        </div>
-                    </div>
-                    <!-- Carousel controls (arrows). If you don't need controls, remove the below section -->
-                    <a class="left carousel-control" href="#bs-carousel-1" role="button" data-slide="prev">
-                        <span class="fa fa-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#bs-carousel-1" role="button" data-slide="next">
-                        <span class="fa fa-chevron-right"></span>
-                    </a>
-                </div>
-
-                <!-- blog three Content -->
-                <div class="blog-three-content">
-                    <!-- Heading -->
-                    <h1>Travel on the longest running trains for a Trans-Siberian adventure</h1>
-                    <!-- Blog meta -->
-                    <!-- Paragraph -->
-                    <p>
-                        The Trans Siberian Railway runs across the Russian south, connecting west to the far east. At 9,289 km it is the world's longest railway stretch.
-                        Crossing seven time zones, trains take 7-8 days to complete the Journey - from Moscow to Vladivostok. There are countless places to venture out on this vast stretch.
-                        From the forests of Taiga to the Lake Baikal, exciting adventures await.
-                    </p>
-                </div>
-            </div>
-            <!-- Blog item ends -->
-
-            <div class="contact-map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d21242192.856387496!2d68.58515526334898!3d49.46483769863519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x46b54afc73d4b0c9%3A0x3d44d6cc5757cf4c!2sMoscow%2C+Russia!3m2!1d55.755826!2d37.6173!4m5!1s0x5fb39cba5249d485%3A0x186704d4dd967e35!2sVladivostok%2C+Primorskiy+Kray%2C+Russia!3m2!1d43.1737387!2d132.0064506!5e0!3m2!1sen!2suk!4v1478190786889" width="100%" height="300" style="border:0"></iframe>
-            </div>
-        </div>
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs margin-bottom-20">
+    <div class="container">
+        <h1 class="pull-left">Trans Siberian</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="/Circuit/Russia">Russia</a></li>
+            <li class="active">Trans-Siberian</li>
+        </ul>
     </div>
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+
+@Html.Partial("_DestinationViewHeader", Model)
+
+<div class="container">
+    <div class="blog-img">
+        <img class="img-responsive img-border" src="~/Content/img/Trans-Siberian/TSR-S03.jpg" alt="">
+    </div>
+</div>
+
+<div class="blog-three">    
 
     <div class="img-box-3 text-center">
         <div class="row">
@@ -135,28 +92,40 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            @if (Request.IsAuthenticated)
-            {                
-                @Html.Partial("_StartTripPlanning", new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = "Trans Siberian" })
-            }
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                @if (Request.IsAuthenticated)
+            {
+                if (Model != null && Model.Destination != null)
+                {
+                    var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = Model.Destination.Name, TemplateAlias = Model.Destination.TemplateSearchAlias };
+                        @Html.Partial("_StartTripPlanning", _model)
+                    }
+                }
 
-            else
+                else
+                {
+                    @Html.Partial("_JoinNowTripPlanning")
+                }
+            </div>
+            <div class="col-md-6 col-sm-6">
+                @if (Request.IsAuthenticated)
             {
-                @Html.Partial("_JoinNowTripPlanning")
+                if (Model != null && Model.Destination != null)
+                {
+                    var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = Model.Destination.Name };
+                        @Html.Partial("_DownloadBrochure", _model)
+                    }
+                }
+                else
+                {
+                    if (Model != null && Model.Destination != null)
+                    {
+                        @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = Model.Destination.Name });
+                }
             }
-        </div>
-        <div class="col-md-12 col-sm-12">
-            @if (Request.IsAuthenticated)
-            {
-                var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = "Trans Siberian" };
-                @Html.Partial("_DownloadBrochure", _model)
-            }
-            else
-            {
-                @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = "Trans Siberian" })
-            }
+            </div>
         </div>
     </div>
 </div>

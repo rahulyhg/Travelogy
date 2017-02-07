@@ -177,6 +177,7 @@
     <Compile Include="Controllers\CircuitController_India.cs" />
     <Compile Include="Controllers\DomingoControllerBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndiaController.cs" />
     <Compile Include="Controllers\InformationController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
@@ -9369,7 +9370,7 @@
     <Content Include="Views\Service\MessageCenter.cshtml" />
     <Content Include="Views\Manage\TravellerProfile.cshtml" />
     <Content Include="Views\Shared\_TripPlannerOverview.cshtml" />
-    <Content Include="Views\Circuit\PhotographyToursIndia.cshtml" />
+    <Content Include="Views\India\PhotographyToursIndia.cshtml" />
     <Content Include="Views\Circuit\LakeBaikal.cshtml" />
     <Content Include="Views\Circuit\Mongolia.cshtml" />
     <Content Include="Views\Circuit\Tibet.cshtml" />
@@ -9404,8 +9405,7 @@
     <Content Include="Views\Shared\_TripPlanningPlannedTripSummary.cshtml" />
     <Content Include="Views\Shared\_TripPlannerAdvert.cshtml" />
     <Content Include="Views\Shared\_DestinationWidget.cshtml" />
-    <Content Include="Views\Circuit\Asia.cshtml" />
-    <Content Include="Views\Circuit\Africa.cshtml" />
+    <Content Include="Views\Circuit\Tanzania.cshtml" />
     <Content Include="Views\Circuit\Europe.cshtml" />
     <Content Include="Views\Shared\_AsiaCircuitsCarousel.cshtml" />
     <Content Include="Views\Shared\_AfricaCircuitsCarousel.cshtml" />
@@ -9419,22 +9419,25 @@
     <Content Include="Views\Shared\_TripBookings.cshtml" />
     <Content Include="Views\Shared\_TripTemplateWidget.cshtml" />
     <Content Include="Views\Shared\_DestinationWidgetMicro.cshtml" />
-    <Content Include="Views\Circuit\EasternHimalaya.cshtml" />
+    <Content Include="Views\India\EasternHimalaya.cshtml" />
     <Content Include="Views\Circuit\India.cshtml" />
-    <Content Include="Views\Circuit\WesternHimalaya.cshtml" />
+    <Content Include="Views\India\WesternHimalaya.cshtml" />
     <Content Include="Views\Admin\CreateDestination.cshtml" />
     <Content Include="Views\Shared\_DestinationViewHeader.cshtml" />
-    <Content Include="Views\Circuit\GangeticPlains.cshtml" />
-    <Content Include="Views\Circuit\GoldenTriangle.cshtml" />
-    <Content Include="Views\Circuit\IndianWestCoast.cshtml" />
-    <Content Include="Views\Circuit\DeccanPlataue.cshtml" />
-    <Content Include="Views\Circuit\SouthernIndia.cshtml" />
-    <Content Include="Views\Circuit\MotorcycleToursIndia.cshtml" />
-    <Content Include="Views\Circuit\WildlifeToursIndia.cshtml" />
-    <Content Include="Views\Circuit\AdventureToursIndia.cshtml" />
-    <Content Include="Views\Circuit\UrbanAdventuresIndia.cshtml" />
-    <Content Include="Views\Circuit\RuralTourismIndia.cshtml" />
-    <Content Include="Views\Circuit\SpiritualTourismIndia.cshtml" />
+    <Content Include="Views\India\GangeticPlains.cshtml" />
+    <Content Include="Views\India\GoldenTriangle.cshtml" />
+    <Content Include="Views\India\IndianWestCoast.cshtml" />
+    <Content Include="Views\India\DeccanPlataue.cshtml" />
+    <Content Include="Views\India\SouthernIndia.cshtml" />
+    <Content Include="Views\India\MotorcycleToursIndia.cshtml" />
+    <Content Include="Views\India\WildlifeToursIndia.cshtml" />
+    <Content Include="Views\India\AdventureToursIndia.cshtml" />
+    <Content Include="Views\India\UrbanAdventuresIndia.cshtml" />
+    <Content Include="Views\India\RuralTourismIndia.cshtml" />
+    <Content Include="Views\India\SpiritualTourismIndia.cshtml" />
+    <Content Include="Views\India\Index.cshtml" />
+    <Content Include="Views\India\FestivalsOfIndia.cshtml" />
+    <Content Include="Views\Circuit\Russia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
