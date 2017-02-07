@@ -41,5 +41,7 @@ namespace WebApplication1.Models
         public int TripId { get; set; }
 
         public int AdminId { get; set; }
+
+        public bool ShowTripViewLink { get; set; }
     }
 }

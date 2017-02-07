@@ -17,6 +17,18 @@ namespace WebApplication1.Models
 
         public int TripId { get; set; }
 
+        public string TripName { get; set; }
+
+        public string TripDescription { get; set; }
+
+        public string TripStepName { get; set; }
+
+        public string TripStepDescription { get; set; }
+
+        public DateTime? TripStepStartDate {get; set; }
+
+        public DateTime? TripStepEndDate { get; set; }
+
         [Required(ErrorMessage = "Please select a type of Accommodation")]
         [Display(Name = "Type of Accommodation")]
         public string AccommodationType { get; set; }

@@ -238,7 +238,31 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult AddTripBookingAccommodation(int tripStepId, int tripId)
         {
-            var model = new AccommodationBookingViewModel() { TripStepId = tripStepId, TripId = tripId };
+            BlViewTrip tripObj = null;
+            var blError = TripManager.GetTripById(tripId, out tripObj);
+            if(blError.ErrorCode > 0)
+            {
+                throw new ApplicationException(blError.ErrorMessage);
+            }
+
+            var tripStepObj = tripObj.DlTripStepsView.FirstOrDefault(p => p.Id == tripStepId);
+            if(tripStepObj == null)
+            {
+                throw new ApplicationException(string.Format("Invalid parameter - [TripStepId:{0}]", tripStepId));
+            }
+
+            var model = new AccommodationBookingViewModel()
+            {
+                TripName = tripObj.DlTripView.Name,
+                TripDescription = tripObj.DlTripView.Description,
+                TripStepName = tripStepObj.ShortDescription,
+                TripStepDescription = tripStepObj.LongDescription,
+                TripStepStartDate = tripStepObj.StartDate,
+                TripStepEndDate = tripStepObj.EndDate,
+                TripStepId = tripStepId,
+                TripId = tripId
+            };
+
             return View("AccommodationBooking", model);
         }
 
@@ -259,6 +283,7 @@ namespace WebApplication1.Controllers
                 CheckoutDate = model.CheckoutDate,
                 Notes = model.Notes,
                 SpecialRequests = model.SpecialRequests,
+                Status = AccommodationBookingStatus.requested.ToString(),
                 TripId = model.TripId,
                 TripStepId = model.TripStepId
             };

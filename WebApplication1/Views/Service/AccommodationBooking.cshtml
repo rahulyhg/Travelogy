@@ -3,8 +3,35 @@
 @Html.Partial("_HomepageCarousel")
 
 <div class="headline">
-    <h2>Booking Request for Accommodation</h2>    
+    <h2>Booking Request for Accommodation</h2>     
 </div>    
+
+<div class="row">
+    <div class="col-sm-12 info-blocks">
+        <i class="icon-compass icon-info-blocks"></i>
+        <div class="info-blocks-in">
+            <h3>Your trip: @Model.TripName -- @Model.TripId</h3>
+            <p>@Model.TripDescription</p>
+        </div>
+    </div>
+    <div class="col-sm-12 info-blocks">
+        <i class="icon-ok-sign icon-info-blocks"></i>
+        <div class="info-blocks-in">
+            <h3>@Model.TripStepName</h3>
+            <p>@Model.TripStepDescription</p>
+            @if(Model.TripStepStartDate.HasValue && Model.TripStepEndDate.HasValue)
+            {
+                <h6>@Model.TripStepStartDate.Value.ToShortDateString() - to - @Model.TripStepEndDate.Value.ToShortDateString() </h6>
+            }
+        </div>
+    </div>    
+</div>
+
+<hr class="margin-bottom-20"> 
+
+<blockquote>
+    <p>Accommodation bookings are done through the local travel agency who is handling your trip.<br /> Travelogers will update the status of your booking within 2 working days of requesting.</p>   
+</blockquote>
 
 <div>
     @using (Html.BeginForm("SaveTripBookingAccommodationAsync", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
@@ -62,8 +89,8 @@
         <div class="row margin-bottom-20">
             <div class="form-group">
                 <div class="col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                    <input type="reset" value="Reset" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn btn-orange" />
+                    <input type="reset" value="Reset" class="btn btn-black" />
                 </div>                
             </div>
         </div>

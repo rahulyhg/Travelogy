@@ -22,6 +22,17 @@ namespace DomingoBL
         archived
     }
 
+    public enum AccommodationBookingStatus
+    {
+        requested,
+
+        booked,
+
+        modified,
+
+        cancelled
+    }
+
     /// <summary>
     /// 
     /// </summary>
