@@ -13,6 +13,8 @@ namespace WebApplication1.Models
     /// </summary>
     public class AccommodationBookingViewModel
     {
+        public string BookingStatus { get; set; }
+
         public int TripStepId { get; set; }
 
         public int TripId { get; set; }
@@ -24,6 +26,10 @@ namespace WebApplication1.Models
         public string TripStepName { get; set; }
 
         public string TripStepDescription { get; set; }
+
+        public string PropertyName { get; set; }
+
+        public string PropertyAddress { get; set; }
 
         public DateTime? TripStepStartDate {get; set; }
 

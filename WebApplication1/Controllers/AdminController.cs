@@ -329,7 +329,7 @@ namespace WebApplication1.Controllers
             _CheckForAdminAccess();
 
             var context = new TravelogyDevEntities1();
-            var _model = context.TripBookingAccommodations.Find(id);
+            var _model = new AdminTripBookingAccommodationEditModel() { DbObject = context.TripBookingAccommodations.Find(id) };
             return View(_model);
         }
 

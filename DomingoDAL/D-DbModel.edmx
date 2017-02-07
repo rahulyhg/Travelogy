@@ -270,6 +270,8 @@
           <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
           <Property Name="SpecialRequests" Type="nvarchar" MaxLength="500" />
           <Property Name="CheckoutDate" Type="datetime" />
+          <Property Name="Adults" Type="int" />
+          <Property Name="Kids" Type="int" />
         </EntityType>
         <EntityType Name="TripBookingTransport">
           <Key>
@@ -286,6 +288,8 @@
           <Property Name="TransportTo" Type="nvarchar" MaxLength="50" />
           <Property Name="AdminNotes" Type="nvarchar" MaxLength="500" />
           <Property Name="TravellerNotes" Type="nvarchar" MaxLength="500" />
+          <Property Name="Adults" Type="int" />
+          <Property Name="Kids" Type="int" />
         </EntityType>
         <EntityType Name="TripProvider">
           <Key>
@@ -976,6 +980,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="SpecialRequests" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CheckoutDate" Type="DateTime" Precision="3" />
+          <Property Name="Adults" Type="Int32" />
+          <Property Name="Kids" Type="Int32" />
         </EntityType>
         <EntityType Name="TripBookingTransport">
           <Key>
@@ -992,6 +998,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="TransportTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdminNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="TravellerNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Adults" Type="Int32" />
+          <Property Name="Kids" Type="Int32" />
         </EntityType>
         <EntityType Name="Traveller">
           <Key>
@@ -1436,6 +1444,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="TripBookingAccommodations">
             <EntityTypeMapping TypeName="TravelogyDevModel.TripBookingAccommodation">
               <MappingFragment StoreEntitySet="TripBookingAccommodation">
+                <ScalarProperty Name="Kids" ColumnName="Kids" />
+                <ScalarProperty Name="Adults" ColumnName="Adults" />
                 <ScalarProperty Name="CheckoutDate" ColumnName="CheckoutDate" />
                 <ScalarProperty Name="SpecialRequests" ColumnName="SpecialRequests" />
                 <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
@@ -1454,6 +1464,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="TripBookingTransports">
             <EntityTypeMapping TypeName="TravelogyDevModel.TripBookingTransport">
               <MappingFragment StoreEntitySet="TripBookingTransport">
+                <ScalarProperty Name="Kids" ColumnName="Kids" />
+                <ScalarProperty Name="Adults" ColumnName="Adults" />
                 <ScalarProperty Name="TravellerNotes" ColumnName="TravellerNotes" />
                 <ScalarProperty Name="AdminNotes" ColumnName="AdminNotes" />
                 <ScalarProperty Name="TransportTo" ColumnName="TransportTo" />

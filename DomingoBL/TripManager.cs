@@ -215,13 +215,26 @@ namespace DomingoBL
                         _dbTrip.StartLocation = trip.StartLocation;                        
                     }
 
-                    // save user notes
+                    // save user notes and dates
                     foreach(var tripStep in tripSteps)
                     {
                         var _dbTripStep = context.TripSteps.Find(tripStep.Id);
                         if(_dbTripStep != null)
                         {
+                            // assign the notes
                             _dbTripStep.TravellerNote = tripStep.TravellerNote;
+
+                            // if the start dates has been edited
+                            if(tripStep.StartDate.HasValue && _dbTripStep.StartDate!= tripStep.StartDate)
+                            {
+                                _dbTripStep.StartDate = tripStep.StartDate;
+                            }
+
+                            // if the end dates has been edited
+                            if (tripStep.EndDate.HasValue && _dbTripStep.EndDate != tripStep.EndDate)
+                            {
+                                _dbTripStep.EndDate = tripStep.EndDate;
+                            }                            
                         }
                     }
 
@@ -232,6 +245,30 @@ namespace DomingoBL
             }
             catch (Exception ex)
             {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bookingId"></param>
+        /// <param name="accommodation"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetTripBookingAccommodation(int bookingId, out TripBookingAccommodation accommodation)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    accommodation = context.TripBookingAccommodations.Find(bookingId);
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                accommodation = null;
                 return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
             }
         }

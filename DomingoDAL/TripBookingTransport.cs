@@ -25,5 +25,7 @@ namespace DomingoDAL
         public string TransportTo { get; set; }
         public string AdminNotes { get; set; }
         public string TravellerNotes { get; set; }
+        public Nullable<int> Adults { get; set; }
+        public Nullable<int> Kids { get; set; }
     }
 }

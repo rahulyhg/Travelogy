@@ -9438,6 +9438,7 @@
     <Content Include="Views\India\Index.cshtml" />
     <Content Include="Views\India\FestivalsOfIndia.cshtml" />
     <Content Include="Views\Circuit\Russia.cshtml" />
+    <Content Include="Views\Service\ViewAccommodationBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

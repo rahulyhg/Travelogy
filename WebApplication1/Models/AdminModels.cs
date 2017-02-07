@@ -50,4 +50,12 @@ namespace WebApplication1.Models
 
         public IEnumerable<SelectListItem> TripProviderList { get; set; }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class AdminTripBookingAccommodationEditModel
+    {
+        public TripBookingAccommodation DbObject { get; set; }
+    }
 }

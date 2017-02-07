@@ -26,5 +26,7 @@ namespace DomingoDAL
         public string PropertyAddress { get; set; }
         public string SpecialRequests { get; set; }
         public Nullable<System.DateTime> CheckoutDate { get; set; }
+        public Nullable<int> Adults { get; set; }
+        public Nullable<int> Kids { get; set; }
     }
 }

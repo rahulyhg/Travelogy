@@ -68,6 +68,8 @@ namespace WebApplication1.Controllers
             return View("Trip", _model);
         }
 
+        
+
         /// <summary>
         /// method to create a form for trip based on a template
         /// </summary>
@@ -264,6 +266,28 @@ namespace WebApplication1.Controllers
             };
 
             return View("AccommodationBooking", model);
+        }
+
+        public ActionResult ViewAccommodationBooking(int id)
+        {
+            TripBookingAccommodation accommodation = null;
+            var blError = TripManager.GetTripBookingAccommodation(id, out accommodation);
+            if(blError.ErrorCode > 0)
+            {
+                throw new ApplicationException(blError.ErrorMessage);
+            }
+
+            var model = new AccommodationBookingViewModel()
+            {
+                AccommodationType = accommodation.AccommodationType,
+                CheckinDate = accommodation.CheckinDate.Value,
+                CheckoutDate = accommodation.CheckoutDate.Value,
+                Notes = accommodation.Notes,
+                SpecialRequests = accommodation.SpecialRequests,
+                BookingStatus = accommodation.Status,
+            };
+            
+            return View(model);
         }
 
         /// <summary>

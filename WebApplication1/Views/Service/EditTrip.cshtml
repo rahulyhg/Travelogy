@@ -77,20 +77,44 @@
 
                             @for (int x = 0; x < Model.ActiveTrip.DlTripStepsView.Count; x++)
                             {
-                                <div class="row">
-
-                                </div>
-
                                 var tripStep = Model.ActiveTrip.DlTripStepsView[x];
-
                                 @Html.HiddenFor(p => p.ActiveTrip.DlTripStepsView[x].Id)
-                                
-                                <h4 class="orange">@tripStep.ShortDescription</h4>
-                                <p>@tripStep.LongDescription</p>
-                                <h5>Add notes:</h5>
-                                <p>@Html.TextAreaFor(p => p.ActiveTrip.DlTripStepsView[x].TravellerNote, new { @class = "form-control" })</p>
-                                <button class="btn btn-default" type="submit">Save Notes</button>
-                                <a class="btn btn-orange" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId">Request Accommodation</a>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="orange">@tripStep.ShortDescription</h4>
+                                        <p>@tripStep.LongDescription</p>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-12">
+                                        <h4>Start date: 
+                                        @if (tripStep.StartDate.HasValue)
+                                        { 
+                                            @tripStep.StartDate.Value.ToShortDateString()
+                                        }
+                                        </h4>
+                                        <p>Change to: @Html.TextBoxFor(p => p.ActiveTrip.DlTripStepsView[x].StartDate, new { @class = "form-control", type = "date" })</p>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-12">
+                                        <h4>
+                                            End date:
+                                            @if (tripStep.EndDate.HasValue)
+                                            {
+                                                @tripStep.EndDate.Value.ToShortDateString()
+                                            }
+                                        </h4>
+                                        <p>Change to: @Html.TextBoxFor(p => p.ActiveTrip.DlTripStepsView[x].EndDate, new { @class = "form-control", type = "date" })</p>
+                                    </div>
+
+                                    <div class="col-md-9">
+                                        <h5>Add notes:</h5>
+                                        <p>@Html.TextAreaFor(p => p.ActiveTrip.DlTripStepsView[x].TravellerNote, new { @class = "form-control" })</p>
+                                        <button class="btn btn-default" type="submit">Save Notes</button>
+                                        <button class="btn btn-orange" type="submit">Save Trip</button>
+                                        <a class="btn btn-orange" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId">Request Accommodation</a>
+                                    </div>                                    
+                                </div>
                                 <hr />
                             }
 
