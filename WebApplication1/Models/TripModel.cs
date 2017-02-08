@@ -7,7 +7,8 @@ using System.Linq;
 using System.Web;
 
 namespace WebApplication1.Models
-{
+{    
+
     /// <summary>
     /// 
     /// </summary>
@@ -35,6 +36,8 @@ namespace WebApplication1.Models
 
         public DateTime? TripStepEndDate { get; set; }
 
+        public string AdminNotes { get; set; }
+
         [Required(ErrorMessage = "Please select a type of Accommodation")]
         [Display(Name = "Type of Accommodation")]
         public string AccommodationType { get; set; }
@@ -48,7 +51,7 @@ namespace WebApplication1.Models
         public DateTime CheckoutDate { get; set; }
 
         [Display(Name = "Your message")]
-        public string Notes { get; set; }
+        public string TravellerNotes { get; set; }
 
         [Display(Name = "Special Requests")]
         public string SpecialRequests { get; set; }        
@@ -70,6 +73,133 @@ namespace WebApplication1.Models
                 return dropdownItems;
             }
         }
+    }
+
+
+    public class LocalTransferViewModel
+    {
+        public int TripBookingTransportId { get; set; }
+
+        public int TripStepId { get; set; }
+
+        public int TripId { get; set; }
+
+        public string TripName { get; set; }
+
+        public string TripDescription { get; set; }
+
+        public string TripStepName { get; set; }
+
+        public string TripStepDescription { get; set; }
+
+        public DateTime? TripStepDate { get; set; }
+
+        public DateTime? TripStepStartDate { get; set; }
+
+        public DateTime? TripStepEndDate { get; set; }
+
+        [Display(Name = "Preferred Date")]
+        [Required]
+        public DateTime TransferDate { get; set; }
+
+        [Display(Name = "From:")]
+        [Required]
+        public string From { get; set; }
+
+        [Display(Name = "To:")]
+        [Required]
+        public string To { get; set; }
+
+        [Display(Name = "Your message")]
+        public string TravellerNotes { get; set; }
+
+        public IEnumerable<System.Web.Mvc.SelectListItem> ListOfTransferClasses
+        {
+            get
+            {
+                var dropdownItems = new List<System.Web.Mvc.SelectListItem>();
+                dropdownItems.AddRange(new[]{
+                            new System.Web.Mvc.SelectListItem() { Text = "--- please select one ---", Value = "" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Economy", Value = "Economy" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Business", Value = "Business" },
+                            new System.Web.Mvc.SelectListItem() { Text = "First", Value = "First" }});
+
+                return dropdownItems;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class FlightBookingViewModel
+    {
+        public int TripBookingTransportId { get; set; }
+
+        public int TripStepId { get; set; }
+
+        public int TripId { get; set; }
+
+        public string TripName { get; set; }
+
+        public string TripDescription { get; set; }
+
+        public string TripStepName { get; set; }
+
+        public string TripStepDescription { get; set; }
+
+        public DateTime? TripStartDate { get; set; }
+
+        public DateTime? TripStepStartDate { get; set; }
+
+        public DateTime? TripStepEndDate { get; set; }
+
+        public string BookingStatus { get; set; }
+      
+
+        public string AdminNotes { get; set; }
+
+        public IEnumerable<System.Web.Mvc.SelectListItem> ListOfFlightClasses
+        {
+            get
+            {
+                var dropdownItems = new List<System.Web.Mvc.SelectListItem>();
+                dropdownItems.AddRange(new[]{
+                            new System.Web.Mvc.SelectListItem() { Text = "--- please select one ---", Value = "" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Economy", Value = "Economy" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Business", Value = "Business" },
+                            new System.Web.Mvc.SelectListItem() { Text = "First", Value = "First" }});
+
+                return dropdownItems;
+            }
+        }
+
+        [Display(Name = "Preferred Date:")]
+        [Required]
+        public DateTime FlightDate { get; set; }
+
+        [Display(Name = "From:")]
+        [Required]
+        public string From { get; set; }
+
+        [Display(Name = "To:")]
+        [Required]
+        public string To { get; set; }
+
+        [Display(Name = "Flight Class:")]
+        [Required]
+        public string FlightClass { get; set; }
+
+        [Display(Name = "Your message:")]
+        public string TravellerNotes { get; set; }
+
+        [Display(Name = "No of Adults:")]
+        [Required]
+        public int Adults { get; set; }
+
+        [Display(Name = "No of Children:")]
+        [Required]
+        public int Kids { get; set; }
     }
 
 

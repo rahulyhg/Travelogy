@@ -55,7 +55,7 @@
     <div class="col-md-6 col-sm-12 info-blocks">
         <div class="info-blocks-in">
             <h4 class="orange">Your message:</h4>
-            <p>@Model.Notes</p>
+            <p>@Model.TravellerNotes</p>
         </div>
     </div>
     <div class="col-md-6 col-sm-12 info-blocks">
@@ -64,4 +64,9 @@
             <p>@Model.SpecialRequests</p>
         </div>
     </div>
+</div>
+<div class="margin-bottom-20">
+</div>
+<div class="margin-bottom-20">
+    <a href="/Service/EditTrip?tripId=@Model.TripId" class="orange">Back to edit trip details</a>
 </div>

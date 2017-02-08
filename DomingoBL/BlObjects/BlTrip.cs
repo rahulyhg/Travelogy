@@ -21,6 +21,16 @@ namespace DomingoBL.BlObjects
         /// 
         /// </summary>
         public List<TripStep> DlTripSteps { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<View_TripBookingAccommodation> DlBookingsView { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<View_TripBookingTransport> DlTransportsBookingsView { get; set; }
     }
 
     /// <summary>
@@ -42,5 +52,10 @@ namespace DomingoBL.BlObjects
         /// 
         /// </summary>
         public List<View_TripBookingAccommodation> DlBookingsView { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<View_TripBookingTransport> DlTransportsBookingsView { get; set; }
     }
 }

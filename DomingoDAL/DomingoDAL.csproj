@@ -168,6 +168,9 @@
     <Compile Include="View_TripBookingAccommodation.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="View_TripBookingTransport.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="View_TripStep.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>

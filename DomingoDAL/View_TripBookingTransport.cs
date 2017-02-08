@@ -12,23 +12,27 @@ namespace DomingoDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TripBookingAccommodation
+    public partial class View_TripBookingTransport
     {
         public int Id { get; set; }
-        public string AccommodationType { get; set; }
+        public string TransportType { get; set; }
         public decimal EstimatedCost { get; set; }
         public int TripId { get; set; }
         public Nullable<int> TripStepId { get; set; }
-        public Nullable<System.DateTime> CheckinDate { get; set; }
-        public string Status { get; set; }
+        public Nullable<System.DateTime> BookingDate { get; set; }
+        public string BookingStatus { get; set; }
+        public string TransportFrom { get; set; }
+        public string TransportTo { get; set; }
+        public string AdminNotes { get; set; }
         public string TravellerNotes { get; set; }
-        public string PropertyName { get; set; }
-        public string PropertyAddress { get; set; }
-        public string SpecialRequests { get; set; }
-        public Nullable<System.DateTime> CheckoutDate { get; set; }
         public Nullable<int> Adults { get; set; }
         public Nullable<int> Kids { get; set; }
-        public string TownOrCity { get; set; }
-        public string AdminNotes { get; set; }
+        public string TravelClass { get; set; }
+        public string Description { get; set; }
+        public Nullable<System.DateTime> TripStartDate { get; set; }
+        public string TripStartLocation { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string UserName { get; set; }
     }
 }

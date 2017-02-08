@@ -41,8 +41,6 @@ namespace DomingoDAL
         public virtual DbSet<ThreadMessage> ThreadMessages { get; set; }
         public virtual DbSet<View_Thread> View_Thread { get; set; }
         public virtual DbSet<View_ThreadMessage> View_ThreadMessage { get; set; }
-        public virtual DbSet<TripBookingAccommodation> TripBookingAccommodations { get; set; }
-        public virtual DbSet<TripBookingTransport> TripBookingTransports { get; set; }
         public virtual DbSet<Traveller> Travellers { get; set; }
         public virtual DbSet<HtmlEmail> HtmlEmails { get; set; }
         public virtual DbSet<HtmlEmailTemplate> HtmlEmailTemplates { get; set; }
@@ -53,9 +51,12 @@ namespace DomingoDAL
         public virtual DbSet<TripTemplateStep> TripTemplateSteps { get; set; }
         public virtual DbSet<View_Trip> View_Trip { get; set; }
         public virtual DbSet<View_TripStep> View_TripStep { get; set; }
-        public virtual DbSet<View_TripBookingAccommodation> View_TripBookingAccommodation { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<TagMap> TagMaps { get; set; }
         public virtual DbSet<View_TagDestination> View_TagDestination { get; set; }
+        public virtual DbSet<TripBookingAccommodation> TripBookingAccommodations { get; set; }
+        public virtual DbSet<TripBookingTransport> TripBookingTransports { get; set; }
+        public virtual DbSet<View_TripBookingAccommodation> View_TripBookingAccommodation { get; set; }
+        public virtual DbSet<View_TripBookingTransport> View_TripBookingTransport { get; set; }
     }
 }

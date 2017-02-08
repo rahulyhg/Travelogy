@@ -94,6 +94,16 @@
                         <!-- Navigation starts.  -->
                         <div class="navy">
                         <ul>
+                            @if (Request.IsAuthenticated)
+                            {
+                                if (ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
+                                {
+                                    <li>@Html.ActionLink("Dashboard", "index", "Admin")</li>
+                                    <li>@Html.ActionLink("Messages", "MessageCenter", "Admin")</li>
+                                    <li>@Html.ActionLink("Trips", "Trips", "Admin")</li>
+                                }
+                            }                            
+
                             <li>
                                 <a href="#">Destinations</a>
                                 <ul>
@@ -108,19 +118,12 @@
 
                             @if (Request.IsAuthenticated)
                             {
-                                if (ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
-                                {
-                                    <li>@Html.ActionLink("Dashboard", "index", "Admin")</li>
-                                    <li>@Html.ActionLink("Messages", "MessageCenter", "Admin")</li>
-                                    <li>@Html.ActionLink("Trips", "Trips", "Admin")</li>
-                                }
-
-                                else
+                                if (!ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
                                 {
                                     <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
                                     <li>@Html.ActionLink("Travel Profile", "TravellerProfile", "Manage")</li>
                                     <li>@Html.ActionLink("My Messages", "MessageCenter", "Service")</li>
-                                }
+                                }                                
                             }
                             else
                             {

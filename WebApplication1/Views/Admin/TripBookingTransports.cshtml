@@ -1,20 +1,8 @@
-﻿@model IEnumerable<DomingoDAL.TripBookingTransport>
+﻿@model IEnumerable<DomingoDAL.View_TripBookingTransport>
 
 <div>
     <table class="table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TransportType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstimatedCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TripId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TripStepId)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.BookingDate)
             </th>
@@ -28,28 +16,19 @@
                 @Html.DisplayNameFor(model => model.TransportTo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AdminNotes)
+                @Html.DisplayNameFor(model => model.TravelClass)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TravellerNotes)
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th></th>
         </tr>
     
     @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TransportType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimatedCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripStepId)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BookingDate)
             </td>
@@ -63,17 +42,20 @@
                 @Html.DisplayFor(modelItem => item.TransportTo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AdminNotes)
+                @Html.DisplayFor(modelItem => item.TravelClass)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TravellerNotes)
+                @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
-                @Html.ActionLink("Manage", "EditTripBookingTransport", new { id=item.Id }) 
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.ActionLink("Manage", "EditTripBookingTransport", new { id = item.Id})                 
             </td>
         </tr>
     }
     
     </table>
 </div>
-
+</html>

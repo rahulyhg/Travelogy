@@ -304,6 +304,61 @@ namespace WebApplication1.Controllers
             return View(trip);
         }
 
+        [Authorize]
+        public ActionResult TripBookingTransports()
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var model = context.View_TripBookingTransport;
+            return View(model);
+        }
+
+        [Authorize]
+        public ActionResult EditTripBookingTransport(int id)
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var _model = new AdminTripBookingTransportEditModel()
+            {
+                DbObject = context.View_TripBookingTransport.Where(p => p.Id == id).FirstOrDefault()
+            };
+
+            return View(_model);
+        }
+
+        [Authorize]
+        public ActionResult SaveTripBookingTransport(AdminTripBookingTransportEditModel model)
+        {
+            _CheckForAdminAccess();
+
+            if (model != null)
+            {
+                using (var context = new TravelogyDevEntities1())
+                {
+                    var _booking = context.TripBookingTransports.Find(model.DbObject.Id);
+                    if (_booking != null)
+                    {
+                        _booking.AdminNotes = model.DbObject.AdminNotes;
+                        _booking.Adults = model.DbObject.Adults;
+                        _booking.BookingDate = model.DbObject.BookingDate;
+                        _booking.BookingStatus = model.DbObject.BookingStatus;
+                        _booking.EstimatedCost = model.DbObject.EstimatedCost;
+                        _booking.Kids = model.DbObject.Kids;
+                        _booking.TransportFrom = model.DbObject.TransportFrom;
+                        _booking.TransportTo = model.DbObject.TransportTo;
+                        _booking.TransportType = model.DbObject.TransportType;
+                        _booking.TravelClass = model.DbObject.TravelClass;                        
+
+                        context.SaveChanges();
+                    }
+                }
+            }
+
+            return RedirectToAction("TripBookingTransports");
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -314,9 +369,9 @@ namespace WebApplication1.Controllers
             _CheckForAdminAccess();
 
             var context = new TravelogyDevEntities1();
-            var model = context.TripBookingAccommodations;
+            var model = context.View_TripBookingAccommodation;
             return View(model);
-        }
+        }        
 
         /// <summary>
         /// 
@@ -329,7 +384,11 @@ namespace WebApplication1.Controllers
             _CheckForAdminAccess();
 
             var context = new TravelogyDevEntities1();
-            var _model = new AdminTripBookingAccommodationEditModel() { DbObject = context.TripBookingAccommodations.Find(id) };
+            var _model = new AdminTripBookingAccommodationEditModel()
+            {
+                DbObject = context.View_TripBookingAccommodation.Where(p => p.Id == id).FirstOrDefault()
+            };
+
             return View(_model);
         }
 
@@ -339,7 +398,7 @@ namespace WebApplication1.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult SaveTripBookingAccommodation(TripBookingAccommodation model)
+        public ActionResult SaveTripBookingAccommodation(AdminTripBookingAccommodationEditModel model)
         {
             _CheckForAdminAccess();
 
@@ -347,54 +406,28 @@ namespace WebApplication1.Controllers
             {
                 using (var context = new TravelogyDevEntities1())
                 {
-                    var _booking = context.TripBookingAccommodations.Find(model.Id);
+                    var _booking = context.TripBookingAccommodations.Find(model.DbObject.Id);
                     if(_booking != null)
                     {
-                        _booking.AccommodationType = model.AccommodationType;
-                        _booking.CheckinDate = model.CheckinDate;
-                        _booking.CheckoutDate = model.CheckoutDate;
-                        _booking.EstimatedCost = model.EstimatedCost;
-                        _booking.Notes = model.Notes;
-                        _booking.PropertyAddress = model.PropertyAddress;
-                        _booking.PropertyName = model.PropertyName;
-                        _booking.SpecialRequests = model.SpecialRequests;
-                        _booking.Status = model.Status;
+                        _booking.AccommodationType = model.DbObject.AccommodationType;
+                        _booking.CheckinDate = model.DbObject.CheckinDate;
+                        _booking.CheckoutDate = model.DbObject.CheckoutDate;
+                        _booking.EstimatedCost = model.DbObject.EstimatedCost;
+                        _booking.AdminNotes = model.DbObject.AdminNotes;
+                        _booking.PropertyAddress = model.DbObject.PropertyAddress;
+                        _booking.PropertyName = model.DbObject.PropertyName;                        
+                        _booking.Status = model.DbObject.Status;
+                        _booking.Adults = model.DbObject.Adults;
+                        _booking.Kids = model.DbObject.Kids;
+                        _booking.TownOrCity = model.DbObject.TownOrCity;
 
                         context.SaveChanges();
                     }
                 }
             }
 
-            return View("EditTripBookingAccommodation", model.Id);
+            return RedirectToAction("TripBookingAccommodations");
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [Authorize]
-        public ActionResult TripBookingTransports()
-        {
-            _CheckForAdminAccess();
-
-            var context = new TravelogyDevEntities1();
-            var model = context.TripBookingTransports;
-            return View(model);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [Authorize]
-        public ActionResult EditTripBookingTransport(int id)
-        {
-            _CheckForAdminAccess();
-
-            var context = new TravelogyDevEntities1();
-            var _model = context.TripBookingTransports.Find(id);
-            return View(_model);
-        }
+        
     }
 }

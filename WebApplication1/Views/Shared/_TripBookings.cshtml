@@ -2,6 +2,46 @@
 
 @if (Model != null)
 {
+    if (Model.DlTransportsBookingsView != null)
+    {
+        if (Model.DlTransportsBookingsView.Count == 0)
+        {
+            <div class="row portfolio-item margin-bottom-50">
+                <div class="col-md-12 md-margin-bottom-40">
+                    <h1>No flights have been booked for this trip.</h1>
+                </div>
+            </div>
+        }
+
+        else
+        {
+            foreach (var _transfer in Model.DlTransportsBookingsView)
+            {
+                <div class="row portfolio-item margin-bottom-50">
+                    <!-- Content Info -->
+                    <div class="col-md-12 md-margin-bottom-40">
+                        <h3>Your @_transfer.TransportType : @_transfer.TransportFrom to @_transfer.TransportTo</h3>
+                        <h5 class="orange">
+                            @_transfer.TransportType [@_transfer.TravelClass]
+                            @if (_transfer.BookingDate.HasValue)
+                            {
+                                @_transfer.BookingDate.Value.ToShortDateString()
+                            }
+                            else
+                            {
+                                @Html.Raw("[Not planned yet]")
+                            }
+                        </h5>
+                    <h4>Status: @_transfer.BookingStatus</h4>
+                    <p>Flight bookings are done through the local travel agency who is handling your trip.<br /> Travelogers will update the status of your booking within 2 working days of requesting.</p>
+                    <p><a class="orange" href="/Service/ViewTransferBooking?id=@_transfer.Id">View booking details</a></p>
+                </div>
+                <!-- End Content Info -->
+            </div>
+            }
+        }
+    }
+
     if (Model.DlBookingsView != null)
     {
         if (Model.DlBookingsView.Count == 0)
@@ -21,7 +61,16 @@
                     <!-- Content Info -->
                     <div class="col-md-12 md-margin-bottom-40">
                         <h3>@_booking.ShortDescription : </h3>
-                        <h5 class="orange">@_booking.AccommodationType on @_booking.CheckinDate.Value.ToShortDateString()</h5>
+                        <h5 class="orange">@_booking.AccommodationType on 
+                        @if (_booking.CheckinDate.HasValue)
+                        {
+                            @_booking.CheckinDate.Value.ToShortDateString()
+                        }
+                        else
+                        {
+                            @Html.Raw("[Not planned yet]")
+                        }
+                        </h5>
                         <h4>Status: @_booking.Status</h4>
                         <p>Accommodation bookings are done through the local travel agency who is handling your trip.<br /> Travelogers will update the status of your booking within 2 working days of requesting.</p>
                         <p><a class="orange" href="/Service/ViewAccommodationBooking?id=@_booking.Id">View booking details</a></p>

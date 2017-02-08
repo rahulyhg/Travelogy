@@ -56,6 +56,43 @@ namespace WebApplication1.Models
     /// </summary>
     public class AdminTripBookingAccommodationEditModel
     {
-        public TripBookingAccommodation DbObject { get; set; }
+        public View_TripBookingAccommodation DbObject { get; set; }
+
+        public IEnumerable<SelectListItem> BookingStatusList
+        {
+            get
+            {
+                var dropdownItems = new List<SelectListItem>();
+                dropdownItems.AddRange(new[]{
+                        new SelectListItem() { Text = "--- please select one ---", Value = "" },
+                            new SelectListItem() { Text = AccommodationBookingStatus.requested.ToString(), Value = AccommodationBookingStatus.requested.ToString() },
+                            new SelectListItem() { Text = AccommodationBookingStatus.booked.ToString(), Value = AccommodationBookingStatus.booked.ToString() },
+                            new SelectListItem() { Text = AccommodationBookingStatus.modified.ToString(), Value = AccommodationBookingStatus.modified.ToString() },
+                            new SelectListItem() { Text = AccommodationBookingStatus.cancelled.ToString(), Value = AccommodationBookingStatus.cancelled.ToString()}});
+
+                return dropdownItems;
+            }
+        }
+    }
+
+    public class AdminTripBookingTransportEditModel
+    {
+        public View_TripBookingTransport DbObject { get; set; }
+
+        public IEnumerable<SelectListItem> BookingStatusList
+        {
+            get
+            {
+                var dropdownItems = new List<SelectListItem>();
+                dropdownItems.AddRange(new[]{
+                        new SelectListItem() { Text = "--- please select one ---", Value = "" },
+                            new SelectListItem() { Text = AccommodationBookingStatus.requested.ToString(), Value = AccommodationBookingStatus.requested.ToString() },
+                            new SelectListItem() { Text = AccommodationBookingStatus.booked.ToString(), Value = AccommodationBookingStatus.booked.ToString() },
+                            new SelectListItem() { Text = AccommodationBookingStatus.modified.ToString(), Value = AccommodationBookingStatus.modified.ToString() },
+                            new SelectListItem() { Text = AccommodationBookingStatus.cancelled.ToString(), Value = AccommodationBookingStatus.cancelled.ToString()}});
+
+                return dropdownItems;
+            }
+        }
     }
 }

@@ -68,11 +68,11 @@
                     </div>
                 </div>
 
-                @Html.LabelFor(model => model.Notes)                
+                @Html.LabelFor(model => model.TravellerNotes)                
                 <div class="row margin-bottom-10">
                     <div class="col-md-11 col-md-offset-0">
-                        @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", @rows = 4 })                        
-                        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger"})
+                        @Html.TextAreaFor(model => model.TravellerNotes, new { @class = "form-control", @rows = 4 })                        
+                        @Html.ValidationMessageFor(model => model.TravellerNotes, "", new { @class = "text-danger"})
                     </div>
                 </div>
 

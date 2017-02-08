@@ -9399,8 +9399,6 @@
     <Content Include="Views\Admin\CreateTripProvider.cshtml" />
     <Content Include="Views\Admin\TripBookingAccommodations.cshtml" />
     <Content Include="Views\Admin\EditTripBookingAccommodation.cshtml" />
-    <Content Include="Views\Admin\TripBookingTransports.cshtml" />
-    <Content Include="Views\Admin\EditTripBookingTransport.cshtml" />
     <Content Include="Views\Admin\Message.cshtml" />
     <Content Include="Views\Shared\_TripPlanningPlannedTripSummary.cshtml" />
     <Content Include="Views\Shared\_TripPlannerAdvert.cshtml" />
@@ -9439,6 +9437,11 @@
     <Content Include="Views\India\FestivalsOfIndia.cshtml" />
     <Content Include="Views\Circuit\Russia.cshtml" />
     <Content Include="Views\Service\ViewAccommodationBooking.cshtml" />
+    <Content Include="Views\Admin\TripBookingTransports.cshtml" />
+    <Content Include="Views\Admin\EditTripBookingTransport.cshtml" />
+    <Content Include="Views\Service\FlightBooking.cshtml" />
+    <Content Include="Views\Service\LocalTransfer.cshtml" />
+    <Content Include="Views\Service\ViewTransferBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

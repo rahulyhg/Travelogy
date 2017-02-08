@@ -21,10 +21,7 @@
 @if (Model.ActiveTrip != null)
 {
     <div class="headline">
-        <h2>Your trip to: @Model.ActiveTrip.DlTripView.Name</h2> 
-        <div class="pull-right">
-            <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.DlTripView.Id" class="btn btn-orange"> Edit trip &nbsp; <i class="icon-edit"></i></a>
-        </div>        
+        <h2>Your trip to: @Model.ActiveTrip.DlTripView.Name</h2>                 
     </div>    
     <div class="row">
         <div class="col-sm-4 info-blocks">
@@ -56,7 +53,11 @@
         </div>
     </div>
 
-    <hr class="margin-bottom-40">   
+    <hr class="margin-bottom-40">
+    <div class="pull-left">
+        <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.DlTripView.Id" class="btn btn-orange"> Edit trip &nbsp; <i class="icon-edit"></i></a>
+    </div>
+    <div class="margin-bottom-10"></div>
 
     <div class="tab-v1">
         <ul class="nav nav-tabs">

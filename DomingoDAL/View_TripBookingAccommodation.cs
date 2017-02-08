@@ -17,19 +17,26 @@ namespace DomingoDAL
         public int Id { get; set; }
         public string AccommodationType { get; set; }
         public decimal EstimatedCost { get; set; }
-        public int TripId { get; set; }
+        public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Description { get; set; }
+        public Nullable<System.DateTime> TripStartDate { get; set; }
+        public string Destination { get; set; }
+        public string ShortDescription { get; set; }
+        public Nullable<System.DateTime> TripStepStartDate { get; set; }
         public Nullable<int> TripStepId { get; set; }
         public Nullable<System.DateTime> CheckinDate { get; set; }
         public string Status { get; set; }
-        public string Notes { get; set; }
+        public string TravellerNotes { get; set; }
+        public string AdminNotes { get; set; }
         public string PropertyName { get; set; }
         public string PropertyAddress { get; set; }
         public string SpecialRequests { get; set; }
         public Nullable<System.DateTime> CheckoutDate { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public string StartLocation { get; set; }
-        public Nullable<System.DateTime> Expr1 { get; set; }
-        public string Destination { get; set; }
-        public string ShortDescription { get; set; }
+        public Nullable<int> Adults { get; set; }
+        public Nullable<int> Kids { get; set; }
+        public int TripId { get; set; }
+        public string TownOrCity { get; set; }
     }
 }

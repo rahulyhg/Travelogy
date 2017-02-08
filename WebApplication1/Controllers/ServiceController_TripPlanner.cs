@@ -268,6 +268,12 @@ namespace WebApplication1.Controllers
             return View("AccommodationBooking", model);
         }
 
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult ViewAccommodationBooking(int id)
         {
             TripBookingAccommodation accommodation = null;
@@ -280,11 +286,13 @@ namespace WebApplication1.Controllers
             var model = new AccommodationBookingViewModel()
             {
                 AccommodationType = accommodation.AccommodationType,
-                CheckinDate = accommodation.CheckinDate.Value,
-                CheckoutDate = accommodation.CheckoutDate.Value,
-                Notes = accommodation.Notes,
+                CheckinDate = accommodation.CheckinDate.HasValue ? accommodation.CheckinDate.Value : DateTime.MinValue,
+                CheckoutDate = accommodation.CheckoutDate.HasValue ? accommodation.CheckoutDate.Value : DateTime.MinValue,
+                TravellerNotes = accommodation.TravellerNotes,
                 SpecialRequests = accommodation.SpecialRequests,
                 BookingStatus = accommodation.Status,
+                AdminNotes = accommodation.AdminNotes,
+                TripId = accommodation.TripId,
             };
             
             return View(model);
@@ -305,7 +313,7 @@ namespace WebApplication1.Controllers
                 AccommodationType = model.AccommodationType,
                 CheckinDate = model.CheckinDate,
                 CheckoutDate = model.CheckoutDate,
-                Notes = model.Notes,
+                TravellerNotes = model.TravellerNotes,
                 SpecialRequests = model.SpecialRequests,
                 Status = AccommodationBookingStatus.requested.ToString(),
                 TripId = model.TripId,
@@ -323,6 +331,113 @@ namespace WebApplication1.Controllers
                 return View("AccommodationBooking", model);
             }
             
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <param name="tripStepId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult AddFlightBooking(int tripId, int tripStepId = 0)
+        {
+            BlViewTrip tripObj = null;
+            var blError = TripManager.GetTripById(tripId, out tripObj);
+            if (blError.ErrorCode > 0)
+            {
+                throw new ApplicationException(blError.ErrorMessage);
+            }
+
+            View_TripStep tripStepObj = null;
+            if(tripStepId > 0)
+            {
+                tripObj.DlTripStepsView.FirstOrDefault(p => p.Id == tripStepId);
+                if (tripStepObj == null)
+                {
+                    throw new ApplicationException(string.Format("Invalid parameter - [TripStepId:{0}]", tripStepId));
+                }
+            }            
+
+            var model = new FlightBookingViewModel()
+            {
+                TripBookingTransportId = 0,
+                TripId = tripId,
+                TripStepId = tripStepId,
+                TripName = tripObj.DlTripView.Name,
+                TripDescription = tripObj.DlTripView.Description
+            };
+
+            return View("FlightBooking", model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async System.Threading.Tasks.Task<ActionResult> SaveFlightBookingAccommodationAsync(FlightBookingViewModel model)
+        {
+            var _booking = new TripBookingTransport();
+
+            _booking.TransportType = "flight";
+            _booking.TripId = model.TripId;
+            _booking.TripStepId = model.TripStepId;
+
+            _booking.Id = model.TripBookingTransportId;
+            _booking.Adults = model.Adults;
+            _booking.BookingDate = model.FlightDate;
+            _booking.BookingStatus = TransferBookingStatus.requested.ToString();
+            _booking.Kids = model.Kids;
+            _booking.TransportFrom = model.From;
+            _booking.TransportTo = model.To;
+            _booking.TravelClass = model.FlightClass;
+            _booking.TravellerNotes = model.TravellerNotes;
+
+            var blError = await TripManager.SaveTripBookingTransportAsync(_booking);
+
+            return RedirectToAction("EditTrip", new { @tripId = model.TripId });
+        }
+
+        [Authorize]
+        public ActionResult ViewTransferBooking(int id)
+        {
+            View_TripBookingTransport transfer = null;
+            var blError = TripManager.GetTripBookingTransport(id, out transfer);
+            if(blError.ErrorCode > 0)
+            {
+                throw new ApplicationException(blError.ErrorMessage);
+            }
+
+            var model = new FlightBookingViewModel()
+            {
+                TripId = transfer.TripId,
+                Adults = transfer.Adults.HasValue ? transfer.Adults.Value : 0,
+                BookingStatus = transfer.BookingStatus,
+                FlightClass = transfer.TravelClass,
+                FlightDate = transfer.BookingDate.HasValue ? transfer.BookingDate.Value : DateTime.MinValue,
+                From = transfer.TransportFrom, To = transfer.TransportTo,
+                Kids = transfer.Kids.HasValue ? transfer.Kids.Value : 0,
+                TravellerNotes = transfer.TravellerNotes, AdminNotes = transfer.AdminNotes                                                
+            };
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <param name="tripStepId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult AddLocalTransfer(int tripId, int tripStepId = 0)
+        {
+            var model = new LocalTransferViewModel()
+            {
+                TripId = tripId,
+                TripStepId = tripStepId
+            };
+
+            return View("LocalTransfer", model);
         }
     }
 }

@@ -24,8 +24,6 @@
         <EntityTypeShape EntityType="TravelogyDevModel.ThreadMessage" Width="1.5" PointX="10.625" PointY="3.5" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_Thread" Width="1.5" PointX="14" PointY="0.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_ThreadMessage" Width="1.5" PointX="12.375" PointY="0.75" />
-        <EntityTypeShape EntityType="TravelogyDevModel.TripBookingAccommodation" Width="1.5" PointX="0.75" PointY="11.75" />
-        <EntityTypeShape EntityType="TravelogyDevModel.TripBookingTransport" Width="1.5" PointX="13.75" PointY="4.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.Traveller" Width="1.5" PointX="11.375" PointY="13.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.HtmlEmail" Width="1.5" PointX="13.375" PointY="13.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.HtmlEmailTemplate" Width="1.5" PointX="3.375" PointY="14.75" />
@@ -36,10 +34,13 @@
         <EntityTypeShape EntityType="TravelogyDevModel.TripTemplateStep" Width="1.5" PointX="8.375" PointY="11.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_Trip" Width="1.5" PointX="13.375" PointY="8.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_TripStep" Width="1.5" PointX="7.375" PointY="15.75" />
-        <EntityTypeShape EntityType="TravelogyDevModel.View_TripBookingAccommodation" Width="1.5" PointX="15.375" PointY="8.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.Tag" Width="1.5" PointX="1.75" PointY="19" />
         <EntityTypeShape EntityType="TravelogyDevModel.TagMap" Width="1.5" PointX="3.375" PointY="11.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_TagDestination" Width="1.5" PointX="15.375" PointY="14.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.TripBookingAccommodation" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.TripBookingTransport" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.View_TripBookingAccommodation" Width="1.5" PointX="15.375" PointY="5.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.View_TripBookingTransport" Width="1.5" PointX="17.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

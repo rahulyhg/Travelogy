@@ -47,11 +47,30 @@
         @Html.AntiForgeryToken();
         @Html.HiddenFor(p => p.ActiveTrip.DlTripView.Id);
 
-        <div class="row pull-right">
+        <div class="row pull-left">
             <div class="col-md-12">
-                <p><button class="btn btn-orange" type="submit"><i class="icon-save"></i>&nbsp; Save trip</button></p>
+                
+                <button class="btn btn-orange" type="submit"><i class="icon-save"></i>&nbsp; Save trip</button>
+                <div class="margin-bottom-10"></div>
+
+                @if(Model.ActiveTrip.DlTransportsBookingsView != null)
+                {
+                    if(Model.ActiveTrip.DlTransportsBookingsView.Count > 0)
+                    {
+                        var _bookings = Model.ActiveTrip.DlTransportsBookingsView.Where(p => p.TripStepId == 0).ToList();
+                        foreach(var _booking in _bookings)
+                        {
+                            <h4 class="orange">Flight booking# @_booking.Id</h4>
+                            <p>@_booking.TransportFrom to @_booking.TransportTo on @_booking.BookingDate.Value.ToShortDateString()</p>
+                        }
+                    }
+                }
+
+                <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@Model.ActiveTrip.DlTripView.Id"><i class="icon-plane"></i>&nbsp; Add Flight Booking</a>
+                
             </div>
         </div>
+        <div class="margin-bottom-20"></div>
 
         <div class="tab-v1">
             <ul class="nav nav-tabs">
@@ -110,9 +129,13 @@
                                     <div class="col-md-9">
                                         <h5>Add notes:</h5>
                                         <p>@Html.TextAreaFor(p => p.ActiveTrip.DlTripStepsView[x].TravellerNote, new { @class = "form-control" })</p>
+                                        <div class="margin-bottom-20"></div>
                                         <button class="btn btn-default" type="submit">Save Notes</button>
+                                        <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@tripStep.TripId&tripStepId=@tripStep.Id"><i class="icon-plane"></i>&nbsp; Add Local Flight</a>                                        
+                                        <a class="btn btn-default" href="/Service/AddLocalTransfer?TripId=@tripStep.TripId&tripStepId=@tripStep.Id"><i class="icon-cog"></i>&nbsp; Add Local Transfer</a>
+                                        <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId"><i class="icon-building"></i>&nbsp;Add Accommodation</a>
+                                        <div class="margin-bottom-20"></div>
                                         <button class="btn btn-orange" type="submit">Save Trip</button>
-                                        <a class="btn btn-orange" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId">Request Accommodation</a>
                                     </div>                                    
                                 </div>
                                 <hr />

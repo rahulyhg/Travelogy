@@ -33,6 +33,17 @@ namespace DomingoBL
         cancelled
     }
 
+    public enum TransferBookingStatus
+    {
+        requested,
+
+        booked,
+
+        modified,
+
+        cancelled
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -60,9 +71,13 @@ namespace DomingoBL
                         // get all the steps and bookings and add to the BL object
                         var dlTripSteps = context.View_TripStep.Where(p => p.TripId == dlTrip.Id);
                         var dlTripBookings = context.View_TripBookingAccommodation.Where(p => p.TripId == dlTrip.Id);
+                        var dlTransferBookings = context.View_TripBookingTransport.Where(p => p.TripId == dlTrip.Id);
+                        
                         var blTrip = new BlViewTrip() { DlTripView = dlTrip }; 
                         blTrip.DlTripStepsView = (dlTripSteps != null) ? dlTripSteps.ToList() : null;
                         blTrip.DlBookingsView = (dlTripBookings != null) ? dlTripBookings.ToList() : null;
+                        blTrip.DlTransportsBookingsView = (dlTransferBookings != null) ? dlTransferBookings.ToList() : null;
+
                         trips.Add(blTrip);
                     }
                 }
@@ -276,6 +291,85 @@ namespace DomingoBL
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="bookingId"></param>
+        /// <param name="transfer"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetTripBookingTransport(int bookingId, out View_TripBookingTransport transfer)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    transfer = context.View_TripBookingTransport.Where(p => p.Id == bookingId).FirstOrDefault();
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                transfer = null;
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="booking"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> SaveTripBookingTransportAsync(TripBookingTransport booking)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    if (booking.Id == 0)
+                    {
+                        context.TripBookingTransports.Add(booking);
+                        await context.SaveChangesAsync();
+                    }
+
+                    else
+                    {
+                        var _dbBooking = context.TripBookingTransports.Find(booking.Id);
+                        if (_dbBooking != null)
+                        {
+                            _dbBooking.AdminNotes = booking.AdminNotes;
+                            _dbBooking.Adults = booking.Adults;
+                            if (booking.BookingDate.HasValue)
+                            {
+                                _dbBooking.BookingDate = booking.BookingDate;
+                            }
+                            _dbBooking.BookingStatus = booking.BookingStatus;
+                            if(booking.EstimatedCost > 0)
+                            {
+                                _dbBooking.EstimatedCost = booking.EstimatedCost;
+                            }
+
+                            _dbBooking.Kids = booking.Kids;
+                            _dbBooking.TransportFrom = booking.TransportFrom;
+                            _dbBooking.TransportTo = booking.TransportTo;
+                            _dbBooking.TransportType = booking.TransportType;
+                            _dbBooking.TravelClass = booking.TravelClass;
+                            _dbBooking.TravellerNotes = booking.TravellerNotes;
+
+                            await context.SaveChangesAsync();
+                        }
+                    }
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="accommodation"></param>
         /// <returns></returns>
         public static async Task<DomingoBlError> SaveTripBookingAccommodationAsync(TripBookingAccommodation accommodation)
@@ -301,6 +395,30 @@ namespace DomingoBL
                         if(_dbAccommodation != null)
                         {
                             // save 
+                            _dbAccommodation.AccommodationType = accommodation.AccommodationType;
+                            _dbAccommodation.AdminNotes = accommodation.AdminNotes;
+                            _dbAccommodation.Adults = accommodation.Adults;
+
+                            if(accommodation.CheckinDate.HasValue)
+                            {
+                                _dbAccommodation.CheckinDate = accommodation.CheckinDate;
+                            }
+
+                            if(accommodation.CheckoutDate.HasValue)
+                            {
+                                _dbAccommodation.CheckoutDate = accommodation.CheckoutDate;
+                            }
+
+                            _dbAccommodation.EstimatedCost = accommodation.EstimatedCost;
+                            _dbAccommodation.Kids = accommodation.Kids;
+                            _dbAccommodation.PropertyAddress = accommodation.PropertyAddress;
+                            _dbAccommodation.PropertyName = accommodation.PropertyName;
+                            _dbAccommodation.SpecialRequests = accommodation.SpecialRequests;
+                            _dbAccommodation.Status = accommodation.Status;
+                            _dbAccommodation.TownOrCity = accommodation.TownOrCity;
+                            _dbAccommodation.TravellerNotes = accommodation.TravellerNotes;
+
+                            await context.SaveChangesAsync();
                         }
                     }
                 }
@@ -452,6 +570,7 @@ namespace DomingoBL
                     viewTrip.DlTripView = context.View_Trip.Where(p => p.Id == tripId).FirstOrDefault();
                     viewTrip.DlTripStepsView = dlTripSteps.ToList();
                     viewTrip.DlBookingsView = context.View_TripBookingAccommodation.Where(p => p.TripId == tripId).ToList();
+                    viewTrip.DlTransportsBookingsView = context.View_TripBookingTransport.Where(p => p.TripId == tripId).ToList();
                 }
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
             }
@@ -477,6 +596,8 @@ namespace DomingoBL
                     var dlTripSteps = context.TripSteps.Where(p => p.TripId == tripId);
                     trip.DlTrip = context.Trips.Find(tripId);
                     trip.DlTripSteps = dlTripSteps.ToList();
+                    trip.DlBookingsView = context.View_TripBookingAccommodation.Where(p => p.TripId == tripId).ToList();
+                    trip.DlTransportsBookingsView = context.View_TripBookingTransport.Where(p => p.TripId == tripId).ToList();
                 }
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
             }
