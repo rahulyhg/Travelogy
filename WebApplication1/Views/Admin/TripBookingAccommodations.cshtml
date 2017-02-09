@@ -1,38 +1,29 @@
 ﻿@model IEnumerable<DomingoDAL.View_TripBookingAccommodation>
 
+@Html.Partial("_HomepageCarousel")
+
+<div class="headline">
+    <h2>Manage Accommodation booking requests</h2>
+</div>
+
 <div>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AccommodationType)
+                Type
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EstimatedCost)
+                Check-in
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TripId)
+                Check-out
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TripStepId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CheckinDate)
+                Property Name
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>            
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SpecialRequests)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CheckoutDate)
-            </th>
             <th></th>
         </tr>
     
@@ -42,34 +33,19 @@
                 @Html.DisplayFor(modelItem => item.AccommodationType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EstimatedCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripStepId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.CheckinDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>            
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertyAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpecialRequests)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CheckoutDate)
             </td>
             <td>
-                @Html.ActionLink("Manage", "EditTripBookingAccommodation", new { id=item.Id })                 
+                @Html.DisplayFor(modelItem => item.PropertyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>            
+            <td>
+                @Html.ActionLink("Manage", "EditTripBookingAccommodation", new { id=item.Id }, new { @class = "btn btn-orange" })                 
             </td>
         </tr>
     }

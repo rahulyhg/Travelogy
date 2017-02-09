@@ -22,5 +22,7 @@ namespace DomingoDAL
         public string AdditionalHtml { get; set; }
         public string NightStay { get; set; }
         public string TripTemplateStepIdentifier { get; set; }
+        public string Destination { get; set; }
+        public Nullable<int> TypicalDurationDays { get; set; }
     }
 }

@@ -583,6 +583,31 @@ namespace DomingoBL
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="tripStepId"></param>
+        /// <param name="step"></param>
+        /// <returns></returns>
+        public static DomingoBlError Admin_GetTripStepById(int tripStepId, out View_TripStep step)
+        {
+            step = null;
+
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    step = context.View_TripStep.Where(p => p.Id == tripStepId).FirstOrDefault();
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="tripId"></param>
         /// <param name="trip"></param>
         /// <returns></returns>

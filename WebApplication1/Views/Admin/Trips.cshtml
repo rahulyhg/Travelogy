@@ -1,31 +1,37 @@
 ﻿@model IEnumerable<DomingoDAL.Trip>
 
+@Html.Partial("_HomepageCarousel")
+
+<div class="headline">
+    <h2>Manage Trips</h2>
+</div>
+
 <div>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StartDate)
+                Trip Start Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartLocation)
+                Start Location
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndDate)
+                Trip End Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndLocation)
+                End Location
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PaxAdults)
+                Adults
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PaxMinors)
+                Minors
             </th>
             <th></th>
         </tr>
@@ -57,7 +63,7 @@
                 @Html.DisplayFor(modelItem => item.PaxMinors)
             </td>
             <td>
-                @Html.ActionLink("Manage", "TripManagement", new { id=item.Id })                 
+                @Html.ActionLink("Manage", "TripManagement", new { id=item.Id }, new { @class = "btn btn-orange" })                 
             </td>
         </tr>
     }

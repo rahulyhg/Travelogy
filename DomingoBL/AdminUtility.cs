@@ -78,6 +78,9 @@ namespace DomingoBL
                             _tripTemmplateStep.LongDescription = templateStep.LongDescription;
                             _tripTemmplateStep.NightStay = templateStep.NightStay;
                             _tripTemmplateStep.ThumbnailPath = templateStep.ThumbnailPath;
+                            _tripTemmplateStep.Destination = templateStep.Destination;
+                            _tripTemmplateStep.TypicalDurationDays = templateStep.TypicalDurationDays;
+
                             await context.SaveChangesAsync();
                         }
 
@@ -89,7 +92,9 @@ namespace DomingoBL
                                 ShortDescription = templateStep.ShortDescription,
                                 LongDescription = templateStep.LongDescription,
                                 NightStay = templateStep.NightStay,
-                                ThumbnailPath = templateStep.ThumbnailPath
+                                ThumbnailPath = templateStep.ThumbnailPath,
+                                Destination = templateStep.Destination,
+                                TypicalDurationDays = templateStep.TypicalDurationDays,
                             };
 
                             context.TripTemplateSteps.Add(_tripTemmplateStep);
@@ -197,6 +202,156 @@ namespace DomingoBL
 
                             await context.SaveChangesAsync();
                         }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> SaveTripBookingTransport(View_TripBookingTransport model)
+        {
+            try
+            {
+                if (model != null)
+                {
+                    using (var context = new TravelogyDevEntities1())
+                    {
+                        var _booking = context.TripBookingTransports.Find(model.Id);
+                        if (_booking != null)
+                        {
+                            _booking.AdminNotes = model.AdminNotes;
+                            _booking.Adults = model.Adults;
+                            _booking.BookingDate = model.BookingDate;
+                            _booking.BookingStatus = model.BookingStatus;
+                            _booking.EstimatedCost = model.EstimatedCost;
+                            _booking.Kids = model.Kids;
+                            _booking.TransportFrom = model.TransportFrom;
+                            _booking.TransportTo = model.TransportTo;
+                            _booking.TransportType = model.TransportType;
+                            _booking.TravelClass = model.TravelClass;
+
+                            await context.SaveChangesAsync();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> SaveTripBookingAccommodation(View_TripBookingAccommodation model)
+        {
+            try
+            {
+                if (model != null)
+                {
+                    using (var context = new TravelogyDevEntities1())
+                    {
+                        var _booking = context.TripBookingAccommodations.Find(model.Id);
+                        if (_booking != null)
+                        {
+                            _booking.AccommodationType = model.AccommodationType;
+                            _booking.CheckinDate = model.CheckinDate;
+                            _booking.CheckoutDate = model.CheckoutDate;
+                            _booking.EstimatedCost = model.EstimatedCost;
+                            _booking.AdminNotes = model.AdminNotes;
+                            _booking.PropertyAddress = model.PropertyAddress;
+                            _booking.PropertyName = model.PropertyName;
+                            _booking.Status = model.Status;
+                            _booking.Adults = model.Adults;
+                            _booking.Kids = model.Kids;
+                            _booking.TownOrCity = model.TownOrCity;
+
+                            await context.SaveChangesAsync();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trip"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> SaveTrip(Trip trip)
+        {
+            try
+            {
+                using (var context = new TravelogyDevEntities1())
+                {
+                    var _dbTrip = context.Trips.Find(trip.Id);
+                    if(_dbTrip != null)
+                    {
+                        if (trip.EndDate.HasValue) { _dbTrip.EndDate = trip.EndDate; }
+                        if (trip.StartDate.HasValue) { _dbTrip.StartDate = trip.StartDate; }                        
+                        _dbTrip.PaxAdults = trip.PaxAdults;
+                        _dbTrip.PaxMinors = trip.PaxMinors;
+                        if (!string.IsNullOrEmpty(trip.Status)) { _dbTrip.Status = trip.Status; }
+                        if (!string.IsNullOrEmpty(trip.StartLocation)) { _dbTrip.StartLocation = trip.StartLocation; }
+                        if (!string.IsNullOrEmpty(trip.EndLocation)) { _dbTrip.EndLocation = trip.EndLocation; }
+                        if (!string.IsNullOrEmpty(trip.Description)) { _dbTrip.Description = trip.Description; }
+
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripStep"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> SaveTripStep(View_TripStep tripStep)
+        {
+            try
+            {
+                using (var context = new TravelogyDevEntities1())
+                {
+                    var _dbTripStep = context.TripSteps.Find(tripStep.Id);
+                    if (_dbTripStep != null)
+                    {
+                        _dbTripStep.Destination = tripStep.Destination;
+                        if (tripStep.StartDate.HasValue) { _dbTripStep.StartDate = tripStep.StartDate; }
+                        if (tripStep.EndDate.HasValue) { _dbTripStep.EndDate = tripStep.EndDate; }
+                        _dbTripStep.LongDescription = tripStep.LongDescription;
+                        _dbTripStep.NightStay = tripStep.NightStay;
+                        _dbTripStep.ShortDescription = tripStep.ShortDescription;
+                        _dbTripStep.TravelogerNote = tripStep.TravelogerNote;
+
+                        await context.SaveChangesAsync();
                     }
                 }
             }

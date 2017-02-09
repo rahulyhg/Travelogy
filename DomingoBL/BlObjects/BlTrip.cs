@@ -31,6 +31,10 @@ namespace DomingoBL.BlObjects
         /// 
         /// </summary>
         public List<View_TripBookingTransport> DlTransportsBookingsView { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>        
     }
 
     /// <summary>

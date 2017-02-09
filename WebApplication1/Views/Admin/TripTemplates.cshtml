@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<DomingoDAL.TripTemplate>
 
+
+@Html.Partial("_HomepageCarousel")
+
     <p>
         @Html.ActionLink("Create New", "CreateTripTemplate")
     </p>
@@ -35,9 +38,7 @@
                 @Html.DisplayFor(modelItem => item.SearchAlias)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditTripTemplate", new { id=item.Id }) |
-                @*@Html.ActionLink("Edit Steps", "EditTripTemplateSteps", new { id = item.Id }) |*@
-                @Html.ActionLink("Delete", "DeleteTripTemplate", new { id=item.Id })
+                @Html.ActionLink("Edit", "EditTripTemplate", new { id=item.Id }) 
             </td>
         </tr>
     }

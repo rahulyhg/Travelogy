@@ -1,5 +1,7 @@
 ﻿@model List<DomingoDAL.Thread>
 
+@Html.Partial("_HomepageCarousel")
+
 <div class="panel panel-orange margin-bottom-40">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="icon-user"></i> Admin message center</h3>
@@ -25,7 +27,7 @@
                         <td>@item.Title</td>
                         <td>@item.CreatedDate</td>
                         <td>@item.MostRecentPostDate</td>
-                        <td><a href="/admin/message?id=@item.Id"><button class="btn btn-warning btn-xs"><i class="icon-pencil"></i> Edit</button></a></td>
+                        <td><a class="btn btn-warning btn-xs" href="/admin/message?id=@item.Id"><i class="icon-envelope"></i> View</a></td>
                     </tr>
                 }
             </tbody>

@@ -359,6 +359,8 @@
           <Property Name="AdditionalHtml" Type="ntext" />
           <Property Name="NightStay" Type="nvarchar" MaxLength="255" />
           <Property Name="TripTemplateStepIdentifier" Type="nvarchar" MaxLength="20" />
+          <Property Name="Destination" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypicalDurationDays" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TravelogyDev.dbo.View_TagDestination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -527,6 +529,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="TravellerNote" Type="ntext" />
           <Property Name="TravelogerNote" Type="ntext" />
           <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="255" />
+          <Property Name="TypicalDurationDays" Type="int" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -729,7 +732,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
     [View_TripStep].[NightStay] AS [NightStay], 
     [View_TripStep].[TravellerNote] AS [TravellerNote], 
     [View_TripStep].[TravelogerNote] AS [TravelogerNote], 
-    [View_TripStep].[ThumbnailPath] AS [ThumbnailPath]
+    [View_TripStep].[ThumbnailPath] AS [ThumbnailPath], 
+    [View_TripStep].[TypicalDurationDays] AS [TypicalDurationDays]
     FROM [dbo].[View_TripStep] AS [View_TripStep]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -1163,6 +1167,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NightStay" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="TripTemplateStepIdentifier" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypicalDurationDays" Type="Int32" />
         </EntityType>
         <EntityType Name="View_Trip">
           <Key>
@@ -1206,6 +1212,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="TravellerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TravelogerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TypicalDurationDays" Type="Int32" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -1678,6 +1685,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="TripTemplateSteps">
             <EntityTypeMapping TypeName="TravelogyDevModel.TripTemplateStep">
               <MappingFragment StoreEntitySet="TripTemplateStep">
+                <ScalarProperty Name="TypicalDurationDays" ColumnName="TypicalDurationDays" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
                 <ScalarProperty Name="TripTemplateStepIdentifier" ColumnName="TripTemplateStepIdentifier" />
                 <ScalarProperty Name="NightStay" ColumnName="NightStay" />
                 <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
@@ -1712,6 +1721,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="View_TripStep">
             <EntityTypeMapping TypeName="TravelogyDevModel.View_TripStep">
               <MappingFragment StoreEntitySet="View_TripStep">
+                <ScalarProperty Name="TypicalDurationDays" ColumnName="TypicalDurationDays" />
                 <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
                 <ScalarProperty Name="TravelogerNote" ColumnName="TravelogerNote" />
                 <ScalarProperty Name="TravellerNote" ColumnName="TravellerNote" />

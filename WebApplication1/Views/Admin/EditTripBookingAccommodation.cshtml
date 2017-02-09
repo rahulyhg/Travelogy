@@ -1,7 +1,9 @@
 ﻿@model WebApplication1.Models.AdminTripBookingAccommodationEditModel
 
+@Html.Partial("_HomepageCarousel")
+
 <div>
-    @using (Html.BeginForm("SaveTripBookingAccommodation", "Admin", new { ReturnUrl = "" }))
+    @using (Html.BeginForm("SaveTripBookingAccommodationAsync", "Admin", new { ReturnUrl = "" }))
     {
         @Html.AntiForgeryToken()
         

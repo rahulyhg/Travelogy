@@ -83,16 +83,16 @@ namespace WebApplication1.Controllers
             {
                 case SignInStatus.Success:
                     // trace the login
-                    DomingoUserManager.TraceSession(model.Email, "/Account/Login - Success");
+                    await DomingoUserManager.TraceSession(model.Email, "/Account/Login - Success");
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
-                    DomingoUserManager.TraceSession(model.Email, "/Account/Login - Lockout");
+                    await DomingoUserManager.TraceSession(model.Email, "/Account/Login - Lockout");
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    DomingoUserManager.TraceSession(model.Email, "/Account/Login - Invalid login attempt");
+                    await DomingoUserManager.TraceSession(model.Email, "/Account/Login - Invalid login attempt");
                     model.LoginFailureMessage = "Sorry your login details do not match!";
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);

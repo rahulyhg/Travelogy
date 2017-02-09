@@ -1,5 +1,7 @@
 ﻿@model WebApplication1.Models.AdminEditTripTemplateViewModel
 
+@Html.Partial("_HomepageCarousel")
+
 <div>
     @using (Html.BeginForm("SaveTripTemplateAsync", "Admin", new { ReturnUrl = "" }))
     {
