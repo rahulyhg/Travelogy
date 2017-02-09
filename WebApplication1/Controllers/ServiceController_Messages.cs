@@ -92,11 +92,8 @@ namespace WebApplication1.Controllers
                 }
 
                 else
-                {
-                    BlViewTrip trip = null;
-                    _blError = TripManager.GetTripById(_model.TripId, out trip);
-                    var _tripViewModel = new TripViewModel() { ActiveTrip = trip };
-                    return View("Trip", _tripViewModel);
+                {                    
+                    return RedirectToAction("EditTrip", new { @tripId = _model.TripId } );
                 }
             }
 
@@ -137,7 +134,7 @@ namespace WebApplication1.Controllers
 
             if (tripId != 0)
             {
-                return RedirectToAction("TripPlanning");
+                return RedirectToAction("EditTrip", new { @tripId = tripId });
             }
 
             return RedirectToAction("MessageCenter");

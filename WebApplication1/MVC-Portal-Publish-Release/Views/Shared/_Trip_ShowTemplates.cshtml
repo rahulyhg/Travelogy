@@ -2,22 +2,38 @@
 
 @if (@Model.AllTemplates != null)
 {
-    <h1>Choose a Trip to start:</h1>
-
-    foreach (var _template in @Model.AllTemplates)
-    {
-        <div class="row tag-box tag-box-v5">
-            <div class="col-md-8">
-                <span>@_template.Name</span>
-                <h2>@_template.Description</h2>
+    <div class="headline"><h2>Choose a circuit to start planning:</h2></div>
+    <hr class="margin-bottom-40">
+    <div class="row">
+        <div class="col-sm-4 info-blocks">
+            <i class="icon-lightbulb icon-info-blocks"></i>
+            <div class="info-blocks-in">
+                <h3>Great ideas for exotic trips</h3>
+                <p>Great ideas for trips to India, Nepal, Bhutan, Tibet, Russia, Mongolia and Tanzania. The itineraries have been prepared by expert travellers.</p>
             </div>
-            <a href="/Service/CreateTripFromTemplate?templateId=@_template.Id">
-                <div class="col-md-4">
-                    <p><button class="btn-u btn-u-lg btn-u-orange"><i class="icon-cogs "></i> Create trip</button></p>
-                </div>
-            </a>
         </div>
-    }
+        <div class="col-sm-4 info-blocks">
+            <i class="icon-laptop icon-info-blocks"></i>
+            <div class="info-blocks-in">
+                <h3>FREE Online trip planner</h3>
+                <p>Use our online planning tool for planning, booking and managing your trips. </p>
+            </div>
+        </div>
+        <div class="col-sm-4 info-blocks">
+            <i class="icon-user icon-info-blocks"></i>
+            <div class="info-blocks-in">
+                <h3>Expert Travel advisers</h3>
+                <p>Our service is backed up by expert advisers and local travel agencies in every location we offer. Have local knowlede at your fingertips</p>
+            </div>
+        </div>
+    </div>
+    <hr class="margin-bottom-20">
+
+    for (var i = 0; i < Model.AllTemplates.Count; i++)
+    {
+        var item = Model.AllTemplates[i];
+        @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = 0, TripTemplate = item })
+    }    
 }
 
 

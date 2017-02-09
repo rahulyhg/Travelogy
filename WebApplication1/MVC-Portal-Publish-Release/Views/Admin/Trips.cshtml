@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DomingoDAL.Trip>
+
+@Html.Partial("_HomepageCarousel")
+
+<div class="headline">
+    <h2>Manage Trips</h2>
+</div>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                Trip Start Date
+            </th>
+            <th>
+                Start Location
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                Trip End Date
+            </th>
+            <th>
+                End Location
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                Adults
+            </th>
+            <th>
+                Minors
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaxAdults)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaxMinors)
+            </td>
+            <td>
+                @Html.ActionLink("Manage", "TripManagement", new { id=item.Id }, new { @class = "btn btn-orange" })                 
+            </td>
+        </tr>
+    }
+    
+    </table>
+</div>
+

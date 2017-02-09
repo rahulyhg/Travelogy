@@ -3,26 +3,30 @@
     <div class="row">
     @if (!Request.IsAuthenticated)
     {
-        <div class="col-md-5">
+        <div class="col-md-6 col-sm-12">
             <!-- Contact Form -->
             <div class="contact-form">
                 <h5>Contact Form</h5>
                 <!-- Form -->
-                <form class="form" role="form" action="https://service.capsulecrm.com/service/newlead" method="post">
+                <form class="form" role="form" action="/Information/ContactUsFormSubmitAsync" method="post">
                     <!-- Form Group -->
-                    <input type="hidden" name="FORM_ID" value="bc313251-2d8c-495f-ae19-4befcca7896e">
-                    <input type="hidden" name="COMPLETE_URL" value="http://travelogyclub.com/v2/formsubmitted.html">
+                    @Html.AntiForgeryToken()
+                    @*<input type="hidden" name="FORM_ID" value="bc313251-2d8c-495f-ae19-4befcca7896e">
+                    <input type="hidden" name="COMPLETE_URL" value="http://travelogyclub.com/v2/formsubmitted.html">*@
                     <div class="form-group">
-                        <input type="text" class="form-control" id="FIRST_NAME" placeholder="First Name" required>
+                        <input type="text" class="form-control" id="FIRST_NAME" name="FIRST_NAME" placeholder="First Name (Required)" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="LAST_NAME" placeholder="Last Name" required>
+                        <input type="text" class="form-control" id="LAST_NAME" name="LAST_NAME" placeholder="Last Name (Required)" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="EMAIL" placeholder="Enter Email" required>
+                        <input type="email" class="form-control" id="EMAIL" name="EMAIL" placeholder="Enter Email (Required)" required>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" id="CUSTOMFIELD[TRIP_REQUEST]" rows="6" placeholder="Enter Message"></textarea>
+                        <input type="email" class="form-control" id="PHONE" name="PHONE" placeholder="Phone Number (Optional)">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="CUSTOMFIELD[TRIP_REQUEST]" name="TRIP_REQUEST" rows="6" placeholder="Enter Message  (Optional)"></textarea>
                     </div>
                     <!-- Button -->
                     <button type="submit" class="btn btn-orange">Submit</button>&nbsp;
@@ -30,8 +34,10 @@
                 </form>
             </div>
         </div>
-    }   
-        <div class="col-md-7">
+    }
+    
+           
+        <div class="col-md-6 col-sm-12">
             <!-- Contact map -->
             <div class="contact-map">
                 <h5>Locate Us</h5>

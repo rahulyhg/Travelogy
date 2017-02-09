@@ -1,0 +1,72 @@
+﻿@model WebApplication1.Models.AccommodationBookingViewModel
+
+@Html.Partial("_HomepageCarousel")
+
+<div class="headline">
+    <h2>Booking details:</h2>
+</div>
+
+<div class="row">
+    <div class="col-sm-3 info-blocks">        
+        <div class="info-blocks-in">
+            <h3>
+                @Model.AccommodationType at 
+            </h3>
+        </div>
+    </div>
+    <div class="col-sm-3 info-blocks">
+        <i class="icon-calendar icon-info-blocks"></i>
+        <div class="info-blocks-in">
+            <h4 class="orange">Check-in date:</h4>
+                @if (Model.CheckinDate > DateTime.MinValue)
+                {
+                   <p>@Model.CheckinDate.ToLongDateString()</p>
+                }
+                else
+                {
+                    <p>@Html.Raw("Not planned")</p>
+                }            
+        </div>
+    </div>
+    <div class="col-sm-3 info-blocks">
+        <i class="icon-calendar icon-info-blocks"></i>
+        <div class="info-blocks-in">
+            <h4 class="orange">Check-out date:</h4>
+            @if (Model.CheckoutDate > DateTime.MinValue)
+            {
+                <p>@Model.CheckoutDate.ToLongDateString()</p>
+            }
+            else
+            {
+                <p>@Html.Raw("Not planned")</p>
+            }
+        </div>
+    </div>
+
+    <div class="col-sm-3 info-blocks">
+        <i class="icon-calendar icon-info-blocks"></i>
+        <div class="info-blocks-in">
+            <h3>Status: @Model.BookingStatus </h3>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-sm-12 info-blocks">
+        <div class="info-blocks-in">
+            <h4 class="orange">Your message:</h4>
+            <p>@Model.TravellerNotes</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 info-blocks">
+        <div class="info-blocks-in">
+            <h4 class="orange">Special request:</h4>
+            <p>@Model.SpecialRequests</p>
+        </div>
+    </div>
+</div>
+<div class="margin-bottom-20">
+</div>
+<div class="margin-bottom-20">
+    <a href="/Service/EditTrip?tripId=@Model.TripId" class="orange">Back to edit trip details</a>
+</div>

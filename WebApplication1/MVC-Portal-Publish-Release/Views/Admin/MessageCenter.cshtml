@@ -1,11 +1,52 @@
-﻿@model WebApplication1.Models.MessageListModel
+﻿@model List<DomingoDAL.Thread>
 
-<h1> Admin message center </h1>
+@Html.Partial("_HomepageCarousel")
+
+<div class="panel panel-orange margin-bottom-40">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="icon-user"></i> Admin message center</h3>
+    </div>
+
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Subject</th>
+                    <th>Created</th>
+                    <th>Last Updated</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.MostRecentPostDate</td>
+                        <td><a class="btn btn-warning btn-xs" href="/admin/message?id=@item.Id"><i class="icon-envelope"></i> View</a></td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+    
+</div>
+        
+
 
 @*get all message threads for the admin*@
-@foreach (var item in Model.AllMessages)
+@*@foreach (var item in Model.AllMessages)
 {
     // pass the threads to the "_MessageThread" partial view
-    var _model = new WebApplication1.Models.MessageListItemViewModel() { MessageThread = item , AdminId = 100};
-    Html.RenderPartial("_MessageThread", _model);
-}
+    var _model = new WebApplication1.Models.MessageListItemViewModel() { MessageThread = item, AdminId = 100 };
+
+    <h3>@item.Thread.Title - @item.Thread.MostRecentPostDate</h3>
+
+    //Html.RenderPartial("_MessageThread", _model);
+}*@

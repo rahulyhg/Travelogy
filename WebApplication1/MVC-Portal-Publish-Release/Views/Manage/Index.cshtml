@@ -1,57 +1,122 @@
 ﻿@model WebApplication1.Models.IndexViewModel
+@using Microsoft.AspNet.Identity
+
 @{
     ViewBag.Title = "Manage your account";
 }
+
+@Html.Partial("_HomepageCarousel")
 
 <h2>@ViewBag.Title. <small>Change your account settings</small></h2>
 
 <p class="orange">@ViewBag.StatusMessage</p>
 <div>    
     <hr />
-    <div class="row servive-block margin-bottom-10">
-        @if (Model.HasPassword)
-        {
-            <div class="col-md-3 col-sm-6">
-                <div class="servive-block-in">
-                    <div><i class="icon-check"></i></div>
-                    <h4>Change Password</h4>     
-                    <p>You have a password for your local account, change it periodically.</p>               
-                    <h4 class="white">@Html.ActionLink("Change your password", "ChangePassword")</h4>
-                </div>
-            </div>
-        }
-        else
-        {
-            <div class="col-md-3 col-sm-6">
-                <div class="servive-block-in">
-                    <div><i class="icon-check"></i></div>
-                    <h4>Create a Password</h4>                    
-                    <p>You have not set up a password for your account yet.</p>
-                    <h4 class="white">@Html.ActionLink("Create One Now", "SetPassword")</h4>
-                    <p>Make your account safer.</p>
-                </div>
-            </div>
-        }        
 
-        <div class="col-md-3 col-sm-6">
-            <div class="servive-block-in">
-                <div><i class="icon-rocket"></i></div>
-                <h4>Traveller profile</h4>                
-                <p>Update your travel preferences in your profile.</p>
-                <h4>@Html.ActionLink("Manage profile", "TravellerProfile")</h4>
-            </div>
-        </div>  
+    <div class="row">
+        <div class="img-box-3 text-center">
+            <div class="row">
+            @if (!ApplicationUserManager.UserEmailVerified(User.Identity.GetUserName()))
+            {
+                <div class="col-md-3 col-sm-6">
+                    <!-- Image Box #3 Item -->
+                    <div class="img-box-3-item">
+                        <div class="img-box-3-icon">
+                            <img src="~/content/img/Dark-icons/128/message_outline-128.png" alt="" class="img-responsive" />
+                        </div>
+                        <h4 class="red">Verify E-Mail address</h4>
+                        <div class="bor bg-black"></div>
+                        <div class="margin-bottom-20"></div>
+                        <a href="/Account/Verify" class="btn-u">Verify your E-Mail</a>
+                        <div class="margin-bottom-20"></div>
+                        <p class="red">You have not verified the email address you have signed up with. Your trip planner will not work until you verify your email address.</p>
+                    </div>
+                </div>
+            }
 
-        <div class="col-md-6 col-sm-6">
+
+            @*Show the Change Password or Create a Password divs based on status*@
+            @if (Model.HasPassword)
+            {
+                <div class="col-md-3 col-sm-6">
+                    <!-- Image Box #3 Item -->
+                    <div class="img-box-3-item">                        
+                        <div class="img-box-3-icon">                            
+                            <img src="~/content/img/Dark-icons/128/lock-128.png" alt="" class="img-responsive" />                            
+                        </div>
+                        <h4>Change Password</h4>
+                        <div class="bor bg-black"></div>
+                        <div class="margin-bottom-20"></div>
+                        <a href="/Manage/ChangePassword" class="btn-u">Change your password</a>    
+                        <div class="margin-bottom-20"></div>                    
+                        <p>You have a password for your local account, change it periodically.</p>                        
+                    </div>
+                </div>
+            }
+
+            else
+            {
+                <div class="col-md-3 col-sm-6">
+                    <!-- Image Box #3 Item -->
+                    <div class="img-box-3-item">
+                        <div class="img-box-3-icon">
+                            <img src="~/content/img/Dark-icons/128/lock-128.png" alt="" class="img-responsive" />
+                        </div>
+                        <h4>Create a Password</h4>
+                        <div class="bor bg-black"></div>
+                        <div class="margin-bottom-20"></div>
+                        <a href="/Manage/SetPassword" class="btn-u">Create a Password</a> 
+                        <div class="margin-bottom-20"></div>                       
+                        <p>You have not set up a password for your account yet.</p>                        
+                        <p>Make your account safer.</p>
+                    </div>
+                </div>
+            }
+
+                <div class="col-md-3 col-sm-6">
+                    <!-- Image Box #3 Item -->
+                    <div class="img-box-3-item">
+                        <div class="img-box-3-icon">
+                            <img src="~/content/img/Dark-icons/128/edit_user-128.png" alt="" class="img-responsive" />
+                        </div>
+                        <h4>Traveller profile</h4>
+                        <div class="bor bg-black"></div>
+                        <div class="margin-bottom-20"></div>
+                        <a href="/Manage/TravellerProfile" class="btn-u">Manage profile</a>      
+                        <div class="margin-bottom-20"></div>                  
+                        <p>Update your travel preferences in your profile. This helps you to find the correct trip plans.</p>                        
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <!-- Image Box #3 Item -->
+                    <div class="img-box-3-item">
+                        <div class="img-box-3-icon">
+                            <img src="~/content/img/Dark-icons/128/compass-128.png" alt="" class="img-responsive" />
+                        </div>
+                        <h4>Manage Trips</h4>
+                        <div class="bor bg-black"></div>
+                        <div class="margin-bottom-20"></div>
+                        <a href="/Service/TripPlanning" class="btn-u">Trip Planner</a>
+                        <div class="margin-bottom-20"></div>
+                        <p>Create and manage your trips using our online planner.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    
+        
+
+        @*<div class="col-md-6 col-sm-6">
             <h2>Manage linked external Accounts:</h2>
             <h4>You have @Model.Logins.Count external login(s) associated</h4>
             <p>@Html.ActionLink("Manage your external accounts", "ManageLogins").</p>
-        </div>              
-    </div>
-
-    <div class="row servive-block margin-bottom-10">
-        
-    </div>
+        </div>*@              
+    
+    
 
     <dl class="dl-horizontal">
         @*<dt>Password:</dt>*@

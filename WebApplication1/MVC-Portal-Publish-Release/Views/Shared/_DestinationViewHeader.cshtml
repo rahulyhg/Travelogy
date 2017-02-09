@@ -1,0 +1,35 @@
+﻿@model WebApplication1.Models.DomingoModelBase
+
+<div class="container">
+    <hr class="margin-bottom-20" />
+    <div class="row blog-page blog-item">
+        <div class="col-md-12 md-margin-bottom-20">
+            <div class="blog-post-tags">
+                <ul class="list-unstyled list-inline blog-info">
+                    <li><i class="icon-calendar"></i> Ideal for: @Model.Destination.BestTimeToVisit</li>
+                    <li><i class="icon-hand-right"></i> Suitable for: @Model.Destination.TravelStyles</li>
+                </ul>
+
+                @if (Model.DestinationTags != null && Model.DestinationTags.Count > 0)
+                {
+                    <ul class="list-unstyled list-inline blog-tags">
+                        <li>
+                            <i class="icon-tags"></i>
+
+                            @foreach (var tag in Model.DestinationTags)
+                            {
+                                <a href="#">@tag.TagDescription</a>
+                            }
+                        </li>
+                    </ul>
+                }
+
+            </div>
+            <div class="blog margin-bottom-10">
+                <h2>@Model.Destination.Tagline</h2>
+            </div>
+            <p>@Model.Destination.Description</p>
+        </div>
+    </div>
+    <hr class="margin-bottom-20" />
+</div>
