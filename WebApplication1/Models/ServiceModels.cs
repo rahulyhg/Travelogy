@@ -10,9 +10,11 @@ namespace WebApplication1.Models
     public class MessageViewModel
     {
         [Display(Name = "Subject")]
+        [Required(ErrorMessage = "Please add a Subject.")]
         public string Subject { get; set; }
 
         [Display(Name = "Body")]
+        [Required(ErrorMessage = "Please write something.")]
         public string Body { get; set; }
 
         public DateTime CreateDate { get; set; } 

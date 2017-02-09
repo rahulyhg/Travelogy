@@ -182,7 +182,7 @@ namespace WebApplication1.Controllers
         public ActionResult SaveTrip(EditTripViewModel model)
         {
             var _blError = TripManager.SaveUserTripChanges(model.ActiveTrip.DlTripView, model.ActiveTrip.DlTripStepsView);
-            return RedirectToAction("ViewTrip", new { @tripId = model.ActiveTrip.DlTripView.Id });
+            return RedirectToAction("EditTrip", new { @tripId = model.ActiveTrip.DlTripView.Id });
         }
 
 
@@ -353,7 +353,7 @@ namespace WebApplication1.Controllers
             View_TripStep tripStepObj = null;
             if(tripStepId > 0)
             {
-                tripObj.DlTripStepsView.FirstOrDefault(p => p.Id == tripStepId);
+                tripStepObj = tripObj.DlTripStepsView.FirstOrDefault(p => p.Id == tripStepId);
                 if (tripStepObj == null)
                 {
                     throw new ApplicationException(string.Format("Invalid parameter - [TripStepId:{0}]", tripStepId));

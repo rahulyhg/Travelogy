@@ -338,11 +338,14 @@ namespace DomingoBL
         {
             try
             {
+                TripStep _dbTripStep = null;
+
                 using (var context = new TravelogyDevEntities1())
                 {
-                    var _dbTripStep = context.TripSteps.Find(tripStep.Id);
-                    if (_dbTripStep != null)
+                    if(tripStep.Id == 0)
                     {
+                        _dbTripStep = new TripStep() { TripId = tripStep.TripId };
+
                         _dbTripStep.Destination = tripStep.Destination;
                         if (tripStep.StartDate.HasValue) { _dbTripStep.StartDate = tripStep.StartDate; }
                         if (tripStep.EndDate.HasValue) { _dbTripStep.EndDate = tripStep.EndDate; }
@@ -351,8 +354,28 @@ namespace DomingoBL
                         _dbTripStep.ShortDescription = tripStep.ShortDescription;
                         _dbTripStep.TravelogerNote = tripStep.TravelogerNote;
 
+                        // insert a new one
+                        context.TripSteps.Add(_dbTripStep);
+
                         await context.SaveChangesAsync();
                     }
+
+                    else
+                    {
+                        _dbTripStep = context.TripSteps.Find(tripStep.Id);
+                        if (_dbTripStep != null)
+                        {
+                            _dbTripStep.Destination = tripStep.Destination;
+                            if (tripStep.StartDate.HasValue) { _dbTripStep.StartDate = tripStep.StartDate; }
+                            if (tripStep.EndDate.HasValue) { _dbTripStep.EndDate = tripStep.EndDate; }
+                            _dbTripStep.LongDescription = tripStep.LongDescription;
+                            _dbTripStep.NightStay = tripStep.NightStay;
+                            _dbTripStep.ShortDescription = tripStep.ShortDescription;
+                            _dbTripStep.TravelogerNote = tripStep.TravelogerNote;
+
+                            await context.SaveChangesAsync();
+                        }
+                    }                    
                 }
             }
             catch (Exception ex)
