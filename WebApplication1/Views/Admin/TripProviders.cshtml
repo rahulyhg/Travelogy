@@ -2,6 +2,11 @@
 
 @Html.Partial("_HomepageCarousel")
 
+
+<div class="headline">
+    <h3>Manage Agencies:</h3>
+</div>
+
 <div>
     <p>
         @Html.ActionLink("Create New", "CreateTripProvider")
@@ -9,22 +14,16 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+               Agency Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Website)
+                Website
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailAddressPrimary)
+               Contact Email
             </th>            
             <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telephone01)
+                Contact Phone
             </th>            
             <th></th>
         </tr>
@@ -38,13 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Website)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.EmailAddressPrimary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Telephone01)

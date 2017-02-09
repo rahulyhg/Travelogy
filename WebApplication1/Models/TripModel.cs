@@ -247,8 +247,13 @@ namespace WebApplication1.Models
         /// <summary>
         /// 
         /// </summary>
-        [Display(Name = "Trip Star tDate")]
+        [Display(Name = "Trip Start Date")]
+        [Required(ErrorMessage = "Please specify a date (approximate will do!)")]
         public DateTime? StartDate { get; set; }
+
+        [Display(Name = "A nick name for your Trip:")]
+        [Required(ErrorMessage = "Please give a name to your Trip!")]
+        public string NickName { get; set; }
     }
 
     /// <summary>

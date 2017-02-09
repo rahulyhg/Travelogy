@@ -30,5 +30,6 @@ namespace DomingoDAL
         public string TemplateSearchAlias { get; set; }
         public int DestinationId { get; set; }
         public string Templates { get; set; }
+        public string NickName { get; set; }
     }
 }

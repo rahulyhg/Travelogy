@@ -21,7 +21,7 @@
 @if (Model.ActiveTrip != null)
 {
     <div class="headline">
-        <h2>Your trip to: @Model.ActiveTrip.DlTripView.Name</h2>                 
+        <h2>@Model.ActiveTrip.DlTripView.NickName <small class="orange">your trip to @Model.ActiveTrip.DlTripView.Name</small> </h2>                 
     </div>    
     <div class="row">
         <div class="col-sm-4 info-blocks">

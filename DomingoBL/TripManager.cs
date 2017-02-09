@@ -127,7 +127,7 @@ namespace DomingoBL
         /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
-        public static DomingoBlError CreateTrip(Trip trip, int tripTemplateId)
+        public static async Task<DomingoBlError> CreateTrip(Trip trip, int tripTemplateId)
         {
             try
             {
@@ -141,17 +141,18 @@ namespace DomingoBL
                         trip.Templates = tripTemplateId.ToString();
                         trip.TemplateSearchAlias = template.SearchAlias;
                         trip.DestinationId = template.DestinationId;
+                        trip.StartLocation = template.StartLocation;
 
                         context.Trips.Add(trip);
-                        context.SaveChanges();
+                        await context.SaveChangesAsync();
 
                         // get the steps from the template
-                        foreach (var tripStep in _CopyTripSteps(tripTemplateId, trip.Id, context))
+                        foreach (var tripStep in _CopyTripStepsFromTemplate(tripTemplateId, trip.Id, trip.StartDate, context))
                         {
                             context.TripSteps.Add(tripStep);
                         }
 
-                        context.SaveChanges();
+                        await context.SaveChangesAsync();
                     }
 
                 }
@@ -162,6 +163,49 @@ namespace DomingoBL
             {
                 return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
             }
+        }
+
+        private static List<TripStep> _CopyTripStepsFromTemplate(int tripTemplateId, int tripId, DateTime? startDate, TravelogyDevEntities1 context)
+        {
+            var tripStartDate = DateTime.MinValue;
+            if(startDate.HasValue && startDate.Value > DateTime.MinValue)
+            {
+                tripStartDate = startDate.Value;
+            }
+
+            var tripSteps = new List<TripStep>();
+            var templateSteps = context.TripTemplateSteps.Where(p => p.TripTemplateId == tripTemplateId).OrderBy(p => p.SortOrder);
+            foreach (var templateStep in templateSteps)
+            {
+                var tripStep = new TripStep()
+                {
+                    TripId = tripId,
+                    TripTemplateStepId = templateStep.Id,
+                    ShortDescription = templateStep.ShortDescription,
+                    LongDescription = templateStep.LongDescription,
+                    NightStay = templateStep.NightStay,
+                    Destination = templateStep.Destination,
+                };
+
+                if (tripStartDate > DateTime.MinValue)
+                {
+                    tripStep.StartDate = tripStartDate;
+                    if(templateStep.TypicalDurationDays.HasValue)
+                    {
+                        tripStep.EndDate = tripStartDate.AddDays(templateStep.TypicalDurationDays.Value);
+                    }
+                }
+
+                tripSteps.Add(tripStep);
+
+                // recalculate tripStartDate
+                if(tripStartDate > DateTime.MinValue && templateStep.TypicalDurationDays.HasValue)
+                {
+                    tripStartDate = tripStartDate.AddDays(templateStep.TypicalDurationDays.Value);
+                }
+                
+            }
+            return tripSteps;
         }
 
         /// <summary>
@@ -190,7 +234,7 @@ namespace DomingoBL
                         _dbTrip.Templates = string.Format("{0};{1}", _dbTrip.Templates, tripTemplateId);
 
                         // get the steps from the template and add them to this trip
-                        foreach (var tripStep in _CopyTripSteps(tripTemplateId, trip.Id, context))
+                        foreach (var tripStep in _CopyTripStepsFromTemplate(tripTemplateId, trip.Id, trip.StartDate, context))
                         {
                             context.TripSteps.Add(tripStep);
                         }
@@ -471,24 +515,7 @@ namespace DomingoBL
             }
         }
 
-        private static List<TripStep> _CopyTripSteps(int tripTemplateId, int tripId, TravelogyDevEntities1 context)
-        {
-            var tripSteps = new List<TripStep>();
-            var templateSteps = context.TripTemplateSteps.Where(p => p.TripTemplateId == tripTemplateId);
-            foreach(var templateStep in templateSteps)
-            {
-                var tripStep = new TripStep()
-                {
-                    TripId = tripId,
-                    TripTemplateStepId = templateStep.Id,
-                    ShortDescription = templateStep.ShortDescription,
-                    LongDescription = templateStep.LongDescription,
-                    NightStay = templateStep.NightStay                     
-                };
-                tripSteps.Add(tripStep);
-            }
-            return tripSteps;
-        }
+        
 
         /// <summary>
         /// 

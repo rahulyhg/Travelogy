@@ -24,5 +24,6 @@ namespace DomingoDAL
         public string TripTemplateStepIdentifier { get; set; }
         public string Destination { get; set; }
         public Nullable<int> TypicalDurationDays { get; set; }
+        public int SortOrder { get; set; }
     }
 }

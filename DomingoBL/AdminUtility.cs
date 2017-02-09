@@ -38,7 +38,7 @@ namespace DomingoBL
                             _tripTemmplate.Name = template.Name;                            
                             _tripTemmplate.Description = template.Description;
                             _tripTemmplate.ThumbnailPath = template.ThumbnailPath;
-                            
+                            _tripTemmplate.TripProviderId = template.TripProviderId;
 
                             await context.SaveChangesAsync();
                         }

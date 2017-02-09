@@ -97,24 +97,25 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateTrip(TripViewModel model)
+        public async System.Threading.Tasks.Task<ActionResult> CreateTrip(TripViewModel model)
         {
             // create a new Trip object from the form and save it
             Trip trip = new Trip()
             {
                 AspNetUserId = User.Identity.GetUserId(),
                 DestinationId = model.CreateTripViewModel.DestinationId,
+                NickName = model.CreateTripViewModel.NickName,
                 StartDate = model.CreateTripViewModel.StartDate,
-                Status = TripStatus.planned.ToString()                
+                Status = TripStatus.planned.ToString()
             };
 
-            var _blError = TripManager.CreateTrip(trip, model.CreateTripViewModel.TemplateId);
+            var _blError = await TripManager.CreateTrip(trip, model.CreateTripViewModel.TemplateId);
             BlViewTrip viewTrip = null;
             _blError = TripManager.GetTripById(trip.Id, out viewTrip);
             var _model = new TripViewModel() { ActiveTrip = viewTrip };
             return View("Trip", _model);
         }
-       
+
         /// <summary>
         /// 
         /// </summary>

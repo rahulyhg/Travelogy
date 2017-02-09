@@ -2,7 +2,7 @@
 
 @if (@Model != null && @Model.DlTripView != null)
 {
-    <h3>Trip to @Model.DlTripView.Name from @Model.DlTripView.StartLocation [Status: @Model.DlTripView.Status]</h3>
+    <h3>Trip to @Model.DlTripView.Name from @Model.DlTripView.StartLocation <small class="orange"> [ Status: @Model.DlTripView.Status ]</small></h3>
 
     <div class="search-blocks search-blocks-top-yellow">
         <div class="row">
@@ -24,7 +24,8 @@
                 </ul>
             </div>
             <div class="col-md-8">
-                <h2><a href="">Your trip to @Model.DlTripView.Name</a></h2>
+                <h2>@Model.DlTripView.NickName</h2>
+                <h4 class="orange">Your trip to @Model.DlTripView.Name</h4>
                 <ul class="list-unstyled search-rating">
                     <li><i class="icon-star"></i></li>
                     <li><i class="icon-star"></i></li>

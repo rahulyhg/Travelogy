@@ -31,7 +31,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })
                 @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -39,7 +39,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })
                 @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -47,7 +47,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.LongDescription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.LongDescription, new { @class = "form-control", @rows = 6 })                
+                @Html.TextAreaFor(model => model.LongDescription, new { @class = "form-control", @rows = 8, @maxlength = 499 })                
                 @Html.ValidationMessageFor(model => model.LongDescription, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -55,7 +55,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ThumbnailPath, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ThumbnailPath, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ThumbnailPath, new { htmlAttributes = new { @class = "form-control", @maxlength = 255 } })
                 @Html.ValidationMessageFor(model => model.ThumbnailPath, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -63,7 +63,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NightStay, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NightStay, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.NightStay, new { htmlAttributes = new { @class = "form-control", @maxlength = 254 } })
                 @Html.ValidationMessageFor(model => model.NightStay, "", new { @class = "text-danger" })
             </div>
         </div>
