@@ -8817,6 +8817,15 @@
     <Content Include="Content\img\gallery\small\thumbnail_WesternHimalaya.jpg" />
     <Content Include="Content\img\gallery\small\thumbnail_WildlifeToursIndia.jpg" />
     <Content Include="Content\img\Historic-Britain\HB001.jpg" />
+    <Content Include="Content\img\India\16650695_10212291999994739_843640343_o.jpg" />
+    <Content Include="Content\img\India\16651476_10212292008394949_1728910291_o.jpg" />
+    <Content Include="Content\img\India\16667305_10212292008674956_1030737844_o.jpg" />
+    <Content Include="Content\img\India\16667356_10212292008714957_952065381_o.jpg" />
+    <Content Include="Content\img\India\16667753_10212292006954913_2090736830_o.jpg" />
+    <Content Include="Content\img\India\16667966_10212291999314722_1559108759_o.jpg" />
+    <Content Include="Content\img\India\16699963_10212292004234845_1732797183_n.jpg" />
+    <Content Include="Content\img\India\16706734_10212292002234795_1977503624_n.jpg" />
+    <Content Include="Content\img\India\16709312_10212291999914737_1198831192_o.jpg" />
     <Content Include="Content\img\Kilimanjaro-Climb\KILI-S01.JPG" />
     <Content Include="Content\img\Kilimanjaro-Climb\KILI-S02.JPG" />
     <Content Include="Content\img\Kilimanjaro-Climb\KILI-S03.JPG" />
@@ -9462,7 +9471,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\India\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
