@@ -1,0 +1,126 @@
+﻿@model WebApplication1.Models.AdminEditTripTemplateViewModel
+
+@Html.Partial("_HomepageCarousel")
+
+<div>
+    @using (Html.BeginForm("SaveTripTemplateAsync", "Admin", new { ReturnUrl = "" }))
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h4>TripTemplate</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.TripTemplate.Id)
+    
+            <div class="form-group">
+                @Html.Label("Trip Provider", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">                    
+                    @Html.DropDownListFor(model => model.TripTemplate.TripProviderId, Model.TripProviderList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TripTemplate.TripProviderId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">  
+                @Html.Label("Destination", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.DropDownListFor(model => model.TripTemplate.DestinationId, Model.DestinationList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TripTemplate.DestinationId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Best Time To Visit", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.TripTemplate.BestTimeToVisit, new { htmlAttributes = new { @class = "form-control" , @maxlength = 49 } })
+                    @Html.ValidationMessageFor(model => model.TripTemplate.BestTimeToVisit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Start Location", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.TripTemplate.StartLocation, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })
+                    @Html.ValidationMessageFor(model => model.TripTemplate.StartLocation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.Label("Duration Min (Days):", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.TripTemplate.DurationDaysMin, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TripTemplate.DurationDaysMin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.Label("Duration Max (Days):", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.TripTemplate.DurationDaysMax, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TripTemplate.DurationDaysMax, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.Label("Template Name:", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TripTemplate.Name, new { htmlAttributes = new { @class = "form-control" , @maxlength = 49 } })
+                    @Html.ValidationMessageFor(model => model.TripTemplate.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.TripTemplate.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.TripTemplate.Description, new { @class = "form-control", @rows = 8, @maxlength = 499 })
+                    @Html.ValidationMessageFor(model => model.TripTemplate.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.TripTemplate.ThumbnailPath, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TripTemplate.ThumbnailPath, new { htmlAttributes = new { @class = "form-control", @maxlength = 255 } })
+                    @Html.ValidationMessageFor(model => model.TripTemplate.ThumbnailPath, "", new { @class = "text-danger" })
+                </div>
+            </div>    
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.TripTemplate.SearchAlias, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TripTemplate.SearchAlias, new { htmlAttributes = new { @class = "form-control", @maxlength = 19 } })
+                    @Html.ValidationMessageFor(model => model.TripTemplate.SearchAlias, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "TripTemplates")                
+    </div>
+</div>
+
+@if(Model.TripTemplate.Id > 0)
+{    
+    var context = new DomingoDAL.TravelogyDevEntities1();
+    var _tripTemplateSteps = context.TripTemplateSteps.Where(p => p.TripTemplateId == Model.TripTemplate.Id);
+
+    foreach(var _tripTemplateStep in _tripTemplateSteps)
+    {
+        Html.RenderPartial("_EditTripTemplateStep", _tripTemplateStep);
+    }
+
+    var _tripTemplateStepNew = new DomingoDAL.TripTemplateStep() { TripTemplateId = Model.TripTemplate.Id };
+    Html.RenderPartial("_EditTripTemplateStep", _tripTemplateStepNew);
+}
+
+<div>
+    @Html.ActionLink("Back to List", "TripTemplates")
+</div>
+

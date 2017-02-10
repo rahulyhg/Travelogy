@@ -2,28 +2,48 @@
 
 @Html.Partial("_HomepageCarousel")
 
+<div class="breadcrumbs margin-bottom-20">
+    <div class="container">
+        <h1 class="pull-left">Top circuits</h1>
+    </div>
+</div><!--/breadcrumbs-->
+
 <div class="divider-1"></div>
 
 <div class="block-heading-two">
     <h3><span>Featured circuits</span></h3>
 </div>	
 
-<div class="row blog-page">
-    <!-- all circuits -->
-    <div class="col-md-9 md-margin-bottom-40">
+@*<div class="row">
+    @foreach (var item in Model.AllDestinations)
+    {
+        <div class="col-md-12 col-sm-12">
+            @Html.Partial("_DestinationWidget", item)
+        </div>
+    }
+</div>*@
 
-        <!--Lake Baikal-->
-        @Html.Partial("LakeBaikal_TripPlannerWP")
-        <!--End Lake Baikal--> 
+@for (var i = 0; i < Model.AllDestinations.Count; i++)
+{
+    if (i % 4 == 0)
+    {
+        @Html.Raw("<div class=\"row\">");
+    }
 
-        <!--TSR-->
-        @Html.Partial("TransSiberian_TripPlannerWP")
-        <!--End TSR--> 
+    {
+        var item = Model.AllDestinations[i];
+        @Html.Partial("_DestinationWidget", item)
+    }
 
-    </div>
+    if (i % 4 == 3)
+    {
+        @Html.Raw("</div>");
+    }
 
-    @*Right navigation*@
-    <div class="col-md-3">
+    if (i == Model.AllDestinations.Count - 1)
+    {
+        @Html.Raw("</div>");
+    }
 
-    </div>
-</div>
+}
+ 

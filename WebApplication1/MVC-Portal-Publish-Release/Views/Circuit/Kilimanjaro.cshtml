@@ -1,80 +1,61 @@
-﻿@model WebApplication1.Models.CircuitModelBase
+﻿@model WebApplication1.Models.DomingoModelBase
 
-@*@{
-    Layout = "";
-}*@
+@{
+    if (Model != null && Model.Destination != null)
+    {
+        ViewBag.Description = Model.Destination.MetaDescription;
+        ViewBag.KeyWords = Model.Destination.MetaKeywords;
+    }
+}
 
-<div class="blog-three">
-    <div class="row">
-        <!-- Mainbar column -->
-        <div class="col-md-12">
+@Html.Partial("_HomepageCarousel")
 
-            <!-- Blog item starts -->
-            <div class="blog-three-item">
-                <!-- blog three slider -->
-                <!-- Carousel -->
-                <!-- Bootstrap carousel usage
-                    Bootstrap carousel should have id. Below i am using "bs-carousel-X". Where "X" denotes number". If a page has more than 1 carousel, then add the new carousel with the id "bs-carousel-1", "bs-carousel-2". You also need to update the id in, "carousel indicators" section and "carousel control" section.
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs margin-bottom-40">
+    <div class="container">
+        <h1 class="pull-left">Climbing Kilimanjaro</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="/Circuit/Africa">Africa</a></li>
+            <li class="active">Kilimanjaro</li>
+        </ul>
+    </div>
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
 
-                    Carousel comes with 3 main data attributes which you can customize. They are...
-                    data-interval - Time delay between item cycle. Default value "5000".
-                    data-pause - Pause on hover. Default value "pause".
-                    data-wrap - Continues cycle or stop at the end. Default value "true".
-                -->
-                <!-- Outer layer -->
-                <div id="bs-carousel-1" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover" data-wrap="true">
-                    <!-- Bootstrap indicators. If you don't need indicators, remove the below section -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#bs-carousel-1" data-slide-to="0" class="active"></li>
-                        <li data-target="#bs-carousel-1" data-slide-to="1"></li>
-                        <li data-target="#bs-carousel-1" data-slide-to="2"></li>
-                        <li data-target="#bs-carousel-1" data-slide-to="3"></li>
-                        <li data-target="#bs-carousel-1" data-slide-to="4"></li>
-                    </ol>
-                    <!-- Slides. You can also add captions -->
-                    <div class="carousel-inner">
-                        <!-- Item, First item should have extra class "active" -->
-                        <div class="item active">
-                            <!-- Image -->
-                            <img src="~/Content/img/Kilimanjaro-Climb/kili-s01.jpg" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="~/Content/img/Kilimanjaro-Climb/kili-s02.jpg" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="~/Content/img/Kilimanjaro-Climb/kili-s03.jpg" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="~/Content/img/Kilimanjaro-Climb/kili-s04.jpg" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="~/Content/img/Kilimanjaro-Climb/kili-s05.jpg" alt="">
-                        </div>
-                    </div>
-                    <!-- Carousel controls (arrows). If you don't need controls, remove the below section -->
-                    <a class="left carousel-control" href="#bs-carousel-1" role="button" data-slide="prev">
-                        <span class="fa fa-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#bs-carousel-1" role="button" data-slide="next">
-                        <span class="fa fa-chevron-right"></span>
-                    </a>
-                </div>
-
-                <!-- blog three Content -->
-                <div class="blog-three-content">
-                    <!-- Heading -->
-                    <h1>Climbing Kilimanjaro</h1>
-                    <!-- Blog meta -->
-                    <!-- Paragraph -->
-                    <h4>
-                        Kilimanjaro is the tallest lone standing mountain in the world! At Uhuru peak, 5895 m above sea level, you can stand on a glacier right on the equator.
-                        You can then look at the clouds below you. Make new friends on the way up and on your way down. All this in the middle of the incredible landscape of Africa!
-                    </h4>
-                </div>
+<div class="container">
+    <div class="row blog-page blog-item">
+        <div class="col-md-12 md-margin-bottom-60">
+            <div class="blog-post-tags">
+                <ul class="list-unstyled list-inline blog-info">
+                    <li><i class="icon-calendar"></i> February 02, 2013</li>
+                    <li><i class="icon-pencil"></i> Diana Anderson</li>
+                    <li><i class="icon-comments"></i> <a href="#">24 Comments</a></li>
+                </ul>
+                <ul class="list-unstyled list-inline blog-tags">
+                    <li>
+                        <i class="icon-tags"></i>
+                        <a href="#">Technology</a>
+                        <a href="#">Education</a>
+                        <a href="#">Internet</a>
+                        <a href="#">Media</a>
+                    </li>
+                </ul>
             </div>
-            <!-- Blog item ends -->
+            <div class="blog margin-bottom-40">
+                <h2>Summit the tallest lone standing mountain in the world!</h2>
+            </div>
+            <p> 
+                Kilimanjaro is the tallest lone standing mountain in the world! At Uhuru peak, 5895 m above sea level, you can stand on a glacier right on the equator.
+                You can then look at the clouds below you. Make new friends on the way up and on your way down. All this in the middle of the incredible landscape of Africa!
+            </p>
+            <div class="blog-img">                
+                <img class="img-responsive" src="~/Content/img/Kilimanjaro-Climb/KILI-S03.JPG" alt="" />
+            </div>
         </div>
     </div>
+</div>
+
+<div class="blog-three">    
 
     <div class="img-box-3 text-center">
         <div class="row">
@@ -90,7 +71,7 @@
                     </div>
                     <h4>Planning</h4>
                     <div class="bor bg-orange"></div>
-                    <h3><small>Create your plan using the Trip Planner, use out expert team to discuss the options for climbing.</small></h3>
+                    <p><small>Create your plan using the Trip Planner, use out expert team to discuss the options for climbing.</small></p>
                 </div>
             </div>
 
@@ -103,7 +84,7 @@
                     </div>
                     <h4>Tickets and Bookings</h4>
                     <div class="bor bg-orange"></div>
-                    <h3><small>Travelogy club will take care of the air tickets and the required accommodation.</small></h3>
+                    <p><small>Travelogy club will take care of the air tickets and the required accommodation.</small></p>
                 </div>
             </div>
 
@@ -116,7 +97,7 @@
                     </div>
                     <h4>Guides and crew</h4>
                     <div class="bor bg-orange"></div>
-                    <h3><small>We use our trusted partners on ground to provide you with professional guides and expert mountain crew.</small></h3>
+                    <p><small>We use our trusted partners on ground to provide you with professional guides and expert mountain crew.</small></p>
                 </div>
             </div>
 
@@ -129,42 +110,46 @@
                     </div>
                     <h4>Camping gears</h4>
                     <div class="bor bg-orange"></div>
-                    <h3><small>We arrange for the tents and other equipments you will need for a successful climb.</small></h3>
+                    <p><small>We arrange for the tents and other equipments you will need for a successful climb.</small></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6 col-sm-6">
-            @if (Request.IsAuthenticated)
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                @if (Request.IsAuthenticated)
             {
-                var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = "Kilimanjaro" };
-                @Html.Partial("_StartTripPlanning", _model)
-            }
+                if (Model != null && Model.Destination != null)
+                {
+                    var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = Model.Destination.Name, TemplateAlias = Model.Destination.TemplateSearchAlias };
+                        @Html.Partial("_StartTripPlanning", _model)
+                    }
+                }
 
-            else
-            {
-                @Html.Partial("_JoinNowTripPlanning")
-            }
-        </div>
-        <div class="col-md-6 col-sm-6">
-            <!-- Blog item starts -->
-            <div class="blog-three-item">
-                <!-- blog three Img -->
-                <div class="blog-three-img">
-                    <!-- Image -->
-                    <img src="~/Content/img/Kilimanjaro-Climb/kili04.jpg" alt="" class="img-responsive img-thumbnail" />
-                </div>
-                <!-- blog three Content -->
-                <div class="blog-three-content">
-                    <!-- Heading -->
-                    <h3><a href="Kilimanjaro-Climb.html">Climb to the top of Africa</a></h3>
-                    <!-- Paragraph -->
-                    <h5>Choose one of the many routes based on your comfort level and fitness. Remember the simple mantra to successfully climb the summit: POLEY POLEY. In Swahili it means 'slowly slowly'. Yes, that is how you reach to the top. Be it a mountain or any other goal in life. Uhuru peak, 5895 m above sea level is the topmost point in Africa.</h5>
-                </div>
+                else
+                {
+                    @Html.Partial("_JoinNowTripPlanning")
+                }
             </div>
-            <!-- Blog item ends -->
+            <div class="col-md-6 col-sm-6">
+                @if (Request.IsAuthenticated)
+            {
+                if (Model != null && Model.Destination != null)
+                {
+                    var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = Model.Destination.Name };
+                        @Html.Partial("_DownloadBrochure", _model)
+                    }
+                }
+                else
+                {
+                    if (Model != null && Model.Destination != null)
+                    {
+                        @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = Model.Destination.Name });
+                }
+            }
+            </div>
         </div>
     </div>
 </div>

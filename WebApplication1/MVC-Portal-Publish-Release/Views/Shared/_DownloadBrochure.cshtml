@@ -1,12 +1,27 @@
 ﻿@model WebApplication1.Models._DownloadBrochureModel
 
- <!--Tag Box v5-->
-<div class="row tag-box tag-box-v5">
-    <div class="col-md-8">
-        <span>Download your brochure for<br /> @Model.CircuitName</span>
-    </div>
-    <div class="col-md-4">
-        <p><button class="btn-u btn-u-lg btn-u-red"><i class="icon-cloud-download"></i> Download Now</button></p>
+<div class="row margin-bottom-40">
+    <div class="col-md-12 col-sm-12">
+        <div class="pricing hover-effect">
+            <div class="pricing-head">
+                <h3>Customized guidebook</h3>
+                <h4>                   
+                    <i>Your own guidebook for $</i>4<i>.99</i>
+                    <span>Get a customized guide for your @Model.CircuitName trip</span>
+                </h4>
+            </div>
+            <ul class="pricing-content list-unstyled">
+                <li><i class="icon-tags"></i> Includes your trip plan</li>
+                <li><i class="icon-asterisk"></i> Customized for your trip</li>
+                <li><i class="icon-heart"></i> Includes all accommodation and transfer details</li>                
+                <li><i class="icon-shopping-cart"></i>Only for $ 4.99</li>
+            </ul>
+            <div class="pricing-footer">
+                <a class="btn-u btn-u-small" href="#">
+                    <i class="icon-cloud-download"></i>&nbsp; Request for a custom @Model.CircuitName brochure
+                </a>                
+            </div>
+        </div>
     </div>
 </div>
-<!--End Tag Box v5-->
+
