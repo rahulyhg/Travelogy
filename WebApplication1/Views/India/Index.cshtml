@@ -1,13 +1,24 @@
 ﻿@model WebApplication1.Models.CircuitModelBase
 
-@*@Html.Partial("_AfricaCircuitsCarousel")*@
-@Html.Partial("_HomepageCarousel")
+@{ 
+    ViewBag.Description = "Travelogy club offers fully customized holidays and travel opportunities in India";
+    ViewBag.KeyWords = "India, India Travel, India Holidays";
+}
 
-<div class="breadcrumbs margin-bottom-20">
-    <div class="container">
-        <h1 class="pull-left">India</h1>
+<div class="row">
+    <div class="col-md-12 padd-10">
+        <img class="img-responsive" src="~/Content/img/India/slider001.jpg" />
     </div>
-</div><!--/breadcrumbs-->
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="block-heading-twelve">
+            <h3 class="color">India <small>from the Himalayas to the Indian Ocean</small></h3>
+        </div>
+    </div>
+</div>
+
 
 <div class="headline">
     <h3>Travel circuits in India</h3>

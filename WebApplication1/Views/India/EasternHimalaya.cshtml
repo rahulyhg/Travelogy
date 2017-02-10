@@ -8,7 +8,19 @@
     }
 }
 
-@Html.Partial("_HomepageCarousel")
+<div class="row">
+    <div class="col-md-12 padd-10">
+        <img class="img-responsive" src="~/Content/img/India/sikkim001.jpg" />
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="block-heading-twelve">
+            <h3 class="color">@Model.Destination.Name <small>@Model.Destination.Tagline</small></h3>
+        </div>
+    </div>
+</div>
 
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs margin-bottom-40">
