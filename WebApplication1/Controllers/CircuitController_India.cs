@@ -253,5 +253,21 @@ namespace WebApplication1.Controllers
             var model = new DomingoModelBase() { PageName = "Festivals in India", Destination = destination, DestinationTags = tags };
             return View(model);
         }
+
+        public ActionResult NorthEastIndia()
+        {
+            var destination = new Destination();
+            var blError = DestinationManager.GetDestinationForAlias("NorthEastIndia", out destination);
+            if (blError.ErrorCode != 0 || destination == null)
+            {
+                throw new ApplicationException(blError.ErrorMessage);
+            }
+
+            // get all the tags for this destination
+            List<View_TagDestination> tags;
+            _GetTagsForDestination(destination, out blError, out tags);
+            var model = new DomingoModelBase() { PageName = "North East India", Destination = destination, DestinationTags = tags };
+            return View(model);
+        }
     }
 }

@@ -9470,6 +9470,7 @@
     <Content Include="Views\Service\LocalTransfer.cshtml" />
     <Content Include="Views\Service\ViewTransferBooking.cshtml" />
     <Content Include="Views\Admin\EditTripStep.cshtml" />
+    <Content Include="Views\India\NorthEastIndia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
