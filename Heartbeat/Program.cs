@@ -15,12 +15,13 @@ namespace Heartbeat
         {
             var urlList = new List<string>()
             {
-                "http://portal-demo.travelogyclub.com/India", "http://portal-demo.travelogyclub.com/",
-                "http://portal-demo.travelogyclub.com/Service/Tripplanning", "http://portal-demo.travelogyclub.com/Circuit/Tanzania",
+                "http://portal-demo.travelogyclub.com/India",
+                "http://portal-demo.travelogyclub.com/",
+                "http://portal-demo.travelogyclub.com/Circuit/Tanzania",
                 "http://portal-demo.travelogyclub.com/Circuit/Russia"
             };
 
-            int x = new Random().Next(5);
+            int x = new Random().Next(4);
 
             _Ping(urlList[x]);          
         }
@@ -29,21 +30,21 @@ namespace Heartbeat
         {
             try
             {
-                StreamWriter file = new StreamWriter("C:\\_CODE\\travelogyportalheartbeattest.txt",true);
-                string msg;
-                msg = string.Format("Heartbeat log ... pinging URL: {0}", url);
-                Console.WriteLine(msg);
-                file.WriteLine(msg);
-                Thread.Sleep(2000);
+                using (StreamWriter file = new StreamWriter("C:\\_CODE\\travelogyportalheartbeattest.txt", true))
+                {
+                    string msg;
+                    msg = string.Format("Heartbeat log ... pinging URL: {0}", url);
+                    Console.WriteLine(msg);
+                    file.WriteLine(msg);
 
-                WebRequest myReq = WebRequest.Create(url);                
-                myReq.Timeout = 5000;
-                WebResponse response = myReq.GetResponse();
-                msg = string.Format("Heartbeat log TIME: {0} RESPONSE: {1}", DateTime.Now, ((HttpWebResponse)response).StatusDescription);
-                Console.WriteLine(msg);
-                file.WriteLine(msg);
-                file.Close();
-                Thread.Sleep(2000);
+                    WebRequest myReq = WebRequest.Create(url);
+                    myReq.Timeout = 5000;
+                    WebResponse response = myReq.GetResponse();
+                    msg = string.Format("Heartbeat log TIME: {0} RESPONSE: {1}", DateTime.Now, ((HttpWebResponse)response).StatusDescription);
+                    Console.WriteLine(msg);
+                    file.WriteLine(msg);
+                    file.Close();
+                }
             }
             catch (Exception ex)
             {
