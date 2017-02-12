@@ -34,7 +34,8 @@ namespace DomingoBL.BlObjects
 
         /// <summary>
         /// 
-        /// </summary>        
+        /// </summary>    
+        public View_Traveller DlTraveller { get; set; }
     }
 
     /// <summary>

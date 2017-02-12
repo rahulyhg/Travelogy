@@ -162,6 +162,9 @@
     <Compile Include="View_ThreadMessage.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="View_Traveller.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="View_Trip.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
@@ -200,33 +203,10 @@
       <DependentUpon>D-DbModel.edmx</DependentUpon>
       <LastGenOutput>D-DbModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\dbo.AspNetRoles.Table.sql" />
-    <Content Include="Scripts\dbo.AspNetUserClaims.Table.sql" />
-    <Content Include="Scripts\dbo.AspNetUserLogins.Table.sql" />
-    <Content Include="Scripts\dbo.AspNetUserRoles.Table.sql" />
-    <Content Include="Scripts\dbo.AspNetUsers.Table.sql" />
-    <Content Include="Scripts\dbo.Country.Table.sql" />
-    <Content Include="Scripts\dbo.Destination.Table.sql" />
-    <Content Include="Scripts\dbo.DestinationCountry.Table.sql" />
-    <Content Include="Scripts\dbo.DestinationLink.Table.sql" />
-    <Content Include="Scripts\dbo.DestinationTravelOption.Table.sql" />
-    <Content Include="Scripts\dbo.SubDestination.Table.sql" />
-    <Content Include="Scripts\dbo.Sys_Log.Table.sql" />
-    <Content Include="Scripts\dbo.Thread.Table.sql" />
-    <Content Include="Scripts\dbo.ThreadMessage.Table.sql" />
-    <Content Include="Scripts\dbo.Traveller.Table.sql" />
-    <Content Include="Scripts\dbo.TravellerType.Table.sql" />
-    <Content Include="Scripts\dbo.Trip.Table.sql" />
-    <Content Include="Scripts\dbo.TripBookingAccommodation.Table.sql" />
-    <Content Include="Scripts\dbo.TripBookingTransport.Table.sql" />
-    <Content Include="Scripts\dbo.TripProvider.Table.sql" />
-    <Content Include="Scripts\dbo.TripStep.Table.sql" />
-    <Content Include="Scripts\dbo.TripTemplate.Table.sql" />
-    <Content Include="Scripts\dbo.TripTemplateStep.Table.sql" />
-    <Content Include="Scripts\dbo.View_Thread.View.sql" />
-    <Content Include="Scripts\dbo.View_ThreadMessage.View.sql" />
-    <Content Include="Scripts\dbo.View_Trip.View.sql" />
-    <Content Include="Scripts\dbo.View_TripStep.View.sql" />
+    <Content Include="Scripts\createtables-09feb2017.sql" />
+    <Content Include="Scripts\createtables.sql" />
+    <Content Include="Scripts\travelogy-data-09feb2017.sql" />
+    <Content Include="Scripts\View_Traveller.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
