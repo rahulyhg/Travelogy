@@ -204,7 +204,6 @@
       <LastGenOutput>D-DbModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\createtables-09feb2017.sql" />
-    <Content Include="Scripts\createtables.sql" />
     <Content Include="Scripts\travelogy-data-09feb2017.sql" />
     <Content Include="Scripts\View_Traveller.sql" />
   </ItemGroup>

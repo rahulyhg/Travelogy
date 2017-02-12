@@ -27,4 +27,9 @@ namespace WebApplication1.Models
 
         public IEnumerable<System.Web.Mvc.SelectListItem> ListOfMonths { get; set; }
     }
+
+    public class DomingoAdminDashboardViewModel
+    {
+
+    }
 }
