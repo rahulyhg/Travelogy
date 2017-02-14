@@ -12,7 +12,7 @@ namespace DomingoDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class SubDestination
+    public partial class DestinationActivity
     {
         public int Id { get; set; }
         public int DestinationId { get; set; }

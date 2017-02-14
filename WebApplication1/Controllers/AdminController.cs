@@ -23,7 +23,12 @@ namespace WebApplication1.Controllers
         /// </summary>
         private void _CheckForAdminAccess()
         {
-            if (!ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
+            string userType = ApplicationUserManager.GetUserType(User.Identity.Name).ToLower().Trim();
+            if(userType == "admin" || userType == "traveloger" || userType == "editor")
+            {
+                // things are just fine
+            }
+            else
             {
                 throw new ApplicationException("Unauthorized access of admin feature!");
             }

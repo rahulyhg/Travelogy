@@ -94,6 +94,18 @@
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
           <Property Name="ShortDescription" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="DestinationActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DestinationId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdditionalHtml" Type="ntext" />
+          <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="DestinationCountry">
           <Key>
             <PropertyRef Name="Id" />
@@ -102,6 +114,18 @@
           <Property Name="DestinationId" Type="int" Nullable="false" />
           <Property Name="CountryId" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="DestinationInterest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DestinationId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdditionalHtml" Type="ntext" />
+          <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="DestinationLink">
           <Key>
@@ -158,6 +182,8 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="2000" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdditionalHtml" Type="ntext" />
+          <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -618,7 +644,9 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="AspNetUserSessions" EntityType="Self.AspNetUserSessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DestinationActivity" EntityType="Self.DestinationActivity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DestinationCountry" EntityType="Self.DestinationCountry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DestinationInterest" EntityType="Self.DestinationInterest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DestinationLink" EntityType="Self.DestinationLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DestinationTravelOption" EntityType="Self.DestinationTravelOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HtmlEmail" EntityType="Self.HtmlEmail" Schema="dbo" store:Type="Tables" />
@@ -843,6 +871,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="View_TripBookingAccommodation" EntityType="TravelogyDevModel.View_TripBookingAccommodation" />
           <EntitySet Name="View_TripBookingTransport" EntityType="TravelogyDevModel.View_TripBookingTransport" />
           <EntitySet Name="View_Traveller" EntityType="TravelogyDevModel.View_Traveller" />
+          <EntitySet Name="DestinationActivities" EntityType="TravelogyDevModel.DestinationActivity" />
+          <EntitySet Name="DestinationInterests" EntityType="TravelogyDevModel.DestinationInterest" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -993,6 +1023,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TripProvider">
           <Key>
@@ -1405,6 +1437,30 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="DestinationActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DestinationId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DestinationInterest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DestinationId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1531,6 +1587,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySetMapping Name="SubDestinations">
             <EntityTypeMapping TypeName="TravelogyDevModel.SubDestination">
               <MappingFragment StoreEntitySet="SubDestination">
+                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
+                <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1944,6 +2002,32 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DestinationActivities">
+            <EntityTypeMapping TypeName="TravelogyDevModel.DestinationActivity">
+              <MappingFragment StoreEntitySet="DestinationActivity">
+                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
+                <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DestinationInterests">
+            <EntityTypeMapping TypeName="TravelogyDevModel.DestinationInterest">
+              <MappingFragment StoreEntitySet="DestinationInterest">
+                <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
+                <ScalarProperty Name="AdditionalHtml" ColumnName="AdditionalHtml" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

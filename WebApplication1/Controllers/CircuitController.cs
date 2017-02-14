@@ -12,6 +12,27 @@ namespace WebApplication1.Controllers
 {
     public class CircuitController : DomingoControllerBase
     {
+        // GET: Circuit - get Destination        
+        public ActionResult Destination(string destination)
+        {
+            var _model = new DestinationViewModel() { Name = destination };
+            return View(_model);
+        }
+
+        // GET: Circuit - get Interest        
+        public ActionResult Interest(string interest)
+        {
+            var _model = new InterestViewModel() { Name = interest };
+            return View(_model);
+        }
+
+        // GET: Circuit - get Activity        
+        public ActionResult Activity(string activity)
+        {
+            var _model = new DestinationViewModel() { Name = activity };
+            return View(_model);
+        }
+
         // GET: Circuit - get all circuits
         public ActionResult Index()
         {

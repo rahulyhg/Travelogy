@@ -9476,6 +9476,9 @@
     <Content Include="Views\Service\ViewTransferBooking.cshtml" />
     <Content Include="Views\Admin\EditTripStep.cshtml" />
     <Content Include="Views\India\NorthEastIndia.cshtml" />
+    <Content Include="Views\Circuit\Destination.cshtml" />
+    <Content Include="Views\Circuit\Interest.cshtml" />
+    <Content Include="Views\Circuit\Activity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

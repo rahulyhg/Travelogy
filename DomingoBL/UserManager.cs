@@ -97,6 +97,32 @@ namespace DomingoBL
         /// </summary>
         /// <param name="AspNetUserName"></param>
         /// <returns></returns>
+        public static string GetUserType(string AspNetUserName)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var user = context.AspNetUsers.FirstOrDefault(p => p.UserName == AspNetUserName);
+                    if (user != null)
+                    {
+                        return user.UserType;
+                    }
+                }
+
+                return string.Empty;
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="AspNetUserName"></param>
+        /// <returns></returns>
         public static bool IsUserEmailVerified(string AspNetUserName)
         {
             try

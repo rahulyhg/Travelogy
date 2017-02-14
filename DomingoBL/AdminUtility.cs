@@ -59,7 +59,11 @@ namespace DomingoBL
             return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="templateStep"></param>
+        /// <returns></returns>
         public static async Task<DomingoBlError> SaveTripTemplateStep(TripTemplateStep templateStep)
         {
             try
