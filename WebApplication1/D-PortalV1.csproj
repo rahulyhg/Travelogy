@@ -9479,6 +9479,9 @@
     <Content Include="Views\Circuit\Destination.cshtml" />
     <Content Include="Views\Circuit\Interest.cshtml" />
     <Content Include="Views\Circuit\Activity.cshtml" />
+    <Content Include="Views\Admin\AddSubDestination.cshtml" />
+    <Content Include="Views\Admin\AddDestinationActivity.cshtml" />
+    <Content Include="Views\Admin\AddDestinationInterest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

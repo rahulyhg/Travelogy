@@ -35,7 +35,7 @@ namespace DomingoBL
                             _tripTemmplate.DurationDaysMin = template.DurationDaysMin;
                             _tripTemmplate.DurationDaysMax = template.DurationDaysMax;
                             _tripTemmplate.BestTimeToVisit = template.BestTimeToVisit;
-                            _tripTemmplate.Name = template.Name;                            
+                            _tripTemmplate.Name = template.Name;
                             _tripTemmplate.Description = template.Description;
                             _tripTemmplate.ThumbnailPath = template.ThumbnailPath;
                             _tripTemmplate.TripProviderId = template.TripProviderId;
@@ -77,7 +77,7 @@ namespace DomingoBL
 
                         if (_tripTemmplateStep != null)
                         {
-                            
+
                             _tripTemmplateStep.ShortDescription = templateStep.ShortDescription;
                             _tripTemmplateStep.LongDescription = templateStep.LongDescription;
                             _tripTemmplateStep.NightStay = templateStep.NightStay;
@@ -105,7 +105,7 @@ namespace DomingoBL
                             await context.SaveChangesAsync();
 
                             _tripTemmplateStep.TripTemplateStepIdentifier = string.Format("{0}-{1}", _tripTemmplateStep.TripTemplateId, _tripTemmplateStep.Id);
-                            await context.SaveChangesAsync();                            
+                            await context.SaveChangesAsync();
                         }
                     }
                 }
@@ -310,10 +310,10 @@ namespace DomingoBL
                 using (var context = new TravelogyDevEntities1())
                 {
                     var _dbTrip = context.Trips.Find(trip.Id);
-                    if(_dbTrip != null)
+                    if (_dbTrip != null)
                     {
                         if (trip.EndDate.HasValue) { _dbTrip.EndDate = trip.EndDate; }
-                        if (trip.StartDate.HasValue) { _dbTrip.StartDate = trip.StartDate; }                        
+                        if (trip.StartDate.HasValue) { _dbTrip.StartDate = trip.StartDate; }
                         _dbTrip.PaxAdults = trip.PaxAdults;
                         _dbTrip.PaxMinors = trip.PaxMinors;
                         if (!string.IsNullOrEmpty(trip.Status)) { _dbTrip.Status = trip.Status; }
@@ -346,7 +346,7 @@ namespace DomingoBL
 
                 using (var context = new TravelogyDevEntities1())
                 {
-                    if(tripStep.Id == 0)
+                    if (tripStep.Id == 0)
                     {
                         _dbTripStep = new TripStep() { TripId = tripStep.TripId };
 
@@ -379,7 +379,7 @@ namespace DomingoBL
 
                             await context.SaveChangesAsync();
                         }
-                    }                    
+                    }
                 }
             }
             catch (Exception ex)
@@ -390,5 +390,130 @@ namespace DomingoBL
             return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> SaveSubDestination(SubDestination model)
+        {
+            try
+            {
+                using (var context = new TravelogyDevEntities1())
+                {
+                    // create new
+                    if (model.Id == 0)
+                    {
+                        context.SubDestinations.Add(model);
+                        await context.SaveChangesAsync();
+                    }
+
+                    // update existing
+                    else
+                    {
+                        var _dbSubDestination = context.SubDestinations.Find(model.Id);
+                        if(_dbSubDestination != null)
+                        {
+                            _dbSubDestination.Name = model.Name;
+                            _dbSubDestination.ThumbnailPath = model.ThumbnailPath;
+                            _dbSubDestination.Type = model.Type;
+                            _dbSubDestination.Description = model.Description;
+
+                            await context.SaveChangesAsync();
+                        }
+                    }
+                }                    
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> SaveDestinationActivity(DestinationActivity model)
+        {
+            try
+            {
+                using (var context = new TravelogyDevEntities1())
+                {
+                    // create new
+                    if (model.Id == 0)
+                    {
+                        context.DestinationActivities.Add(model);
+                        await context.SaveChangesAsync();
+                    }
+
+                    // update existing
+                    else
+                    {
+                        var _dbActivityObj = context.DestinationActivities.Find(model.Id);
+                        if (_dbActivityObj != null)
+                        {
+                            _dbActivityObj.Name = model.Name;
+                            _dbActivityObj.ThumbnailPath = model.ThumbnailPath;
+                            _dbActivityObj.Type = model.Type;
+                            _dbActivityObj.Description = model.Description;
+
+                            await context.SaveChangesAsync();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> SaveDestinationInterest(DestinationInterest model)
+        {
+            try
+            {
+                using (var context = new TravelogyDevEntities1())
+                {
+                    // create new
+                    if (model.Id == 0)
+                    {
+                        context.DestinationInterests.Add(model);
+                        await context.SaveChangesAsync();
+                    }
+
+                    // update existing
+                    else
+                    {
+                        var _dbInterestObj = context.DestinationInterests.Find(model.Id);
+                        if (_dbInterestObj != null)
+                        {
+                            _dbInterestObj.Name = model.Name;
+                            _dbInterestObj.ThumbnailPath = model.ThumbnailPath;
+                            _dbInterestObj.Type = model.Type;
+                            _dbInterestObj.Description = model.Description;
+
+                            await context.SaveChangesAsync();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
     }
 }
