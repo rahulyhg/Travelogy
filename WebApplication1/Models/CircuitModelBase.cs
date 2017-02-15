@@ -19,24 +19,12 @@ namespace WebApplication1.Models
     /// <summary>
     /// 
     /// </summary>
-    public class DestinationViewModel
+    public class CircuitDestinationViewModel
     {
         public string Name { get; set; }
-    }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public class InterestViewModel
-    {
-        public string Name { get; set; }
-    }
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    public class ActivityViewModel
-    {
-        public string Name { get; set; }
-    }
+        public List<SubDestination> SubDestinations { get; set; }
+
+        public List<DestinationActivity> Activities { get; set; }
+    }    
 }

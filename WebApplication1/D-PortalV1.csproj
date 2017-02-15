@@ -9482,6 +9482,7 @@
     <Content Include="Views\Admin\AddSubDestination.cshtml" />
     <Content Include="Views\Admin\AddDestinationActivity.cshtml" />
     <Content Include="Views\Admin\AddDestinationInterest.cshtml" />
+    <Content Include="Views\Shared\Error404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

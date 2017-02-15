@@ -18,6 +18,11 @@ namespace WebApplication1.Controllers
             return View("Error");
         }
 
+        public ActionResult Error404()
+        {
+            return View("Error404");
+        }
+
         public ActionResult Index()
         {
             //if (ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))

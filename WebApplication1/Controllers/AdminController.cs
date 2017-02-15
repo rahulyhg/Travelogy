@@ -116,29 +116,29 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="subDestinationId"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult AddSubDestination(int id)
+        public ActionResult AddSubDestination(int destinationId)
         {
             _CheckForAdminAccess();
 
-            var model = new SubDestination() { DestinationId = id };
+            var model = new SubDestination() { Id = 0, DestinationId = destinationId };
             return View(model);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="subDestinationId"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult EditSubDestination(int id)
+        public ActionResult EditSubDestination(int subDestinationId)
         {
             _CheckForAdminAccess();
 
             var context = new TravelogyDevEntities1();
-            var model = context.SubDestinations.Find(id);
+            var model = context.SubDestinations.Find(subDestinationId);
             if(model == null)
             {
                 throw new ApplicationException("Invalid parameter");
@@ -172,12 +172,32 @@ namespace WebApplication1.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult AddDestinationActivity(int id)
+        public ActionResult AddDestinationActivity(int destinationId)
         {
             _CheckForAdminAccess();
 
-            var model = new DestinationActivity() { DestinationId = id };
+            var model = new DestinationActivity() { DestinationId = destinationId };
             return View(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult EditDestinationActivity(int destinationActivityId)
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var model = context.DestinationActivities.Find(destinationActivityId);
+            if (model == null)
+            {
+                throw new ApplicationException("Invalid parameter");
+            }
+
+            return View("AddDestinationActivity", model);
         }
 
         /// <summary>
@@ -205,12 +225,32 @@ namespace WebApplication1.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult AddDestinationInterest(int id)
+        public ActionResult AddDestinationInterest(int destinationId)
         {
             _CheckForAdminAccess();
 
-            var model = new DestinationInterest() { DestinationId = id };
+            var model = new DestinationInterest() { DestinationId = destinationId };
             return View(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult EditDestinationInterest(int destinationInterestId)
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var model = context.DestinationActivities.Find(destinationInterestId);
+            if (model == null)
+            {
+                throw new ApplicationException("Invalid parameter");
+            }
+
+            return View("AddDestinationInterest", model);
         }
 
         /// <summary>

@@ -195,5 +195,31 @@ namespace DomingoBL
 
             return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="search"></param>
+        /// <param name="subDestinationList"></param>
+        /// <returns></returns>
+        public static DomingoBlError SearchSubDestination(string search, out List<SubDestination> subDestinationList)
+        {
+            subDestinationList = new List<SubDestination>();
+
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    subDestinationList.AddRange(context.SubDestinations.Where(p => p.Name == search || p.Type == search).ToList());                    
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
     }
 }

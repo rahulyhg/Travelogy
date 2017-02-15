@@ -4,7 +4,8 @@
     @using (Html.BeginForm("SaveDestinationInterestAsync", "Admin", new { ReturnUrl = "" }))
     {
         @Html.AntiForgeryToken()
-        
+        @Html.HiddenFor(model => model.Id)
+
         <div class="form-horizontal">
             <h4>DestinationInterest</h4>
             <hr />
