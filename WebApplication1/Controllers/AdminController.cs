@@ -365,15 +365,6 @@ namespace WebApplication1.Controllers
             return View(step);
         }
 
-        [Authorize]
-        public ActionResult AddTripStep(int tripId)
-        {
-            _CheckForAdminAccess();
-
-            View_TripStep step = new View_TripStep() { TripId = tripId };
-            return View("EditTripStep", step);
-        }
-
         /// <summary>
         /// 
         /// </summary>

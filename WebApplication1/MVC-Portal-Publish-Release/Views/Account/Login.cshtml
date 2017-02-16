@@ -4,7 +4,6 @@
     ViewBag.Title = "Sign in to your account";
 }
 
- 
 <div class="row">
     <div class="col-md-4 col-lg-offset-2">
         <section id="loginForm">
@@ -13,22 +12,22 @@
                 @Html.AntiForgeryToken()
 
                 <div class="reg-header">
-                    <h3>@ViewBag.Title.</h3>
-                    @*<h4>@Html.ActionLink("or Sign up and join the Club", "Register")</h4>*@
+                    <h3>@ViewBag.Title.</h3>   
+                    <h5>@Html.ActionLink("or, Sign up and join the Club", "Register")</h5>                 
                 </div>
-
+                
                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 <div class="input-group margin-bottom-20">
                     <span class="input-group-addon"><i class="icon-user"></i></span>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })                    
                 </div>
-
+                
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 <div class="input-group margin-bottom-20">
                     <span class="input-group-addon"><i class="icon-lock"></i></span>
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })                    
                 </div>
-
+                
 
                 <div class="input-group margin-bottom-20">
                     @Html.CheckBoxFor(m => m.RememberMe) &nbsp; @Html.LabelFor(m => m.RememberMe)
@@ -48,46 +47,30 @@
                         <input type="submit" value="Log in" class="btn-u pull-right" />
                     </div>
                 </div>
-                <div class="margin-bottom-20"></div>
+                
 
-                @* Enable this once you have account confirmation enabled for password reset functionality*@
-                <p class="text-center">
+                @* Enable this once you have account confirmation enabled for password reset functionality
+                <p>
                     @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                </p>
+                </p>*@
                 }
         </section>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4">   
         <section id="socialLoginForm">
             <div class="reg-page">
                 @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
             </div>
-        </section>
+        </section>     
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4">        
     </div>
 </div>
-
-<div class="col-lg-8 col-lg-offset-2">
-    <!--Tag Box v5-->
-    <div class="row tag-box tag-box-v5">
-        <div class="col-md-8">
-            <span>If you have not created an account yet: </span>
-        </div>
-        <div class="col-md-4">
-            <p> <a href="/Account/Register" class="btn-u btn-u-lg btn-u-orange"><i class="icon-signin"></i> &nbsp;Sign up and Join the club</a></p>
-        </div>
-    </div>
-    <!--End Tag Box v5-->
-</div>
-
 
 <div class="row">
     <div class="col-md-12 padd-15 text-center">
-        <h4>
-            By Signing up and logging in, you agree to our <a href="/Information/TermsAndConditions" target="_blank" class="orange">Terms And Conditions</a>.
-            <small>Please read our <a href="/Information/Privacy" target="_blank" class="orange">Privacy policy</a> for peace of mind.</small>
-        </h4>
+        <h4>By logging in you agree to our <a href="/Information/TermsAndConditions" target="_blank" class="orange">Terms And Conditions</a>. 
+        <small>Please read our <a href="/Information/Privacy" target="_blank" class="orange">Privacy policy</a> for peace of mind.</small>  </h4>
     </div>
 </div>
 

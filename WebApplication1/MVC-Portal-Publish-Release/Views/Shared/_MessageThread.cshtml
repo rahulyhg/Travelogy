@@ -2,7 +2,7 @@
 
 <div class="row margin-bottom-20">
     <div class="col-md-12">
-        <div class="panel panel-default">
+        <div class="panel panel-black">
             <div class="panel-heading">
                 <h3 class="panel-title"><i class="icon-tasks"></i> Discussion started: @Model.MessageThread.Thread.CreatedDate</h3>
             </div>
@@ -13,7 +13,7 @@
                 <input type="hidden" name="aDmin" value="@Model.AdminId" />
                 <div class="panel-body">
                     <h4>@Model.MessageThread.Thread.Title</h4>
-                    @if(Model.TripId > 0 && Model.ShowTripViewLink == true)
+                    @if(Model.TripId > 0)
                     {
                         <h5><a href="/Service/ViewTrip?tripId=@Model.TripId">View trip</a></h5>
                     }

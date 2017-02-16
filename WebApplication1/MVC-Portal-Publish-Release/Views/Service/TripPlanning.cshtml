@@ -1,23 +1,10 @@
 ﻿@model WebApplication1.Models.TripPlanningViewModel
 
-@{
-    ViewBag.Title = "Trip Planner";
-}
-
-@Html.Partial("_HomepageCarousel")
-
-<!--=== Breadcrumbs ===-->
-<div class="breadcrumbs margin-bottom-20">
-    <div class="container">
-        <h1 class="pull-left">Trip planner</h1>
-        <ul class="pull-right breadcrumb">
-            <li>Explore</li>
-            <li>Plan</li>
-            <li class="active">Book</li>
-        </ul>
+<div class="row">
+    <div class="col-md-12 padd-10">
+        <img class="img-responsive" src="~/Content/img/gallery/big/slider001.jpg" />
     </div>
-</div><!--/breadcrumbs-->
-
+</div>
 
 @if (!Request.IsAuthenticated)
 {
@@ -40,43 +27,25 @@ else // for logged in users
             </div>
         </div>
 
-        <div class="container">
-            <div class="row tag-box tag-box-v1">
-                <h1 class="orange">Featured circuits</h1>
-                <div class="row">
-                    @for (var i = 0; i < Model.SuggestedDestinations.Count; i++)
-                    {
-                        if (i % 4 == 0)
-                        {
-                            @Html.Raw("<div class=\"row\">");
-                        }
+        <div class="row tag-box tag-box-v1">
+            <h1 class="orange">Featured circuits</h1>
 
-                        {
-                            var item = Model.SuggestedDestinations[i];
-                            @Html.Partial("_DestinationWidget", item)
-                        }
-
-                        if (i % 4 == 3)
-                        {
-                            @Html.Raw("</div>");
-                        }
-
-                        if (i == Model.SuggestedDestinations.Count - 1)
-                        {
-                            @Html.Raw("</div>");
-                        }
-                    }                    
-                </div>
-            </div>
+            <!--Lake Baikal-->
+            @Html.Partial("LakeBaikal_TripPlannerWP")
+            <!--End Lake Baikal-->
+            <!--TSR-->
+            @Html.Partial("TransSiberian_TripPlannerWP")
+            <!--End TSR-->
         </div>
     }
 
     // planned trips
-    else if (Model.PlannedTrips != null && Model.PlannedTrips.Count > 0)
+    else if(Model.PlannedTrips != null && Model.PlannedTrips.Count > 0)
     {
-        foreach (var trip in Model.PlannedTrips)
+        foreach(var trip in Model.PlannedTrips)
         {
-            Html.RenderPartial("_TripPlanningPlannedTripSummary", trip);
+            <h1>@trip.StartDate -- @trip.Status Trip # @trip.Id</h1>
+            <h2><a href="/Service/ViewTrip?tripId=@trip.Id">View</a></h2>
         }
 
         <div class="row tag-box tag-box-v5">

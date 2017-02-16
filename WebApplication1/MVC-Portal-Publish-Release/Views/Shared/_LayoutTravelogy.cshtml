@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     
-    <title>@ViewBag.Title - Travelogy | Science of Travelling</title>
+    <title>Travelogy | Science of Travelling - @ViewBag.Title</title>
 
     <!-- Google Tag Manager -->
     <script>
@@ -18,8 +18,8 @@
     <!-- End Google Tag Manager -->
         
     <!-- Description, Keywords and Author -->
-    <meta name="description" content="@ViewBag.Description">
-    <meta name="keywords" content="@ViewBag.KeyWords">
+    <meta name="description" content="Travelogy club is a platform created to offer 360 degree solution for travel to exotic destinations. Get completely flexible customised trips planned and booked through us.">
+    <meta name="keywords" content="">
     <meta name="author" content="Travelogy Ltd">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,11 +44,8 @@
     <link href="~/Content/css/styles/style.css" rel="stylesheet">
     <link href="~/Content/assets/css/style.css" rel="stylesheet">
     <link href="~/Content/assets/css/responsive.css" rel="stylesheet">
-    <link href="~/Content/assets/css/pages/page_404_error.css" rel="stylesheet">
     <link href="~/Content/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
-    <link href="~/Content/assets/css/pages/portfolio-v2.css" rel="stylesheet" >
-    <link href="~/Content/assets/css/pages/page_pricing.css" rel="stylesheet">    
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/">     
@@ -79,17 +76,43 @@
 
     <div class="outer">
 
+        <!-- Top bar starts -->
+        <div class="top-bar">
+            <div class="container">
+
+                <!-- Contact starts -->
+                <div class="tb-contact pull-left">
+                    <!-- Email -->
+                    Contact us at: &nbsp;&nbsp;
+                    <i class="fa fa-envelope color"></i> &nbsp; <a href="mailto:info@travelogyclub.com">info@travelogyclub.com</a>
+                    &nbsp;&nbsp;
+                    <!-- Phone -->
+                    @*<i class="fa fa-phone color"></i> &nbsp; +91 80178 10994 (India) &nbsp;&nbsp; +44 208 560 2747 (U.K.)*@
+                </div>
+                <!-- Contact ends -->
+
+                <div class="tb-contact pull-right">
+                    @Html.Partial("_LoginPartial")
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <!-- Top bar ends -->
         <!-- Header two Starts -->
         <div class="header-2">
 
             <!-- Container -->
             <div class="container">
-                <div class="row logo">
-                    <div class="col-md-3 col-sm-12">
-                        <h1><a href="/">Travelogy Club</a></h1>                        
+                <div class="row">
+                    <div class="col-md-3">
+                        <!-- Logo section -->
+                        <div class="logo">
+                            <h1><a href="/"><i class="fa fa-laptop"></i> Travelogy Club</a></h1>
+                        </div>
                     </div>
-                    
-                    <div class="col-md-7 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
                         
                         <!-- Navigation starts.  -->
                         <div class="navy">
@@ -100,77 +123,89 @@
                                 {
                                     <li>@Html.ActionLink("Dashboard", "index", "Admin")</li>
                                     <li>@Html.ActionLink("Messages", "MessageCenter", "Admin")</li>
-                                    <li>@Html.ActionLink("Trips", "Trips", "Admin")</li>
+                                    <li>@Html.ActionLink("Trips", "TripManagement", "Admin")</li>
                                 }
-                            }                            
 
-                            <li>
-                                <a href="#">Destinations</a>
-                                <ul>
-                                    <li>@Html.ActionLink("India", "index", "India")</li>
-                                    <li>@Html.ActionLink("Tanzania", "Tanzania", "Circuit")</li>
-                                    <li>@Html.ActionLink("Russia", "Russia", "Circuit")</li>
-                                    <li>@Html.ActionLink("Mongolia", "Mongolia", "Circuit")</li>
-                                    <li>@Html.ActionLink("Europe", "Europe", "Circuit")</li>
-                                    <li><a href="/Circuit">Browse All</a></li>
-                                </ul>
-                            </li>
-
-                            @if (Request.IsAuthenticated)
-                            {
-                                if (!ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
+                                else
                                 {
                                     <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
-                                    <li>@Html.ActionLink("Travel Profile", "TravellerProfile", "Manage")</li>
+                                    <li>@Html.ActionLink("My Profile", "TravellerProfile", "Manage")</li>
                                     <li>@Html.ActionLink("My Messages", "MessageCenter", "Service")</li>
-                                }                                
+                                }
                             }
                             else
                             {
                                 <!-- Main menu -->
                                 <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
                                 <li>
+                                    <a href="#">Circuits</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Asia</a>
+                                            <ul>
+                                                <li>@Html.ActionLink("Eastern Himalaya - Motorcycle tour", "MotoEasternHimalaya", "Circuit")</li>
+                                                <li>@Html.ActionLink("Eastern Himalaya - Backpacking", "BackpackEasternHimalaya", "Circuit")</li>
+                                                <li>@Html.ActionLink("India and Nepal - Specialized Photography Tours", "PhotographyToursIndia", "Circuit")</li>
+                                                <li>@Html.ActionLink("Lake Baikal and Buryat republic", "LakeBaikal", "Circuit")</li>
+                                                <li>@Html.ActionLink("Trans-Mongolian journeys", "TransMongolian", "Circuit")</li>
+                                                <li>@Html.ActionLink("Nomadic Mongolia", "Mongolia", "Circuit")</li>
+                                                <li>@Html.ActionLink("Tibet - roof of the world", "Tibet", "Circuit")</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Africa</a>
+                                            <ul>
+                                                <li>@Html.ActionLink("Kilimanjaro Climb", "Kilimanjaro", "Circuit")</li>
+                                                <li>@Html.ActionLink("Safari in Tanzania", "TanzaniaSafari", "Circuit")</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Europe</a>
+                                            <ul>
+                                                <li>@Html.ActionLink("Moscow and the Trans-Siberian", "TransSiberian", "Circuit")</li>
+                                                <li>@Html.ActionLink("Scottish Isles", "ScottishIsles", "Circuit")</li>
+                                                <li>@Html.ActionLink("Supercar & Superbike tours of Britain", "SupercarSuperbikeBritain", "Circuit")</li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/Circuit">Browse All</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
                                     <a href="#">Information</a>
                                     <ul>
                                         <li>@Html.ActionLink("F.A.Q.", "FAQ", "Information")</li>
                                         <li>@Html.ActionLink("Privacy Policy", "Privacy", "Information")</li>
                                         <li>@Html.ActionLink("Terms and Conditions", "TermsAndConditions", "Information")</li>
-                                        <li>@Html.ActionLink("About Us", "AboutUs", "Information")</li>
-                                        <li>@Html.ActionLink("Contact Us", "ContactUs", "Information")</li>
                                     </ul>
-                                </li>                                
-                            }                            
+                                </li>
 
-                            @*Login menu items*@
-                            @Html.Partial("_LoginPartial")
-                        </ul>                                               
+                                <li>@Html.ActionLink("About Us", "AboutUs", "Information")</li>
+                                <li>@Html.ActionLink("Contact Us", "ContactUs", "Information")</li>
+                            }                            
+                        </ul>
                     </div>
                     <!-- Navigation ends -->
-                </div>                
-                <div class="col-md-2 col-sm-12 text-center">
-                    <div class="margin-bottom-10"></div>
-                    <a href="/">
-                        <img src="~/Content/img/logo1-default-small.png" />
-                    </a>                                       
+
                 </div>
+                <div class="col-md-3"><img src="~/Content/img/logo1-default.png" /></div>
             </div>
-            @if (Request.IsAuthenticated)
-            {
-                @Html.Partial("_LogoutPartial")                    
-            }
         </div>
     </div>
+
     <!-- Header two ends -->
-        
-
     <!-- Main content starts -->
+
     <div class="main-block">
+
         <div class="container">
+
             @RenderBody()
+
         </div>
     </div>
-    <!-- Main content ends -->
 
+    <!-- Main content ends -->
     <!-- Foot Starts -->
 
     <div class="foot">
