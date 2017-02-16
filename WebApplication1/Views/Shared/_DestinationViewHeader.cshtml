@@ -1,9 +1,13 @@
 ﻿@model WebApplication1.Models.DomingoModelBase
 
-<div class="container">
-    <hr class="margin-bottom-20" />
+<div class="container">    
     <div class="row blog-page blog-item">
         <div class="col-md-12 md-margin-bottom-20">
+            <div class="block-heading-twelve">
+                <h3 class="color">@Model.Destination.Name</h3>
+                <h2>@Model.Destination.Tagline</h2>
+            </div>
+            <hr class="margin-bottom-20" />
             <div class="blog-post-tags">
                 <ul class="list-unstyled list-inline blog-info">
                     <li><i class="icon-calendar"></i> Ideal for: @Model.Destination.BestTimeToVisit</li>
@@ -25,9 +29,7 @@
                 }
 
             </div>
-            <div class="blog margin-bottom-10">
-                <h2>@Model.Destination.Tagline</h2>
-            </div>
+            
             <p>@Model.Destination.Description</p>
         </div>
     </div>

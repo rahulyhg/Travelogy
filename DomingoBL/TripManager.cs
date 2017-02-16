@@ -650,7 +650,13 @@ namespace DomingoBL
                     trip.DlTripSteps = dlTripSteps.ToList();
                     trip.DlBookingsView = context.View_TripBookingAccommodation.Where(p => p.TripId == tripId).ToList();
                     trip.DlTransportsBookingsView = context.View_TripBookingTransport.Where(p => p.TripId == tripId).ToList();
+
+                    // get the traveller info
+                    var AspNetUserId = trip.DlTrip.AspNetUserId;
+                    trip.DlTraveller = context.View_Traveller.Where(p => p.Id == AspNetUserId).FirstOrDefault();
                 }
+
+
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
             }
             catch (Exception ex)

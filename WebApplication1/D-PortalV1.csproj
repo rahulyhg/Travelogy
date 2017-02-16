@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WebApplication1</RootNamespace>
     <AssemblyName>WebApplication1</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,16 +56,14 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -106,6 +105,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -8817,6 +8817,7 @@
     <Content Include="Content\img\gallery\small\thumbnail_WesternHimalaya.jpg" />
     <Content Include="Content\img\gallery\small\thumbnail_WildlifeToursIndia.jpg" />
     <Content Include="Content\img\Historic-Britain\HB001.jpg" />
+    <Content Include="Content\img\India\1040308_10201401438377505_2003923828_o.jpg" />
     <Content Include="Content\img\India\16650695_10212291999994739_843640343_o.jpg" />
     <Content Include="Content\img\India\16651476_10212292008394949_1728910291_o.jpg" />
     <Content Include="Content\img\India\16667305_10212292008674956_1030737844_o.jpg" />
@@ -8826,6 +8827,9 @@
     <Content Include="Content\img\India\16699963_10212292004234845_1732797183_n.jpg" />
     <Content Include="Content\img\India\16706734_10212292002234795_1977503624_n.jpg" />
     <Content Include="Content\img\India\16709312_10212291999914737_1198831192_o.jpg" />
+    <Content Include="Content\img\India\sikkim001.jpg" />
+    <Content Include="Content\img\India\slider001.jpg" />
+    <Content Include="Content\img\India\slider002.jpg" />
     <Content Include="Content\img\Kilimanjaro-Climb\KILI-S01.JPG" />
     <Content Include="Content\img\Kilimanjaro-Climb\KILI-S02.JPG" />
     <Content Include="Content\img\Kilimanjaro-Climb\KILI-S03.JPG" />
@@ -9067,6 +9071,7 @@
     <Content Include="Content\img\Trans-Siberian\Moscow-01.JPG" />
     <Content Include="Content\img\Trans-Siberian\Moscow-02.JPG" />
     <Content Include="Content\img\Trans-Siberian\Moscow-03.JPG" />
+    <Content Include="Content\img\Trans-Siberian\slider001.jpg" />
     <Content Include="Content\img\Trans-Siberian\TSR-P01.JPG" />
     <Content Include="Content\img\Trans-Siberian\TSR-P02.JPG" />
     <Content Include="Content\img\Trans-Siberian\TSR-P03.JPG" />
@@ -9339,7 +9344,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -9468,6 +9475,14 @@
     <Content Include="Views\Service\LocalTransfer.cshtml" />
     <Content Include="Views\Service\ViewTransferBooking.cshtml" />
     <Content Include="Views\Admin\EditTripStep.cshtml" />
+    <Content Include="Views\India\NorthEastIndia.cshtml" />
+    <Content Include="Views\Circuit\Destination.cshtml" />
+    <Content Include="Views\Circuit\Interest.cshtml" />
+    <Content Include="Views\Circuit\Activity.cshtml" />
+    <Content Include="Views\Admin\AddSubDestination.cshtml" />
+    <Content Include="Views\Admin\AddDestinationActivity.cshtml" />
+    <Content Include="Views\Admin\AddDestinationInterest.cshtml" />
+    <Content Include="Views\Shared\Error404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

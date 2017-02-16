@@ -8,8 +8,15 @@ using System.Web.Mvc;
 
 namespace WebApplication1.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class AdminModel
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<SelectListItem> GetTripProvidersSelectList()
         {
             var _dbTripProviders = new List<TripProvider>();
@@ -75,6 +82,9 @@ namespace WebApplication1.Models
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class AdminTripBookingTransportEditModel
     {
         public View_TripBookingTransport DbObject { get; set; }
@@ -94,5 +104,31 @@ namespace WebApplication1.Models
                 return dropdownItems;
             }
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EditDestinationViewModel
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public Destination DbObject { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<SubDestination> SubDestinations { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<DestinationActivity> Activities { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<DestinationInterest> Interests { get; set; }
     }
 }

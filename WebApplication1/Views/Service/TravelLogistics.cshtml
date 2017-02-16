@@ -6,3 +6,133 @@
 
 @Html.Partial("_HomepageCarousel")
 
+<div class="headline">
+    <h2>Travel logistics <small class="orange"> &amp; booking services</small></h2>
+    <div class="about-us-one">
+        <div class="about-logo">
+            <p>Travelogy club offers services that you can use to plan, book and enjoy your travels. Start by using our <a class="orange" href="/service/tripplanning">FREE online Trip Planner</a> to 
+            browse sample itineraries created by travel experts and customise them according to your own preferences.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="margin-bottom-20" />
+
+<div class="img-box-3 text-center">
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/aeroplane.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Air Tickets</h4>
+                <div class="bor bg-black"></div>
+                <p>Book air tickets from our trusted booking partner. Our agents will handle it for you.</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/passport.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Visas</h4>
+                <div class="bor bg-black"></div>
+                <p>Travelogy club associates handle Visa applications to all our destinations.</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/hotel.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Accommodation</h4>
+                <div class="bor bg-black"></div>
+                <p>Our team can book the hotel you want. Fit any budget, any style, from a 5-Star to a hostel bunk.</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/minivan-taxi.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Transport arrangements</h4>
+                <div class="bor bg-black"></div>
+                <p>We can arrange local transport at your destinations through our local associates.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/taxi.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Airport pickup / drop</h4>
+                <div class="bor bg-black"></div>
+                <p>We arrange airort pickup and drops when you arrive at a new destination.</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/woman.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Tour guides</h4>
+                <div class="bor bg-black"></div>
+                <p>If you need one, we will arrange for one. English speaking professional guides are available in most of our destinations.</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/photo-camera.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Local tours</h4>
+                <div class="bor bg-black"></div>
+                <p>You can also pre-book local tours at the destinations, through our partners. </p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/male-reporter.png" alt="" class="img-responsive" />
+                </div>
+                <h4>On tour support</h4>
+                <div class="bor bg-black"></div>
+                <p>Stay in touch with our "Travel Jockeys" while you are travelling. Through this premium service you can have a smooth sailing in every corner of the world.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="margin-bottom-20" />
+
+@if (!Request.IsAuthenticated)
+{
+    <div class="row tag-box tag-box-v2 padd-15">
+        <h3>
+            Start planning now. You can <a href="/Circuit" class="orange">explore the destinations</a>, and <a href="/account/register" class="orange">Sign up</a> or
+            <a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-u-orange"><i class="icon-facebook"></i> &nbsp; Login with Facebook</a> to start using our
+            FREE online trip planner.
+        </h3>
+    </div>
+}
+
+
+

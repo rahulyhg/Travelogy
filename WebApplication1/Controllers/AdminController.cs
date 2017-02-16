@@ -23,7 +23,12 @@ namespace WebApplication1.Controllers
         /// </summary>
         private void _CheckForAdminAccess()
         {
-            if (!ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
+            string userType = ApplicationUserManager.GetUserType(User.Identity.Name).ToLower().Trim();
+            if(userType == "admin" || userType == "traveloger" || userType == "editor")
+            {
+                // things are just fine
+            }
+            else
             {
                 throw new ApplicationException("Unauthorized access of admin feature!");
             }
@@ -57,6 +62,19 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult CreateDestination()
+        {
+            _CheckForAdminAccess();
+
+            var _model = new Destination();
+            return View(_model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [Authorize]
@@ -65,20 +83,14 @@ namespace WebApplication1.Controllers
             _CheckForAdminAccess();
 
             var context = new TravelogyDevEntities1();
-            var _model = context.Destinations.Find(id);
-            return View(_model);
-        }
+            var _model = new EditDestinationViewModel
+            {
+                DbObject = context.Destinations.Find(id),
+                SubDestinations = context.SubDestinations.Where(p => p.DestinationId == id),
+                Interests = context.DestinationInterests.Where(p => p.DestinationId == id),
+                Activities = context.DestinationActivities.Where(p => p.DestinationId == id)
+            };
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [Authorize]
-        public ActionResult CreateDestination()
-        {
-            _CheckForAdminAccess();
-
-            var _model = new Destination();
             return View(_model);
         }
 
@@ -97,7 +109,166 @@ namespace WebApplication1.Controllers
                 await AdminUtility.SaveDestination(model);
             }
 
-            return RedirectToAction("Destinations");
+            return RedirectToAction("EditDestination", new { @id = model.Id });
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="subDestinationId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult AddSubDestination(int destinationId)
+        {
+            _CheckForAdminAccess();
+
+            var model = new SubDestination() { Id = 0, DestinationId = destinationId };
+            return View(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="subDestinationId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult EditSubDestination(int subDestinationId)
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var model = context.SubDestinations.Find(subDestinationId);
+            if(model == null)
+            {
+                throw new ApplicationException("Invalid parameter");
+            }
+
+            return View("AddSubDestination", model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        public async Task<ActionResult> SaveSubDestinationAsync(SubDestination model)
+        {
+            _CheckForAdminAccess();
+
+            if (model != null)
+            {
+                await AdminUtility.SaveSubDestination(model);
+            }
+
+            return RedirectToAction("EditDestination", new { @id = model.DestinationId });
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult AddDestinationActivity(int destinationId)
+        {
+            _CheckForAdminAccess();
+
+            var model = new DestinationActivity() { DestinationId = destinationId };
+            return View(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult EditDestinationActivity(int destinationActivityId)
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var model = context.DestinationActivities.Find(destinationActivityId);
+            if (model == null)
+            {
+                throw new ApplicationException("Invalid parameter");
+            }
+
+            return View("AddDestinationActivity", model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        public async Task<ActionResult> SaveDestinationActivityAsync(DestinationActivity model)
+        {
+            _CheckForAdminAccess();
+
+            if (model != null)
+            {
+                await AdminUtility.SaveDestinationActivity(model);
+            }
+
+            return RedirectToAction("EditDestination", new { @id = model.DestinationId });
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult AddDestinationInterest(int destinationId)
+        {
+            _CheckForAdminAccess();
+
+            var model = new DestinationInterest() { DestinationId = destinationId };
+            return View(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult EditDestinationInterest(int destinationInterestId)
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var model = context.DestinationActivities.Find(destinationInterestId);
+            if (model == null)
+            {
+                throw new ApplicationException("Invalid parameter");
+            }
+
+            return View("AddDestinationInterest", model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        public async Task<ActionResult> SaveDestinationInterestAsync(DestinationInterest model)
+        {
+            _CheckForAdminAccess();
+
+            if (model != null)
+            {
+                await AdminUtility.SaveDestinationInterest(model);
+            }
+
+            return RedirectToAction("EditDestination", new { @id = model.DestinationId });
 
         }
 
@@ -363,6 +534,15 @@ namespace WebApplication1.Controllers
             }
 
             return View(step);
+        }
+
+        [Authorize]
+        public ActionResult AddTripStep(int tripId)
+        {
+            _CheckForAdminAccess();
+
+            View_TripStep step = new View_TripStep() { TripId = tripId };
+            return View("EditTripStep", step);
         }
 
         /// <summary>

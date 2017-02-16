@@ -1,3 +1,213 @@
-﻿@model WebApplication1.Models.TravelogyModelBase
+﻿@model DomingoBL.BlObjects.BlTrip
 
-<h1> Admin Trip management center </h1>
+@Html.Partial("_HomepageCarousel")
+
+<div class="headline">
+    <h2>Trip Management</h2>
+</div>
+
+<div class="panel panel-orange margin-bottom-10">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="icon-cogs"></i> Manage Trip # @Model.DlTrip.Id</h3>
+    </div>    	
+    <div class="panel-body">
+    @using (Html.BeginForm("SaveTripAsync", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken();
+        @Html.HiddenFor(p => p.DlTrip.Id);
+
+        <h2>Make changes to the trip.</h2>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Trip start date: 
+                    @if (@Model.DlTrip.StartDate.HasValue)
+                    {
+                        @Model.DlTrip.StartDate.Value.ToShortDateString();
+                    }
+                    else
+                    {
+                        @Html.Raw("Not planned");
+                    }</label>
+                    Change to: @Html.EditorFor(model => model.DlTrip.StartDate, new { htmlAttributes = new { @class = "form-control" , @type = "date"} }) &nbsp;&nbsp;
+                </div>
+
+                <div class="col-md-4">
+                    <label>Trip starts at:</label>
+                    @Html.EditorFor(model => model.DlTrip.StartLocation, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="col-md-2">
+                    <label>Adults:</label>
+                    @Html.EditorFor(model => model.DlTrip.PaxAdults, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="col-md-2">
+                    <label>Children:</label>
+                    @Html.EditorFor(model => model.DlTrip.PaxMinors, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Status: [@Model.DlTrip.Status]</label>
+                    @Html.DropDownListFor(model => model.DlTrip.Status,
+                    new List<SelectListItem>()
+                    {
+                        new SelectListItem() { Text = "--- please select one ---", Value = "" },
+                        new SelectListItem() { Text = "planned", Value = "planned" },
+                        new SelectListItem() { Text = "booked", Value = "booked" },
+                    },
+                    new { @class = "form-control" })                    
+                </div>
+            </div>
+        </div>
+
+        <div class="margin-bottom-20"></div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Save Trip Details" class="btn btn-orange" />
+            </div>
+        </div>
+        <div class="margin-bottom-20"></div>
+
+        <div class="margin-bottom-20">
+            <h2>Trip details</h2>
+        </div>
+
+        <table class="table">                        
+            <thead>
+                <tr>
+                    <th>Destination</th>
+                    <th>Dates</th>                    
+                    <th>Description</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>            
+                @foreach (var tripStep in Model.DlTripSteps)
+                {
+                    <tr>
+                        <td>@tripStep.Destination</td>
+                        <td>
+                            @if (tripStep.StartDate.HasValue)
+                            {
+                                @tripStep.StartDate.Value.ToShortDateString()
+                            }
+                            else
+                            {
+                                @Html.Raw("Not planned")
+                            }
+
+                            --
+
+                            @if (tripStep.EndDate.HasValue)
+                            {
+                                @tripStep.EndDate.Value.ToShortDateString()
+                            }
+                            else
+                            {
+                                @Html.Raw("Not planned")
+                            }
+                            
+                        </td>
+                        <td>@tripStep.ShortDescription</td>
+                        <td><a href="/Admin/EditTripStep?id=@tripStep.Id" class="btn btn-warning btn-xs"><i class="icon-pencil"></i> Edit</a></td>
+                    </tr>
+                }
+
+                <tr>
+                    <th colspan="4">
+                        <h3><a href="/Admin/AddTripStep?tripId=@Model.DlTrip.Id" class="btn btn-orange"><i class="icon-pencil"></i>Add a new step</a></h3>
+                    </th>                    
+                </tr>
+
+                <tr>
+                    <th colspan="4">
+                        <hr class="margin-bottom-40" />
+                    </th>
+                </tr>
+
+                <tr>
+                    <th colspan="4">
+                        <h2>Booking details</h2>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Destination</th>
+                    <th>Status</th>
+                    <th>#</th>
+                </tr>
+                @foreach(var _acco in Model.DlBookingsView)
+                {
+                    <tr>
+                        <td>
+                            @if(_acco.CheckinDate.HasValue)
+                            {
+                                @_acco.CheckinDate.Value.ToShortDateString()
+                            }
+                            else
+                            {
+                                @Html.Raw("Not planned");
+                            }
+                        </td>
+                        <td>
+                            @if (_acco.CheckoutDate.HasValue)
+                            {
+                                @_acco.CheckoutDate.Value.ToShortDateString()
+                            }
+                            else
+                            {
+                                @Html.Raw("Not planned");
+                            }
+                        </td>
+                        <td>@_acco.Destination</td>
+                        <td>@_acco.Status</td>
+                        <td><a href="/Admin/EditTripBookingAccommodation?id=@_acco.Id" class="btn btn-warning btn-xs"><i class="icon-pencil"></i> Edit</a></td>
+                    </tr>
+                }        
+                
+                <tr>
+                    <th colspan="4">
+                        <h2>Transfer details</h2>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Details</th>
+                    <th>Date</th>
+                    <th>Class</th>
+                    <th>Status</th>
+                    <th>#</th>
+                </tr>    
+                
+                @foreach(var _transfer in Model.DlTransportsBookingsView)
+                {
+                    <tr>
+                        <td>@_transfer.TransportFrom -- @_transfer.TransportTo</td>
+                        <td>
+                            @if (_transfer.BookingDate.HasValue)
+                            {
+                                @_transfer.BookingDate
+                            }
+                            else
+                            {
+                                @Html.Raw("Not planned");
+                            }
+
+                        </td>
+                        <td>@_transfer.TravelClass</td>
+                        <td>@_transfer.BookingStatus</td>
+                        <td><a href="/Admin/EditTripBookingTransport?id=@_transfer.Id" class="btn btn-warning btn-xs"><i class="icon-pencil"></i> Edit</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        <div class="margin-bottom-20"></div>        
+    }       
+        
+    </div>		
+</div>

@@ -90,39 +90,61 @@ namespace WebApplication1
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="AspNetUserName"></param>
+        /// <returns></returns>
+        public static string GetUserType(string AspNetUserName)
+        {
+            if (string.IsNullOrEmpty(AspNetUserName))
+            {
+                return string.Empty;
+            }
+
+            if (HttpContext.Current.Session["LoggedInUserType"] != null && !string.IsNullOrEmpty(HttpContext.Current.Session["LoggedInUserType"].ToString()))
+            {
+                return HttpContext.Current.Session["LoggedInUserType"].ToString();
+            }
+
+            var userType = DomingoUserManager.GetUserType(AspNetUserName);
+            HttpContext.Current.Session.Add("LoggedInUserType", userType);
+            return userType;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="AspNetUserId"></param>
         /// <returns></returns>
-        public static bool IsTravelogyAdmin(string AspNetUserName)
-        {
-            if(string.IsNullOrEmpty(AspNetUserName))
-            {
-                return false;
-            }
+        //public static bool IsTravelogyAdmin(string AspNetUserName)
+        //{
+        //    if(string.IsNullOrEmpty(AspNetUserName))
+        //    {
+        //        return false;
+        //    }
 
-            if(HttpContext.Current.Session["IsTravelogyAdmin"] != null)                
-            {
-                if ((HttpContext.Current.Session["IsTravelogyAdmin"].ToString().ToUpper() == "TRUE"))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+        //    if(HttpContext.Current.Session["IsTravelogyAdmin"] != null)                
+        //    {
+        //        if ((HttpContext.Current.Session["IsTravelogyAdmin"].ToString().ToUpper() == "TRUE"))
+        //        {
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            return false;
+        //        }
+        //    }
 
-            var isAdmin = DomingoUserManager.IsTravelogyAdmin(AspNetUserName);
-            if(isAdmin)
-            {
-                HttpContext.Current.Session.Add("IsTravelogyAdmin", "TRUE");
-                return true;
-            }
-            else
-            {
-                HttpContext.Current.Session.Add("IsTravelogyAdmin", "FALSE");
-                return false;
-            }
-        }
+        //    var isAdmin = DomingoUserManager.IsTravelogyAdmin(AspNetUserName);
+        //    if(isAdmin)
+        //    {
+        //        HttpContext.Current.Session.Add("IsTravelogyAdmin", "TRUE");
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        HttpContext.Current.Session.Add("IsTravelogyAdmin", "FALSE");
+        //        return false;
+        //    }
+        //}
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {

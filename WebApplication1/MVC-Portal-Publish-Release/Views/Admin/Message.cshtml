@@ -1,0 +1,11 @@
+﻿@model WebApplication1.Models.MessageListModel
+
+@Html.Partial("_HomepageCarousel")
+
+@foreach (var item in Model.AllMessages)
+{
+    var _model = new WebApplication1.Models.MessageListItemViewModel() { MessageThread = item, AdminId = 100 };
+    Html.RenderPartial("_MessageThread", _model);
+}
+
+<a href="/Admin/MessageCenter">Back to Messages</a>

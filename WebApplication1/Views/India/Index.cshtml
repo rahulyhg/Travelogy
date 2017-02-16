@@ -1,13 +1,34 @@
 ﻿@model WebApplication1.Models.CircuitModelBase
 
-@*@Html.Partial("_AfricaCircuitsCarousel")*@
-@Html.Partial("_HomepageCarousel")
+@{ 
+    ViewBag.Description = "Travelogy club offers fully customized holidays and travel opportunities in India";
+    ViewBag.KeyWords = "India, India Travel, India Holidays";
+}
 
-<div class="breadcrumbs margin-bottom-20">
-    <div class="container">
-        <h1 class="pull-left">Top circuits in India</h1>
+<div class="row">
+    <div class="col-md-12 padd-10">
+        <img class="img-responsive" src="~/Content/img/India/slider001.jpg" />
     </div>
-</div><!--/breadcrumbs-->
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="block-heading-twelve">
+            <h3 class="color">India <small>from the Himalayas to the Indian Ocean</small></h3>
+        </div>
+    </div>
+</div>
+
+<div class="about-us-one">
+    <div class="about-logo">
+        <p>India is aptly called a sub-continent. This vast country offers the visitor a view of fascinating religions and ethnography, a vast variety of languages with more than 438 living languages, and monuments that have been present for thousands of years. 
+        As it opens up to a globalised world, India still has a depth of history and intensity of culture that awes and fascinates the many who visit there.</p>
+    </div>
+</div>
+
+<div class="headline">
+    <h3>Travel circuits in India</h3>
+</div>
 
 @for (var i = 0; i < Model.AllDestinations.Count; i++)
 {

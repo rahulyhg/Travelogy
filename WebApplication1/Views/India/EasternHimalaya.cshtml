@@ -8,13 +8,10 @@
     }
 }
 
-@Html.Partial("_HomepageCarousel")
-
 <!--=== Breadcrumbs ===-->
-<div class="breadcrumbs margin-bottom-40">
+<div class="breadcrumbs">
     <div class="container">
-        <h1 class="pull-left">@Model.PageName</h1>
-        <ul class="pull-right breadcrumb">            
+        <ul class="pull-right breadcrumb">
             <li><a href="/India">India</a></li>
             <li><a href="/Circuit/India">All Circuits</a></li>
             <li class="active">@Model.Destination.Name</li>
@@ -23,6 +20,14 @@
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
 @Html.Partial("_DestinationViewHeader", Model)
+
+<div class="row">
+    <div class="col-md-12 padd-10">
+        <img class="img-responsive" src="~/Content/img/India/sikkim001.jpg" />
+    </div>
+</div>
+
+<hr class="margin-bottom-20" />
 
 
 <div class="container">

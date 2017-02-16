@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.DomingoModelBase
+﻿@model WebApplication1.Models.DomingoAdminDashboardViewModel
 
 @Html.Partial("_HomepageCarousel")
 
@@ -6,76 +6,78 @@
     <h1>Admin Dashboard</h1>  
 </div>
 <div class="margin-bottom-20"></div>
-<div class="row servive-block margin-bottom-10">
 
-    <div class="col-md-3 col-sm-6">
-        <div class="servive-block-in servive-block-colored servive-block-orange">
-            <h4>Manage Trips</h4>
-            <div class="margin-bottom-20"></div>
-            <a href="/Admin/Trips" class="white"> <div><i class="icon-briefcase"></i></div></a>
-            <p>@*Manage Destinations*@</p>
+@if ((ApplicationUserManager.GetUserType(User.Identity.Name) == "admin")
+    || (ApplicationUserManager.GetUserType(User.Identity.Name) == "traveloger"))
+{
+    <div class="row servive-block margin-bottom-10">
+
+        <div class="col-md-3 col-sm-6">
+            <div class="servive-block-in servive-block-colored servive-block-orange">
+                <h4>Manage Trips</h4>
+                <div class="margin-bottom-20"></div>
+                <a href="/Admin/Trips" class="white"> <div><i class="icon-briefcase"></i></div></a>
+            </div>
         </div>
-    </div>
 
-    <div class="col-md-3 col-sm-6">
-        <div class="servive-block-in servive-block-colored servive-block-grey">
-            <h4>Hotel Bookings</h4>
-            <div class="margin-bottom-20"></div>
-            <a href="/Admin/TripBookingAccommodations" class="white"> <div><i class="icon-building"></i></div></a>
-            <p>@*Manage Destinations*@</p>
+        <div class="col-md-3 col-sm-6">
+            <div class="servive-block-in servive-block-colored servive-block-grey">
+                <h4>Hotel Bookings</h4>
+                <div class="margin-bottom-20"></div>
+                <a href="/Admin/TripBookingAccommodations" class="white"> <div><i class="icon-building"></i></div></a>
+            </div>
         </div>
-    </div>
 
-    <div class="col-md-3 col-sm-6">
-        <div class="servive-block-in servive-block-colored servive-block-yellow">
-            <h4>Transfer Bookings</h4>
-            <div class="margin-bottom-20"></div>
-            <a href="/Admin/TripBookingTransports" class="white"> <div><i class="icon-plane"></i></div></a>
-            <p>@*Manage Destinations*@</p>
+        <div class="col-md-3 col-sm-6">
+            <div class="servive-block-in servive-block-colored servive-block-yellow">
+                <h4>Transfer Bookings</h4>
+                <div class="margin-bottom-20"></div>
+                <a href="/Admin/TripBookingTransports" class="white"> <div><i class="icon-plane"></i></div></a>
+            </div>
         </div>
-    </div>
 
-    <div class="col-md-3 col-sm-6">
-        <div class="servive-block-in servive-block-colored servive-block-orange">
-            <h4>Messages</h4>
-            <div class="margin-bottom-20"></div>
-            <a href="/Admin/MessageCenter" class="white"> <div><i class="icon-envelope"></i></div></a>
-            <p>@*Manage Destinations*@</p>
+        <div class="col-md-3 col-sm-6">
+            <div class="servive-block-in servive-block-colored servive-block-orange">
+                <h4>Messages</h4>
+                <div class="margin-bottom-20"></div>
+                <a href="/Admin/MessageCenter" class="white"> <div><i class="icon-envelope"></i></div></a>
+            </div>
         </div>
+
     </div>
+}
 
-</div>
-<div class="row servive-block margin-bottom-10">
 
-    <div class="col-md-3 col-sm-6">
-        <div class="servive-block-in servive-block-colored servive-block-orange">
-            <h4>Destinations</h4>
-            <div class="margin-bottom-20"></div>
-            <a href="/Admin/Destinations" class="white"> <div><i class="icon-road"></i></div></a>
-            <p>@*Manage Destinations*@</p>
+
+@if ((ApplicationUserManager.GetUserType(User.Identity.Name) == "admin")
+    || (ApplicationUserManager.GetUserType(User.Identity.Name) == "editor"))
+{
+    <div class="row servive-block margin-bottom-10">
+
+        <div class="col-md-3 col-sm-6">
+            <div class="servive-block-in servive-block-colored servive-block-orange">
+                <h4>Destinations</h4>
+                <div class="margin-bottom-20"></div>
+                <a href="/Admin/Destinations" class="white"> <div><i class="icon-road"></i></div></a>
+            </div>
         </div>
-    </div>
 
-    <div class="col-md-3 col-sm-6">
-        <div class="servive-block-in servive-block-colored servive-block-yellow">
-            <h4>Trip Templates</h4>
-            <div class="margin-bottom-20"></div>
-            <a href="/Admin/TripTemplates" class="white"> <div><i class="icon-cogs"></i></div></a>
-            <p>@*Manage Destinations*@</p>
+        <div class="col-md-3 col-sm-6">
+            <div class="servive-block-in servive-block-colored servive-block-yellow">
+                <h4>Trip Templates</h4>
+                <div class="margin-bottom-20"></div>
+                <a href="/Admin/TripTemplates" class="white"> <div><i class="icon-cogs"></i></div></a>
+            </div>
         </div>
-    </div>
 
-
-
-    <div class="col-md-3 col-sm-6">
-        <div class="servive-block-in servive-block-colored servive-block-orange">
-            <h4>Trip Providers</h4>
-            <div class="margin-bottom-20"></div>
-            <a href="/Admin/Tripproviders" class="white"> <div><i class="icon-cogs"></i></div></a>
-            <p>@*Manage Destinations*@</p>
+        <div class="col-md-3 col-sm-6">
+            <div class="servive-block-in servive-block-colored servive-block-orange">
+                <h4>Trip Providers</h4>
+                <div class="margin-bottom-20"></div>
+                <a href="/Admin/Tripproviders" class="white"> <div><i class="icon-cogs"></i></div></a>
+            </div>
         </div>
+
     </div>
+}
 
-
-
-</div>

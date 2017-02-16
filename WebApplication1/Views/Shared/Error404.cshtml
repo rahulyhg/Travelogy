@@ -1,0 +1,38 @@
+﻿<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="error-v1">
+            <span class="error-v1-title">404!</span>
+            <span>We cannot find that page!</span>
+            <p>This page does not exist.</p>
+            <span class="orange">But you can do a lot more ...</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="img-box-3 text-center">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 padd-15">
+                <h1>Use the <span class="orange">FREE</span> Travelogy Trip Planner</h1>
+                <h2 class="orange">Plan your next trip to exotic locations.</h2>
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="margin-bottom-20"></div>
+                    <p> <a href="/Service/Tripplanning" class="btn-u btn-u-lg"><i class="icon-signin"></i> &nbsp; Start Planning Now</a></p>
+                }
+
+                <div class="margin-bottom-20"></div>
+                <h3>You can <a href="/Circuit" class="orange">explore the destinations</a></h3>
+
+                @if (!Request.IsAuthenticated)
+                {
+                    <div class="margin-bottom-20"></div>
+                    <h3>
+                        <a href="/account/register" class="orange">Sign up</a> or
+                        <a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-u-orange"><i class="icon-facebook"></i> &nbsp; Login with Facebook</a> to start.
+                    </h3>
+                }
+            </div>
+        </div>
+    </div>
+</div>

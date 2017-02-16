@@ -20,6 +20,32 @@
 
         <div class="form-group">
             <div class="row">
+                <div class="col-md-12">
+                    <h4 class="orange">Traveller details</h4>
+                </div>
+                <div class="col-md-3">                   
+                    <p>
+                        <strong>E-Mail:</strong>
+                        @Model.DlTraveller.Email
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <p><strong>Name:</strong> @Model.DlTraveller.FirstName @Model.DlTraveller.LastName</p>
+                </div>
+                <div class="col-md-3">
+                    <p><strong>Address:</strong> @Model.DlTraveller.AddressLine1 <br />@Model.DlTraveller.AddressLine2 <br />City: @Model.DlTraveller.City <br />Country: @Model.DlTraveller.Country</p>
+                </div>
+                <div class="col-md-3">
+                    <p><strong>Travel interests:</strong>
+                    @if (!String.IsNullOrEmpty(Model.DlTraveller.TravelInterests))
+                    {
+                        @Model.DlTraveller.TravelInterests.Replace("%%", " ")
+                    }
+                    </p>
+                </div>
+                <div class="margin-bottom-20"></div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <label>Trip start date: 
                     @if (@Model.DlTrip.StartDate.HasValue)
@@ -115,6 +141,18 @@
                         <td><a href="/Admin/EditTripStep?id=@tripStep.Id" class="btn btn-warning btn-xs"><i class="icon-pencil"></i> Edit</a></td>
                     </tr>
                 }
+
+                <tr>
+                    <th colspan="4">
+                        <h3><a href="/Admin/AddTripStep?tripId=@Model.DlTrip.Id" class="btn btn-orange"><i class="icon-pencil"></i>Add a new step</a></h3>
+                    </th>                    
+                </tr>
+
+                <tr>
+                    <th colspan="4">
+                        <hr class="margin-bottom-40" />
+                    </th>
+                </tr>
 
                 <tr>
                     <th colspan="4">
