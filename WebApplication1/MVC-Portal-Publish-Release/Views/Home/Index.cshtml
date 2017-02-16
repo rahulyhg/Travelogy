@@ -14,8 +14,7 @@
             <div class="about-logo">
                 <h1>Travelogy <small class="color">the science of travelling</small></h1>
                 <h3>Welcome to the club of the travellers</h3>
-                <p>We offer 360 degree solution for your travel. 
-                Take a look at the exotic locations we offer. 
+                <p>We offer 360 degree solutions for your travel. Take a look at the exotic locations we offer. 
                 Create a custom trip plan using our <a href="/service/TripPlanning" class="orange">FREE Trip Planning tool.</a>
                 Get ideas for trips to India, Nepal, Bhutan, Tibet, Russia, Mongolia and Tanzania. 
                 Get in touch with us for <a href="/service/TravelLogistics" class="orange">Logistics &amp; Support services</a> 
@@ -25,9 +24,8 @@
     </div>
 </div>
 
-
-
 <hr class="margin-bottom-40">
+
 <div class="row">
     <div class="col-sm-4 info-blocks">
         <i class="icon-lightbulb icon-info-blocks"></i>
@@ -94,15 +92,18 @@ else
         @{
             List<Destination> _destinations = null;
             var blError = DestinationManager.GetTopDestinations(out _destinations, 4);
+            if(blError.ErrorCode != 0 || _destinations == null)
+            {
+                throw new ApplicationException(blError.ErrorMessage);
+            }
+
             foreach (var _destination in _destinations)
             {
                 @Html.Partial("_DestinationWidgetMicro", _destination)
             }
         }
     </div>
-    <div class="row">
-        <a href="/circuit" class="btn btn-u btn-orange">See all destinations</a>
-    </div>
+
     <div class="row">
         <div class="block-heading-twelve">
             <h1>More exciting destinations</h1>
@@ -112,4 +113,9 @@ else
             <h2>Explore the destinations for more ideas...</h2>            
         </div>
     </div>
+
+    <div class="row">
+        <a href="/circuit" class="btn btn-u btn-orange">See all destinations</a>
+    </div>
+
 </div>

@@ -96,7 +96,7 @@
                         <ul>
                             @if (Request.IsAuthenticated)
                             {
-                                if (ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
+                                if (ApplicationUserManager.GetUserType(User.Identity.Name) != string.Empty)
                                 {
                                     <li>@Html.ActionLink("Dashboard", "index", "Admin")</li>
                                     <li>@Html.ActionLink("Messages", "MessageCenter", "Admin")</li>
@@ -118,7 +118,7 @@
 
                             @if (Request.IsAuthenticated)
                             {
-                                if (!ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
+                                if (ApplicationUserManager.GetUserType(User.Identity.Name) == string.Empty)
                                 {
                                     <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
                                     <li>@Html.ActionLink("Travel Profile", "TravellerProfile", "Manage")</li>

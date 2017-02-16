@@ -8,39 +8,22 @@
     }
 }
 
-@Html.Partial("_HomepageCarousel")
-
 <!--=== Breadcrumbs ===-->
-<div class="breadcrumbs margin-bottom-40">
-    <div class="container">
-        <h1 class="pull-left">Climbing Kilimanjaro</h1>
+<div class="breadcrumbs">
+    <div class="container">        
         <ul class="pull-right breadcrumb">
-            <li><a href="/Circuit/Africa">Africa</a></li>
+            <li><a href="/Circuit/Tanzania">Tanzania</a></li>
             <li class="active">Kilimanjaro</li>
         </ul>
     </div>
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
 
+@Html.Partial("_DestinationViewHeader", Model)
+
 <div class="container">
     <div class="row blog-page blog-item">
-        <div class="col-md-12 md-margin-bottom-60">
-            <div class="blog-post-tags">
-                <ul class="list-unstyled list-inline blog-info">
-                    <li><i class="icon-calendar"></i> February 02, 2013</li>
-                    <li><i class="icon-pencil"></i> Diana Anderson</li>
-                    <li><i class="icon-comments"></i> <a href="#">24 Comments</a></li>
-                </ul>
-                <ul class="list-unstyled list-inline blog-tags">
-                    <li>
-                        <i class="icon-tags"></i>
-                        <a href="#">Technology</a>
-                        <a href="#">Education</a>
-                        <a href="#">Internet</a>
-                        <a href="#">Media</a>
-                    </li>
-                </ul>
-            </div>
+        <div class="col-md-12 md-margin-bottom-60">            
             <div class="blog margin-bottom-40">
                 <h2>Summit the tallest lone standing mountain in the world!</h2>
             </div>
