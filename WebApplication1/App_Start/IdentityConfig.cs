@@ -54,29 +54,26 @@ namespace WebApplication1
                 return false;
             }
 
-            if (HttpContext.Current.Session["UserEmailVerified"] != null)
+            if(HttpContext.Current.Session["UserEmailVerified"] == null)
             {
-                if ((HttpContext.Current.Session["UserEmailVerified"].ToString().ToUpper() == "TRUE"))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                var emailVerified = DomingoUserManager.IsUserEmailVerified(AspNetUserName);
+                HttpContext.Current.Session.Add("UserEmailVerified", emailVerified);
+                return emailVerified;
             }
 
-            var emailVerified = DomingoUserManager.IsUserEmailVerified(AspNetUserName);
-            if (emailVerified)
+            else if(HttpContext.Current.Session["UserEmailVerified"].ToString().ToUpper() == "TRUE")
             {
-                HttpContext.Current.Session.Add("UserEmailVerified", "TRUE");
                 return true;
             }
-            else
+
+            else if (HttpContext.Current.Session["UserEmailVerified"].ToString().ToUpper() == "FALSE")
             {
-                HttpContext.Current.Session.Add("UserEmailVerified", "FALSE");
-                return false;
-            }            
+                var emailVerified = DomingoUserManager.IsUserEmailVerified(AspNetUserName);
+                HttpContext.Current.Session["UserEmailVerified"] = emailVerified;
+                return emailVerified;
+            }
+
+            return false;
         }
 
         public static void SetUserEmailVerified(string AspNetUserName)
