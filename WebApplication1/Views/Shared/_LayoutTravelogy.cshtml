@@ -99,13 +99,17 @@
                         <ul>
                             @if (Request.IsAuthenticated)
                             {
-                                if (ApplicationUserManager.GetUserType(User.Identity.Name) != string.Empty)
+                                if (!string.IsNullOrEmpty(ApplicationUserManager.GetUserType(User.Identity.Name)))
                                 {
-                                    <li>@Html.ActionLink("Dashboard", "index", "Admin")</li>
-                                    <li>@Html.ActionLink("Messages", "MessageCenter", "Admin")</li>
-                                    <li>@Html.ActionLink("Trips", "Trips", "Admin")</li>
+                                    if ((ApplicationUserManager.GetUserType(User.Identity.Name) == "admin")
+                                                || (ApplicationUserManager.GetUserType(User.Identity.Name) == "editor"))
+                                    {
+                                        <li>@Html.ActionLink("Dashboard", "index", "Admin")</li>
+                                        <li>@Html.ActionLink("Messages", "MessageCenter", "Admin")</li>
+                                        <li>@Html.ActionLink("Trips", "Trips", "Admin")</li>
+                                    }
                                 }
-                            }                            
+                            }
 
                             <li>
                                 <a href="#">Destinations</a>
@@ -121,12 +125,12 @@
 
                             @if (Request.IsAuthenticated)
                             {
-                                if (ApplicationUserManager.GetUserType(User.Identity.Name) == string.Empty)
+                                if (string.IsNullOrEmpty(ApplicationUserManager.GetUserType(User.Identity.Name)))                                   
                                 {
                                     <li>@Html.ActionLink("Trip Planner", "Tripplanning", "Service")</li>
                                     <li>@Html.ActionLink("Travel Profile", "TravellerProfile", "Manage")</li>
                                     <li>@Html.ActionLink("My Messages", "MessageCenter", "Service")</li>
-                                }                                
+                                }
                             }
                             else
                             {
@@ -141,8 +145,8 @@
                                         <li>@Html.ActionLink("About Us", "AboutUs", "Information")</li>
                                         <li>@Html.ActionLink("Contact Us", "ContactUs", "Information")</li>
                                     </ul>
-                                </li>                                
-                            }                            
+                                </li>
+                            }
 
                             @*Login menu items*@
                             @Html.Partial("_LoginPartial")

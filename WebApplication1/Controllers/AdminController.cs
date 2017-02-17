@@ -100,17 +100,16 @@ namespace WebApplication1.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [Authorize]
-        public async Task<ActionResult> SaveDestinationAsync(Destination model)
+        public async Task<ActionResult> SaveDestinationAsync(EditDestinationViewModel model)
         {
             _CheckForAdminAccess();
 
             if (model != null)
             {
-                await AdminUtility.SaveDestination(model);
+                await AdminUtility.SaveDestination(model.DbObject);
             }
 
-            return RedirectToAction("EditDestination", new { @id = model.Id });
-
+            return RedirectToAction("EditDestination", new { @id = model.DbObject.Id });
         }
 
         /// <summary>
