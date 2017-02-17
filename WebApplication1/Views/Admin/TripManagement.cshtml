@@ -191,7 +191,7 @@
                         </td>
                         <td>@_acco.Destination</td>
                         <td>@_acco.Status</td>
-                        <td><a href="/Admin/EditTripBookingAccommodation?id=@_acco.Id" class="btn btn-warning btn-xs"><i class="icon-pencil"></i> Edit</a></td>
+                        <td><a href="/Admin/EditTripBookingAccommodation?id=@_acco.Id&tripId=@Model.DlTrip.Id" class="btn btn-warning btn-xs"><i class="icon-pencil"></i> Edit</a></td>
                     </tr>
                 }        
                 
@@ -225,7 +225,7 @@
                         </td>
                         <td>@_transfer.TravelClass</td>
                         <td>@_transfer.BookingStatus</td>
-                        <td><a href="/Admin/EditTripBookingTransport?id=@_transfer.Id" class="btn btn-warning btn-xs"><i class="icon-pencil"></i> Edit</a></td>
+                        <td><a href="/Admin/EditTripBookingTransport?id=@_transfer.Id&tripId=@Model.DlTrip.Id" class="btn btn-warning btn-xs"><i class="icon-pencil"></i> Edit</a></td>
                     </tr>
                 }
 

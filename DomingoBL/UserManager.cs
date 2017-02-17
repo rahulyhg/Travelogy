@@ -13,13 +13,35 @@ namespace DomingoBL
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="emailAddress"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> CreateCrmLeadWebSignup(string emailAddress, string userId)
+        {
+            try
+            {
+                // create a lead in the capsule CRM
+                var gateway = new CapsupleCrmGateway();
+                var crmResponse = await gateway.CreateCapsuleLead(userId, userId, emailAddress, "Un-known", "Portal Signup");
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="FIRST_NAME"></param>
         /// <param name="LAST_NAME"></param>
         /// <param name="EMAIL"></param>
         /// <param name="PHONE"></param>
         /// <param name="TRIP_REQUEST"></param>
         /// <returns></returns>
-        public static async Task<DomingoBlError> CreateCrmLead(string FIRST_NAME, string LAST_NAME, string EMAIL, string PHONE, string TRIP_REQUEST)
+        public static async Task<DomingoBlError> CreateCrmLeadExternal(string FIRST_NAME, string LAST_NAME, string EMAIL, string PHONE, string TRIP_REQUEST)
         {
             try
             {

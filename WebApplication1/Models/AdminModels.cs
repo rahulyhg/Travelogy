@@ -65,6 +65,8 @@ namespace WebApplication1.Models
     {
         public View_TripBookingAccommodation DbObject { get; set; }
 
+        public int TripId { get; set; }
+
         public IEnumerable<SelectListItem> BookingStatusList
         {
             get
@@ -88,6 +90,8 @@ namespace WebApplication1.Models
     public class AdminTripBookingTransportEditModel
     {
         public View_TripBookingTransport DbObject { get; set; }
+
+        public int TripId { get; set; }
 
         public IEnumerable<SelectListItem> BookingStatusList
         {

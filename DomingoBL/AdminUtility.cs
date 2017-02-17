@@ -230,22 +230,46 @@ namespace DomingoBL
                 {
                     using (var context = new TravelogyDevEntities1())
                     {
-                        var _booking = context.TripBookingTransports.Find(model.Id);
-                        if (_booking != null)
+                        // add a new record if this is new
+                        if (model.Id == 0)
                         {
-                            _booking.AdminNotes = model.AdminNotes;
-                            _booking.Adults = model.Adults;
-                            _booking.BookingDate = model.BookingDate;
-                            _booking.BookingStatus = model.BookingStatus;
-                            _booking.EstimatedCost = model.EstimatedCost;
-                            _booking.Kids = model.Kids;
-                            _booking.TransportFrom = model.TransportFrom;
-                            _booking.TransportTo = model.TransportTo;
-                            _booking.TransportType = model.TransportType;
-                            _booking.TravelClass = model.TravelClass;
+                            var _newBooking = new TripBookingTransport();
 
+                            _newBooking.AdminNotes = model.AdminNotes;
+                            _newBooking.Adults = model.Adults;
+                            _newBooking.BookingDate = model.BookingDate;
+                            _newBooking.BookingStatus = model.BookingStatus;
+                            _newBooking.EstimatedCost = model.EstimatedCost;
+                            _newBooking.Kids = model.Kids;
+                            _newBooking.TransportFrom = model.TransportFrom;
+                            _newBooking.TransportTo = model.TransportTo;
+                            _newBooking.TransportType = model.TransportType;
+                            _newBooking.TravelClass = model.TravelClass;
+
+                            context.TripBookingTransports.Add(_newBooking);
                             await context.SaveChangesAsync();
                         }
+
+                        // update existing record
+                        else
+                        {
+                            var _booking = context.TripBookingTransports.Find(model.Id);
+                            if (_booking != null)
+                            {
+                                _booking.AdminNotes = model.AdminNotes;
+                                _booking.Adults = model.Adults;
+                                if (model.BookingDate.HasValue) { _booking.BookingDate = model.BookingDate; }
+                                _booking.BookingStatus = model.BookingStatus;
+                                _booking.EstimatedCost = model.EstimatedCost;
+                                _booking.Kids = model.Kids;
+                                _booking.TransportFrom = model.TransportFrom;
+                                _booking.TransportTo = model.TransportTo;
+                                _booking.TransportType = model.TransportType;
+                                _booking.TravelClass = model.TravelClass;
+
+                                await context.SaveChangesAsync();
+                            }
+                        }                            
                     }
                 }
             }
@@ -269,24 +293,48 @@ namespace DomingoBL
                 if (model != null)
                 {
                     using (var context = new TravelogyDevEntities1())
-                    {
-                        var _booking = context.TripBookingAccommodations.Find(model.Id);
-                        if (_booking != null)
+                    {                        
+                        if (model.Id == 0)
                         {
-                            _booking.AccommodationType = model.AccommodationType;
-                            _booking.CheckinDate = model.CheckinDate;
-                            _booking.CheckoutDate = model.CheckoutDate;
-                            _booking.EstimatedCost = model.EstimatedCost;
-                            _booking.AdminNotes = model.AdminNotes;
-                            _booking.PropertyAddress = model.PropertyAddress;
-                            _booking.PropertyName = model.PropertyName;
-                            _booking.Status = model.Status;
-                            _booking.Adults = model.Adults;
-                            _booking.Kids = model.Kids;
-                            _booking.TownOrCity = model.TownOrCity;
+                            var _newBooking = new TripBookingAccommodation();
+                            _newBooking.AccommodationType = model.AccommodationType;
+                            _newBooking.CheckinDate = model.CheckinDate;
+                            _newBooking.CheckoutDate = model.CheckoutDate;
+                            _newBooking.EstimatedCost = model.EstimatedCost;
+                            _newBooking.AdminNotes = model.AdminNotes;
+                            _newBooking.PropertyAddress = model.PropertyAddress;
+                            _newBooking.PropertyName = model.PropertyName;
+                            _newBooking.Status = model.Status;
+                            _newBooking.Adults = model.Adults;
+                            _newBooking.Kids = model.Kids;
+                            _newBooking.TownOrCity = model.TownOrCity;
 
+                            context.TripBookingAccommodations.Add(_newBooking);
                             await context.SaveChangesAsync();
                         }
+
+                        else
+                        {
+                            var _booking = context.TripBookingAccommodations.Find(model.Id);
+                            if (_booking != null)
+                            {
+                                _booking.AccommodationType = model.AccommodationType;
+                                if(model.CheckinDate.HasValue) // only if there is a new value
+                                { _booking.CheckinDate = model.CheckinDate; }
+                                if (model.CheckoutDate.HasValue) // only if there is a new value
+                                { _booking.CheckoutDate = model.CheckoutDate; }                                  
+                                _booking.EstimatedCost = model.EstimatedCost;
+                                _booking.AdminNotes = model.AdminNotes;
+                                _booking.PropertyAddress = model.PropertyAddress;
+                                _booking.PropertyName = model.PropertyName;
+                                _booking.Status = model.Status;
+                                _booking.Adults = model.Adults;
+                                _booking.Kids = model.Kids;
+                                _booking.TownOrCity = model.TownOrCity;
+
+                                await context.SaveChangesAsync();
+                            }
+                        }                        
                     }
                 }
             }

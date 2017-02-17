@@ -67,7 +67,7 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ContactUsFormSubmitAsync(string FIRST_NAME, string LAST_NAME, string EMAIL, string TRIP_REQUEST, string PHONE)
         {
-            var blError = await DomingoUserManager.CreateCrmLead(FIRST_NAME, LAST_NAME, EMAIL, PHONE, TRIP_REQUEST);
+            var blError = await DomingoUserManager.CreateCrmLeadExternal(FIRST_NAME, LAST_NAME, EMAIL, PHONE, TRIP_REQUEST);
 
             return RedirectToAction("ContactUsThanks");
         }
@@ -88,7 +88,7 @@ namespace WebApplication1.Controllers
         {
             TRIP_REQUEST = string.Format("Circuit requested for: {0} -- User comment: {1}", CIRCUIT, TRIP_REQUEST);
 
-            var blError = await DomingoUserManager.CreateCrmLead(FIRST_NAME, LAST_NAME, EMAIL, PHONE, TRIP_REQUEST);
+            var blError = await DomingoUserManager.CreateCrmLeadExternal(FIRST_NAME, LAST_NAME, EMAIL, PHONE, TRIP_REQUEST);
 
             return RedirectToAction("ContactUsThanks");
         }

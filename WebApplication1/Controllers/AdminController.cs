@@ -562,15 +562,17 @@ namespace WebApplication1.Controllers
         /// 
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="tripId"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult EditTripBookingTransport(int id)
+        public ActionResult EditTripBookingTransport(int id, int tripId = 0)
         {
             _CheckForAdminAccess();
 
             var context = new TravelogyDevEntities1();
             var _model = new AdminTripBookingTransportEditModel()
             {
+                TripId = tripId,
                 DbObject = context.View_TripBookingTransport.Where(p => p.Id == id).FirstOrDefault()
             };
 
@@ -589,7 +591,16 @@ namespace WebApplication1.Controllers
 
             var _blError = await AdminUtility.SaveTripBookingTransport(model.DbObject);
 
-            return RedirectToAction("TripManagement", new { @id = model.DbObject.TripId });
+            if(model.TripId > 0)
+            {
+                return RedirectToAction("TripManagement", new { @id = model.TripId });
+            }
+
+            else
+            {
+                return RedirectToAction("TripBookingTransports");
+            }
+            
         }
 
         /// <summary>
@@ -610,15 +621,17 @@ namespace WebApplication1.Controllers
         /// 
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="tripId"></param>
         /// <returns></returns>
         [Authorize]
-        public ActionResult EditTripBookingAccommodation(int id)
+        public ActionResult EditTripBookingAccommodation(int id, int tripId = 0)
         {
             _CheckForAdminAccess();
 
             var context = new TravelogyDevEntities1();
             var _model = new AdminTripBookingAccommodationEditModel()
             {
+                TripId = tripId,
                 DbObject = context.View_TripBookingAccommodation.Where(p => p.Id == id).FirstOrDefault()
             };
 
@@ -637,7 +650,14 @@ namespace WebApplication1.Controllers
 
             var _blError = await AdminUtility.SaveTripBookingAccommodation(model.DbObject);
 
-            return RedirectToAction("TripBookingAccommodations");
+            if (model.TripId == 0)
+            {
+                return RedirectToAction("TripBookingAccommodations");
+            }
+            else
+            {
+                return RedirectToAction("TripManagement", new { @id = model.TripId });
+            }
         }
 
     }

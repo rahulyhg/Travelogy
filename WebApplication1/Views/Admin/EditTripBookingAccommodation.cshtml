@@ -6,6 +6,7 @@
     @using (Html.BeginForm("SaveTripBookingAccommodationAsync", "Admin", new { ReturnUrl = "" }))
     {
         @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.TripId)
         
         <div class="form-horizontal">
             <h4>Manage Accommodation Booking</h4>

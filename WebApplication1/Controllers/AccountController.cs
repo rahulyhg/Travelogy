@@ -212,7 +212,7 @@ namespace WebApplication1.Controllers
                     var blEmail = emailUtility.SendEmail("VerifiyEmail", model.Email, emailParams);                   
 
                     // create a CRM lead
-                    var blCrm = DomingoBL.DomingoUserManager.CreateCrmLead(user.Id, user.Id, model.Email, "----", "Web Registration");                    
+                    var blCrm = DomingoUserManager.CreateCrmLeadWebSignup(model.Email, user.Id);                    
 
                     return RedirectToAction("Index", "Home");
                 }
