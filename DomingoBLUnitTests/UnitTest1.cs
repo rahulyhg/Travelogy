@@ -9,11 +9,11 @@ namespace DomingoBLUnitTests
     public class UnitTest1
     {
         [TestMethod]
-        public void Test_Create_Thread_Valid_Params()
+        public void Test_Create_CRM_LEAD_Valid_Params()
         {
-            var _tm = new ThreadMessage();
-            var _blError = ThreadManager.CreateThread(_tm, "Test message");
-            Assert.AreEqual(_blError.ErrorCode, 0);
+            var _gateWay = new CapsupleCrmGateway();
+            var x = DateTime.Now.Millisecond.ToString();
+            _gateWay.CreateCapsuleParty("FNAME" + x, "LNAME" + x, "EMAIL" + x + "@abc.com" , "PHONE" + x , "test trip request");
         }
     }
 }
