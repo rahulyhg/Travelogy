@@ -50,7 +50,7 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="details">
-                @using (Html.BeginForm("SaveTrip", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                @using (Html.BeginForm("SaveTripAsync", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
                 {
                     @Html.AntiForgeryToken();
                     @Html.HiddenFor(p => p.ActiveTrip.DlTripView.Id);

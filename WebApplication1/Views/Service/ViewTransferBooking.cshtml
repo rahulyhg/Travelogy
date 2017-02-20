@@ -3,78 +3,78 @@
 @Html.Partial("_HomepageCarousel")
 
 <div class="headline">
-    <h2>Your Booking Details</h2>
+    <h2>Your Flight Booking Details</h2>
 </div>  
 
-<div class="row">
-    <div class="col-sm-3 info-blocks">
-        <div class="info-blocks-in">
-            <h4 class="orange">
-                Flight
-            </h4>
-            <p>From: @Model.From to @Model.To</p>
-        </div>
-    </div>
-    <div class="col-sm-3 info-blocks">
-        <i class="icon-calendar icon-info-blocks"></i>
-        <div class="info-blocks-in">
-            <h4 class="orange">Requested date:</h4>
-            @if (Model.FlightDate > DateTime.MinValue)
-            {
-                <p>@Model.FlightDate.ToLongDateString()</p>
-            }
-            else
-            {
-                <p>@Html.Raw("Not planned")</p>
-            }
-            <h4>Class:</h4>
-            <p>@Model.FlightClass</p>
-        </div>
+<div class="row servive-block margin-bottom-10">
+    <div class="col-md-12 col-sm-12">
+        <div class="servive-block-in">
+            <div><i class="icon-plane"></i></div>
+            <h4>Your flight from @Model.From to @Model.To</h4>  
+            <hr class="margin-bottom-20" />          
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <h4 class="orange">Requested date:</h4>
+                    @if (Model.FlightDate > DateTime.MinValue)
+                    {
+                        <p>@Model.FlightDate.ToLongDateString()</p>
+                    }
+                    else
+                    {
+                        <p>@Html.Raw("Not planned")</p>
+                    }
+                </div>
 
-    </div>   
+                <div class="col-md-3 col-sm-6">
+                    <h4 class="orange">Class:</h4>
+                    <p>@Model.FlightClass</p>
+                </div>
 
-    <div class="col-sm-3 info-blocks">
-        <i class="icon-calendar icon-info-blocks"></i>
-        <div class="info-blocks-in">
-            <h4 class="orange">Status: </h4>
-            <p>@Model.BookingStatus </p>
-        </div>
-    </div>
+                <div class="col-md-3 col-sm-6">
+                    <h4 class="orange">Status:</h4>
+                    <p>@Model.BookingStatus</p>
+                </div>
 
-    <div class="col-sm-3 info-blocks">
-        <div class="info-blocks-in">
-            <h4 class="orange">
-                Passengers:
-            </h4>
-            <p>Adults: @Model.Adults , Children: @Model.Kids</p>
-        </div>
-    </div>
-</div>
+                <div class="col-md-3 col-sm-6">
+                    <h4 class="orange">Passengers:</h4>
+                    <p>Adults: @Model.Adults , Children: @Model.Kids</p>
+                </div>
+            </div>
 
-<div class="row">
-    <div class="col-sm-12 info-blocks">
-        <div class="info-blocks-in">
-            <h4 class="orange">
-                Your Notes:
-            </h4>
-            <p>@Model.TravellerNotes</p>
-        </div>
-    </div>
-</div>
+            <hr class="margin-bottom-20" />          
 
-<div class="row">
-    <div class="col-sm-12 info-blocks">
-        <div class="info-blocks-in">
-            <h4 class="orange">
-                Traveloger's Notes:
-            </h4>
-            <p>@Model.AdminNotes</p>
+            <div class="row">
+                <div class="col-sm-12 info-blocks text-left">
+                    <div class="info-blocks-in">
+                        <h4 class="orange">
+                            Your Notes:
+                        </h4>
+                        <p>@Model.TravellerNotes</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 info-blocks text-left">
+                    <div class="info-blocks-in">
+                        <h4 class="orange">
+                            Traveloger's Notes:
+                        </h4>
+                        <p>@Model.AdminNotes</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
+
+
+
+
 
 <div class="container">
     <div class="row">
-        @Html.ActionLink("Go back to trip details", "EditTrip", new { @tripId = Model.TripId })
+        @Html.ActionLink("Go back to trip details", "ViewTrip", new { @tripId = Model.TripId })
     </div>
 </div>

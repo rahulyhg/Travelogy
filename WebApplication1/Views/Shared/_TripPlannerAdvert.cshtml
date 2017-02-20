@@ -4,12 +4,7 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 padd-15">
                 <h1>Use the <span class="orange">FREE</span> Travelogy Trip Planner</h1>
-                <h2 class="orange">Plan your next trip to exotic locations.</h2>
-                @if (Request.IsAuthenticated)
-                {                    
-                    <div class="margin-bottom-20"></div>
-                    <p> <a href="/Service/Tripplanning" class="btn-u btn-u-lg"><i class="icon-signin"></i> &nbsp; Start Planning Now</a></p>
-                }
+                <h2 class="orange">Plan your next trip to exotic locations.</h2>                
             </div>
         </div>
         <div class="row">
@@ -58,5 +53,14 @@
                 </div>
             </div>
         </div>
+        @if (Request.IsAuthenticated)
+        {
+            <div class="margin-bottom-20"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p> <a href="/Service/Tripplanning" class="btn-u btn-u-lg"><i class="icon-signin"></i> &nbsp; Start Planning Now</a></p>
+                </div>
+            </div>            
+        }
     </div>
 </div>

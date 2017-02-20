@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using WebApplication1.Models;
 using Microsoft.AspNet.Identity;
 using DomingoBL.BlObjects;
+using System.Threading.Tasks;
 
 namespace WebApplication1.Controllers
 {
@@ -46,7 +47,7 @@ namespace WebApplication1.Controllers
                 var _plannedTrips = _allTrips.Where(p => (p.DlTripView.Status.Trim() == TripStatus.planned.ToString())).ToList();
                 model.PlannedTrips = _plannedTrips;
                 List<Destination> _destinations = null;
-                blError = DestinationManager.GetTopDestinations("", 3, out _destinations);
+                blError = DestinationManager.GetTopDestinations("", 8, out _destinations);
                 model.SuggestedDestinations = _destinations;
             }
 
@@ -97,7 +98,7 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> CreateTrip(TripViewModel model)
+        public async Task<ActionResult> CreateTrip(TripViewModel model)
         {
             // create a new Trip object from the form and save it
             Trip trip = new Trip()
@@ -179,10 +180,10 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveTrip(EditTripViewModel model)
+        public async Task<ActionResult> SaveTripAsync(EditTripViewModel model)
         {
-            var _blError = TripManager.SaveUserTripChanges(model.ActiveTrip.DlTripView, model.ActiveTrip.DlTripStepsView);
-            return RedirectToAction("EditTrip", new { @tripId = model.ActiveTrip.DlTripView.Id });
+            var _blError = await TripManager.SaveUserTripChangesAsync(model.ActiveTrip.DlTripView, model.ActiveTrip.DlTripStepsView);
+            return RedirectToAction("ViewTrip", new { @tripId = model.ActiveTrip.DlTripView.Id });
         }
 
 
@@ -255,7 +256,7 @@ namespace WebApplication1.Controllers
             }
 
             var model = new AccommodationBookingViewModel()
-            {
+            {                
                 TripName = tripObj.DlTripView.Name,
                 TripDescription = tripObj.DlTripView.Description,
                 TripStepName = tripStepObj.ShortDescription,
@@ -294,6 +295,11 @@ namespace WebApplication1.Controllers
                 BookingStatus = accommodation.Status,
                 AdminNotes = accommodation.AdminNotes,
                 TripId = accommodation.TripId,
+                TownOrCity = accommodation.TownOrCity,
+                Adults = accommodation.Adults.HasValue ? accommodation.Adults.Value : 0,
+                Kids = accommodation.Kids.HasValue ? accommodation.Kids.Value : 0,
+                PropertyName = accommodation.PropertyName,
+                PropertyAddress = accommodation.PropertyAddress,
             };
             
             return View(model);
@@ -307,10 +313,13 @@ namespace WebApplication1.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> SaveTripBookingAccommodationAsync(AccommodationBookingViewModel model)
+        public async Task<ActionResult> SaveTripBookingAccommodationAsync(AccommodationBookingViewModel model)
         {
             var accommodation = new TripBookingAccommodation()
             {
+                Kids = model.Kids,
+                Adults = model.Adults,
+                TownOrCity = model.TownOrCity,
                 AccommodationType = model.AccommodationType,
                 CheckinDate = model.CheckinDate,
                 CheckoutDate = model.CheckoutDate,
@@ -324,7 +333,7 @@ namespace WebApplication1.Controllers
             var blError = await TripManager.SaveTripBookingAccommodationAsync(accommodation);
             if(blError.ErrorCode == 0)
             {
-                return RedirectToAction("EditTrip", new { @tripId = model.TripId });
+                return RedirectToAction("ViewTrip", new { @tripId = model.TripId });
             }
             else
             {

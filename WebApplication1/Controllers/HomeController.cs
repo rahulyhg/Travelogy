@@ -25,11 +25,6 @@ namespace WebApplication1.Controllers
 
         public ActionResult Index()
         {
-            //if (ApplicationUserManager.IsTravelogyAdmin(User.Identity.Name))
-            //{
-            //    return RedirectToAction("Index", "Admin");
-            //}
-
             if (Request.IsAuthenticated)
             {
                 DomingoUserManager.TraceSession(User.Identity.GetUserName(), "/Home");
@@ -48,6 +43,11 @@ namespace WebApplication1.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Business()
+        {
             return View();
         }
     }

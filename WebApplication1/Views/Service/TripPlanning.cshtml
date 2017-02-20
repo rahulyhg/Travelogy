@@ -29,44 +29,7 @@ else // for logged in users
     // show the create options
     if (Model.AllTrips == null || Model.AllTrips.Count == 0)
     {
-        <div class="row tag-box tag-box-v5">
-            <div class="col-md-8">
-                <span>You have not planned any trip yet!</span>
-            </div>
-            <div class="col-md-4">
-                <a href="/circuit" class="btn-u btn-u-lg btn-u-orange"><i class="icon-cloud"></i> Browse all circuits...</a>                
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row tag-box tag-box-v1">
-                <h1 class="orange">Featured circuits</h1>
-                <div class="row">
-                    @for (var i = 0; i < Model.SuggestedDestinations.Count; i++)
-                    {
-                        if (i % 4 == 0)
-                        {
-                            @Html.Raw("<div class=\"row\">");
-                        }
-
-                        {
-                            var item = Model.SuggestedDestinations[i];
-                            @Html.Partial("_DestinationWidget", item)
-                        }
-
-                        if (i % 4 == 3)
-                        {
-                            @Html.Raw("</div>");
-                        }
-
-                        if (i == Model.SuggestedDestinations.Count - 1)
-                        {
-                            @Html.Raw("</div>");
-                        }
-                    }                    
-                </div>
-            </div>
-        </div>
+        Html.RenderPartial("_TripPlanningZeroTrips", Model);
     }
 
     // planned trips

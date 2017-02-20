@@ -24,7 +24,7 @@
         <h2>@Model.ActiveTrip.DlTripView.NickName <small class="orange">your trip to @Model.ActiveTrip.DlTripView.Name</small> </h2>                 
     </div>    
     <div class="row">
-        <div class="col-sm-4 info-blocks">
+        <div class="col-sm-4 info-blocks text-left">
             <i class="icon-calendar icon-info-blocks"></i>
             <div class="info-blocks-in">
                 <h3>Planned date:
@@ -55,7 +55,7 @@
 
     <hr class="margin-bottom-40">
     <div class="pull-left">
-        <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.DlTripView.Id" class="btn btn-orange"> Edit trip &nbsp; <i class="icon-edit"></i></a>
+        
     </div>
     <div class="margin-bottom-10"></div>
 
@@ -66,15 +66,17 @@
             <li><a href="#messages" data-toggle="tab">Messages</a></li>            
         </ul>
         <div class="tab-content">
-            <div class="tab-pane active" id="details">                
+            <div class="tab-pane active" id="details">  
+                
+                <div class="row servive-block margin-bottom-10">
                     @foreach (var tripStep in Model.ActiveTrip.DlTripStepsView)
                     {
-                        <div class="row portfolio-item margin-bottom-40">
-                            <div class="col-md-12 md-margin-bottom-40">
-                                <h3>@tripStep.ShortDescription</h3>
-                                <h5 class="orange">
-                                    Planned Dates: 
-                                    @if(tripStep.StartDate.HasValue)
+                        <div class="col-md-12 col-sm-12">
+                            <div class="servive-block-in">
+                                <h4 class="text-left"><i class="icon-calendar-empty"></i> @tripStep.ShortDescription</h4> 
+                                <h5 class="orange text-left">
+                                    Planned Dates:
+                                    @if (tripStep.StartDate.HasValue)
                                     {
                                         @Html.Raw(tripStep.StartDate.Value.ToShortDateString());
                                     }
@@ -92,27 +94,45 @@
                                     {
                                         @Html.Raw("Not Planned");
                                     }
-                                </h5>
+                                </h5>                               
+                                <p class="text-left">@tripStep.LongDescription</p>
 
-                                <p>@tripStep.LongDescription</p>
+                                @{ 
+                                    var hotels = Model.ActiveTrip.DlBookingsView.Where(hotel => hotel.TripStepId == tripStep.Id);
+                                    foreach(var hotel in hotels)
+                                    {
+                                        <h6 class="text-left">Accommodation</h6>
+                                        <p class="text-left">
+                                            @hotel.Destination Check-in: @hotel.CheckinDate - Check-out: @hotel.CheckinDate</p>
+                                    }
+                                }
 
                                 @if (!string.IsNullOrEmpty(tripStep.TravellerNote))
                                 {
-                                    <h5 class="orange">Your Notes:</h5>
-                                    <p>@tripStep.TravellerNote</p>
+                                    <h5 class="orange text-left">Your Notes:</h5>
+                                    <p class="text-left">@tripStep.TravellerNote</p>
                                 }
-
 
                                 @if (!string.IsNullOrEmpty(tripStep.TravelogerNote))
                                 {
-                                    <h5 class="orange">Traveloger's Notes:</h5>
-                                    <p class="orange">@tripStep.TravelogerNote</p>
+                                    <h5 class="orange text-left">Traveloger's Notes:</h5>
+                                    <p class="orange text-left">@tripStep.TravelogerNote</p>
                                 }
+
+                                <div class="margin-bottom-20"></div>
+
+                                <p class="text-left">
+                                    <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.DlTripView.Id" class="btn btn-orange"> Edit trip &nbsp;</a>
+                                    <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId">&nbsp;Add Accommodation</a>&nbsp;
+                                    <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@tripStep.TripId&tripStepId=@tripStep.Id">&nbsp; Add Local Flight</a>
+                                </p>
+                                
                             </div>
-                        </div>                        
+                        </div>
                     }
-                    
+                </div>
             </div>
+
             <div class="tab-pane" id="booking">
                 @Html.Partial("_TripBookings", Model.ActiveTrip)
             </div>

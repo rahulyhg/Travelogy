@@ -1,0 +1,112 @@
+﻿@model WebApplication1.Models.TripPlanningViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="block-heading-twelve">
+            <h1>Let's get you started! Plan trips to exotic locations.</h1>
+            <h3 class="color">India, <small class="color">Tanzania, Russia &amp; Mongolia</small></h3>
+            <h2>Create your own itinerary and we will help you with it.</h2>            
+        </div>
+    </div>
+
+    <div class="img-box-3 text-center">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/maps-and-flags-3.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Step 1</h4>
+                    <div class="bor bg-black"></div>
+                    <p>Choose any of the destinations and click on the Plan a Trip button, you can add other destinations to it later.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/booking.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Step-2</h4>
+                    <div class="bor bg-black"></div>
+                    <p>Choose an approximate date. Add flight and accommodation requests. You can always modify all details.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/male-reporter.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Step-3</h4>
+                    <div class="bor bg-black"></div>
+                    <p>Get a free consultation with our experts to fine tune your itinerary, everything at one place.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/passport.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Step-4</h4>
+                    <div class="bor bg-black"></div>
+                    <p>Get going: Our team will help you with everything you would need - Visas, air tickets, hotel bookings, etc ...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="block-heading-twelve">
+            <h1>Want to know more before you start? <a href="/Service/MessageCenter">Send a message to us.</a></h1>    
+            <h2 class="orange">The trip planner is FREE to use, you will only pay for any bookings you make through us.</h2>        
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="headline">
+            <h3 class="orange">Featured circuits</h3>
+        </div>
+    </div>
+
+    @*<div class="container">*@
+        @for (var i = 0; i < Model.SuggestedDestinations.Count; i++)
+        {
+            if (i % 4 == 0)
+            {
+            @Html.Raw("<div class=\"row\">");
+            }
+
+            {
+                var item = Model.SuggestedDestinations[i];
+            @Html.Partial("_DestinationWidget", item)
+        }
+
+        if (i % 4 == 3)
+        {
+            @Html.Raw("</div>");
+            }
+
+            if (i == Model.SuggestedDestinations.Count - 1)
+            {
+            @Html.Raw("</div>");
+            }
+        }
+    @*</div>*@
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Get more ideas ... <a href="/circuit" class="orange"> Browse all circuits <i class="icon-cloud"></i></a></h3>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,67 @@
+﻿@using WebApplication1.Models
+@model MessageViewModel
+
+@Html.Partial("_HomepageCarousel")
+
+<div class="contact-us-two">
+    <div class="container">
+        <div class="row">
+
+            <!-- Contact Form -->
+            <div class="contact-form">                
+                <!-- Form -->
+                <form class="form" role="form" action="/Information/ContactUsFormSubmitAsync" method="post">                    
+                @Html.AntiForgeryToken()
+
+                    <div class="headline">
+                        <h3>Business Contact Form</h3>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <!-- Form Group -->
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="FIRST_NAME" name="FIRST_NAME" placeholder="First Name (Required)" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="LAST_NAME" name="LAST_NAME" placeholder="Last Name (Required)" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="EMAIL" name="EMAIL" placeholder="Business Email (Required)" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="PHONE" name="PHONE" placeholder="Office Telephone Number (Required)" Required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                            <!-- Form Group -->
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="BSNS_NAME" name="BSNS_NAME" placeholder="Business Name (Required)" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="BSNS_WEB" name="BSNS_WEB" placeholder="Business website (Required)" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="BSNS_ADDRESS" name="BSNS_ADDRESS" rows="3" placeholder="Full Address of your business including country (Required)" required></textarea>
+                            </div>                            
+                        </div>
+
+                    </div>                    
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea class="form-control" id="CUSTOMFIELD[TRIP_REQUEST]" name="TRIP_REQUEST" rows="6" placeholder="Enter Message  (Optional)"></textarea>
+                            </div>
+                        </div>
+                    </div>                    
+                    
+                    <!-- Button -->
+                    <button type="submit" class="btn btn-orange">Submit</button>&nbsp;
+                    <button type="reset" class="btn btn-default">Reset</button>
+                </form>
+            </div>
+        </div>
+    </div>    
+</div>

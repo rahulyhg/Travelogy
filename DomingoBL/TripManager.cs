@@ -257,7 +257,7 @@ namespace DomingoBL
         /// <param name="trip"></param>
         /// <param name="tripSteps"></param>
         /// <returns></returns>
-        public static DomingoBlError SaveUserTripChanges(View_Trip trip, List<View_TripStep> tripSteps)
+        public static async Task<DomingoBlError> SaveUserTripChangesAsync(View_Trip trip, List<View_TripStep> tripSteps)
         {
             try
             {
@@ -297,7 +297,7 @@ namespace DomingoBL
                         }
                     }
 
-                    context.SaveChanges();  
+                    await context.SaveChangesAsync();  
                 }
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };

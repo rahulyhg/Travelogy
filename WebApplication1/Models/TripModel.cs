@@ -50,6 +50,17 @@ namespace WebApplication1.Models
         [Required]
         public DateTime CheckoutDate { get; set; }
 
+        [Required]
+        [Display(Name = "Town or City")]
+        public string TownOrCity { get; set; }
+
+        [Display(Name = "Adults")]
+        [Required(ErrorMessage = "Please select at least one adult")]
+        public int Adults { get; set; }
+
+        [Display(Name = "Adults")]
+        public int Kids { get; set; }
+
         [Display(Name = "Your message")]
         public string TravellerNotes { get; set; }
 

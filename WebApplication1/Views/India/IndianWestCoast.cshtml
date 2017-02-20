@@ -10,8 +10,7 @@
 
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs margin-bottom-40">
-    <div class="container">
-        <h1 class="pull-left">@Model.PageName</h1>
+    <div class="container">        
         <ul class="pull-right breadcrumb">
             <li><a href="/India">India</a></li>
             <li><a href="/Circuit/India">All Circuits</a></li>
@@ -30,7 +29,64 @@
     </div>
 </div>
 
+<div class="margin-bottom-20"></div>
+
 <div class="container">
+    <div class="headline">
+        <h3>Top attractions in @Model.Destination.Name</h3>
+    </div>
+    <div class="img-box-3 text-center">
+        <div class="row">
+            @*Beaches*@ 
+            <div class="col-md-3 col-sm-6">                
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/beach.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Beaches</h4>                    
+                </div>
+            </div>
+
+            @*food & drink*@
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/coconaut.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Food and drinks</h4>
+                </div>
+            </div>
+
+            @*History*@
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/castle.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>History</h4>
+                </div>
+            </div>
+
+            @*Nature*@
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/waterfall.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Nature</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="margin-bottom-20"></div>
+
+<div class="container">
+    <div class="headline">
+        <h3>Start planning now</h3>
+    </div>
     <div class="row">
         <div class="col-md-6 col-sm-6">
             @if (Request.IsAuthenticated)
