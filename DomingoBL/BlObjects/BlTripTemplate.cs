@@ -15,6 +15,11 @@ namespace DomingoBL.BlObjects
         /// <summary>
         /// 
         /// </summary>
+        public string Country { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public TripTemplate DlTemplate { get; set; }
 
         /// <summary>

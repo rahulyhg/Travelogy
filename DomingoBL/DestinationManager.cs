@@ -54,7 +54,8 @@ namespace DomingoBL
                 // get all desitions that matches the continent, reverse order by weightage
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    destinations = context.Destinations.Where(p => p.Country == country).OrderByDescending(p => p.Weightage).ToList();
+                    destinations = context.Destinations
+                        .Where(p => p.Country == country && p.Name != country).OrderByDescending(p => p.Weightage).ToList();
                 }
             }
 
@@ -127,14 +128,19 @@ namespace DomingoBL
             return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
         }
 
+        //public static DomingoBlError GetSuggestionsForTrip(int tripId, )
+        //{
+
+        //}
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="continent"></param>
+        /// <param name="country"></param>
         /// <param name="topRecs"></param>
         /// <param name="destinations"></param>
         /// <returns></returns>
-        public static DomingoBlError GetTopDestinations(string continent, int topRecs, out List<Destination> destinations)
+        public static DomingoBlError GetTopDestinations(string country, int topRecs, out List<Destination> destinations)
         {
             destinations = null;
 
@@ -143,9 +149,9 @@ namespace DomingoBL
                 // get all desitions, reverse order by weightage
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    var _allDestinations = string.IsNullOrEmpty(continent) ?
+                    var _allDestinations = string.IsNullOrEmpty(country) ?
                             context.Destinations.Select(p => p).OrderByDescending(p => p.Weightage)
-                            : context.Destinations.Where(p => p.TourContinent == continent).OrderByDescending(p => p.Weightage);
+                            : context.Destinations.Where(p => p.Country == country).OrderByDescending(p => p.Weightage);
 
                     if (_allDestinations != null)
                     {

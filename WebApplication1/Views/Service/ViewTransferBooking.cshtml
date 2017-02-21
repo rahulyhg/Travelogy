@@ -10,7 +10,7 @@
     <div class="col-md-12 col-sm-12">
         <div class="servive-block-in">
             <div><i class="icon-plane"></i></div>
-            <h4>Your flight from @Model.From to @Model.To</h4>  
+            <h4>Your transfer from @Model.From to @Model.To</h4>  
             <hr class="margin-bottom-20" />          
             <div class="row">
                 <div class="col-md-3 col-sm-6">
@@ -41,7 +41,18 @@
                 </div>
             </div>
 
-            <hr class="margin-bottom-20" />          
+            <hr class="margin-bottom-20" />     
+            
+            @if (!String.IsNullOrEmpty(Model.TransferDetails))
+            {
+                <div class="row">
+                    <div class="col-sm-12 info-blocks text-left">
+                        <div class="info-blocks-in">
+                            <h4>@Model.TransferDetails</h4>                            
+                        </div>
+                    </div>
+                </div>
+            }
 
             <div class="row">
                 <div class="col-sm-12 info-blocks text-left">

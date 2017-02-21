@@ -28,5 +28,6 @@ namespace DomingoDAL
         public Nullable<int> Adults { get; set; }
         public Nullable<int> Kids { get; set; }
         public string TravelClass { get; set; }
+        public string TransferDetails { get; set; }
     }
 }

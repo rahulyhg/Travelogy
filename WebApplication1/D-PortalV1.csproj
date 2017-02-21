@@ -9493,6 +9493,7 @@
     <Content Include="Views\Shared\Error404.cshtml" />
     <Content Include="Views\Shared\_TripPlanningZeroTrips.cshtml" />
     <Content Include="Views\Home\Business.cshtml" />
+    <Content Include="Views\Service\TripTemplates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

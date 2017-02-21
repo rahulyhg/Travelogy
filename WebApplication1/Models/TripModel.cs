@@ -101,7 +101,7 @@ namespace WebApplication1.Models
 
         public string TripStepName { get; set; }
 
-        public string TripStepDescription { get; set; }
+        public string TripStepDescription { get; set; }        
 
         public DateTime? TripStepDate { get; set; }
 
@@ -166,7 +166,8 @@ namespace WebApplication1.Models
         public DateTime? TripStepEndDate { get; set; }
 
         public string BookingStatus { get; set; }
-      
+
+        public string TransferDetails { get; set; }
 
         public string AdminNotes { get; set; }
 
@@ -177,9 +178,14 @@ namespace WebApplication1.Models
                 var dropdownItems = new List<System.Web.Mvc.SelectListItem>();
                 dropdownItems.AddRange(new[]{
                             new System.Web.Mvc.SelectListItem() { Text = "--- please select one ---", Value = "" },
-                            new System.Web.Mvc.SelectListItem() { Text = "Economy", Value = "Economy" },
-                            new System.Web.Mvc.SelectListItem() { Text = "Business", Value = "Business" },
-                            new System.Web.Mvc.SelectListItem() { Text = "First", Value = "First" }});
+                            new System.Web.Mvc.SelectListItem() { Text = "Flight - Economy", Value = "Economy" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Flight - Business", Value = "Business" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Flight - First", Value = "First" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Train - Airconditioned", Value = "Train - AC" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Train - Non Airconditioned", Value = "Train - Non-AC" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Bus or Coach", Value = "Bus" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Taxi or Car", Value = "Taxi" }
+                });
 
                 return dropdownItems;
             }
@@ -197,7 +203,7 @@ namespace WebApplication1.Models
         [Required]
         public string To { get; set; }
 
-        [Display(Name = "Flight Class:")]
+        [Display(Name = "Travel Class:")]
         [Required]
         public string FlightClass { get; set; }
 
@@ -272,6 +278,16 @@ namespace WebApplication1.Models
     /// </summary>
     public class TripViewModel
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public int ImmediateTripId { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Country { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

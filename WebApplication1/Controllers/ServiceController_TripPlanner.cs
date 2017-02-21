@@ -46,6 +46,7 @@ namespace WebApplication1.Controllers
                 // else show all the planned trips
                 var _plannedTrips = _allTrips.Where(p => (p.DlTripView.Status.Trim() == TripStatus.planned.ToString())).ToList();
                 model.PlannedTrips = _plannedTrips;
+
                 List<Destination> _destinations = null;
                 blError = DestinationManager.GetTopDestinations("", 8, out _destinations);
                 model.SuggestedDestinations = _destinations;
@@ -63,13 +64,69 @@ namespace WebApplication1.Controllers
         public ActionResult ListAllTripTemplates(string templateAlias)
         {
             var _availableTemplates = new List<BlTripTemplate>();
+            var _allTemplates = new List<BlTripTemplate>();
             var _blError = TripManager.SearchTripTemplatesByAlias(templateAlias, out _availableTemplates);
-            var _model = new TripViewModel() { AliasName = templateAlias, AllTemplates = _availableTemplates };
+            var _trip = TripManager.GetImmediateTripForUser(User.Identity.GetUserId());
+
+            if (_availableTemplates != null)
+            {
+                foreach (var template in _availableTemplates)
+                {
+                    if (!_trip.DlTripView.Templates.Contains(template.DlTemplate.Id.ToString()))
+                    {
+                        _allTemplates.Add(template);
+                    }
+                }
+            }
+
+            var _model = new TripViewModel()
+            {
+                AliasName = templateAlias,
+                AllTemplates = _allTemplates
+            };
+
+            if(_trip != null)
+            {
+                _model.ImmediateTripId = _trip.DlTripView.Id;
+                _model.ActiveTrip = _trip;
+            }
+
+            if (_availableTemplates.Count > 0)
+            {
+                _model.Country = _availableTemplates[0].Country;
+            }
+
+            return View("TripTemplates", _model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="country"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult CreateTripForCountry(string country)
+        {
+            BlTripTemplate _template = null;
+            var _blerror = TripManager.GetDefaultTemplateForCountry(country, out _template);
+            if(_blerror.ErrorCode > 0 || _template == null || _template.DlTemplate == null)
+            {
+                throw new ApplicationException("No GetDefaultTemplateForCountry for: " + country);
+            }
+
+            // assign the template to the view model
+            var _model = new TripViewModel();
+            _model.CreateTripTemplate = _template;
+            _model.CreateTripViewModel 
+                = new CreateTripViewModel()
+                    {
+                        DestinationId = _template.DlTemplate.DestinationId,
+                        TemplateId = _template.DlTemplate.Id,
+                        StartDate = DateTime.Now
+                    };
 
             return View("Trip", _model);
         }
-
-        
 
         /// <summary>
         /// method to create a form for trip based on a template
@@ -111,10 +168,12 @@ namespace WebApplication1.Controllers
             };
 
             var _blError = await TripManager.CreateTrip(trip, model.CreateTripViewModel.TemplateId);
-            BlViewTrip viewTrip = null;
-            _blError = TripManager.GetTripById(trip.Id, out viewTrip);
-            var _model = new TripViewModel() { ActiveTrip = viewTrip };
-            return View("Trip", _model);
+            if(_blError.ErrorCode > 0)
+            {
+                throw new ApplicationException(_blError.ErrorMessage);
+            }   
+                    
+            return RedirectToAction("ViewTrip", new { tripId = trip.Id });
         }
 
         /// <summary>
@@ -129,7 +188,7 @@ namespace WebApplication1.Controllers
             var _blError = TripManager.GetTripById(tripId, out trip);
             List<BlTripTemplate> _allTemplates = null;
             List<BlTripTemplate> _relatedTemplates = new List<BlTripTemplate>();
-            _blError = TripManager.SearchTripTemplatesByAlias(trip.DlTripView.TemplateSearchAlias, out _allTemplates);
+            _blError = TripManager.SearchRelatedTripTemplates(trip.DlTripView.Id, out _allTemplates);
 
             if (_allTemplates != null)
             {
@@ -228,9 +287,9 @@ namespace WebApplication1.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddCircuitToTripSubmit(TripViewModel model)
+        public async Task<ActionResult> AddCircuitToTripSubmit(TripViewModel model)
         {
-            var blError = TripManager.AddTemplateToTrip(model.ActiveTrip.DlTripView, model.CreateTripTemplate.DlTemplate.Id);
+            var blError = await TripManager.AddTemplateToTripAsync(model.ActiveTrip.DlTripView, model.CreateTripTemplate.DlTemplate.Id);
             return RedirectToAction("ViewTrip", new { tripId = model.ActiveTrip.DlTripView.Id });            
         }
 
@@ -384,11 +443,15 @@ namespace WebApplication1.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> SaveFlightBookingAccommodationAsync(FlightBookingViewModel model)
+        public async Task<ActionResult> SaveFlightBookingAccommodationAsync(FlightBookingViewModel model)
         {
             var _booking = new TripBookingTransport();
 
-            _booking.TransportType = "flight";
+            if (model.FlightClass.ToLower().Contains("train")) { _booking.TransportType = "Train"; }
+            else if (model.FlightClass.ToLower().Contains("bus")) { _booking.TransportType = "Bus"; }
+            else if (model.FlightClass.ToLower().Contains("taxi")) { _booking.TransportType = "Taxi"; }
+            else { _booking.TransportType = "Flight"; }
+
             _booking.TripId = model.TripId;
             _booking.TripStepId = model.TripStepId;
 
@@ -404,7 +467,7 @@ namespace WebApplication1.Controllers
 
             var blError = await TripManager.SaveTripBookingTransportAsync(_booking);
 
-            return RedirectToAction("EditTrip", new { @tripId = model.TripId });
+            return RedirectToAction("ViewTrip", new { @tripId = model.TripId });
         }
 
         [Authorize]
@@ -426,7 +489,8 @@ namespace WebApplication1.Controllers
                 FlightDate = transfer.BookingDate.HasValue ? transfer.BookingDate.Value : DateTime.MinValue,
                 From = transfer.TransportFrom, To = transfer.TransportTo,
                 Kids = transfer.Kids.HasValue ? transfer.Kids.Value : 0,
-                TravellerNotes = transfer.TravellerNotes, AdminNotes = transfer.AdminNotes                                                
+                TravellerNotes = transfer.TravellerNotes, AdminNotes = transfer.AdminNotes,
+                TransferDetails = transfer.TransferDetails                                                
             };
 
             return View(model);

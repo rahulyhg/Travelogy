@@ -245,6 +245,7 @@ namespace DomingoBL
                             _newBooking.TransportTo = model.TransportTo;
                             _newBooking.TransportType = model.TransportType;
                             _newBooking.TravelClass = model.TravelClass;
+                            _newBooking.TransferDetails = model.TransferDetails;
 
                             context.TripBookingTransports.Add(_newBooking);
                             await context.SaveChangesAsync();
@@ -266,6 +267,7 @@ namespace DomingoBL
                                 _booking.TransportTo = model.TransportTo;
                                 _booking.TransportType = model.TransportType;
                                 _booking.TravelClass = model.TravelClass;
+                                _booking.TransferDetails = model.TransferDetails;
 
                                 await context.SaveChangesAsync();
                             }

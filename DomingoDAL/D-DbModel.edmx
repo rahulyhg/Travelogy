@@ -320,6 +320,7 @@
           <Property Name="Adults" Type="int" />
           <Property Name="Kids" Type="int" />
           <Property Name="TravelClass" Type="nvarchar" MaxLength="20" />
+          <Property Name="TransferDetails" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="TripProvider">
           <Key>
@@ -554,6 +555,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripBookingTransport' does n
           <Property Name="FirstName" Type="nvarchar" MaxLength="200" />
           <Property Name="LastName" Type="nvarchar" MaxLength="200" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="TransferDetails" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -782,7 +784,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
     [View_TripBookingTransport].[TripStartLocation] AS [TripStartLocation], 
     [View_TripBookingTransport].[FirstName] AS [FirstName], 
     [View_TripBookingTransport].[LastName] AS [LastName], 
-    [View_TripBookingTransport].[UserName] AS [UserName]
+    [View_TripBookingTransport].[UserName] AS [UserName], 
+    [View_TripBookingTransport].[TransferDetails] AS [TransferDetails]
     FROM [dbo].[View_TripBookingTransport] AS [View_TripBookingTransport]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="View_TripStep" EntityType="Self.View_TripStep" store:Type="Views" store:Schema="dbo">
@@ -867,12 +870,12 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="TagMaps" EntityType="TravelogyDevModel.TagMap" />
           <EntitySet Name="View_TagDestination" EntityType="TravelogyDevModel.View_TagDestination" />
           <EntitySet Name="TripBookingAccommodations" EntityType="TravelogyDevModel.TripBookingAccommodation" />
-          <EntitySet Name="TripBookingTransports" EntityType="TravelogyDevModel.TripBookingTransport" />
           <EntitySet Name="View_TripBookingAccommodation" EntityType="TravelogyDevModel.View_TripBookingAccommodation" />
-          <EntitySet Name="View_TripBookingTransport" EntityType="TravelogyDevModel.View_TripBookingTransport" />
           <EntitySet Name="View_Traveller" EntityType="TravelogyDevModel.View_Traveller" />
           <EntitySet Name="DestinationActivities" EntityType="TravelogyDevModel.DestinationActivity" />
           <EntitySet Name="DestinationInterests" EntityType="TravelogyDevModel.DestinationInterest" />
+          <EntitySet Name="TripBookingTransports" EntityType="TravelogyDevModel.TripBookingTransport" />
+          <EntitySet Name="View_TripBookingTransport" EntityType="TravelogyDevModel.View_TripBookingTransport" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1339,25 +1342,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="TownOrCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdminNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="TripBookingTransport">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TransportType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="EstimatedCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="TripId" Type="Int32" Nullable="false" />
-          <Property Name="TripStepId" Type="Int32" />
-          <Property Name="BookingDate" Type="DateTime" Precision="3" />
-          <Property Name="BookingStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TransportFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TransportTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdminNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="TravellerNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Adults" Type="Int32" />
-          <Property Name="Kids" Type="Int32" />
-          <Property Name="TravelClass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="View_TripBookingAccommodation">
           <Key>
             <PropertyRef Name="Id" />
@@ -1390,35 +1374,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="Kids" Type="Int32" />
           <Property Name="TripId" Type="Int32" Nullable="false" />
           <Property Name="TownOrCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="View_TripBookingTransport">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="TransportType" />
-            <PropertyRef Name="EstimatedCost" />
-            <PropertyRef Name="TripId" />
-            <PropertyRef Name="UserName" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TransportType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="EstimatedCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="TripId" Type="Int32" Nullable="false" />
-          <Property Name="TripStepId" Type="Int32" />
-          <Property Name="BookingDate" Type="DateTime" Precision="3" />
-          <Property Name="BookingStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TransportFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TransportTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdminNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="TravellerNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Adults" Type="Int32" />
-          <Property Name="Kids" Type="Int32" />
-          <Property Name="TravelClass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="TripStartDate" Type="DateTime" Precision="0" />
-          <Property Name="TripStartLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="View_Traveller">
           <Key>
@@ -1460,6 +1415,56 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdditionalHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ThumbnailPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TripBookingTransport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransportType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EstimatedCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="TripStepId" Type="Int32" />
+          <Property Name="BookingDate" Type="DateTime" Precision="3" />
+          <Property Name="BookingStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TransportFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransportTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TravellerNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Adults" Type="Int32" />
+          <Property Name="Kids" Type="Int32" />
+          <Property Name="TravelClass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TransferDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="View_TripBookingTransport">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TransportType" />
+            <PropertyRef Name="EstimatedCost" />
+            <PropertyRef Name="TripId" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TransportType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EstimatedCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="TripStepId" Type="Int32" />
+          <Property Name="BookingDate" Type="DateTime" Precision="3" />
+          <Property Name="BookingStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TransportFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransportTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TravellerNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Adults" Type="Int32" />
+          <Property Name="Kids" Type="Int32" />
+          <Property Name="TravelClass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TripStartDate" Type="DateTime" Precision="0" />
+          <Property Name="TripStartLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="TransferDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1912,26 +1917,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TripBookingTransports">
-            <EntityTypeMapping TypeName="TravelogyDevModel.TripBookingTransport">
-              <MappingFragment StoreEntitySet="TripBookingTransport">
-                <ScalarProperty Name="TravelClass" ColumnName="TravelClass" />
-                <ScalarProperty Name="Kids" ColumnName="Kids" />
-                <ScalarProperty Name="Adults" ColumnName="Adults" />
-                <ScalarProperty Name="TravellerNotes" ColumnName="TravellerNotes" />
-                <ScalarProperty Name="AdminNotes" ColumnName="AdminNotes" />
-                <ScalarProperty Name="TransportTo" ColumnName="TransportTo" />
-                <ScalarProperty Name="TransportFrom" ColumnName="TransportFrom" />
-                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
-                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
-                <ScalarProperty Name="TripStepId" ColumnName="TripStepId" />
-                <ScalarProperty Name="TripId" ColumnName="TripId" />
-                <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
-                <ScalarProperty Name="TransportType" ColumnName="TransportType" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="View_TripBookingAccommodation">
             <EntityTypeMapping TypeName="TravelogyDevModel.View_TripBookingAccommodation">
               <MappingFragment StoreEntitySet="View_TripBookingAccommodation">
@@ -1958,32 +1943,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
                 <ScalarProperty Name="AccommodationType" ColumnName="AccommodationType" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_TripBookingTransport">
-            <EntityTypeMapping TypeName="TravelogyDevModel.View_TripBookingTransport">
-              <MappingFragment StoreEntitySet="View_TripBookingTransport">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="TripStartLocation" ColumnName="TripStartLocation" />
-                <ScalarProperty Name="TripStartDate" ColumnName="TripStartDate" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="TravelClass" ColumnName="TravelClass" />
-                <ScalarProperty Name="Kids" ColumnName="Kids" />
-                <ScalarProperty Name="Adults" ColumnName="Adults" />
-                <ScalarProperty Name="TravellerNotes" ColumnName="TravellerNotes" />
-                <ScalarProperty Name="AdminNotes" ColumnName="AdminNotes" />
-                <ScalarProperty Name="TransportTo" ColumnName="TransportTo" />
-                <ScalarProperty Name="TransportFrom" ColumnName="TransportFrom" />
-                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
-                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
-                <ScalarProperty Name="TripStepId" ColumnName="TripStepId" />
-                <ScalarProperty Name="TripId" ColumnName="TripId" />
-                <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
-                <ScalarProperty Name="TransportType" ColumnName="TransportType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2028,6 +1987,54 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripBookingTransports">
+            <EntityTypeMapping TypeName="TravelogyDevModel.TripBookingTransport">
+              <MappingFragment StoreEntitySet="TripBookingTransport">
+                <ScalarProperty Name="TransferDetails" ColumnName="TransferDetails" />
+                <ScalarProperty Name="TravelClass" ColumnName="TravelClass" />
+                <ScalarProperty Name="Kids" ColumnName="Kids" />
+                <ScalarProperty Name="Adults" ColumnName="Adults" />
+                <ScalarProperty Name="TravellerNotes" ColumnName="TravellerNotes" />
+                <ScalarProperty Name="AdminNotes" ColumnName="AdminNotes" />
+                <ScalarProperty Name="TransportTo" ColumnName="TransportTo" />
+                <ScalarProperty Name="TransportFrom" ColumnName="TransportFrom" />
+                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="TripStepId" ColumnName="TripStepId" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
+                <ScalarProperty Name="TransportType" ColumnName="TransportType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_TripBookingTransport">
+            <EntityTypeMapping TypeName="TravelogyDevModel.View_TripBookingTransport">
+              <MappingFragment StoreEntitySet="View_TripBookingTransport">
+                <ScalarProperty Name="TransferDetails" ColumnName="TransferDetails" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="TripStartLocation" ColumnName="TripStartLocation" />
+                <ScalarProperty Name="TripStartDate" ColumnName="TripStartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TravelClass" ColumnName="TravelClass" />
+                <ScalarProperty Name="Kids" ColumnName="Kids" />
+                <ScalarProperty Name="Adults" ColumnName="Adults" />
+                <ScalarProperty Name="TravellerNotes" ColumnName="TravellerNotes" />
+                <ScalarProperty Name="AdminNotes" ColumnName="AdminNotes" />
+                <ScalarProperty Name="TransportTo" ColumnName="TransportTo" />
+                <ScalarProperty Name="TransportFrom" ColumnName="TransportFrom" />
+                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="TripStepId" ColumnName="TripStepId" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
+                <ScalarProperty Name="TransportType" ColumnName="TransportType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

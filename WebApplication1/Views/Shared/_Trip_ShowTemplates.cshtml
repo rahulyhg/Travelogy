@@ -2,38 +2,70 @@
 
 @if (@Model.AllTemplates != null)
 {
-    <div class="headline"><h2>Choose a circuit to start planning:</h2></div>
-    <hr class="margin-bottom-40">
-    <div class="row">
-        <div class="col-sm-4 info-blocks">
-            <i class="icon-lightbulb icon-info-blocks"></i>
-            <div class="info-blocks-in">
-                <h3>Great ideas for exotic trips</h3>
-                <p>Great ideas for trips to India, Nepal, Bhutan, Tibet, Russia, Mongolia and Tanzania. The itineraries have been prepared by expert travellers.</p>
+    if (Model.ImmediateTripId > 0)
+    {
+        <div class="headline"><h2>Add more to your trip plan:</h2></div>
+    }
+    else
+    {
+        <div class="headline"><h2>Choose a circuit to start planning:</h2></div>
+        <hr class="margin-bottom-40">
+        <div class="row">
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-lightbulb icon-info-blocks"></i>
+                <div class="info-blocks-in">
+                    <h3>Great ideas for exotic trips</h3>
+                    <p>Great ideas for trips to India, Nepal, Bhutan, Tibet, Russia, Mongolia and Tanzania. The itineraries have been prepared by expert travellers.</p>
+                </div>
+            </div>
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-laptop icon-info-blocks"></i>
+                <div class="info-blocks-in">
+                    <h3>FREE Online trip planner</h3>
+                    <p>Use our online planning tool for planning, booking and managing your trips. </p>
+                </div>
+            </div>
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-user icon-info-blocks"></i>
+                <div class="info-blocks-in">
+                    <h3>Expert Travel advisers</h3>
+                    <p>Our service is backed up by expert advisers and local travel agencies in every location we offer. Have local knowlede at your fingertips</p>
+                </div>
             </div>
         </div>
-        <div class="col-sm-4 info-blocks">
-            <i class="icon-laptop icon-info-blocks"></i>
-            <div class="info-blocks-in">
-                <h3>FREE Online trip planner</h3>
-                <p>Use our online planning tool for planning, booking and managing your trips. </p>
+
+        if (!String.IsNullOrEmpty(Model.Country))
+        {
+            <div class="row">
+                <div class="block-heading-twelve">
+                    <h1>Start planning for @Model.Country <small class="orange">you can keep adding circuits you like</small> </h1>
+                    <div class="margin-bottom-10"></div>
+                    <a href="/Service/CreateTripForCountry?country=@Model.Country" class="btn-u btn-u-orange">Start Planning for trip to @Model.Country &nbsp;&nbsp;<i class="icon-cogs "></i></a>
+                </div>
+                <div class="margin-bottom-20"></div>
             </div>
-        </div>
-        <div class="col-sm-4 info-blocks">
-            <i class="icon-user icon-info-blocks"></i>
-            <div class="info-blocks-in">
-                <h3>Expert Travel advisers</h3>
-                <p>Our service is backed up by expert advisers and local travel agencies in every location we offer. Have local knowlede at your fingertips</p>
-            </div>
-        </div>
-    </div>
-    <hr class="margin-bottom-20">
+        }
+    }
+
+    <hr class="margin-bottom-20">    
 
     for (var i = 0; i < Model.AllTemplates.Count; i++)
     {
         var item = Model.AllTemplates[i];
-        @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = 0, TripTemplate = item })
-    }    
+        @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = Model.ImmediateTripId, TripTemplate = item })
+    }
+
+    if (Model.ImmediateTripId ==0 && !String.IsNullOrEmpty(Model.Country))
+    {
+        <div class="row">
+            <div class="block-heading-twelve">
+                <h1>You can also start planning for the whole country</h1>
+                <h3>Start planning for @Model.Country</h3>
+                <div class="margin-bottom-20"></div>
+                <a href="/Service/CreateTripForCountry?country=@Model.Country" class="btn-u btn-u-orange">Start Planning for trip to @Model.Country &nbsp;&nbsp;<i class="icon-cogs "></i></a>
+            </div>
+        </div>
+    }
 }
 
 
