@@ -489,7 +489,9 @@ namespace WebApplication1.Controllers
                 FlightDate = transfer.BookingDate.HasValue ? transfer.BookingDate.Value : DateTime.MinValue,
                 From = transfer.TransportFrom, To = transfer.TransportTo,
                 Kids = transfer.Kids.HasValue ? transfer.Kids.Value : 0,
-                TravellerNotes = transfer.TravellerNotes, AdminNotes = transfer.AdminNotes,
+                TravellerNotes = transfer.TravellerNotes,
+                TransportType = transfer.TransportType,
+                AdminNotes = transfer.AdminNotes,
                 TransferDetails = transfer.TransferDetails                                                
             };
 

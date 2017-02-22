@@ -157,6 +157,8 @@ namespace WebApplication1.Models
 
         public string TripStepName { get; set; }
 
+        public string TransportType { get; set; }
+
         public string TripStepDescription { get; set; }
 
         public DateTime? TripStartDate { get; set; }
