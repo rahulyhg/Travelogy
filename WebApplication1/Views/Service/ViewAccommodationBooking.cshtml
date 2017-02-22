@@ -3,85 +3,73 @@
 @Html.Partial("_HomepageCarousel")
 
 <div class="headline">
-    <h2>Your Accommodation Booking details:</h2>
+    <h4>Your booking for @Model.AccommodationType at @Model.TownOrCity</h4>
 </div>
 
-<div class="row servive-block margin-bottom-10">
-    <div class="col-md-12 col-sm-12">
-        <div class="servive-block-in">
-            <div><i class="icon-plane"></i></div>
-            <h4>Your booking for @Model.AccommodationType at @Model.TownOrCity</h4>
-            <hr class="margin-bottom-20" />          
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <h4 class="orange">Check-in date:</h4>
-                    <i class="icon-calendar icon-info-blocks"></i>
-                    @if (Model.CheckinDate > DateTime.MinValue)
-                    {
-                        <h4>@Model.CheckinDate.ToLongDateString()</h4>
-                    }
-                    else
-                    {
-                        <h4>@Html.Raw("Not planned")</h4>
-                    }
+
+<div class="img-box-3 text-left">
+    <div class="row">
+        <div class="col-md-2 col-sm-6">
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/hotel-1.png" alt="" class="img-responsive" />
                 </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <h4 class="orange">Check-out date:</h4>
-                    <i class="icon-calendar icon-info-blocks"></i>
-                    @if (Model.CheckoutDate > DateTime.MinValue)
-                    {
-                        <h4>@Model.CheckoutDate.ToLongDateString()</h4>
-                    }
-                    else
-                    {
-                        <h4>@Html.Raw("Not planned")</h4>
-                    }
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <h4 class="orange">Status: </h4>
-                    <h4>@Model.BookingStatus</h4>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <h4 class="orange">Travellers: </h4>                    
-                    <h4>Adults: @Model.Adults, Kids: @Model.Kids</h4>
-                </div>
-            </div>
-            
-            <hr class="margin-bottom-20" />
-
-            @if (!string.IsNullOrEmpty(Model.PropertyName))
-            {
-                <div class="row text-left">
-                    <h4 class="orange">Property Name:</h4>
-                    <p>@Model.PropertyName</p>
-
-                    <h4 class="orange">Property Address:</h4>
-                    <p>@Model.PropertyAddress</p>
-                </div>
-
-                <hr class="margin-bottom-20" />
-            }
-
-            <div class="row text-left">
-                <h4 class="orange">Your message:</h4>
-                <p>@Model.TravellerNotes</p>
-                <hr class="margin-bottom-20" />
-                <h4 class="orange">Special request:</h4>
-                <p>@Model.SpecialRequests</p>
-                <hr class="margin-bottom-20" />
-            </div>
-
-            <div class="row text-left">
-                <h4 class="orange">Traveloger notes:</h4>
-                <p>@Model.AdminNotes</p>
-            </div>
+            </div>                  
         </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="img-box-3-item">
+                <h5>Adults: @Model.Adults, Minors: @Model.Kids</h5>
+                <h5 class="orange">Check-in date:</h5>
+                @if (Model.CheckinDate > DateTime.MinValue)
+                {
+                    <p>@Model.CheckinDate.ToLongDateString()</p>
+                }
+                else
+                {
+                    <p>@Html.Raw("Not planned")</p>
+                }
+
+                <h5 class="orange">Check-out date:</h5>
+                @if (Model.CheckoutDate > DateTime.MinValue)
+                {
+                    <p>@Model.CheckoutDate.ToLongDateString()</p>
+                }
+                else
+                {
+                    <p>@Html.Raw("Not planned")</p>
+                }
+
+                <h5 class="orange">Status: </h5>
+                <p>@Model.BookingStatus</p>
+            </div>            
+        </div>
+
+        <div class="col-md-5 col-sm-12">
+            <h5 class="orange">Your message:</h5>
+            <p>@Model.TravellerNotes</p>
+            <h5 class="orange">Special Requests:</h5>
+            <p>@Model.SpecialRequests</p>
+            <h5 class="orange">Traveloger's Message:</h5>
+            <p>@Model.AdminNotes</p>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.PropertyName))
+        {
+            <div class="col-md-12">
+                <h5 class="orange">Property Name:</h5>
+                <p>@Model.PropertyName</p>
+
+                <h5 class="orange">Property Address:</h5>
+                <p>@Model.PropertyAddress</p>
+            </div>
+        }
+
+        
     </div>
 </div>
 
-<div class="margin-bottom-20">
-    <a href="/Service/ViewTrip?tripId=@Model.TripId" class="orange">Back to trip details</a>
+<div class="margin-bottom-20">    
 </div>
+
+<a href="/Service/ViewTrip?tripId=@Model.TripId" class="btn-u btn-orange">Back to trip planning</a>
