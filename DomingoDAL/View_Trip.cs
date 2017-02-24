@@ -15,6 +15,7 @@ namespace DomingoDAL
     public partial class View_Trip
     {
         public int Id { get; set; }
+        public string NickName { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public string StartLocation { get; set; }
         public string Status { get; set; }
@@ -23,11 +24,12 @@ namespace DomingoDAL
         public int Travellerid { get; set; }
         public string AspNetUserId { get; set; }
         public Nullable<int> ThreadId { get; set; }
+        public string Templates { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string TemplateSearchAlias { get; set; }
         public string ThumbnailPath { get; set; }
-        public string Templates { get; set; }
-        public string NickName { get; set; }
+        public string TripCurrency { get; set; }
+        public Nullable<decimal> EstimatedCost { get; set; }
     }
 }

@@ -18,12 +18,12 @@
 
     <div class="img-box-3 text-center">
         <div class="row">
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-3 col-sm-6">
                 <div class="img-box-3-item">
                     <div class="img-box-3-icon">
                         <img src="~/content/img/flat-icons/airplane.png" alt="" class="img-responsive" />
                     </div>
-                    <h3>Starts:
+                    <h4>
                         @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
                         {
                             @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()
@@ -31,25 +31,46 @@
                         else
                         {
                             @Html.Raw("Not planned")
-                        }</h3>                    
+                        }
+                    </h4>                    
+                    <h6 class="orange">(Planned date)</h6>
                 </div>
             </div>
 
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-3 col-sm-6">
                 <div class="img-box-3-item">
                     <div class="img-box-3-icon">
                         <img src="~/content/img/flat-icons/notebook.png" alt="" class="img-responsive" />
                     </div>
-                    <h3>Status: @Model.ActiveTrip.DlTripView.Status</h3>
+                    <h4>Status: @Model.ActiveTrip.DlTripView.Status</h4>
                 </div>
             </div>
 
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-3 col-sm-6">
                 <div class="img-box-3-item">
                     <div class="img-box-3-icon">
                         <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
                     </div>
-                    <h3>Starts at: @Model.ActiveTrip.DlTripView.StartLocation</h3>
+                    <h4>Starts at: @Model.ActiveTrip.DlTripView.StartLocation</h4>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/money.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Estimated cost:</h4>                    
+                    <h5 class="orange">
+                        @if (Model.ActiveTrip.DlTripView.EstimatedCost.HasValue)
+                        {
+                            @Model.ActiveTrip.DlTripView.TripCurrency
+                            @Html.Raw(" ")                            
+                            @Model.ActiveTrip.DlTripView.EstimatedCost.Value.ToString("N2")
+                        }
+                        else
+                        { @Html.Raw("n/a")}  
+                    </h5>
                 </div>
             </div>
         </div>

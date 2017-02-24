@@ -34,13 +34,13 @@
             </div>
         </div>
 
-        if (!String.IsNullOrEmpty(Model.Country))
+        if (Model.ImmediateTripId == 0 && !String.IsNullOrEmpty(Model.Country))
         {
             <div class="row">
-                <div class="block-heading-twelve">
-                    <h1>Start planning for @Model.Country <small class="orange">you can keep adding circuits you like</small> </h1>
-                    <div class="margin-bottom-10"></div>
-                    <a href="/Service/CreateTripForCountry?country=@Model.Country" class="btn-u btn-u-orange">Start Planning for trip to @Model.Country &nbsp;&nbsp;<i class="icon-cogs "></i></a>
+                <div class="block-heading-twelve text-center">
+                    <h1 class="orange">You can also start planning for @Model.Country without choosing a circuit first</h1>
+                    <h3><a href="/Service/CreateTripForCountry?country=@Model.Country">Click to start planning for @Model.Country &nbsp;&nbsp;<i class="icon-arrow-right"></i></a></h3>
+                    <h5 class="orange">you can keep adding circuits you like</h5>
                 </div>
                 <div class="margin-bottom-20"></div>
             </div>
@@ -55,15 +55,15 @@
         @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = Model.ImmediateTripId, TripTemplate = item })
     }
 
-    if (Model.ImmediateTripId ==0 && !String.IsNullOrEmpty(Model.Country))
+    if (Model.ImmediateTripId == 0 && !String.IsNullOrEmpty(Model.Country))
     {
         <div class="row">
-            <div class="block-heading-twelve">
-                <h1>You can also start planning for the whole country</h1>
-                <h3>Start planning for @Model.Country</h3>
-                <div class="margin-bottom-20"></div>
-                <a href="/Service/CreateTripForCountry?country=@Model.Country" class="btn-u btn-u-orange">Start Planning for trip to @Model.Country &nbsp;&nbsp;<i class="icon-cogs "></i></a>
+            <div class="block-heading-twelve text-center">
+                <h1 class="orange">You can also start planning for @Model.Country without choosing a circuit first</h1>                
+                <h3><a href="/Service/CreateTripForCountry?country=@Model.Country">Click to start planning for @Model.Country &nbsp;&nbsp;<i class="icon-arrow-right"></i></a></h3>
+                <h5 class="orange">you can keep adding circuits you like</h5>                    
             </div>
+            <div class="margin-bottom-20"></div>
         </div>
     }
 }

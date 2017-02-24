@@ -72,7 +72,14 @@ namespace WebApplication1.Controllers
             {
                 foreach (var template in _availableTemplates)
                 {
-                    if (!_trip.DlTripView.Templates.Contains(template.DlTemplate.Id.ToString()))
+                    // if there is already a trip that includes this template - then
+                    if (_trip != null && _trip.DlTripView != null && !String.IsNullOrEmpty( _trip.DlTripView.Templates) 
+                        && _trip.DlTripView.Templates.Contains(template.DlTemplate.Id.ToString()))
+                    {
+                        // do nothing
+                    }
+
+                    else // add it to the available list
                     {
                         _allTemplates.Add(template);
                     }
@@ -125,6 +132,15 @@ namespace WebApplication1.Controllers
                         StartDate = DateTime.Now
                     };
 
+            var startLocationOptions = _template.DlTemplate.StartLocation.Split('/').ToList();
+            var _tripStartLocationOptions = new List<SelectListItem>();
+            foreach(var startLocation in startLocationOptions)
+            {
+                _tripStartLocationOptions.Add(new SelectListItem() { Text = startLocation, Value = startLocation });
+            }
+
+            _model.CreateTripStartLocationOptions = _tripStartLocationOptions;
+
             return View("Trip", _model);
         }
 
@@ -164,6 +180,7 @@ namespace WebApplication1.Controllers
                 DestinationId = model.CreateTripViewModel.DestinationId,
                 NickName = model.CreateTripViewModel.NickName,
                 StartDate = model.CreateTripViewModel.StartDate,
+                StartLocation = model.CreateTripViewModel.StartLocation,
                 Status = TripStatus.planned.ToString()
             };
 

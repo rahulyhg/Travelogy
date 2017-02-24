@@ -18,20 +18,22 @@
             
             <div class="blog margin-bottom-20">
                 <div class="row">
-                    <div class="col-md-3 col-sm-12">
+                    <div class="col-md-3 col-sm-6">
                         <div class="blog-img">
                             <img class="img-responsive" src="@Model.CreateTripTemplate.DlTemplate.ThumbnailPath" alt="">
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12">
-                        <h2><a href="#">@Model.CreateTripTemplate.DlTemplate.Name</a></h2>
+                    <div class="col-md-3 col-sm-6">
+                        <h2>Plan for @Model.CreateTripTemplate.DlTemplate.Name</h2>
                         <div class="blog-post-tags">
-                            <ul class="list-unstyled list-inline blog-info">
+                            <ul class="list-unstyled blog-info">
                                 <li><i class="icon-calendar"></i>Best time to visit: @Model.CreateTripTemplate.DlTemplate.BestTimeToVisit</li>
                                 <li><i class="icon-location-arrow"></i> Usually starts at: @Model.CreateTripTemplate.DlTemplate.StartLocation</li>
                                 <li><i class="icon-suitcase"></i> Usual Duration: @Model.CreateTripTemplate.DlTemplate.DurationDaysMin to @Model.CreateTripTemplate.DlTemplate.DurationDaysMax Days</li>                                
                             </ul>
-                        </div>
+                        </div>                        
+                    </div>
+                    <div class="col-md-6 col-sm-12">
                         <p>@Model.CreateTripTemplate.DlTemplate.Description</p>
                     </div>
                 </div>
@@ -40,29 +42,29 @@
             <div class="panel panel-orange">
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <h5 class="orange">Give a name to your trip:  </h5>
+                        <div class="col-md-4 col-sm-12">
+                            <h5 class="margin-bottom-10">Give a name to your trip:  </h5>
                             @Html.EditorFor(p => p.CreateTripViewModel.NickName, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })
                             @Html.ValidationMessageFor(p => p.CreateTripViewModel.NickName, "", new { @class = "text-danger" })
                         </div>
-                        <div class="col-md-3 col-sm-12">
-                            <h5 class="orange">Approximate date of your trip :  </h5>
+                        <div class="col-md-4 col-sm-12">
+                            <h5 class="margin-bottom-10">Approximate date of your trip :  </h5>
                             @Html.TextBoxFor(p => p.CreateTripViewModel.StartDate, new { @class = "form-control", type = "date" })
                             @Html.ValidationMessageFor(p => p.CreateTripViewModel.StartDate, "", new { @class = "text-danger" })
                             <p class="orange">This is an approximate date you choose for planning, the exact date will be worked out when you book it.</p>
-                        </div>                        
+                        </div>  
+                        <div class="col-md-4 col-sm-12">
+                            <h5 class="margin-bottom-10">Choose where to start your trip :  </h5>
+                            @Html.DropDownListFor(m => m.CreateTripViewModel.StartLocation, Model.CreateTripStartLocationOptions, new { @class = "form-control" })
+                            <p class="orange">You can always change this location to anywhere (possible) you want!</p>
+                        </div>
                     </div>                    
                 </div>
             </div>            
             
             <div class="col-md-12 text-right">
-                <p><button class="btn-u btn-u-lg btn-u-orange" type="submit"><i class="icon-cogs "></i> Add to my trip</button></p>
+                <p><button class="btn-u btn-u-lg btn-u-orange" type="submit"> Start planning &nbsp;&nbsp; <i class="icon-arrow-right"></i></button></p>
             </div>
-
-            <div class="headline">
-                <h3>Trip details</h3>
-                <p class="orange">You can fully customize this trip with help from expert travel advisors.</p>
-            </div>            
 
             @if (!String.IsNullOrEmpty(Model.CreateTripTemplate.DlTemplate.AdditionalHtml))
             {
@@ -73,19 +75,27 @@
                 </div>
             }   
 
-            <div class="media margin-bottom-20">
-            @foreach (var step in Model.CreateTripTemplate.DlTemplateSteps)
+            @if (Model.CreateTripTemplate.DlTemplateSteps != null && Model.CreateTripTemplate.DlTemplateSteps.Count > 0)
             {
-                <hr class="margin-bottom-20" />
-                <h3>@step.ShortDescription</h3>
-                if(!string.IsNullOrEmpty(step.ThumbnailPath))
-                {
-                    <img src="@step.ThumbnailPath" class="img-responsive img-border" />
-                }
-                <p>@step.LongDescription</p>
-                <hr class="margin-bottom-20" />
-            }
-            </div>            
+                <div class="headline">
+                    <h3>Trip details</h3>
+                    <p class="orange">You can fully customize this trip with help from expert travel advisors.</p>
+                </div>
+
+                <div class="media margin-bottom-20">
+                    @foreach (var step in Model.CreateTripTemplate.DlTemplateSteps)
+                    {
+                        <hr class="margin-bottom-20" />
+                        <h3>@step.ShortDescription</h3>
+                        if (!string.IsNullOrEmpty(step.ThumbnailPath))
+                        {
+                            <img src="@step.ThumbnailPath" class="img-responsive img-border" />
+                        }
+                        <p>@step.LongDescription</p>
+                        <hr class="margin-bottom-20" />
+                    }
+                </div>
+            }                       
         </div>
     };
 }

@@ -153,6 +153,9 @@
     <Compile Include="TripStep.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TripStepCost.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TripTemplate.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
@@ -215,6 +218,7 @@
     <Content Include="Scripts\SubDestination.sql" />
     <Content Include="Scripts\travelogy-data-09feb2017.sql" />
     <Content Include="Scripts\TripBookingTransport.21022017.sql" />
+    <Content Include="Scripts\tripstepcost.sql" />
     <Content Include="Scripts\View_Traveller.sql" />
     <Content Include="Scripts\View_TripBookingTransport.21022017.sql" />
   </ItemGroup>

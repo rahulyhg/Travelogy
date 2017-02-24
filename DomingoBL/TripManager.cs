@@ -167,7 +167,8 @@ namespace DomingoBL
                         trip.Templates = tripTemplateId.ToString();
                         trip.TemplateSearchAlias = template.SearchAlias;
                         trip.DestinationId = template.DestinationId;
-                        trip.StartLocation = template.StartLocation;
+                        trip.TripCurrency = "GBP";
+                        if (String.IsNullOrEmpty(trip.StartLocation)) { trip.StartLocation = template.StartLocation; }
 
                         context.Trips.Add(trip);
                         await context.SaveChangesAsync();

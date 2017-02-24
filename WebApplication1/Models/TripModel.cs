@@ -273,6 +273,10 @@ namespace WebApplication1.Models
         [Display(Name = "A nick name for your Trip:")]
         [Required(ErrorMessage = "Please give a name to your Trip!")]
         public string NickName { get; set; }
+
+        [Display(Name = "Choose where you want to start:")]
+        [Required(ErrorMessage = "Please pick a starting point for the Trip!")]
+        public string StartLocation { get; set; }
     }
 
     /// <summary>
@@ -314,7 +318,12 @@ namespace WebApplication1.Models
         /// 
         /// </summary>
         public BlTripTemplate CreateTripTemplate { get; set; }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<System.Web.Mvc.SelectListItem> CreateTripStartLocationOptions { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

@@ -32,7 +32,6 @@
         <EntityTypeShape EntityType="TravelogyDevModel.TripStep" Width="1.5" PointX="6.375" PointY="10.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.TripTemplate" Width="1.5" PointX="11.375" PointY="8.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.TripTemplateStep" Width="1.5" PointX="8.375" PointY="11.75" />
-        <EntityTypeShape EntityType="TravelogyDevModel.View_Trip" Width="1.5" PointX="13.375" PointY="8.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_TripStep" Width="1.5" PointX="7.375" PointY="15.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.Tag" Width="1.5" PointX="1.75" PointY="19" />
         <EntityTypeShape EntityType="TravelogyDevModel.TagMap" Width="1.5" PointX="3.375" PointY="11.75" />
@@ -44,6 +43,8 @@
         <EntityTypeShape EntityType="TravelogyDevModel.DestinationInterest" Width="1.5" PointX="15.375" PointY="17.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.TripBookingTransport" Width="1.5" PointX="16.375" PointY="0.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_TripBookingTransport" Width="1.5" PointX="17.375" PointY="5.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.TripStepCost" Width="1.5" PointX="17.375" PointY="16.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.View_Trip" Width="1.5" PointX="4.375" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
