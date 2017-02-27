@@ -80,6 +80,9 @@
     <Compile Include="DestinationActivity.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DestinationCost.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DestinationCountry.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
@@ -214,12 +217,15 @@
     </Content>
     <Content Include="Scripts\createtables-09feb2017.sql" />
     <Content Include="Scripts\DestinationActivity.sql" />
+    <Content Include="Scripts\DestinationCost.sql" />
     <Content Include="Scripts\DestinationInterest.sql" />
     <Content Include="Scripts\SubDestination.sql" />
     <Content Include="Scripts\travelogy-data-09feb2017.sql" />
+    <Content Include="Scripts\Trip.20170224.sql" />
     <Content Include="Scripts\TripBookingTransport.21022017.sql" />
     <Content Include="Scripts\tripstepcost.sql" />
     <Content Include="Scripts\View_Traveller.sql" />
+    <Content Include="Scripts\View_Trip.20170224.sql" />
     <Content Include="Scripts\View_TripBookingTransport.21022017.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

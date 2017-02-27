@@ -12,20 +12,17 @@ namespace DomingoDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TripStepCost
+    public partial class DestinationCost
     {
         public int Id { get; set; }
         public string Destination { get; set; }
-        public int TripTemplateStepId { get; set; }
+        public int DestinationId { get; set; }
         public string ShortDescription { get; set; }
-        public int TripTemplateId { get; set; }
         public string Description { get; set; }
         public string Season { get; set; }
         public string Currency { get; set; }
         public decimal Amount { get; set; }
         public string Type { get; set; }
         public string Class { get; set; }
-        public int TripStepId { get; set; }
-        public int TripId { get; set; }
     }
 }

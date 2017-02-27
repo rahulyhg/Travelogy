@@ -660,5 +660,26 @@ namespace WebApplication1.Controllers
             }
         }
 
+        [Authorize]
+        public ActionResult CreateTripStepCost(int tripTemplateStepId)
+        {
+            var context = new TravelogyDevEntities1();
+            var _tripStep = context.TripTemplateSteps.Find(tripTemplateStepId);
+            var _model = new TripStepCost() { TripTemplateStepId = tripTemplateStepId , TripTemplateId = _tripStep.TripTemplateId, Destination = _tripStep.Destination };
+            return View("EditTripStepCost", _model);
+        }
+
+        [Authorize]
+        public ActionResult EditTripStepCost(int tripStepId)
+        {
+            return View();
+        }
+
+        //EditTripStepCost
+        [Authorize]
+        public async Task<ActionResult> SaveTripStepCost(TripStepCost model)
+        {
+            return RedirectToAction("EditTripTemplate", new { @id = model.TripTemplateId });
+        }
     }
 }
