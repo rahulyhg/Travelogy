@@ -31,5 +31,8 @@ namespace DomingoDAL
         public string ThumbnailPath { get; set; }
         public string TripCurrency { get; set; }
         public Nullable<decimal> EstimatedCost { get; set; }
+        public string TripType { get; set; }
+        public int PaxAdults { get; set; }
+        public int PaxMinors { get; set; }
     }
 }

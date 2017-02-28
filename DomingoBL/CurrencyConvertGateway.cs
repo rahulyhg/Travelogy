@@ -24,6 +24,11 @@ namespace DomingoBL
         {
             convertRate = 0D;
 
+            if (String.IsNullOrEmpty(fromCurrency) || String.IsNullOrEmpty(toCurrency))
+            {
+                return new DomingoBlError() { ErrorCode = 200, ErrorMessage = "Invalid or NULL parameters" }; ;
+            }
+
             try
             {
                 var strJsonRequest = _SendJsonRequestToFixer();

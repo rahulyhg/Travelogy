@@ -491,6 +491,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_Trip' does not have a primar
             <PropertyRef Name="Templates" />
             <PropertyRef Name="Name" />
             <PropertyRef Name="TripCurrency" />
+            <PropertyRef Name="PaxAdults" />
+            <PropertyRef Name="PaxMinors" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="NickName" Type="nvarchar" MaxLength="50" />
@@ -509,6 +511,9 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_Trip' does not have a primar
           <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="256" />
           <Property Name="TripCurrency" Type="nvarchar" MaxLength="4" Nullable="false" />
           <Property Name="EstimatedCost" Type="money" />
+          <Property Name="TripType" Type="nvarchar" MaxLength="10" />
+          <Property Name="PaxAdults" Type="int" Nullable="false" />
+          <Property Name="PaxMinors" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'TravelogyDev.dbo.View_TripBookingAccommodation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -600,6 +605,34 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="TravelogerNote" Type="ntext" />
           <Property Name="ThumbnailPath" Type="nvarchar" MaxLength="255" />
           <Property Name="TypicalDurationDays" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TravelogyDev.dbo.View_TripStepCost' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_TripStepCost">
+          <Key>
+            <PropertyRef Name="TripId" />
+            <PropertyRef Name="TripStepId" />
+            <PropertyRef Name="TypicalDurationDays" />
+            <PropertyRef Name="ACCO_COST" />
+            <PropertyRef Name="TRANSPORT_COST" />
+            <PropertyRef Name="FOOD_COST" />
+          </Key>
+          <Property Name="TripId" Type="int" Nullable="false" />
+          <Property Name="TripStepId" Type="int" Nullable="false" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="ActualDays" Type="int" />
+          <Property Name="TypicalDurationDays" Type="int" Nullable="false" />
+          <Property Name="ACCO_COST" Type="money" Nullable="false" />
+          <Property Name="ACCO_CURRENCY" Type="nvarchar" MaxLength="4" />
+          <Property Name="ACCO_SEASON" Type="nvarchar" MaxLength="10" />
+          <Property Name="TRANSPORT_COST" Type="money" Nullable="false" />
+          <Property Name="TRANSPORT_CURRENCY" Type="nvarchar" MaxLength="4" />
+          <Property Name="TRANSPORT_SEASON" Type="nvarchar" MaxLength="10" />
+          <Property Name="FOOD_COST" Type="money" Nullable="false" />
+          <Property Name="FOOD_CURRENCY" Type="nvarchar" MaxLength="4" />
+          <Property Name="FOOD_SEASON" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -755,7 +788,10 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
     [View_Trip].[TemplateSearchAlias] AS [TemplateSearchAlias], 
     [View_Trip].[ThumbnailPath] AS [ThumbnailPath], 
     [View_Trip].[TripCurrency] AS [TripCurrency], 
-    [View_Trip].[EstimatedCost] AS [EstimatedCost]
+    [View_Trip].[EstimatedCost] AS [EstimatedCost], 
+    [View_Trip].[TripType] AS [TripType], 
+    [View_Trip].[PaxAdults] AS [PaxAdults], 
+    [View_Trip].[PaxMinors] AS [PaxMinors]
     FROM [dbo].[View_Trip] AS [View_Trip]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="View_TripBookingAccommodation" EntityType="Self.View_TripBookingAccommodation" store:Type="Views" store:Schema="dbo">
@@ -829,6 +865,26 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
     [View_TripStep].[TypicalDurationDays] AS [TypicalDurationDays]
     FROM [dbo].[View_TripStep] AS [View_TripStep]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="View_TripStepCost" EntityType="Self.View_TripStepCost" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_TripStepCost].[TripId] AS [TripId], 
+    [View_TripStepCost].[TripStepId] AS [TripStepId], 
+    [View_TripStepCost].[ShortDescription] AS [ShortDescription], 
+    [View_TripStepCost].[StartDate] AS [StartDate], 
+    [View_TripStepCost].[EndDate] AS [EndDate], 
+    [View_TripStepCost].[ActualDays] AS [ActualDays], 
+    [View_TripStepCost].[TypicalDurationDays] AS [TypicalDurationDays], 
+    [View_TripStepCost].[ACCO_COST] AS [ACCO_COST], 
+    [View_TripStepCost].[ACCO_CURRENCY] AS [ACCO_CURRENCY], 
+    [View_TripStepCost].[ACCO_SEASON] AS [ACCO_SEASON], 
+    [View_TripStepCost].[TRANSPORT_COST] AS [TRANSPORT_COST], 
+    [View_TripStepCost].[TRANSPORT_CURRENCY] AS [TRANSPORT_CURRENCY], 
+    [View_TripStepCost].[TRANSPORT_SEASON] AS [TRANSPORT_SEASON], 
+    [View_TripStepCost].[FOOD_COST] AS [FOOD_COST], 
+    [View_TripStepCost].[FOOD_CURRENCY] AS [FOOD_CURRENCY], 
+    [View_TripStepCost].[FOOD_SEASON] AS [FOOD_SEASON]
+    FROM [dbo].[View_TripStepCost] AS [View_TripStepCost]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -898,8 +954,9 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="DestinationInterests" EntityType="TravelogyDevModel.DestinationInterest" />
           <EntitySet Name="TripBookingTransports" EntityType="TravelogyDevModel.TripBookingTransport" />
           <EntitySet Name="View_TripBookingTransport" EntityType="TravelogyDevModel.View_TripBookingTransport" />
-          <EntitySet Name="View_Trip" EntityType="TravelogyDevModel.View_Trip" />
           <EntitySet Name="DestinationCosts" EntityType="TravelogyDevModel.DestinationCost" />
+          <EntitySet Name="View_TripStepCost" EntityType="TravelogyDevModel.View_TripStepCost" />
+          <EntitySet Name="View_Trip" EntityType="TravelogyDevModel.View_Trip" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1468,6 +1525,47 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="TransferDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="DestinationCost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationId" Type="Int32" Nullable="false" />
+          <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Season" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Currency" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Class" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="View_TripStepCost">
+          <Key>
+            <PropertyRef Name="TripId" />
+            <PropertyRef Name="TripStepId" />
+            <PropertyRef Name="TypicalDurationDays" />
+            <PropertyRef Name="ACCO_COST" />
+            <PropertyRef Name="TRANSPORT_COST" />
+            <PropertyRef Name="FOOD_COST" />
+          </Key>
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="TripStepId" Type="Int32" Nullable="false" />
+          <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="ActualDays" Type="Int32" />
+          <Property Name="TypicalDurationDays" Type="Int32" Nullable="false" />
+          <Property Name="ACCO_COST" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ACCO_CURRENCY" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="ACCO_SEASON" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TRANSPORT_COST" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="TRANSPORT_CURRENCY" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="TRANSPORT_SEASON" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FOOD_COST" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="FOOD_CURRENCY" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="FOOD_SEASON" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="View_Trip">
           <Key>
             <PropertyRef Name="Id" />
@@ -1476,6 +1574,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
             <PropertyRef Name="Templates" />
             <PropertyRef Name="Name" />
             <PropertyRef Name="TripCurrency" />
+            <PropertyRef Name="PaxAdults" />
+            <PropertyRef Name="PaxMinors" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1494,21 +1594,9 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="ThumbnailPath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="TripCurrency" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="EstimatedCost" Type="Decimal" Precision="19" Scale="4" />
-        </EntityType>
-        <EntityType Name="DestinationCost">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DestinationId" Type="Int32" Nullable="false" />
-          <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Season" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Currency" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Class" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TripType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PaxAdults" Type="Int32" Nullable="false" />
+          <Property Name="PaxMinors" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2064,9 +2152,50 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DestinationCosts">
+            <EntityTypeMapping TypeName="TravelogyDevModel.DestinationCost">
+              <MappingFragment StoreEntitySet="DestinationCost">
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Season" ColumnName="Season" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_TripStepCost">
+            <EntityTypeMapping TypeName="TravelogyDevModel.View_TripStepCost">
+              <MappingFragment StoreEntitySet="View_TripStepCost">
+                <ScalarProperty Name="FOOD_SEASON" ColumnName="FOOD_SEASON" />
+                <ScalarProperty Name="FOOD_CURRENCY" ColumnName="FOOD_CURRENCY" />
+                <ScalarProperty Name="FOOD_COST" ColumnName="FOOD_COST" />
+                <ScalarProperty Name="TRANSPORT_SEASON" ColumnName="TRANSPORT_SEASON" />
+                <ScalarProperty Name="TRANSPORT_CURRENCY" ColumnName="TRANSPORT_CURRENCY" />
+                <ScalarProperty Name="TRANSPORT_COST" ColumnName="TRANSPORT_COST" />
+                <ScalarProperty Name="ACCO_SEASON" ColumnName="ACCO_SEASON" />
+                <ScalarProperty Name="ACCO_CURRENCY" ColumnName="ACCO_CURRENCY" />
+                <ScalarProperty Name="ACCO_COST" ColumnName="ACCO_COST" />
+                <ScalarProperty Name="TypicalDurationDays" ColumnName="TypicalDurationDays" />
+                <ScalarProperty Name="ActualDays" ColumnName="ActualDays" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="TripStepId" ColumnName="TripStepId" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="View_Trip">
             <EntityTypeMapping TypeName="TravelogyDevModel.View_Trip">
               <MappingFragment StoreEntitySet="View_Trip">
+                <ScalarProperty Name="PaxMinors" ColumnName="PaxMinors" />
+                <ScalarProperty Name="PaxAdults" ColumnName="PaxAdults" />
+                <ScalarProperty Name="TripType" ColumnName="TripType" />
                 <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
                 <ScalarProperty Name="TripCurrency" ColumnName="TripCurrency" />
                 <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
@@ -2083,22 +2212,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
                 <ScalarProperty Name="StartLocation" ColumnName="StartLocation" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DestinationCosts">
-            <EntityTypeMapping TypeName="TravelogyDevModel.DestinationCost">
-              <MappingFragment StoreEntitySet="DestinationCost">
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="Season" ColumnName="Season" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
-                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
-                <ScalarProperty Name="Destination" ColumnName="Destination" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

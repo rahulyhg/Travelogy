@@ -230,7 +230,7 @@ namespace WebApplication1.Controllers
         public ActionResult EditTrip(int tripId)
         {
             BlViewTrip trip = null;
-            var _blError = TripManager.GetTripById(tripId, out trip);
+            var _blError = TripManager.GetTripById(tripId, out trip);            
             List<BlTripTemplate> _allTemplates = null;
             List<BlTripTemplate> _relatedTemplates = new List<BlTripTemplate>();
             _blError = TripManager.SearchTripTemplatesByAlias(trip.DlTripView.TemplateSearchAlias, out _allTemplates);

@@ -167,7 +167,7 @@ namespace DomingoBL
                         trip.Templates = tripTemplateId.ToString();
                         trip.TemplateSearchAlias = template.SearchAlias;
                         trip.DestinationId = template.DestinationId;
-                        trip.TripCurrency = "GBP";
+                        if (String.IsNullOrEmpty(trip.TripCurrency)) { trip.TripCurrency = "GBP"; }
                         if (String.IsNullOrEmpty(trip.StartLocation)) { trip.StartLocation = template.StartLocation; }
 
                         context.Trips.Add(trip);
@@ -305,13 +305,19 @@ namespace DomingoBL
                         }
 
                         _dbTrip.StartLocation = trip.StartLocation;
+                        _dbTrip.TripCurrency = trip.TripCurrency;
+                        _dbTrip.TripType = trip.TripType;
+                        _dbTrip.PaxAdults = trip.PaxAdults;
+                        _dbTrip.PaxMinors = trip.PaxMinors;
                     }
 
                     if (tripSteps != null)
                     {
                         // save user notes and dates
                         _UpdateTripSteps(tripSteps, context, _dbTrip);
-                    }                    
+                    }
+
+                    _dbTrip.EstimatedCost = _CalculateTripCost(tripSteps, context, _dbTrip);
 
                     await context.SaveChangesAsync();
                 }
@@ -324,6 +330,83 @@ namespace DomingoBL
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripSteps"></param>
+        /// <param name="context"></param>
+        /// <param name="_dbTrip"></param>
+        /// <returns></returns>
+        private static decimal _CalculateTripCost(List<View_TripStep> tripSteps, TravelogyDevEntities1 context, Trip _dbTrip)
+        {
+            var costs = context.View_TripStepCost.Where(p => p.TripId == _dbTrip.Id);
+            decimal _totalCost = 0;
+            double _conversionFactor = 1;
+
+            // for each step - 
+            foreach(var tripStep in tripSteps)
+            {
+                // get the food, transport and acco costs 
+                // factor in the number of pax - food - Minors 50% 
+                var foodCost = costs.Where(p => p.TripStepId == tripStep.Id).Average(r => r.FOOD_COST);
+                foodCost = foodCost * _dbTrip.PaxAdults + (_dbTrip.PaxMinors.HasValue ?  foodCost * _dbTrip.PaxMinors.Value / 2 : 0);
+
+                // factor the currency
+                var _foodCurrency = costs.Where(p => p.TripStepId == tripStep.Id).FirstOrDefault().FOOD_CURRENCY;
+                var blError = CurrencyConvertGateway.GetCurrencyExchangeRate(_foodCurrency, _dbTrip.TripCurrency, out _conversionFactor);
+                if(blError.ErrorCode == 0 && _conversionFactor != 0 && _conversionFactor != 1)
+                {
+                    foodCost = foodCost * (decimal)_conversionFactor;
+                }
+
+                // transport - Minors = Adults
+                var transportCost = costs.Where(p => p.TripStepId == tripStep.Id).Average(r => r.TRANSPORT_COST);
+                transportCost = transportCost * _dbTrip.PaxAdults + (_dbTrip.PaxMinors.HasValue ? foodCost * _dbTrip.PaxMinors.Value : 0);
+
+                // factor the currency
+                var _tCurrency = costs.Where(p => p.TripStepId == tripStep.Id).FirstOrDefault().TRANSPORT_CURRENCY;
+                if(string.Compare(_tCurrency, _foodCurrency, true) != 0)
+                {
+                    blError = CurrencyConvertGateway.GetCurrencyExchangeRate(_tCurrency, _dbTrip.TripCurrency, out _conversionFactor);
+                }                
+
+                transportCost = transportCost * (decimal)_conversionFactor;
+
+                // acco - Minors free
+                var accoCost = costs.Where(p => p.TripStepId == tripStep.Id).Average(r => r.ACCO_COST);
+                accoCost = accoCost * _dbTrip.PaxAdults;
+
+                _tCurrency = costs.Where(p => p.TripStepId == tripStep.Id).FirstOrDefault().ACCO_CURRENCY;
+                if (string.Compare(_tCurrency, _foodCurrency, true) != 0)
+                {
+                    blError = CurrencyConvertGateway.GetCurrencyExchangeRate(_tCurrency, _dbTrip.TripCurrency, out _conversionFactor);
+                }
+
+                accoCost = accoCost * (decimal)_conversionFactor;
+
+                // get actual days
+                var stepDays = costs.Where(p => p.TripStepId == tripStep.Id).Average(r => r.ActualDays);
+
+                // if not found, get the usual days for the template step
+                if (stepDays == 0 || stepDays == null)
+                {
+                    stepDays = costs.Where(p => p.TripStepId == tripStep.Id).Average(r => r.TypicalDurationDays);
+                    if (stepDays == null) { stepDays = 1; } // none found, default to 1
+                }
+
+                // add food + trans + food multiply by days
+                _totalCost += ((foodCost + accoCost + transportCost) * (decimal)stepDays) ;
+            }
+
+            return _totalCost;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripSteps"></param>
+        /// <param name="context"></param>
+        /// <param name="_dbTrip"></param>
         private static void _UpdateTripSteps(List<View_TripStep> tripSteps, TravelogyDevEntities1 context, Trip _dbTrip)
         {
             foreach (var tripStep in tripSteps)
