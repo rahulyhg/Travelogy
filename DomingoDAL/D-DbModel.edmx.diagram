@@ -44,8 +44,7 @@
         <EntityTypeShape EntityType="TravelogyDevModel.TripBookingTransport" Width="1.5" PointX="16.375" PointY="0.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_TripBookingTransport" Width="1.5" PointX="17.375" PointY="5.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_Trip" Width="1.5" PointX="4.375" PointY="18.75" />
-        <EntityTypeShape EntityType="TravelogyDevModel.TripStepCost" Width="1.5" PointX="17.375" PointY="16.75" />
-        <EntityTypeShape EntityType="TravelogyDevModel.DestinationCost" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.DestinationCost" Width="1.5" PointX="17.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

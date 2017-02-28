@@ -9584,6 +9584,7 @@
     <Content Include="Views\Home\Business.cshtml" />
     <Content Include="Views\Service\TripTemplates.cshtml" />
     <Content Include="Views\Admin\EditTripStepCost.cshtml" />
+    <Content Include="Views\Admin\EditDestinationCost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

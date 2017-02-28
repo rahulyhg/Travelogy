@@ -114,12 +114,12 @@
           <Property Name="Destination" Type="nvarchar" MaxLength="50" />
           <Property Name="DestinationId" Type="int" Nullable="false" />
           <Property Name="ShortDescription" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Season" Type="nvarchar" MaxLength="10" />
           <Property Name="Currency" Type="nvarchar" MaxLength="4" Nullable="false" />
           <Property Name="Amount" Type="money" Nullable="false" />
-          <Property Name="Type" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Class" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Class" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="DestinationCountry">
           <Key>
@@ -373,22 +373,6 @@
           <Property Name="TravellerNote" Type="ntext" />
           <Property Name="TravelogerNote" Type="ntext" />
           <Property Name="TripTemplateId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TripStepCost">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Destination" Type="nvarchar" MaxLength="50" />
-          <Property Name="TripStepId" Type="int" Nullable="false" />
-          <Property Name="ShortDescription" Type="nvarchar" MaxLength="50" />
-          <Property Name="TripId" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Season" Type="nvarchar" MaxLength="10" />
-          <Property Name="Currency" Type="nvarchar" MaxLength="4" Nullable="false" />
-          <Property Name="Amount" Type="money" Nullable="false" />
-          <Property Name="Type" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Class" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="TripTemplate">
           <Key>
@@ -702,7 +686,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="TripBookingTransport" EntityType="Self.TripBookingTransport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripProvider" EntityType="Self.TripProvider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripStep" EntityType="Self.TripStep" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TripStepCost" EntityType="Self.TripStepCost" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripTemplate" EntityType="Self.TripTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TripTemplateStep" EntityType="Self.TripTemplateStep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="View_TagDestination" EntityType="Self.View_TagDestination" store:Type="Views" store:Schema="dbo">
@@ -916,7 +899,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <EntitySet Name="TripBookingTransports" EntityType="TravelogyDevModel.TripBookingTransport" />
           <EntitySet Name="View_TripBookingTransport" EntityType="TravelogyDevModel.View_TripBookingTransport" />
           <EntitySet Name="View_Trip" EntityType="TravelogyDevModel.View_Trip" />
-          <EntitySet Name="TripStepCosts" EntityType="TravelogyDevModel.TripStepCost" />
           <EntitySet Name="DestinationCosts" EntityType="TravelogyDevModel.DestinationCost" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
@@ -1513,24 +1495,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="TripCurrency" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="EstimatedCost" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
-        <EntityType Name="TripStepCost">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TripTemplateStepId" Type="Int32" Nullable="false" />
-          <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TripTemplateId" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Season" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Currency" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Class" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="TripStepId" Type="Int32" Nullable="false" />
-          <Property Name="TripId" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="DestinationCost">
           <Key>
             <PropertyRef Name="Id" />
@@ -1539,12 +1503,12 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
           <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DestinationId" Type="Int32" Nullable="false" />
           <Property Name="ShortDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Season" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Currency" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Class" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Class" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2119,23 +2083,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStep' does not have a pr
                 <ScalarProperty Name="StartLocation" ColumnName="StartLocation" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TripStepCosts">
-            <EntityTypeMapping TypeName="TravelogyDevModel.TripStepCost">
-              <MappingFragment StoreEntitySet="TripStepCost">
-                <ScalarProperty Name="TripId" ColumnName="TripId" />
-                <ScalarProperty Name="TripStepId" ColumnName="TripStepId" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="Season" ColumnName="Season" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
-                <ScalarProperty Name="Destination" ColumnName="Destination" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

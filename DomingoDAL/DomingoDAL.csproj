@@ -156,9 +156,6 @@
     <Compile Include="TripStep.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TripStepCost.cs">
-      <DependentUpon>D-DbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="TripTemplate.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>

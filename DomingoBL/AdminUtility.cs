@@ -487,6 +487,54 @@ namespace DomingoBL
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        public static async Task<DomingoBlError> SaveDestinationCost(DestinationCost model)
+        {
+            try
+            {
+                using (var context = new TravelogyDevEntities1())
+                {
+                    // create new
+                    if (model.Id == 0)
+                    {
+                        context.DestinationCosts.Add(model);
+                        await context.SaveChangesAsync();
+                    }
+
+                    // else update existing
+                    else
+                    {
+                        var _dbDestinationCost = context.DestinationCosts.Find(model.Id);
+                        if(_dbDestinationCost != null)
+                        {
+                            _dbDestinationCost.Amount = model.Amount;
+                            _dbDestinationCost.Class = model.Class;
+                            _dbDestinationCost.Currency = model.Currency;
+                            _dbDestinationCost.Description = model.Description;
+                            _dbDestinationCost.Destination = model.Destination;
+                            _dbDestinationCost.DestinationId = model.DestinationId;
+                            _dbDestinationCost.Season = model.Season;
+                            _dbDestinationCost.ShortDescription = model.ShortDescription;
+                            _dbDestinationCost.Type = model.Type;
+
+                            await context.SaveChangesAsync();
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public static async Task<DomingoBlError> SaveDestinationActivity(DestinationActivity model)
         {
             try

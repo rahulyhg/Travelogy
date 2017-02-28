@@ -88,7 +88,8 @@ namespace WebApplication1.Controllers
                 DbObject = context.Destinations.Find(id),
                 SubDestinations = context.SubDestinations.Where(p => p.DestinationId == id),
                 Interests = context.DestinationInterests.Where(p => p.DestinationId == id),
-                Activities = context.DestinationActivities.Where(p => p.DestinationId == id)
+                Activities = context.DestinationActivities.Where(p => p.DestinationId == id),
+                CostObjects = context.DestinationCosts.Where(p => p.DestinationId == id)
             };
 
             return View(_model);
@@ -115,7 +116,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="subDestinationId"></param>
+        /// <param name="destinationId"></param>
         /// <returns></returns>
         [Authorize]
         public ActionResult AddSubDestination(int destinationId)
@@ -159,6 +160,59 @@ namespace WebApplication1.Controllers
             if (model != null)
             {
                 await AdminUtility.SaveSubDestination(model);
+            }
+
+            return RedirectToAction("EditDestination", new { @id = model.DestinationId });
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="destinationId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult AddDestinationCost(int destinationId)
+        {
+            _CheckForAdminAccess();
+
+            var model = new DestinationCost() { Id = 0, DestinationId = destinationId };
+            return View("EditDestinationCost", model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="destinationCostId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult EditDestinationCost(int destinationCostId)
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var model = context.DestinationCosts.Find(destinationCostId);
+            if (model == null)
+            {
+                throw new ApplicationException("Invalid parameter");
+            }
+
+            return View("EditDestinationCost", model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        public async Task<ActionResult> SaveDestinationCostAsync(DestinationCost model)
+        {
+            _CheckForAdminAccess();
+
+            if (model != null)
+            {
+                await AdminUtility.SaveDestinationCost(model);
             }
 
             return RedirectToAction("EditDestination", new { @id = model.DestinationId });
@@ -658,28 +712,6 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("TripManagement", new { @id = model.TripId });
             }
-        }
-
-        [Authorize]
-        public ActionResult CreateTripStepCost(int tripTemplateStepId)
-        {
-            var context = new TravelogyDevEntities1();
-            var _tripStep = context.TripTemplateSteps.Find(tripTemplateStepId);
-            var _model = new TripStepCost() { TripTemplateStepId = tripTemplateStepId , TripTemplateId = _tripStep.TripTemplateId, Destination = _tripStep.Destination };
-            return View("EditTripStepCost", _model);
-        }
-
-        [Authorize]
-        public ActionResult EditTripStepCost(int tripStepId)
-        {
-            return View();
-        }
-
-        //EditTripStepCost
-        [Authorize]
-        public async Task<ActionResult> SaveTripStepCost(TripStepCost model)
-        {
-            return RedirectToAction("EditTripTemplate", new { @id = model.TripTemplateId });
-        }
+        }        
     }
 }

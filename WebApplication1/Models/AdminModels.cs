@@ -134,5 +134,10 @@ namespace WebApplication1.Models
         /// 
         /// </summary>
         public IEnumerable<DestinationInterest> Interests { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<DestinationCost> CostObjects { get; set; }
     }
 }
