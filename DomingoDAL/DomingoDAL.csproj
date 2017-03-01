@@ -74,6 +74,9 @@
     <Compile Include="Country.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CurrencyExchange.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Destination.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
@@ -189,6 +192,9 @@
     <Compile Include="View_TripStepCost.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="View_User.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -216,6 +222,7 @@
       <LastGenOutput>D-DbModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\createtables-09feb2017.sql" />
+    <Content Include="Scripts\CurrencyExchange.sql" />
     <Content Include="Scripts\DestinationActivity.sql" />
     <Content Include="Scripts\DestinationCost.sql" />
     <Content Include="Scripts\DestinationInterest.sql" />

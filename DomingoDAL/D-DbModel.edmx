@@ -73,6 +73,16 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="CurrencyExchange">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CurrencyFrom" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="CurrencyTo" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="XchangeRate" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="DateOfUpdate" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="Destination">
           <Key>
             <PropertyRef Name="Id" />
@@ -634,6 +644,28 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStepCost' does not have 
           <Property Name="FOOD_CURRENCY" Type="nvarchar" MaxLength="4" />
           <Property Name="FOOD_SEASON" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_User">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmailConfirmed" />
+            <PropertyRef Name="UserType" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddressLine2" Type="nvarchar" MaxLength="200" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="Expr1" Type="int" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -698,6 +730,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStepCost' does not have 
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserSessions" EntityType="Self.AspNetUserSessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CurrencyExchange" EntityType="Self.CurrencyExchange" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DestinationActivity" EntityType="Self.DestinationActivity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DestinationCost" EntityType="Self.DestinationCost" Schema="dbo" store:Type="Tables" />
@@ -885,6 +918,23 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStepCost' does not have 
     [View_TripStepCost].[FOOD_SEASON] AS [FOOD_SEASON]
     FROM [dbo].[View_TripStepCost] AS [View_TripStepCost]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="View_User" EntityType="Self.View_User" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_User].[Id] AS [Id], 
+    [View_User].[Email] AS [Email], 
+    [View_User].[EmailConfirmed] AS [EmailConfirmed], 
+    [View_User].[UserType] AS [UserType], 
+    [View_User].[FirstName] AS [FirstName], 
+    [View_User].[LastName] AS [LastName], 
+    [View_User].[AddressLine1] AS [AddressLine1], 
+    [View_User].[AddressLine2] AS [AddressLine2], 
+    [View_User].[City] AS [City], 
+    [View_User].[PostCode] AS [PostCode], 
+    [View_User].[Country] AS [Country], 
+    [View_User].[Expr1] AS [Expr1], 
+    [View_User].[NickName] AS [NickName]
+    FROM [dbo].[View_User] AS [View_User]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -957,6 +1007,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStepCost' does not have 
           <EntitySet Name="DestinationCosts" EntityType="TravelogyDevModel.DestinationCost" />
           <EntitySet Name="View_TripStepCost" EntityType="TravelogyDevModel.View_TripStepCost" />
           <EntitySet Name="View_Trip" EntityType="TravelogyDevModel.View_Trip" />
+          <EntitySet Name="CurrencyExchanges" EntityType="TravelogyDevModel.CurrencyExchange" />
+          <EntitySet Name="View_User" EntityType="TravelogyDevModel.View_User" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1598,6 +1650,36 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStepCost' does not have 
           <Property Name="PaxAdults" Type="Int32" Nullable="false" />
           <Property Name="PaxMinors" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="CurrencyExchange">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CurrencyFrom" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyTo" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="XchangeRate" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="DateOfUpdate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="View_User">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmailConfirmed" />
+            <PropertyRef Name="UserType" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="UserType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Expr1" Type="Int32" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2212,6 +2294,36 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_TripStepCost' does not have 
                 <ScalarProperty Name="StartLocation" ColumnName="StartLocation" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CurrencyExchanges">
+            <EntityTypeMapping TypeName="TravelogyDevModel.CurrencyExchange">
+              <MappingFragment StoreEntitySet="CurrencyExchange">
+                <ScalarProperty Name="DateOfUpdate" ColumnName="DateOfUpdate" />
+                <ScalarProperty Name="XchangeRate" ColumnName="XchangeRate" />
+                <ScalarProperty Name="CurrencyTo" ColumnName="CurrencyTo" />
+                <ScalarProperty Name="CurrencyFrom" ColumnName="CurrencyFrom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_User">
+            <EntityTypeMapping TypeName="TravelogyDevModel.View_User">
+              <MappingFragment StoreEntitySet="View_User">
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

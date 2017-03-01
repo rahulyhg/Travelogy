@@ -36,9 +36,15 @@
             <div class="col-md-3 col-sm-6">
                 <div class="img-box-3-item">
                     <div class="img-box-3-icon">
-                        <img src="~/content/img/flat-icons/notebook.png" alt="" class="img-responsive" />
+                        <img src="~/content/img/flat-icons/group.png" alt="" class="img-responsive" />
                     </div>
-                    <h4>Status: @Model.ActiveTrip.DlTripView.Status</h4>
+                    <h4>
+                        @Model.ActiveTrip.DlTripView.PaxAdults Adults
+                        @if (Model.ActiveTrip.DlTripView.PaxMinors > 0)
+                        {
+                            @Html.Raw("and ") @Model.ActiveTrip.DlTripView.PaxMinors @Html.Raw(" minor(s)")
+                        }
+                    </h4>
                 </div>
             </div>
 
@@ -71,7 +77,21 @@
             </div>
         </div>
     </div>
-    
+
+    <hr class="margin-bottom-20">
+    <h2>Current status: @Model.ActiveTrip.DlTripView.Status &nbsp;&nbsp; 
+        @if (Model.ActiveTrip.DlTripView.Status == DomingoBL.TripStatus.planned.ToString())
+        {
+            <a class="btn-u btn-orange" href="/Service/StartTripBooking?tripId=@Model.ActiveTrip.DlTripView.Id">Start Booking Process</a>
+            <small>&nbsp;&nbsp;&nbsp;&nbsp;(There is no payment required until you actually book)</small>
+        }
+
+        else if (Model.ActiveTrip.DlTripView.Status == DomingoBL.TripStatus.consulting.ToString())
+        {
+            <small>&nbsp;&nbsp;&nbsp;&nbsp;(Your trip is being reviewed by our Travelogers)</small>
+        }
+
+    </h2>
     <hr class="margin-bottom-40">             
 
         <div class="tab-v1">

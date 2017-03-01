@@ -51,6 +51,39 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns></returns>
         [Authorize]
+        public ActionResult Users()
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            return View(context.View_User);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="aspUserId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult UserDetails(string userId)
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var model = context.View_User.Where(p => p.Id == userId).FirstOrDefault();
+            if(model != null)
+            {
+                return View(model);
+            }
+
+            throw new ApplicationException("User not found");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
         public ActionResult Destinations()
         {
             _CheckForAdminAccess();

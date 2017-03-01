@@ -51,7 +51,7 @@ namespace WebApplication1.Models
         public string Telephone { get; set; }
 
         [StringLength(14)]        
-        [RegularExpression(@"^\+[0-9]{1,3}\.[0-9]{4,14}(?:x.+)?$", ErrorMessage = "Please enter a valid Mobile number")]
+        [RegularExpression(@"^\+(?:[0-9]?){6,14}[0-9]$", ErrorMessage = "Please enter a valid Mobile number")]
         [Display(Name = "Mobile Number")]
         public string Mobile { get; set; }
 

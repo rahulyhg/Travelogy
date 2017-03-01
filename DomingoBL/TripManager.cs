@@ -17,6 +17,8 @@ namespace DomingoBL
     {
         planned,
 
+        consulting,
+
         booked,
 
         archived
@@ -285,6 +287,35 @@ namespace DomingoBL
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> StartTripBookingAsync(int tripId)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var trip = context.Trips.Find(tripId);
+                    if(trip == null)
+                    {
+                        return new DomingoBlError() { ErrorCode = 100, ErrorMessage = "Invalid Parameter : tripId" };
+                    }
+
+                    trip.Status = TripStatus.consulting.ToString();
+                    await context.SaveChangesAsync();
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
         /// saves user's changes to the trip
         /// </summary>
         /// <param name="trip"></param>
@@ -361,13 +392,13 @@ namespace DomingoBL
 
                 // transport - Minors = Adults
                 var transportCost = costs.Where(p => p.TripStepId == tripStep.Id).Average(r => r.TRANSPORT_COST);
-                transportCost = transportCost * _dbTrip.PaxAdults + (_dbTrip.PaxMinors.HasValue ? foodCost * _dbTrip.PaxMinors.Value : 0);
+                transportCost = transportCost * _dbTrip.PaxAdults + (_dbTrip.PaxMinors.HasValue ? transportCost * _dbTrip.PaxMinors.Value : 0);
 
                 // factor the currency
-                var _tCurrency = costs.Where(p => p.TripStepId == tripStep.Id).FirstOrDefault().TRANSPORT_CURRENCY;
-                if(string.Compare(_tCurrency, _foodCurrency, true) != 0)
+                var _transportCurrency = costs.Where(p => p.TripStepId == tripStep.Id).FirstOrDefault().TRANSPORT_CURRENCY;
+                if(string.Compare(_transportCurrency, _foodCurrency, true) != 0)
                 {
-                    blError = CurrencyConvertGateway.GetCurrencyExchangeRate(_tCurrency, _dbTrip.TripCurrency, out _conversionFactor);
+                    blError = CurrencyConvertGateway.GetCurrencyExchangeRate(_transportCurrency, _dbTrip.TripCurrency, out _conversionFactor);
                 }                
 
                 transportCost = transportCost * (decimal)_conversionFactor;
@@ -376,10 +407,10 @@ namespace DomingoBL
                 var accoCost = costs.Where(p => p.TripStepId == tripStep.Id).Average(r => r.ACCO_COST);
                 accoCost = accoCost * _dbTrip.PaxAdults;
 
-                _tCurrency = costs.Where(p => p.TripStepId == tripStep.Id).FirstOrDefault().ACCO_CURRENCY;
-                if (string.Compare(_tCurrency, _foodCurrency, true) != 0)
+                var _accoCurrency = costs.Where(p => p.TripStepId == tripStep.Id).FirstOrDefault().ACCO_CURRENCY;
+                if (string.Compare(_accoCurrency, _transportCurrency, true) != 0)
                 {
-                    blError = CurrencyConvertGateway.GetCurrencyExchangeRate(_tCurrency, _dbTrip.TripCurrency, out _conversionFactor);
+                    blError = CurrencyConvertGateway.GetCurrencyExchangeRate(_accoCurrency, _dbTrip.TripCurrency, out _conversionFactor);
                 }
 
                 accoCost = accoCost * (decimal)_conversionFactor;

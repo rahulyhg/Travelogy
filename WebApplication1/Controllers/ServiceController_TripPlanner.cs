@@ -44,7 +44,7 @@ namespace WebApplication1.Controllers
                 }
 
                 // else show all the planned trips
-                var _plannedTrips = _allTrips.Where(p => (p.DlTripView.Status.Trim() == TripStatus.planned.ToString())).ToList();
+                var _plannedTrips = _allTrips.Where(p => (p.DlTripView.Status.Trim() == TripStatus.planned.ToString() || p.DlTripView.Status.Trim() == TripStatus.consulting.ToString())).ToList();
                 model.PlannedTrips = _plannedTrips;
 
                 List<Destination> _destinations = null;
@@ -263,6 +263,14 @@ namespace WebApplication1.Controllers
         }
 
 
+        [Authorize]        
+        public async Task<ActionResult> StartTripBooking(int tripId)
+        {
+            var _blError = await TripManager.StartTripBookingAsync(tripId);
+            return RedirectToAction("ViewTrip", new { @tripId = tripId });
+        }
+
+
         /// <summary>
         /// Show the view for Trip
         /// </summary>
@@ -332,7 +340,7 @@ namespace WebApplication1.Controllers
             }
 
             var model = new AccommodationBookingViewModel()
-            {                
+            {
                 TripName = tripObj.DlTripView.Name,
                 TripDescription = tripObj.DlTripView.Description,
                 TripStepName = tripStepObj.ShortDescription,
@@ -340,7 +348,9 @@ namespace WebApplication1.Controllers
                 TripStepStartDate = tripStepObj.StartDate,
                 TripStepEndDate = tripStepObj.EndDate,
                 TripStepId = tripStepId,
-                TripId = tripId
+                TripId = tripId,
+                Adults = tripObj.DlTripView.PaxAdults,
+                Kids = tripObj.DlTripView.PaxMinors,
             };
 
             return View("AccommodationBooking", model);
@@ -451,7 +461,9 @@ namespace WebApplication1.Controllers
                 TripId = tripId,
                 TripStepId = tripStepId,
                 TripName = tripObj.DlTripView.Name,
-                TripDescription = tripObj.DlTripView.Description
+                TripDescription = tripObj.DlTripView.Description,
+                Adults = tripObj.DlTripView.PaxAdults,
+                Kids = tripObj.DlTripView.PaxMinors,
             };
 
             return View("FlightBooking", model);
