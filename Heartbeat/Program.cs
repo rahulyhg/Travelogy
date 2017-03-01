@@ -13,6 +13,14 @@ namespace Heartbeat
     {
         static void Main(string[] args)
         {
+            int timeDelay = 0;
+            if(args.Count() > 0 && args[0] != null)
+            {
+                int.TryParse(args[0], out timeDelay);
+            }
+
+            if (timeDelay == 0) timeDelay = 30000;
+
             var urlList = new List<string>()
             {
                 "http://portal-demo.travelogyclub.com/India",
@@ -22,7 +30,7 @@ namespace Heartbeat
             };
 
             int x = new Random().Next(4);
-
+            Thread.Sleep(timeDelay);
             _Ping(urlList[x]);          
         }
 
@@ -33,7 +41,7 @@ namespace Heartbeat
                 using (StreamWriter file = new StreamWriter("C:\\_CODE\\travelogyportalheartbeattest.txt", true))
                 {
                     string msg;
-                    msg = string.Format("Heartbeat log ... pinging URL: {0}", url);
+                    msg = string.Format("Heartbeat log ... \npinging URL: {0}", url);
                     Console.WriteLine(msg);
                     file.WriteLine(msg);
 
