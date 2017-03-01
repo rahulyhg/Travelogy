@@ -221,6 +221,7 @@
       <DependentUpon>D-DbModel.edmx</DependentUpon>
       <LastGenOutput>D-DbModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\2017.03.01.Regenerate_Views.sql" />
     <Content Include="Scripts\createtables-09feb2017.sql" />
     <Content Include="Scripts\CurrencyExchange.sql" />
     <Content Include="Scripts\DestinationActivity.sql" />
@@ -231,9 +232,6 @@
     <Content Include="Scripts\Trip.20170224.sql" />
     <Content Include="Scripts\TripBookingTransport.21022017.sql" />
     <Content Include="Scripts\tripstepcost.sql" />
-    <Content Include="Scripts\View_Traveller.sql" />
-    <Content Include="Scripts\View_Trip.20170224.sql" />
-    <Content Include="Scripts\View_TripBookingTransport.21022017.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
