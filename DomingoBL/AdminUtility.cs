@@ -134,7 +134,7 @@ namespace DomingoBL
                         if (model.Id == 0)
                         {
                             context.Destinations.Add(model);
-                            context.SaveChanges();
+                            await context.SaveChangesAsync();
                         }
 
                         else

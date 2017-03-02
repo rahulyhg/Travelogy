@@ -3,7 +3,7 @@
 @Html.Partial("_HomepageCarousel")
 
 <div>
-   @using (Html.BeginForm("SaveDestinationAsync", "Admin", new { ReturnUrl = "" }))
+   @using (Html.BeginForm("CreateDestinationAsync", "Admin", new { ReturnUrl = "" }))
    {
         @Html.AntiForgeryToken()
         

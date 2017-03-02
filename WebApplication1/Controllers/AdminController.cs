@@ -149,6 +149,24 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        public async Task<ActionResult> CreateDestinationAsync(Destination model)
+        {
+            _CheckForAdminAccess();
+
+            if (model != null)
+            {
+                await AdminUtility.SaveDestination(model);
+            }
+
+            return RedirectToAction("EditDestination", new { @id = model.Id });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="destinationId"></param>
         /// <returns></returns>
         [Authorize]
