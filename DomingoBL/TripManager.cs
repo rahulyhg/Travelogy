@@ -62,7 +62,7 @@ namespace DomingoBL
             {
                 using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
                 {
-                    var dlTrip = context.View_Trip.Where(p => p.AspNetUserId == aspUserId).Where(p => p.StartDate > DateTime.Now).OrderBy(p => p.StartDate).First();
+                    var dlTrip = context.View_Trip.Where(p => p.AspNetUserId == aspUserId).OrderBy(p => p.StartDate).First();
                     if(dlTrip != null)
                     {
                         var trip = new BlViewTrip() { DlTripView = dlTrip };

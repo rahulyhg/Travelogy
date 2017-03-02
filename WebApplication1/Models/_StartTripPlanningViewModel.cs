@@ -16,5 +16,10 @@ namespace WebApplication1.Models
         /// 
         /// </summary>
         public string TemplateAlias { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsActiveTrip { get; set; }
     }
 }

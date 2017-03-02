@@ -13,6 +13,7 @@ using Microsoft.Owin.Security;
 using WebApplication1.Models;
 using WebApplication1.Helpers;
 using DomingoBL;
+using DomingoBL.BlObjects;
 
 namespace WebApplication1
 {
@@ -109,39 +110,31 @@ namespace WebApplication1
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="AspNetUserId"></param>
+        /// <param name="aspNetUserId"></param>
         /// <returns></returns>
-        //public static bool IsTravelogyAdmin(string AspNetUserName)
-        //{
-        //    if(string.IsNullOrEmpty(AspNetUserName))
-        //    {
-        //        return false;
-        //    }
+        public static BlViewTrip GetImmidiateTrip(string aspNetUserId)
+        {
+            try
+            {
+                BlViewTrip _trip = null;  
 
-        //    if(HttpContext.Current.Session["IsTravelogyAdmin"] != null)                
-        //    {
-        //        if ((HttpContext.Current.Session["IsTravelogyAdmin"].ToString().ToUpper() == "TRUE"))
-        //        {
-        //            return true;
-        //        }
-        //        else
-        //        {
-        //            return false;
-        //        }
-        //    }
-
-        //    var isAdmin = DomingoUserManager.IsTravelogyAdmin(AspNetUserName);
-        //    if(isAdmin)
-        //    {
-        //        HttpContext.Current.Session.Add("IsTravelogyAdmin", "TRUE");
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        HttpContext.Current.Session.Add("IsTravelogyAdmin", "FALSE");
-        //        return false;
-        //    }
-        //}
+                if (HttpContext.Current.Session["ImmediateTrip"] != null)
+                {
+                    _trip = HttpContext.Current.Session["ImmediateTrip"] as BlViewTrip;
+                }
+                else
+                {
+                    _trip = TripManager.GetImmediateTripForUser(aspNetUserId);
+                    HttpContext.Current.Session.Add("ImmediateTrip", _trip);
+                }
+                
+                return _trip;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {

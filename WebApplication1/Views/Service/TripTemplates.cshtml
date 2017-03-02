@@ -13,4 +13,13 @@
 @if (@Model.AllTemplates != null)
 {
     Html.RenderPartial("_Trip_ShowTemplates", Model);
-} 
+
+    if (Model.AllTemplates.Count == 0)
+    {
+        <h2>You have already added the circuits to your trip.</h2>
+    }
+}
+else
+{
+    <h2>You have already added the circuits to your trip.</h2>
+}

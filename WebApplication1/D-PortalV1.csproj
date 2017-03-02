@@ -9424,6 +9424,9 @@
     <Content Include="Content\assets\plugins\revolution_slider\rs-plugin\videojs\font\vjs.eot" />
     <Content Include="Content\assets\plugins\revolution_slider\rs-plugin\videojs\font\vjs.ttf" />
     <Content Include="Content\assets\plugins\revolution_slider\rs-plugin\videojs\font\vjs.woff" />
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\FS-Debug.pubxml" />
     <None Include="Properties\PublishProfiles\FS-Release.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9588,6 +9591,8 @@
     <Content Include="Views\Admin\EditDestinationCost.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Admin\UserDetails.cshtml" />
+    <Content Include="Views\Shared\_ImmediateTrip.cshtml" />
+    <Content Include="Views\Shared\_DestinationViewCommon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

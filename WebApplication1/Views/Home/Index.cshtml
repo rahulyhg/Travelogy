@@ -1,6 +1,7 @@
 ﻿@using System.Collections.Generic
 @using DomingoBL;
 @using DomingoDAL;
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Home Page";
@@ -53,22 +54,7 @@
 
 @if (Request.IsAuthenticated)
 {
-    List<DomingoBL.BlObjects.BlViewTrip> _allTrips = null;
-    var blError2 = TripManager.GetAllTripsForUserByName(User.Identity.Name, out _allTrips);
-    if(_allTrips != null && _allTrips.Count > 0)
-    {
-        <div>
-            <h2 class="orange text-center">Your upcoming trip with Travelogy</h2>
-            <div class="margin-bottom-20"></div>
-            @Html.Partial("_TripPlanningPlannedTripSummary", _allTrips[0])
-        </div>
-    }
-    else
-    {
-        <div class="row">
-            @Html.Partial("_TripPlannerAdvert")
-        </div>
-    }
+    @Html.Partial("_ImmediateTrip")   
 }
 
 else
