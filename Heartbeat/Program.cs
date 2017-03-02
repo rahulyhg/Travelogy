@@ -23,10 +23,10 @@ namespace Heartbeat
 
             var urlList = new List<string>()
             {
-                "http://portal-demo.travelogyclub.com/India",
-                "http://portal-demo.travelogyclub.com/",
-                "http://portal-demo.travelogyclub.com/Circuit/Tanzania",
-                "http://portal-demo.travelogyclub.com/Circuit/Russia"
+                "http://www.travelogyclub.com/India",
+                "http://www.travelogyclub.com/",
+                "http://www.travelogyclub.com/Circuit/Tanzania",
+                "http://www.travelogyclub.com/Circuit/Russia"
             };
 
             int x = new Random().Next(4);
