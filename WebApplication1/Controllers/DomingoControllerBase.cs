@@ -13,7 +13,8 @@ namespace WebApplication1.Controllers
         protected override void OnException(ExceptionContext filterContext)
         {
             filterContext.ExceptionHandled = true;
-
+            var _logger = NLog.LogManager.GetCurrentClassLogger();
+            _logger.Error(filterContext.Exception);
             // Redirect on error:
             filterContext.Result = RedirectToAction("Error", "Home");
         }
