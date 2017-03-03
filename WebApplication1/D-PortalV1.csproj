@@ -174,6 +174,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BusinessController.cs" />
     <Compile Include="Controllers\CircuitController.cs" />
     <Compile Include="Controllers\CircuitController_India.cs" />
     <Compile Include="Controllers\DomingoControllerBase.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ServiceModels.cs" />
     <Compile Include="Models\DomingoModelBase.cs" />
+    <Compile Include="Models\Travelogy4BusinessModels.cs" />
     <Compile Include="Models\TripModel.cs" />
     <Compile Include="Models\_DownloadBrochureModel.cs" />
     <Compile Include="Models\_StartTripPlanningViewModel.cs" />
@@ -820,19 +822,6 @@
     <Content Include="Content\css\styles\wedding.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\revicons.svg" />
-    <Content Include="Content\img\aboutus\about-office-1.jpg" />
-    <Content Include="Content\img\aboutus\about-office-2.jpg" />
-    <Content Include="Content\img\aboutus\about-office-3.jpg" />
-    <Content Include="Content\img\app-site\background.jpg" />
-    <Content Include="Content\img\app-site\features\1.png" />
-    <Content Include="Content\img\app-site\features\2.png" />
-    <Content Include="Content\img\app-site\features\3.png" />
-    <Content Include="Content\img\app-site\features\4.png" />
-    <Content Include="Content\img\app-site\features\5.png" />
-    <Content Include="Content\img\app-site\features\6.png" />
-    <Content Include="Content\img\app-site\features\7.png" />
-    <Content Include="Content\img\app-site\features\8.png" />
-    <Content Include="Content\img\app-site\iphone.png" />
     <Content Include="Content\img\backgrounds\1.jpg" />
     <Content Include="Content\img\backgrounds\2.jpg" />
     <Content Include="Content\img\backgrounds\3.jpg" />
@@ -9585,7 +9574,6 @@
     <Content Include="Views\Admin\AddDestinationInterest.cshtml" />
     <Content Include="Views\Shared\Error404.cshtml" />
     <Content Include="Views\Shared\_TripPlanningZeroTrips.cshtml" />
-    <Content Include="Views\Home\Business.cshtml" />
     <Content Include="Views\Service\TripTemplates.cshtml" />
     <Content Include="Views\Admin\EditTripStepCost.cshtml" />
     <Content Include="Views\Admin\EditDestinationCost.cshtml" />
@@ -9593,6 +9581,7 @@
     <Content Include="Views\Admin\UserDetails.cshtml" />
     <Content Include="Views\Shared\_ImmediateTrip.cshtml" />
     <Content Include="Views\Shared\_DestinationViewCommon.cshtml" />
+    <Content Include="Views\Business\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,7 +11,7 @@ namespace WebApplication1
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");            
 
             routes.MapRoute(
                 name: "Destination", url: "Circuit/Destination/{destination}",
