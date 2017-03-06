@@ -21,17 +21,11 @@ namespace Heartbeat
 
             if (timeDelay == 0) timeDelay = 30000;
 
-            var urlList = new List<string>()
-            {
-                "http://www.travelogyclub.com/India",
-                "http://www.travelogyclub.com/",
-                "http://www.travelogyclub.com/Circuit/Tanzania",
-                "http://www.travelogyclub.com/Circuit/Russia"
-            };
+            var url = "https://www.travelogyclub.com/circuit/HB9FF35F56_5324_4B94_8038_EA9C10C3EB76";
 
             int x = new Random().Next(4);
             Thread.Sleep(timeDelay);
-            _Ping(urlList[x]);          
+            _Ping(url);          
         }
 
         private static void _Ping(string url)

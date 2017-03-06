@@ -12,6 +12,20 @@ namespace WebApplication1.Controllers
 {
     public class CircuitController : DomingoControllerBase
     {
+        //[Guid("9FF35F56-5324-4B94-8038-EA9C10C3EB76")]
+        public ActionResult HB9FF35F56_5324_4B94_8038_EA9C10C3EB76()
+        {
+            List<Destination> _destinations = null;
+            var blError = DestinationManager.GetAllDestinations(out _destinations);
+            if (blError.ErrorCode != 0 || _destinations == null || _destinations.Count == 0)
+            {
+                throw new ApplicationException(blError.ErrorMessage);
+            }
+
+            var _model = new CircuitModelBase() { AllDestinations = _destinations, CircuitName = "All Destinations" };
+            return View("Index", _model);
+        }
+
         // GET: Circuit - get Destination        
         public ActionResult Destination(string destination)
         {
