@@ -12,8 +12,10 @@
 
 @if (Request.IsAuthenticated)
 {
-
     Html.RenderPartial("_MessageThreadStart", Model);
 }
+else
+{
+    @Html.Partial("_ContactUsExternal")
+}
 
-@Html.Partial("_ContactUsExternal")

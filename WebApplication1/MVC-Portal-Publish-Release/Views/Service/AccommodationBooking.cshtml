@@ -68,6 +68,30 @@
                     </div>
                 </div>
 
+                @Html.LabelFor(model => model.TownOrCity)
+                <div class="row margin-bottom-10">
+                    <div class="col-md-3 col-md-offset-0">
+                        @Html.EditorFor(model => model.TownOrCity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TownOrCity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @Html.LabelFor(model => model.Adults)
+                <div class="row margin-bottom-10">
+                    <div class="col-md-3 col-md-offset-0">
+                        @Html.EditorFor(model => model.Adults, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Adults, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @Html.LabelFor(model => model.Kids)
+                <div class="row margin-bottom-10">
+                    <div class="col-md-3 col-md-offset-0">
+                        @Html.EditorFor(model => model.Kids, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Kids, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
                 @Html.LabelFor(model => model.TravellerNotes)                
                 <div class="row margin-bottom-10">
                     <div class="col-md-11 col-md-offset-0">
@@ -99,7 +123,7 @@
     }
 
     <div>
-        @Html.ActionLink("Go back to trip details", "EditTrip", new { @tripId = Model.TripId })
+        @Html.ActionLink("Go back to trip details", "ViewTrip", new { @tripId = Model.TripId })
     </div>
 </div>
 

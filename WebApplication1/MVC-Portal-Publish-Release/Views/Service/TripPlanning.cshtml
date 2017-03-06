@@ -6,87 +6,55 @@
 
 @Html.Partial("_HomepageCarousel")
 
-<!--=== Breadcrumbs ===-->
-<div class="breadcrumbs margin-bottom-20">
-    <div class="container">
-        <h1 class="pull-left">Trip planner</h1>
-        <ul class="pull-right breadcrumb">
-            <li>Explore</li>
-            <li>Plan</li>
-            <li class="active">Book</li>
-        </ul>
+<div class="headline">
+    <h3>Trip planner</h3>
+</div>
+
+<div class="about-us-one">
+    <div class="about-logo">
+        <p>
+            Presenting the FREE tool that will help every traveller plan their adventures (or a romantic getaway).
+        </p>
     </div>
-</div><!--/breadcrumbs-->
+</div>
 
+<div class="container">
+    
 
-@if (!Request.IsAuthenticated)
-{
-    @Html.Partial("_TripPlanningNotLoggedInView")
-}
-else // for logged in users
-{
-    // user has not created any trip yet
-    // show the create options
-    if (Model.AllTrips == null || Model.AllTrips.Count == 0)
+    @if (!Request.IsAuthenticated)
     {
-        <div class="row tag-box tag-box-v5">
-            <div class="col-md-8">
-                <span>You have not planned any trip yet!</span>
-            </div>
-            <div class="col-md-4">
-                <a href="/circuit" class="btn-u btn-u-lg btn-u-orange"><i class="icon-cloud"></i> Browse all circuits...</a>                
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row tag-box tag-box-v1">
-                <h1 class="orange">Featured circuits</h1>
-                <div class="row">
-                    @for (var i = 0; i < Model.SuggestedDestinations.Count; i++)
-                    {
-                        if (i % 4 == 0)
-                        {
-                            @Html.Raw("<div class=\"row\">");
-                        }
-
-                        {
-                            var item = Model.SuggestedDestinations[i];
-                            @Html.Partial("_DestinationWidget", item)
-                        }
-
-                        if (i % 4 == 3)
-                        {
-                            @Html.Raw("</div>");
-                        }
-
-                        if (i == Model.SuggestedDestinations.Count - 1)
-                        {
-                            @Html.Raw("</div>");
-                        }
-                    }                    
-                </div>
-            </div>
-        </div>
+        @Html.Partial("_TripPlanningNotLoggedInView")
     }
-
-    // planned trips
-    else if (Model.PlannedTrips != null && Model.PlannedTrips.Count > 0)
+    else // for logged in users
     {
-        foreach (var trip in Model.PlannedTrips)
+        // user has not created any trip yet
+        // show the create options
+        if (Model.AllTrips == null || Model.AllTrips.Count == 0)
         {
-            Html.RenderPartial("_TripPlanningPlannedTripSummary", trip);
+            Html.RenderPartial("_TripPlanningZeroTrips", Model);
         }
 
-        <div class="row tag-box tag-box-v5">
-            <div class="col-md-8">
-                <span>Planned more trips for future!</span>
+        // planned trips
+        else if (Model.PlannedTrips != null && Model.PlannedTrips.Count > 0)
+        {
+            foreach (var trip in Model.PlannedTrips)
+            {
+                Html.RenderPartial("_TripPlanningPlannedTripSummary", trip);
+            }
+
+            <div class="row tag-box tag-box-v5">
+                <div class="col-md-8">
+                    <span>Planned more trips for future!</span>
+                </div>
+                <div class="col-md-4">
+                    <a href="/circuit" class="btn-u btn-u-lg btn-u-orange"><i class="icon-cloud"></i> Browse all circuits...</a>
+                </div>
             </div>
-            <div class="col-md-4">
-                <a href="/circuit" class="btn-u btn-u-lg btn-u-orange"><i class="icon-cloud"></i> Browse all circuits...</a>
-            </div>
-        </div>
+        }
     }
-}
+</div>
+
+
 
 
 

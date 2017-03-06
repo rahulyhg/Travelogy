@@ -822,7 +822,6 @@
     <Content Include="Content\css\styles\wedding.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\revicons.svg" />
-    <Content Include="Content\img\backgrounds\1.jpg" />
     <Content Include="Content\img\backgrounds\2.jpg" />
     <Content Include="Content\img\backgrounds\3.jpg" />
     <Content Include="Content\img\backgrounds\4.jpg" />

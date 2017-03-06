@@ -6,40 +6,92 @@
 @if (Model.ActiveTrip != null)
 {
     <div class="headline">
-        <h2>Your trip to: @Model.ActiveTrip.DlTripView.Name</h2>        
+        <h3>
+            @Model.ActiveTrip.DlTripView.NickName 
+            <small class="orange">[Your trip to: @Model.ActiveTrip.DlTripView.Name] - Trip Ref # @Model.ActiveTrip.DlTripView.Id</small> 
+        </h3>            
     </div>
 
-    <div class="row">
-        <div class="col-sm-4 info-blocks">
-            <i class="icon-calendar icon-info-blocks"></i>
-            <div class="info-blocks-in">
-                <h3>
-                    Planned date:
-                    @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
-                    {
-                        @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()
-                    }
-                    else
-                    {
-                        @Html.Raw("Not planned")
-                    }
-                </h3>
+    <div class="img-box-3 text-center">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/airplane.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>
+                        @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
+                        {
+                            @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()
+                        }
+                        else
+                        {
+                            @Html.Raw("Not planned")
+                        }
+                    </h4>
+                    <h6 class="orange">(Planned date)</h6>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-4 info-blocks">
-            <i class="icon-ok-sign icon-info-blocks"></i>
-            <div class="info-blocks-in">
-                <h3>Status: @Model.ActiveTrip.DlTripView.Status</h3>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/group.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>
+                        @Model.ActiveTrip.DlTripView.PaxAdults Adults
+                        @if (Model.ActiveTrip.DlTripView.PaxMinors > 0)
+                        {
+                            @Html.Raw("and ") @Model.ActiveTrip.DlTripView.PaxMinors @Html.Raw(" minor(s)")
+                        }
+                    </h4>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-4 info-blocks">
-            <i class="icon-map-marker icon-info-blocks"></i>
-            <div class="info-blocks-in">
-                <h3>Starts at: @Model.ActiveTrip.DlTripView.StartLocation</h3>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Starts at: @Model.ActiveTrip.DlTripView.StartLocation</h4>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/money.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Estimated cost:</h4>
+                    <h5 class="orange">
+                        @if (Model.ActiveTrip.DlTripView.EstimatedCost.HasValue)
+                        {
+                            @Model.ActiveTrip.DlTripView.TripCurrency
+                            @Html.Raw(" ")
+                            @Model.ActiveTrip.DlTripView.EstimatedCost.Value.ToString("N2")
+                        }
+                        else
+                        { @Html.Raw("n/a")}
+                    </h5>
+                </div>
             </div>
         </div>
     </div>
 
+    <hr class="margin-bottom-20">
+    <h2>Current status: @Model.ActiveTrip.DlTripView.Status &nbsp;&nbsp; 
+        @if (Model.ActiveTrip.DlTripView.Status == DomingoBL.TripStatus.planned.ToString())
+        {
+            <a class="btn-u btn-orange" href="/Service/StartTripBooking?tripId=@Model.ActiveTrip.DlTripView.Id">Start Booking Process</a>
+            <small>&nbsp;&nbsp;&nbsp;&nbsp;(There is no payment required until you actually book)</small>
+        }
+
+        else if (Model.ActiveTrip.DlTripView.Status == DomingoBL.TripStatus.consulting.ToString())
+        {
+            <small>&nbsp;&nbsp;&nbsp;&nbsp;(Your trip is being reviewed by our Travelogers)</small>
+        }
+
+    </h2>
     <hr class="margin-bottom-40">             
 
         <div class="tab-v1">
@@ -50,12 +102,67 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="details">
-                @using (Html.BeginForm("SaveTrip", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                @using (Html.BeginForm("SaveTripAsync", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
                 {
                     @Html.AntiForgeryToken();
                     @Html.HiddenFor(p => p.ActiveTrip.DlTripView.Id);
 
                     <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <h5 class="orange">Planned start date: @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
+                            { @Model.ActiveTrip.DlTripView.StartDate.Value.ToShortDateString()}</h5>
+                            <p>@Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartDate, new { @class = "form-control", type = "date" })</p>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <h5 class="orange">Start Location:</h5>
+                            <p>@Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartLocation, new { @class = "form-control" }) </p>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            @{
+                                var ListOfCurrencies = new List<SelectListItem>();
+                                ListOfCurrencies.AddRange(new[]{
+                                    new SelectListItem() { Text = "GBP", Value = "GBP" },
+                                    new SelectListItem() { Text = "EUR", Value = "EUR" },
+                                    new SelectListItem() { Text = "USD", Value = "USD" },
+                                    new SelectListItem() { Text = "INR", Value = "INR" }
+                                });
+                            }
+                            <h5 class="orange">Currency:</h5>
+                            <p>
+                                @Html.DropDownListFor(model => model.ActiveTrip.DlTripView.TripCurrency, ListOfCurrencies, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ActiveTrip.DlTripView.TripCurrency, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            @{
+                                var ListOfClasses = new List<SelectListItem>();
+                                ListOfClasses.AddRange(new[]{
+                                    new SelectListItem() { Text = "LUXURY", Value = "LUXURY" },
+                                    new SelectListItem() { Text = "STANDARD", Value = "STANDARD" },
+                                    new SelectListItem() { Text = "ECONOMY", Value = "ECONOMY" }
+                                });
+                            }
+
+                            <h5 class="orange">Style:</h5>
+                            <p>
+                                @Html.DropDownListFor(model => model.ActiveTrip.DlTripView.TripType, ListOfClasses, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ActiveTrip.DlTripView.TripType, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <h5 class="orange">Adults (above 15 yrs old)</h5>
+                            <p>@Html.EditorFor(model => model.ActiveTrip.DlTripView.PaxAdults, new { htmlAttributes = new { @class = "form-control" } })</p>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <h5 class="orange">Minors (below 15 yrs old)</h5>
+                            <p>@Html.EditorFor(model => model.ActiveTrip.DlTripView.PaxMinors, new { htmlAttributes = new { @class = "form-control" } })</p>
+                        </div>
+                    </div>
+
+                    <div class="row margin-bottom-20">
                         <div class="col-md-12">
                             <div class="margin-bottom-10"></div>
                             @if (Model.ActiveTrip.DlTransportsBookingsView != null)
@@ -70,23 +177,13 @@
                                     }
                                 }
                             }
-                            <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@Model.ActiveTrip.DlTripView.Id"><i class="icon-plane"></i>&nbsp; Add Flight Booking</a>
+                            <a class="btn-u btn-u-lg btn-u-orange" href="/Service/AddFlightBooking?TripId=@Model.ActiveTrip.DlTripView.Id"><i class="icon-plane"></i>&nbsp; Add Flight Booking</a>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3 col-sm-12">                            
-                            <h5 class="orange">Trip Ref # @Model.ActiveTrip.DlTripView.Id</h5>
-                            <h5>Planned start date: @if (Model.ActiveTrip.DlTripView.StartDate.HasValue) { @Model.ActiveTrip.DlTripView.StartDate.Value.ToShortDateString()}</h5>
-                            <p>Change date to: @Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartDate, new { @class = "form-control", type = "date" })</p>
-                            <p>Start Location: @Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartLocation, new { @class = "form-control" }) </p>
-                            <h5>Current status: @Model.ActiveTrip.DlTripView.Status</h5>                            
-                            <p><button class="btn btn-orange" type="submit"><i class="icon-save"></i>&nbsp; Save trip</button></p>
-                        </div>
-                        <div class="col-md-6">                            
-                        </div>
-                    </div>
-                    <div class="margin-bottom-20">                        
+                    
+                    <div class="margin-bottom-20">  
+                        <p><button class="btn btn-orange" type="submit"><i class="icon-save"></i>&nbsp; Save trip</button></p>                      
                     </div>
                     
                     <div class="row">
@@ -137,8 +234,7 @@
                                         <p>@Html.TextAreaFor(p => p.ActiveTrip.DlTripStepsView[x].TravellerNote, new { @class = "form-control" })</p>
                                         <div class="margin-bottom-20"></div>
                                         <button class="btn btn-default" type="submit">Save Notes</button>
-                                        <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@tripStep.TripId&tripStepId=@tripStep.Id"><i class="icon-plane"></i>&nbsp; Add Local Flight</a>
-                                        @*<a class="btn btn-default" href="/Service/AddLocalTransfer?TripId=@tripStep.TripId&tripStepId=@tripStep.Id"><i class="icon-cog"></i>&nbsp; Add Local Transfer</a>*@
+                                        <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@tripStep.TripId&tripStepId=@tripStep.Id"><i class="icon-plane"></i>&nbsp; Add Domestic Transfer</a>                                        
                                         <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId"><i class="icon-building"></i>&nbsp;Add Accommodation</a>
                                         <div class="margin-bottom-20"></div>
                                         <button class="btn btn-orange" type="submit">Save Trip</button>

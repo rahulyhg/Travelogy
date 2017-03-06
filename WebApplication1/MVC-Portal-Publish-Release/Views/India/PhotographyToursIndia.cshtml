@@ -23,45 +23,8 @@
 
 <div class="row">
     <div class="col-md-12 padd-10">
-        <img class="img-responsive" src="~/Content/img/India/sikkim001.jpg" />
+        <img class="img-responsive" src="~/Content/img/India/photography01.jpg" />
     </div>
 </div>
 
-<hr class="margin-bottom-20" />
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-sm-6">
-            @if (Request.IsAuthenticated)
-            {
-                if (Model != null && Model.Destination != null)
-                {
-                    var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = Model.Destination.Name, TemplateAlias = Model.Destination.TemplateSearchAlias };
-                    @Html.Partial("_StartTripPlanning", _model)
-                }
-            }
-
-            else
-            {
-                @Html.Partial("_JoinNowTripPlanning")
-            }
-        </div>
-        <div class="col-md-6 col-sm-6">
-            @if (Request.IsAuthenticated)
-            {
-                if (Model != null && Model.Destination != null)
-                {
-                    var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = Model.Destination.Name };
-                    @Html.Partial("_DownloadBrochure", _model)
-                }
-            }
-            else
-            {
-                if (Model != null && Model.Destination != null)
-                {
-                    @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = Model.Destination.Name });
-                }
-            }
-        </div>
-    </div>
-</div>
+@Html.Partial("_DestinationViewCommon", Model)

@@ -2,17 +2,14 @@
 @using Microsoft.Owin.Security
 
 <div class="reg-header">
-    <h2 class="color">Use social media account <span class="small">to log in.</span> </h2>
+    <h2 class="color">Use Social Account <span class="small">to log in.</span> </h2>
 </div>
 
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-    if (loginProviders.Count() == 0) {
-        @*<div>
-            <p>
-                There are no external authentication services configured.
-            </p>
-        </div>*@
+    if (loginProviders.Count() == 0)
+    {
+        //Nothing here
     }
     else {
         using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
@@ -20,8 +17,11 @@
             <div id="socialLoginList">
                 @foreach (AuthenticationDescription p in loginProviders)
                 {
+                    <p class="margin-bottom-40">
+                        You can use your @p.AuthenticationType account to login to Travelogy. Your account will automatically be created and linked to your @p.AuthenticationType profile.
+                    </p>
                     <p class="text-center">
-                        @*Log in using your @p.Caption account*@ <button type="submit" class="btn-u btn-u200" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">Login with @p.AuthenticationType</button>
+                        <button type="submit" class="btn-u btn-u200" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">Login with @p.AuthenticationType</button>
                     </p>
                 }                
             </div>

@@ -3,22 +3,29 @@
 @Html.Partial("_HomepageCarousel")
 
 <div class="headline">
-    <h2>Your Booking Details</h2>
+    <h3>Booking Details for your @Model.TransportType from @Model.From to @Model.To</h3>
 </div>  
 
-<div class="row">
-    <div class="col-sm-3 info-blocks">
-        <div class="info-blocks-in">
-            <h4 class="orange">
-                Flight
-            </h4>
-            <p>From: @Model.From to @Model.To</p>
+<div class="img-box-3 text-left">
+    <div class="row">
+        <div class="col-md-2 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    @if (Model.TransportType.ToLower().Contains("flight"))
+                    { <img src="~/content/img/flat-icons/aeroplane.png" alt="" class="img-responsive" /> }
+                    else if (Model.TransportType.ToLower().Contains("train"))
+                    { <img src="~/content/img/flat-icons/train-2.png" alt="" class="img-responsive" /> }
+                    else if (Model.TransportType.ToLower().Contains("bus"))
+                    { <img src="~/content/img/flat-icons/minibus.png" alt="" class="img-responsive" /> }
+                    else
+                    { <img src="~/content/img/flat-icons/minivan-taxi.png" alt="" class="img-responsive" />}
+                </div>                
+            </div>
         </div>
-    </div>
-    <div class="col-sm-3 info-blocks">
-        <i class="icon-calendar icon-info-blocks"></i>
-        <div class="info-blocks-in">
-            <h4 class="orange">Requested date:</h4>
+
+        <div class="col-md-3 col-sm-6">            
+            <h5 class="orange">Planned date:</h5>
             @if (Model.FlightDate > DateTime.MinValue)
             {
                 <p>@Model.FlightDate.ToLongDateString()</p>
@@ -27,54 +34,48 @@
             {
                 <p>@Html.Raw("Not planned")</p>
             }
-            <h4>Class:</h4>
+
+            <h5 class="orange">Passengers:</h5>
+            <p>Adults: @Model.Adults , Children: @Model.Kids</p> 
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <h5 class="orange">Class:</h5>            
             <p>@Model.FlightClass</p>
+            <h5 class="orange">Status:</h5>                       
+            <p>@Model.BookingStatus</p>
         </div>
 
-    </div>   
-
-    <div class="col-sm-3 info-blocks">
-        <i class="icon-calendar icon-info-blocks"></i>
-        <div class="info-blocks-in">
-            <h4 class="orange">Status: </h4>
-            <p>@Model.BookingStatus </p>
-        </div>
-    </div>
-
-    <div class="col-sm-3 info-blocks">
-        <div class="info-blocks-in">
-            <h4 class="orange">
-                Passengers:
-            </h4>
-            <p>Adults: @Model.Adults , Children: @Model.Kids</p>
+        <div class="col-md-4 col-sm-6">
+            @if (!String.IsNullOrEmpty(Model.TransferDetails))
+            {
+                <h5 class="orange">Details of your @Model.TransportType</h5>
+                <p>@Model.TransferDetails</p>
+            }
+            
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-sm-12 info-blocks">
-        <div class="info-blocks-in">
-            <h4 class="orange">
-                Your Notes:
-            </h4>
-            <p>@Model.TravellerNotes</p>
-        </div>
+@if (!String.IsNullOrEmpty(Model.TravellerNotes))
+{
+    <div class="headline">
+        <h4 class="orange">Your Notes</h4>
     </div>
-</div>
+    <p>@Model.TravellerNotes</p>
+}
 
-<div class="row">
-    <div class="col-sm-12 info-blocks">
-        <div class="info-blocks-in">
-            <h4 class="orange">
-                Traveloger's Notes:
-            </h4>
-            <p>@Model.AdminNotes</p>
-        </div>
+@if (!String.IsNullOrEmpty(Model.AdminNotes))
+{
+    <div class="headline">
+        <h4 class="orange">Traveloger's Notes</h4>
     </div>
-</div>
+    <p>@Model.AdminNotes</p>
+}
 
 <div class="container">
-    <div class="row">
-        @Html.ActionLink("Go back to trip details", "EditTrip", new { @tripId = Model.TripId })
+    <div class="row">        
+        <div class="margin-bottom-20"></div>
+        <a href="~/Service/ViewTrip?tripId=@Model.TripId" class="btn-u btn-large">Back to Trip Planning</a>
     </div>
 </div>

@@ -1,27 +1,57 @@
 ﻿@model WebApplication1.Models._StartTripPlanningViewModel
 
-
-<div class="row margin-bottom-40">
-    <div class="col-md-12 col-sm-12">
-        <div class="pricing hover-effect">
-            <div class="pricing-head">
-                <h3>Plan your trip now</h3>
-                <h4>
-                    <i>Use our FREE online trip planner</i> 
-                    <span>Plan exciting trips to @Model.CircuitName</span>
-                </h4>
-            </div>
-            <ul class="pricing-content list-unstyled">
-                <li><i class="icon-tags"></i> Browse our trip ideas for @Model.CircuitName</li>
-                <li><i class="icon-asterisk"></i>Choose one and cutomize it</li>
-                <li><i class="icon-mail-reply"></i>Collaborate with our Travelogers</li>
-                <li><i class="icon-star"></i>Request for accommodation and Transfers </li>                
-            </ul>
-            <div class="pricing-footer">
-                <a class="btn-u btn-u-small" href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateAlias">
-                    <i class="icon-location-arrow"></i>&nbsp; Look up all @Model.CircuitName trips
-                </a>
+@if (Model.IsActiveTrip == true)
+{
+    <div class="row margin-bottom-40">
+        <div class="col-md-12 col-sm-12">
+            <div class="pricing hover-effect">
+                <div class="pricing-head">
+                    <h3>Add to your trip now</h3>
+                    <h4>
+                        <i>You can add multiple circuits</i>
+                        <span>Add @Model.CircuitName trips to your plan</span>
+                    </h4>
+                </div>
+                <div class="text-center">
+                    <h3 class="orange">Browse our trip ideas for @Model.CircuitName</h3>
+                    <h4>Choose a circuit and add to your plan</h4>   
+                    <h1>&nbsp;</h1>                 
+                </div>
+                <div class="pricing-footer">
+                    <a href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateAlias">
+                        <h3 class="white">&nbsp; &nbsp;  Add to Current trip &nbsp; &nbsp; </h3>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
+
+else
+{
+    <div class="row margin-bottom-40">
+        <div class="col-md-12 col-sm-12">
+            <div class="pricing hover-effect">
+                <div class="pricing-head">
+                    <h3>Plan your trip now</h3>
+                    <h4>
+                        <i>FREE ONLINE TRIP PLANNER</i>
+                        <span>Plan exciting trips to @Model.CircuitName</span>
+                    </h4>
+                </div>
+                <div class="text-center">
+                    <h3 class="orange">Browse our trip ideas for @Model.CircuitName</h3>
+                    <h4>Choose a trip plan and cutomize it</h4>
+                    <h4>Collaborate with our "Travelogers"</h4>
+                    <h4 class="orange">Place order for accommodation and Transfers</h4>
+                </div>
+                <div class="pricing-footer">
+                    <a href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateAlias">
+                        <h2 class="white">&nbsp; &nbsp;  Start Planning &nbsp; &nbsp; </h2>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

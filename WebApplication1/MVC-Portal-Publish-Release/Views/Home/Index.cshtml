@@ -1,6 +1,7 @@
 ﻿@using System.Collections.Generic
 @using DomingoBL;
 @using DomingoDAL;
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Home Page";
@@ -11,16 +12,34 @@
 <div class="container">
     <div class="about-us-one">
         <div class="row">
-            <div class="about-logo">
-                <h1>Travelogy <small class="color">the science of travelling</small></h1>
-                <h3>Welcome to the club of the travellers</h3>
-                <p>We offer 360 degree solutions for your travel. Take a look at the exotic locations we offer. 
-                Create a custom trip plan using our <a href="/service/TripPlanning" class="orange">FREE Trip Planning tool.</a>
-                Get ideas for trips to India, Nepal, Bhutan, Tibet, Russia, Mongolia and Tanzania. 
-                Get in touch with us for <a href="/service/TravelLogistics" class="orange">Logistics &amp; Support services</a> 
-                in the destinations to make your exotic trips a great experience to remember.</p>                
-            </div>
+            <h1>Travelogy <small><i>(noun)</i><span class="orange"> the science of travelling.</span></small></h1>
         </div>
+        <hr class="margin-bottom-10" />
+        <div class="row">
+            <div class="container">
+                <div class="about-logo">
+                    <h3>Welcome to the club created for the "travellers" <i>by</i> the travellers!</h3>
+                    <p>
+                        Find 360 degree solutions for your travel. Over here, you can create your custom trip plan using our <a href="/service/TripPlanning" class="orange">FREE Trip Planning tool.</a>
+                        You can get ideas for trips to <strong>India, Nepal &amp; Bhutan, Russia, Mongolia and Tanzania</strong>. 
+                        Get in touch with us for <a href="/service/TravelLogistics" class="orange">Logistics &amp; Support services</a>
+                        in the destinations to make your exotic trips a great experience to remember. We work with hand-picked, friendly and hard-working local operators in each destination.
+                    </p>
+                </div>
+            </div>            
+        </div>
+        @if (!Request.IsAuthenticated)
+        {
+            <div class="row">
+                <div class="container">
+                    <h3>
+                        Join the club: <a href="/Account/Register" class="orange">Sign up for Free </a> or <a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-u-small btn-u-orange">
+                            <i class="icon-facebook"></i> &nbsp; Login with Facebook
+                        </a>
+                    </h3>
+                </div>
+            </div>
+        }        
     </div>
 </div>
 
@@ -31,14 +50,14 @@
         <i class="icon-lightbulb icon-info-blocks"></i>
         <div class="info-blocks-in">
             <h3>Great ideas for exotic trips</h3>
-            <p>Great ideas for trips to India, Nepal, Bhutan, Tibet, Russia, Mongolia and Tanzania. The itineraries have been prepared by expert travellers.</p>
+            <p>Great ideas for trips to India, Nepal, Bhutan, Russia, Mongolia and Tanzania. The itineraries have been prepared by expert travellers.</p>
         </div>
     </div>
     <div class="col-sm-4 info-blocks">
         <i class="icon-laptop icon-info-blocks"></i>
         <div class="info-blocks-in">
             <h3>FREE Online trip planner</h3>
-            <p>Use our online planning tool for planning, booking and managing your trips. </p>
+            <p>Use our online planning tool for planning, booking and managing your trips.</p>
         </div>
     </div>
     <div class="col-sm-4 info-blocks">
@@ -53,69 +72,121 @@
 
 @if (Request.IsAuthenticated)
 {
-    List<DomingoBL.BlObjects.BlViewTrip> _allTrips = null;
-    var blError2 = TripManager.GetAllTripsForUserByName(User.Identity.Name, out _allTrips);
-    if(_allTrips != null && _allTrips.Count > 0)
-    {
-        <div>
-            <h2 class="orange text-center">Your upcoming trip with Travelogy</h2>
-            <div class="margin-bottom-20"></div>
-            @Html.Partial("_TripPlanningPlannedTripSummary", _allTrips[0])
-        </div>
-    }
-    else
-    {
-        <div class="row">
-            @Html.Partial("_TripPlannerAdvert")
-        </div>
-    }
+    @Html.Partial("_ImmediateTrip")   
 }
 
 else
 {   <!--End Tag Box v5-->
-
-    @Html.Partial("_TripPlannerAdvert")
-
-    <a href="/Account/Register"> <h1 class="text-center">Join now to start using the <span class="orange">FREE</span> Travelogy Trip Planner</h1></a>
+    <div class="box-shadow-outer">
+        <div class="box-shadow-block box-shadow-1 text-left">
+            @Html.Partial("_TripPlannerAdvert")
+        </div>     
+    </div>    
 }
 
+<div class="margin-bottom-20"></div>
+
+
 <div class="container">
-    <hr class="margin-bottom-40">
-    <div class="row">
-        <div class="headline">
-            <h2 class="orange">Featured destinations</h2>
+
+    <hr class="margin-bottom-20" />
+
+    <!-- INDIA -->
+    <div class="box-shadow-outer">
+        <div class="box-shadow-block box-shadow-1 text-left">
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <a href="/India">
+                        <img class="img-responsive img-border margin-bottom-20" src="~/Content/img/gallery/small/thumbnail_WesternHimalaya.jpg" />
+                        <img class="img-responsive img-border margin-bottom-20" src="~/Content/img/gallery/small/thumbnail_IndianWestCoast.jpg" />
+                    </a>
+                </div>
+                <div class="col-md-8 col-sm-12">
+                    <a href="/India">
+                        <div class="block-heading-twelve">
+                            <h3 class="orange">India, Nepal &amp; Bhutan</h3>
+                            <h2>
+                                Explore the tallest mountain range of the world, The Himalayas and go on
+                                <span class="orange">Motorcycling, Backpacking &amp; Adventure travel.</span>
+                                Get mesmerized by the majestic Taj Mahal and head to the desert of Rajasthan!
+                                <span class="orange">From the gorgeous beaches of Goa,</span>
+                                head South for the ancient temples and the Technology Hubs!
+                            </h2>
+                            <h1 class="orange">Find Exciting Photography trips in India and Nepal.</h1>
+                            <h2>Explore more travel ideas for the Sub-continent...</h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="margin-bottom-20"></div>
-    </div>
-
-    <div class="row">
-        @{
-            List<Destination> _destinations = null;
-            var blError = DestinationManager.GetTopDestinations(out _destinations, 4);
-            if(blError.ErrorCode != 0 || _destinations == null)
-            {
-                throw new ApplicationException(blError.ErrorMessage);
-            }
-
-            foreach (var _destination in _destinations)
-            {
-                @Html.Partial("_DestinationWidgetMicro", _destination)
-            }
-        }
-    </div>
-
-    <div class="row">
-        <div class="block-heading-twelve">
-            <h1>More exciting destinations</h1>
-            <a href="/India"><h3 class="color">India, Nepal &amp; Bhutan</h3></a>
-            <h2>Explore the Himalayas - Biking trips, backpacking trips &amp; adventures trips.</h2>
-            <h1 class="color">Photography trips in Varanasi and Pushkar, India.</h1>
-            <h2>Explore the destinations for more ideas...</h2>            
+    </div>     
+    <!-- END : INDIA -->
+    <div class="margin-bottom-20"></div>
+    <!-- TANZANIA -->
+    <div class="box-shadow-outer">
+        <div class="box-shadow-block box-shadow-1 text-left">
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <a href="/Circuit/Tanzania">
+                        <div class="block-heading-twelve">
+                            <h3>Climb Kilimanjaro</h3>
+                            <h1 class="orange">Enjoy a Safari in Serengeti</h1>
+                            <h2>The tallest lone standing mountain in the world and some of the most amazing wildlife sights on Earth!</h2>
+                            <h1 class="orange">Exciting Travel plans for Tanzania</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <a href="/Circuit/Tanzania">
+                        <img class="img-responsive img-border margin-bottom-10" src="~/Content/img/gallery/small/thumbnail_safari.jpg" />
+                        <img class="img-responsive img-border margin-bottom-10" src="~/Content/img/gallery/small/thumbnail_kili.jpg" />
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
+    </div> 
+    <!-- END : TANZANIA -->    
+
+    <div class="margin-bottom-20"></div>    
 
     <div class="row">
-        <a href="/circuit" class="btn btn-u btn-orange">See all destinations</a>
+        <!-- MONGOLIA -->   
+        <div class="col-md-6 col-sm-12">
+            <div class="box-shadow-outer">
+                <div class="box-shadow-block box-shadow-1 text-left">
+                    <a href="/Circuit/Mongolia">
+                        <div class="block-heading-twelve">
+                            <img class="img-responsive img-border margin-bottom-20" src="~/Content/img/gallery/small/thumbnail_mongol02.jpg" />
+                            <h3>Mongolia</h3>
+                            <h1>Gobi Desert&nbsp;&amp;<span class="orange"> Altai Mountains</span> </h1>
+                            <h2>Be a Nomad in the endless fields of Mongolia</h2>
+                            <h2 class="orange">The legendary land of Zenghis Khan offers great adventure for every traveller.</h2>
+                        </div>
+                    </a>
+                </div>
+            </div>             
+        </div>
+        <!-- END : MONGOLIA --> 
+        
+        <!-- END : RUSSIA -->   
+        <div class="col-md-6 col-sm-12">
+            <div class="box-shadow-outer">
+                <div class="box-shadow-block box-shadow-1 text-left">
+                    <a href="/Circuit/Russia">
+                        <div class="block-heading-twelve">
+                            <img class="img-responsive img-border margin-bottom-20" src="~/Content/img/gallery/small/thumbnail_tsr02.jpg" />
+                            <h3>Russia</h3>
+                            <h1>Trans-Siberian <span class="orange">&amp;&nbsp;Lake Baikal</span> </h1>
+                            <h2>The longest running train of the planet.</h2>
+                            <h1 class="orange">The deepest lake on Earth.</h1>
+                            <h4 class="orange">Adventures in the world's largest country!</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>             
+        </div>
+        <!-- END : RUSSIA -->   
     </div>
+    <hr class="margin-bottom-20" />
 
 </div>

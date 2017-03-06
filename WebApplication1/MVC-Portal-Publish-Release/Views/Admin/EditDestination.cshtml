@@ -135,6 +135,41 @@
 <hr />
 <div class="margin-bottom-20"></div>
 
+<div class="headline">
+    <h3>Costs</h3>
+</div>
+
+<div>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Type</th>
+            <th>Class</th>
+            <th>Currency</th>
+            <th>Season</th>
+            <th>Amount</th>
+            <th> -- </th>
+        </tr>
+
+        @foreach (var item in Model.CostObjects)
+        {
+            <tr>
+                <td>@item.Type</td>
+                <td>@item.Class</td>
+                <td>@item.Currency</td>
+                <td>@item.Season</td>
+                <td>@item.Amount</td>
+                <td>@Html.ActionLink("Edit", "EditDestinationCost", new { @destinationCostId = item.Id })</td>
+            </tr>
+        }
+    </table>
+    <div class="margin-bottom-20">
+        @Html.ActionLink("Add New", "AddDestinationCost", new { @destinationId = Model.DbObject.Id })
+    </div>
+</div>
+
+<hr />
+<div class="margin-bottom-20"></div>
+
 <div class="tab-v1">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#sub_destinations" data-toggle="tab">Places</a></li>

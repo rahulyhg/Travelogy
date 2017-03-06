@@ -4,21 +4,18 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 padd-15">
                 <h1>Use the <span class="orange">FREE</span> Travelogy Trip Planner</h1>
-                <h2 class="orange">Plan your next trip to exotic locations.</h2>
-                @if (Request.IsAuthenticated)
-                {                    
-                    <div class="margin-bottom-20"></div>
-                    <p> <a href="/Service/Tripplanning" class="btn-u btn-u-lg"><i class="icon-signin"></i> &nbsp; Start Planning Now</a></p>
-                }
+                <h2 class="orange">Plan your next trip to exotic locations.</h2>                
             </div>
         </div>
         <div class="row">
             <div class="col-md-3 col-sm-6">
                 <!-- Image Box #3 Item -->
                 <div class="img-box-3-item">
-                    <div class="img-box-3-icon">
-                        <img src="~/content/img/flat-icons/maps-and-flags-3.png" alt="" class="img-responsive" />
-                    </div>
+                    <a href="/Service/Tripplanning">
+                        <div class="img-box-3-icon">
+                            <img src="~/content/img/flat-icons/maps-and-flags-3.png" alt="" class="img-responsive" />
+                        </div>
+                    </a>                    
                     <h4>Plan your travel</h4>
                     <div class="bor bg-black"></div>
                     <p>Use our online TripPlanner, backed by an expert team to plan your trips. Start by choosing one or more circuits and customize it.</p>
@@ -27,9 +24,11 @@
             <div class="col-md-3 col-sm-6">
                 <!-- Image Box #3 Item -->
                 <div class="img-box-3-item">
-                    <div class="img-box-3-icon">
-                        <img src="~/content/img/flat-icons/booking.png" alt="" class="img-responsive" />
-                    </div>
+                    <a href="/Service/Tripplanning">
+                        <div class="img-box-3-icon">
+                            <img src="~/content/img/flat-icons/booking.png" alt="" class="img-responsive" />
+                        </div>
+                    </a>
                     <h4>Manage your Bookings</h4>
                     <div class="bor bg-black"></div>
                     <p>Using the TripPlanner You can book accommodations and transfers through our partner Travel Agencies to get the best deals.</p>
@@ -38,9 +37,11 @@
             <div class="col-md-3 col-sm-6">
                 <!-- Image Box #3 Item -->
                 <div class="img-box-3-item">
-                    <div class="img-box-3-icon">
-                        <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
-                    </div>
+                    <a href="/Service/Tripplanning">
+                        <div class="img-box-3-icon">
+                            <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
+                        </div>
+                    </a>                    
                     <h4>Create Guidebooks</h4>
                     <div class="bor bg-black"></div>
                     <p> Get custom made guidebooks for yourself including your trip plan.</p>
@@ -49,14 +50,25 @@
             <div class="col-md-3 col-sm-6">
                 <!-- Image Box #3 Item -->
                 <div class="img-box-3-item">
-                    <div class="img-box-3-icon">
-                        <img src="~/content/img/flat-icons/male-reporter.png" alt="" class="img-responsive" />
-                    </div>
+                    <a href="/Service/Tripplanning">
+                        <div class="img-box-3-icon">
+                            <img src="~/content/img/flat-icons/male-reporter.png" alt="" class="img-responsive" />
+                        </div>
+                    </a>                    
                     <h4><a href="Travel-Logistics.html">Get a Travel helpline</a></h4>
                     <div class="bor bg-black"></div>
                     <p>Stay connected to our travel center while you travel. Our members are ready to help you with your needs while you travel.</p>
                 </div>
             </div>
         </div>
+        @if (Request.IsAuthenticated)
+        {
+            <div class="margin-bottom-20"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p> <a href="/Service/Tripplanning" class="btn-u btn-u-lg"><i class="icon-signin"></i> &nbsp; Start Planning Now</a></p>
+                </div>
+            </div>            
+        }
     </div>
 </div>
