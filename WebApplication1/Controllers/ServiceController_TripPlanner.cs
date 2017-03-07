@@ -159,6 +159,16 @@ namespace WebApplication1.Controllers
             // assign the template to the view model
             var _model = new TripViewModel();
             _model.CreateTripTemplate = _template;
+
+            var startLocationOptions = _template.DlTemplate.StartLocation.Split('/').ToList();
+            var _tripStartLocationOptions = new List<SelectListItem>();
+            foreach (var startLocation in startLocationOptions)
+            {
+                _tripStartLocationOptions.Add(new SelectListItem() { Text = startLocation, Value = startLocation });
+            }
+
+            _model.CreateTripStartLocationOptions = _tripStartLocationOptions;
+
             _model.CreateTripViewModel = new CreateTripViewModel() { DestinationId = _template.DlTemplate.DestinationId, TemplateId = _template.DlTemplate.Id, StartDate = DateTime.Now };
 
             return View("Trip", _model);
