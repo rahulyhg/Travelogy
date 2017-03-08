@@ -3,14 +3,20 @@
 <div class="media margin-bottom-20">
     @foreach (var step in Model.DlTemplateSteps)
     {
-        <hr class="margin-bottom-20" />
-            <h3>@step.ShortDescription</h3>
+        <div class="margin-bottom-20"></div>
+        <h3>@step.Destination</h3>
         if (!string.IsNullOrEmpty(step.ThumbnailPath))
         {
             <img src="@step.ThumbnailPath" class="img-responsive img-border" />
         }
+        <h5 class="orange">@step.ShortDescription</h5>
         <p>@step.LongDescription</p>
-            <hr class="margin-bottom-20" />
+        <h6>Night stays: @step.NightStay</h6>
+        if (!string.IsNullOrEmpty(step.AdditionalHtml))
+        {
+            @Html.Raw(step.AdditionalHtml)
+        }
+        <div class="margin-bottom-20"></div>
     }
 </div>
 

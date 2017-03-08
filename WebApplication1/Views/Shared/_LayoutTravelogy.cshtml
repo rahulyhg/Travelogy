@@ -84,21 +84,24 @@
 
         <!-- Header two Starts -->
         <div class="header-2">
-
+              
             <!-- Container -->
             <div class="container">
 
                 @{
-                    var url = Request.RawUrl;
-                    if (Session["HideCookieWarning"] == null)
+                    if (!Request.IsAuthenticated)
                     {
-                        <div class="alert alert-block alert-warning">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <p>
-                                To help you log in to our website and keep your trip planner running, we use cookies.By logging on and navigating the site, you agree to our <a class="orange" href="/Information/Cookies">Cookies Policy</a>
-                            </p>
-                            <p><strong>OK! I Understood, @Html.ActionLink("hide this", "HideCookieWarning", "Information", new { @returnUrl = url }, new { @class = "orange" }).</strong> </p>
-                        </div>
+                        var url = Request.RawUrl;
+                        if (Session["HideCookieWarning"] == null)
+                        {
+                            <div class="alert alert-block alert-warning">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <p>
+                                    To help you log in to our website and keep your trip planner running, we use cookies.By logging on and navigating the site, you agree to our <a class="orange" href="/Information/Cookies">Cookies Policy</a>
+                                </p>
+                                <p><strong>OK! I Understood, @Html.ActionLink("hide this", "HideCookieWarning", "Information", new { @returnUrl = url }, new { @class = "orange" }).</strong> </p>
+                            </div>
+                        }
                     }
                 }                
 
@@ -154,11 +157,11 @@
                                 <li>
                                     <a href="#">Information</a>
                                     <ul>
+                                        <li>@Html.ActionLink("About Us", "AboutUs", "Information")</li>
+                                        <li>@Html.ActionLink("Contact Us", "ContactUs", "Information")</li>
                                         <li>@Html.ActionLink("F.A.Q.", "FAQ", "Information")</li>
                                         <li>@Html.ActionLink("Privacy Policy", "Privacy", "Information")</li>
                                         <li>@Html.ActionLink("Terms and Conditions", "TermsAndConditions", "Information")</li>
-                                        <li>@Html.ActionLink("About Us", "AboutUs", "Information")</li>
-                                        <li>@Html.ActionLink("Contact Us", "ContactUs", "Information")</li>
                                     </ul>
                                 </li>
                             }
@@ -209,15 +212,7 @@
                     <div class="foot-item">
                         <!-- Heading -->
                         <h5 class="bold"><i class="fa fa-user"></i>&nbsp;&nbsp;About</h5>
-                        <p class="orange">Travelogy club is a platform created to offer 360 degree solution for travel to exotic destinations.</p>
-                        <div class="brand-bg">
-                            <!-- Social Media Icons -->
-                            <a href="https://www.facebook.com/travelogyclub/" target="_blank" class="facebook"><i class="fa fa-facebook circle-3"></i></a>
-                            <a href="https://twitter.com/travelogyclub" target="_blank" class="twitter"><i class="fa fa-twitter circle-3"></i></a>
-                            <!--<a href="#" class="google-plus"><i class="fa fa-google-plus circle-3"></i></a>
-                            <a href="#" class="linkedin"><i class="fa fa-linkedin circle-3"></i></a>
-                            <a href="#" class="pinterest"><i class="fa fa-pinterest circle-3"></i></a>-->
-                        </div>
+                        <p class="orange">Travelogy club is a platform created to offer 360 degree solution for travel to exotic destinations.</p>                        
                     </div>
                 </div>
                 <div class="col-md-7 col-sm-6">
@@ -229,17 +224,26 @@
                         <div class="foot-item-content address">
                             <p class="tel white">                                
                                 <i class="fa fa-phone"></i>+44 20 3318 6049 (U.K. Customer Care)<br />
-                                <i class="fa fa-phone"></i>+44 20 8560 2747 (U.K. Business Queries)<br />
-                                <i class="fa fa-phone"></i>+91 98366 97183 (India Customer Care) <br />
+                                @*<i class="fa fa-phone"></i>+44 20 8560 2747 (U.K. Business Queries)<br />*@
+                                @*<i class="fa fa-phone"></i>+91 98366 97183 (India Customer Care) <br />*@
                                 <i class="fa fa-envelope"></i>  Mail : <a href="mailto:info@travelogyclub.com">info@travelogyclub.com</a><br />
-                                <i class="fa fa-calendar"></i> Business Hours : Sales 9:30 - 5:30 India and U.K. <br />
-                                <i class="fa fa-clock-o"></i>Support : 24x7
+                                @*<i class="fa fa-calendar"></i> Business Hours : Sales 9:30 - 5:30 India and U.K. <br />
+                                <i class="fa fa-clock-o"></i>Support : 24x7*@
                             </p>
                         </div>
+
+                        <div class="margin-bottom-10"></div>
+                        <h5 class="bold orange">Find us on social media</h5>
+                        <div class="brand-bg">
+                            <!-- Social Media Icons -->
+                            <a href="https://www.facebook.com/travelogyclub/" target="_blank" @*class="facebook"*@><i class="fa fa-facebook circle-3"></i> Facebook</a>
+                            <a href="https://twitter.com/travelogyclub" target="_blank" @*class="twitter"*@><i class="fa fa-twitter circle-3"></i> Twitter</a>                            
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-6">
-                    <img src="~/Content/img/logo1-default-small.png" />
+                    <img src="~/Content/img/logo1-default-small.png" />                    
                 </div>
             </div>
         </div>

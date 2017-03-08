@@ -4,15 +4,15 @@
     <div class="col-md-3 search-img">
         <img class="img-responsive" src="@Model.TripTemplate.DlTemplate.ThumbnailPath" alt="">
         <ul class="list-unstyled">
-            <li><i class="icon-briefcase"></i>@Model.TripTemplate.DlTemplate.Name</li>
-            <li><i class="icon-map-marker"></i>@Model.TripTemplate.DlTemplate.Name</li>
+            <li><i class="icon-briefcase"></i>Best time to visit: @Model.TripTemplate.DlTemplate.BestTimeToVisit</li>
+            <li><i class="icon-map-marker"></i>Usually starts at: @Model.TripTemplate.DlTemplate.StartLocation</li>
         </ul>
     </div>
     <div class="col-md-9">
         <h2>@Model.TripTemplate.DlTemplate.Name</h2>
-        <a href="/Service/ViewTripTemplate?TemplateId=@Model.TripTemplate.DlTemplate.Id"><h5 class="orange margin-bottom-20">View details</h5></a>
-        <h4 class="orange">Typical duration: @Model.TripTemplate.DlTemplate.DurationDaysMin - @Model.TripTemplate.DlTemplate.DurationDaysMax Days</h4>
+        <a href="/Service/ViewTripTemplate?TemplateId=@Model.TripTemplate.DlTemplate.Id"><h5 class="orange margin-bottom-20">View details</h5></a>        
         <p>@Model.TripTemplate.DlTemplate.Description</p>
+        <h6 class="orange">Typical duration: @Model.TripTemplate.DlTemplate.DurationDaysMin - @Model.TripTemplate.DlTemplate.DurationDaysMax Days</h6>        
     </div>
     <div class="col-md-12 text-left">
     @if (Request.IsAuthenticated)
