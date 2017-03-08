@@ -9582,6 +9582,8 @@
     <Content Include="Views\Shared\_DestinationViewCommon.cshtml" />
     <Content Include="Views\Business\Index.cshtml" />
     <Content Include="Views\Service\ViewTripTemplate.cshtml" />
+    <Content Include="Views\Shared\_ViewTripTemplateSteps.cshtml" />
+    <Content Include="Views\Information\Cookies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

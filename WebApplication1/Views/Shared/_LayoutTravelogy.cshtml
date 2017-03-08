@@ -87,6 +87,21 @@
 
             <!-- Container -->
             <div class="container">
+
+                @{
+                    var url = Request.RawUrl;
+                    if (Session["HideCookieWarning"] == null)
+                    {
+                        <div class="alert alert-block alert-warning">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <p>
+                                To help you log in to our website and keep your trip planner running, we use cookies.By logging on and navigating the site, you agree to our <a class="orange" href="/Information/Cookies">Cookies Policy</a>
+                            </p>
+                            <p><strong>OK! I Understood, @Html.ActionLink("hide this", "HideCookieWarning", "Information", new { @returnUrl = url }, new { @class = "orange" }).</strong> </p>
+                        </div>
+                    }
+                }                
+
                 <div class="row logo">
                     <div class="col-md-3 col-sm-12">
                         <h1><a href="/">Travelogy Club</a></h1>                        
@@ -167,7 +182,7 @@
             }
         </div>
     </div>
-    <!-- Header two ends -->
+    <!-- Header two ends -->    
         
     <div class="alert alert-block alert-warning fade in text-center">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

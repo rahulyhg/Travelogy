@@ -75,6 +75,7 @@
                 </div>
             }   
 
+            @*// TODO: Move this to a partial view*@
             @if (Model.CreateTripTemplate.DlTemplateSteps != null && Model.CreateTripTemplate.DlTemplateSteps.Count > 0)
             {
                 <div class="headline">
@@ -83,17 +84,7 @@
                 </div>
 
                 <div class="media margin-bottom-20">
-                    @foreach (var step in Model.CreateTripTemplate.DlTemplateSteps)
-                    {
-                        <hr class="margin-bottom-20" />
-                        <h3>@step.ShortDescription</h3>
-                        if (!string.IsNullOrEmpty(step.ThumbnailPath))
-                        {
-                            <img src="@step.ThumbnailPath" class="img-responsive img-border" />
-                        }
-                        <p>@step.LongDescription</p>
-                        <hr class="margin-bottom-20" />
-                    }
+                    @Html.Partial("_ViewTripTemplateSteps", Model.CreateTripTemplate)
                 </div>
             }                       
         </div>

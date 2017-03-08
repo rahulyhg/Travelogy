@@ -53,6 +53,20 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        // GET: Cookies
+        public ActionResult Cookies()
+        {
+            return View();
+        }
+
+        // GET: HideCookieWarning
+        public ActionResult HideCookieWarning(string returnUrl)
+        {
+            Session["HideCookieWarning"] = "true";
+            return Redirect(returnUrl);         
+        }
+
+
         /// <summary>
         /// Contact us form submit - 
         ///     a. Send a thank you mail to customer
