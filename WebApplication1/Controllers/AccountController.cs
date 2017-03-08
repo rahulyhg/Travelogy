@@ -177,7 +177,7 @@ namespace WebApplication1.Controllers
             var emailParams = new Dictionary<String, String>();
             emailParams.Add("UserName", _regViewModel.Email);
             emailParams.Add("ActivationLink", callbackUrl);
-            emailUtility.SendEmail("VerifiyEmail2", _regViewModel.Email, emailParams);
+            await emailUtility.SendEmail("VerifiyEmail2", _regViewModel.Email, emailParams);
 
             var model = new VerifyEmailViewModel() { Mode = "codegenerated" };
             return View("Verify", model);
@@ -276,7 +276,7 @@ namespace WebApplication1.Controllers
                 var emailParams = new Dictionary<String, String>();
                 emailParams.Add("UserName", model.Email);
                 emailParams.Add("ResetPasswordLink", callbackUrl);
-                emailUtility.SendEmail("ResetPasswordEmail", model.Email, emailParams);
+                await emailUtility.SendEmail("ResetPasswordEmail", model.Email, emailParams);
 
                 // await DomingoUserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
@@ -393,6 +393,8 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
+            Session["salt"] = "salt";  
+
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
