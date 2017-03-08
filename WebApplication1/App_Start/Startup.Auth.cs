@@ -47,30 +47,12 @@ namespace WebApplication1
             // This is similar to the RememberMe option when you log in.
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
-            //var x = new FacebookAuthenticationOptions();
-            //x.Scope.Add("email");
-            //x.AppId = "169913900145520";
-            //x.AppSecret = "12ad8643deba3b26b35d700e7a3ed010";
-            //x.Provider = new FacebookAuthenticationProvider()
-            //{
-            //    OnAuthenticated = async context =>
-            //    {
-            //        //Get the access token from FB and store it in the database and
-            //        //use FacebookC# SDK to get more information about the user
-            //        context.Identity.AddClaim(new System.Security.Claims.Claim("FacebookAccessToken", context.AccessToken));
-            //        context.Identity.AddClaim(new System.Security.Claims.Claim("urn:facebook:name", context.Name));
-            //        context.Identity.AddClaim(new System.Security.Claims.Claim("urn:facebook:email", context.Email));
-            //    }
-            //};
-            //x.SignInAsAuthenticationType = DefaultAuthenticationTypes.ExternalCookie;
-            //app.UseFacebookAuthentication(x);
-
-            // original code - being commented off for the fix
+            // facebook
             app.UseFacebookAuthentication(
                appId: "169913900145520",
                appSecret: "12ad8643deba3b26b35d700e7a3ed010");
 
-            // Uncomment the following lines to enable logging in with third party login providers
+            
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
             //    clientSecret: "");

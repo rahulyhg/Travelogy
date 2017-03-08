@@ -109,6 +109,31 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="TemplateId"></param>
+        /// <returns></returns>
+        public ActionResult ViewTripTemplate(int TemplateId)
+        {
+            BlTripTemplate _template = null;
+            var _blError = TripManager.GetTripTemplatesById(TemplateId, out _template);
+            if(_blError.ErrorCode != 0)
+            {
+                throw new ApplicationException(_blError.ErrorMessage);
+            }            
+
+            var _model = new ViewTripTemplateViewModel() {  TripTemplate = _template };
+
+            var _trip = TripManager.GetImmediateTripForUser(User.Identity.GetUserId());
+            if(_trip != null)
+            {
+                _model.TripId = _trip.DlTripView.Id;
+            }
+
+            return View(_model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="country"></param>
         /// <returns></returns>
         [Authorize]

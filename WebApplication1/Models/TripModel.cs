@@ -366,4 +366,17 @@ namespace WebApplication1.Models
         /// </summary>
         public int TripId { get; set; }
     }
+
+    public class ViewTripTemplateViewModel
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public BlTripTemplate TripTemplate { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int TripId { get; set; }
+    }
 }

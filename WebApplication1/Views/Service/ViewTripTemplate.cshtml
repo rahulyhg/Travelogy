@@ -1,0 +1,58 @@
+﻿@model WebApplication1.Models.ViewTripTemplateViewModel
+
+
+@if (Model.TripTemplate.DlTemplateSteps != null && Model.TripTemplate.DlTemplateSteps.Count > 0)
+{
+    <div class="headline">
+        <h3>@Model.TripTemplate.DlTemplate.Name</h3>
+        <p class="orange">You can fully customize this trip with help from expert travel advisors.</p>
+    </div>
+
+
+    if (!String.IsNullOrEmpty(Model.TripTemplate.DlTemplate.AdditionalHtml))
+    {
+        <div class="container">
+            <div class="row margin-bottom-20">
+                @Html.Raw(Model.TripTemplate.DlTemplate.AdditionalHtml)
+            </div>
+        </div>
+    }
+
+    <div class="media margin-bottom-20">
+        @foreach (var step in Model.TripTemplate.DlTemplateSteps)
+        {
+            <hr class="margin-bottom-20" />
+            <h3>@step.ShortDescription</h3>
+            if (!string.IsNullOrEmpty(step.ThumbnailPath))
+            {
+                <img src="@step.ThumbnailPath" class="img-responsive img-border" />
+            }
+            <p>@step.LongDescription</p>
+            <hr class="margin-bottom-20" />
+        }
+    </div>
+
+    <div class="col-md-12 text-left">
+        @if (Request.IsAuthenticated)
+        {
+            if (Model.TripId > 0)
+            {
+                <a href="/Service/AddCircuitToTrip?tripId=@Model.TripId&templateId=@Model.TripTemplate.DlTemplate.Id">
+                    <h3 class="orange">Add this to my Trip <i class="icon-arrow-right"></i></h3>
+                </a>
+            }
+            else
+            {
+                <a href="/Service/CreateTripFromTemplate?templateId=@Model.TripTemplate.DlTemplate.Id">
+                    <h3 class="orange">Start my plan with this circuit <i class="icon-arrow-right"></i></h3>
+                </a>
+            }
+        }
+        else
+        {
+            <a href="/Account/Register" class="btn-u btn-orange">Sign up</a>
+            <a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-orange"><i class="icon-facebook"></i> &nbsp; Login with Facebook</a>
+            <p>Use our FREE online Trip planner.</p>
+        }
+    </div>
+}       
