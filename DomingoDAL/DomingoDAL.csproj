@@ -222,6 +222,9 @@
       <LastGenOutput>D-DbModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\2017.03.01.Regenerate_Views.sql" />
+    <Content Include="Scripts\2017.03.09.TripStep.sql" />
+    <Content Include="Scripts\2017.03.09.TripTemplateStep.sql" />
+    <Content Include="Scripts\2017.03.09.View_TripStep.sql" />
     <Content Include="Scripts\createtables-09feb2017.sql" />
     <Content Include="Scripts\CurrencyExchange.sql" />
     <Content Include="Scripts\DestinationActivity.sql" />

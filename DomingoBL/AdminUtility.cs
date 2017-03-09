@@ -84,6 +84,7 @@ namespace DomingoBL
                             _tripTemmplateStep.ThumbnailPath = templateStep.ThumbnailPath;
                             _tripTemmplateStep.Destination = templateStep.Destination;
                             _tripTemmplateStep.TypicalDurationDays = templateStep.TypicalDurationDays;
+                            _tripTemmplateStep.TopAttractions = templateStep.TopAttractions;
 
                             await context.SaveChangesAsync();
                         }
@@ -99,6 +100,7 @@ namespace DomingoBL
                                 ThumbnailPath = templateStep.ThumbnailPath,
                                 Destination = templateStep.Destination,
                                 TypicalDurationDays = templateStep.TypicalDurationDays,
+                                TopAttractions = templateStep.TopAttractions,
                             };
 
                             context.TripTemplateSteps.Add(_tripTemmplateStep);

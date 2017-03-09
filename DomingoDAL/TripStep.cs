@@ -27,5 +27,6 @@ namespace DomingoDAL
         public string TravellerNote { get; set; }
         public string TravelogerNote { get; set; }
         public int TripTemplateId { get; set; }
+        public string TopAttractions { get; set; }
     }
 }

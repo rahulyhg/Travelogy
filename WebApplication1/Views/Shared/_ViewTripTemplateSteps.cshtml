@@ -10,6 +10,15 @@
             <img src="@step.ThumbnailPath" class="img-responsive img-border" />
         }
         <h5 class="orange">@step.ShortDescription</h5>
+        if (!String.IsNullOrEmpty(step.TopAttractions))
+        {
+            <div class="margin-bottom-10"></div>
+            <blockquote>
+                <h6>Top attractions:</h6>
+                <h5><i>@step.TopAttractions</i></h5>
+                <div class="margin-bottom-10"></div>
+            </blockquote>
+        }
         <p>@step.LongDescription</p>
         <h6>Night stays: @step.NightStay</h6>
         if (!string.IsNullOrEmpty(step.AdditionalHtml))
