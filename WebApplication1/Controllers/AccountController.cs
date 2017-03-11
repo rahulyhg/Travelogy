@@ -201,18 +201,10 @@ namespace WebApplication1.Controllers
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link                   
 
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    var emailUtility = new EmailUtility();
-                    var emailParams = new Dictionary<String, String>();
-                    emailParams.Add("UserName", model.Email);
-                    emailParams.Add("ActivationLink", callbackUrl);
-
-                    // create a task for sending the verification mail
-                    var blEmail = emailUtility.SendEmail("VerifiyEmail", model.Email, emailParams);                   
+                    await _SendVerificationEmail(model.Email, user.Id);
 
                     // create a CRM lead
-                    var blCrm = DomingoUserManager.CreateCrmLeadWebSignup(model.Email, user.Id);                    
+                    var blCrm = DomingoUserManager.CreateCrmLeadWebSignup(model.Email, user.Id);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -222,7 +214,20 @@ namespace WebApplication1.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-               
+
+        private async Task _SendVerificationEmail(string email, string userId)
+        {
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userId);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userId, code = code }, protocol: Request.Url.Scheme);
+            var emailUtility = new EmailUtility();
+            var emailParams = new Dictionary<String, String>();
+            emailParams.Add("UserName", email);
+            emailParams.Add("ActivationLink", callbackUrl);
+
+            // create a task for sending the verification mail
+            var blEmail = emailUtility.SendEmail("VerifiyEmail", email, emailParams);
+        }
+
 
         //
         // GET: /Account/ConfirmEmail
@@ -448,6 +453,12 @@ namespace WebApplication1.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                        await _SendVerificationEmail(model.Email, user.Id);
+
+                        // create a CRM lead
+                        var blCrm = DomingoUserManager.CreateCrmLeadWebSignup(model.Email, user.Id);
+
                         return RedirectToLocal(returnUrl);
                     }
                 }

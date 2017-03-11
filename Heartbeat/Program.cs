@@ -19,12 +19,17 @@ namespace Heartbeat
                 int.TryParse(args[0], out timeDelay);
             }
 
-            if (timeDelay == 0) timeDelay = 30000;
+            if (timeDelay == 0) timeDelay = 30;
 
             var url = "https://www.travelogyclub.com/circuit/HB9FF35F56_5324_4B94_8038_EA9C10C3EB76";
+           
+            for(int x = 0; x < timeDelay; x ++)
+            {
+                Thread.Sleep(1000);
+                Console.Write(".");
+            }
 
-            int x = new Random().Next(4);
-            Thread.Sleep(timeDelay);
+            Console.Write(".\n");
             _Ping(url);          
         }
 
