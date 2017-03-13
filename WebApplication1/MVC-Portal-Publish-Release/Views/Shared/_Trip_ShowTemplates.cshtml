@@ -9,13 +9,37 @@
     else
     {
         <div class="headline"><h2>Choose a circuit to start planning:</h2></div>
+
+        if (Model.ImmediateTripId == 0 && !String.IsNullOrEmpty(Model.Country))
+        {
+            <div class="row">
+                <div class="block-heading-twelve text-center">
+                    <h4 class="orange">You can also start planning for @Model.Country and add circuits later</h4>
+                    <h1><a href="/Service/CreateTripForCountry?country=@Model.Country">Click to start planning for @Model.Country &nbsp;&nbsp;<i class="icon-arrow-right"></i></a></h1>
+                    <h5 class="orange">you can keep adding circuits you like</h5>
+                </div>
+                <div class="margin-bottom-20"></div>
+            </div>
+        }
+    }
+
+    <hr class="margin-bottom-20">    
+
+    for (var i = 0; i < Model.AllTemplates.Count; i++)
+    {
+        var item = Model.AllTemplates[i];
+        @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = Model.ImmediateTripId, TripTemplate = item })
+    }
+
+    if (Model.ImmediateTripId == 0)
+    {        
         <hr class="margin-bottom-40">
         <div class="row">
             <div class="col-sm-4 info-blocks">
                 <i class="icon-lightbulb icon-info-blocks"></i>
                 <div class="info-blocks-in">
                     <h3>Great ideas for exotic trips</h3>
-                    <p>Great ideas for trips to India, Nepal, Bhutan, Tibet, Russia, Mongolia and Tanzania. The itineraries have been prepared by expert travellers.</p>
+                    <p>Great ideas for trips to India, Nepal, Bhutan, Russia, Mongolia and Tanzania. The itineraries have been prepared by expert travellers.</p>
                 </div>
             </div>
             <div class="col-sm-4 info-blocks">
@@ -33,39 +57,8 @@
                 </div>
             </div>
         </div>
-
-        if (Model.ImmediateTripId == 0 && !String.IsNullOrEmpty(Model.Country))
-        {
-            <div class="row">
-                <div class="block-heading-twelve text-center">
-                    <h1 class="orange">You can also start planning for @Model.Country and add circuits later</h1>
-                    <h3><a href="/Service/CreateTripForCountry?country=@Model.Country">Click to start planning for @Model.Country &nbsp;&nbsp;<i class="icon-arrow-right"></i></a></h3>
-                    <h5 class="orange">you can keep adding circuits you like</h5>
-                </div>
-                <div class="margin-bottom-20"></div>
-            </div>
-        }
     }
-
-    <hr class="margin-bottom-20">    
-
-    for (var i = 0; i < Model.AllTemplates.Count; i++)
-    {
-        var item = Model.AllTemplates[i];
-        @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = Model.ImmediateTripId, TripTemplate = item })
-    }
-
-    if (Model.ImmediateTripId == 0 && !String.IsNullOrEmpty(Model.Country))
-    {
-        <div class="row">
-            <div class="block-heading-twelve text-center">
-                <h1 class="orange">You can also start planning for @Model.Country without choosing a circuit first</h1>                
-                <h3><a href="/Service/CreateTripForCountry?country=@Model.Country">Click to start planning for @Model.Country &nbsp;&nbsp;<i class="icon-arrow-right"></i></a></h3>
-                <h5 class="orange">you can keep adding circuits you like</h5>                    
-            </div>
-            <div class="margin-bottom-20"></div>
-        </div>
-    }
+    
 }
 
 
