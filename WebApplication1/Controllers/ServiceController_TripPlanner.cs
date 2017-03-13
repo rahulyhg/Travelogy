@@ -22,6 +22,7 @@ namespace WebApplication1.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         public ActionResult TripPlanning()
         {
             var model = new TripPlanningViewModel();
@@ -60,7 +61,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <param name="templateAlias"></param>
         /// <returns></returns>
-        //[Authorize]
+        [Authorize]
         public ActionResult ListAllTripTemplates(string templateAlias)
         {
             var _availableTemplates = new List<BlTripTemplate>();
@@ -111,6 +112,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <param name="TemplateId"></param>
         /// <returns></returns>
+        [Authorize]
         public ActionResult ViewTripTemplate(int TemplateId)
         {
             BlTripTemplate _template = null;
@@ -204,6 +206,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateTrip(TripViewModel model)
@@ -325,6 +328,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SaveTripAsync(EditTripViewModel model)
@@ -427,12 +431,13 @@ namespace WebApplication1.Controllers
             return View("AccommodationBooking", model);
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Authorize]
         public ActionResult ViewAccommodationBooking(int id)
         {
             TripBookingAccommodation accommodation = null;
