@@ -178,6 +178,7 @@
     <Compile Include="Controllers\CircuitController.cs" />
     <Compile Include="Controllers\CircuitController_India.cs" />
     <Compile Include="Controllers\DomingoControllerBase.cs" />
+    <Compile Include="Controllers\DomingoTripPlannerv2Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndiaController.cs" />
     <Compile Include="Controllers\InformationController.cs" />
@@ -9584,6 +9585,8 @@
     <Content Include="Views\Service\ViewTripTemplate.cshtml" />
     <Content Include="Views\Shared\_ViewTripTemplateSteps.cshtml" />
     <Content Include="Views\Information\Cookies.cshtml" />
+    <Content Include="Views\DomingoTripPlannerv2\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutTravelogyV2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

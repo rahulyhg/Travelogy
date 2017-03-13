@@ -236,8 +236,27 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult ViewTrip(int tripId)
         {
+            // get the trip details
             BlViewTrip trip = null;
             var _blError = TripManager.GetTripById(tripId, out trip);
+
+            // error handling
+            if(_blError.ErrorCode != 0)
+            {
+                throw new ApplicationException(_blError.ErrorMessage);
+            }
+
+            if(trip == null || trip.DlTripView == null)
+            {
+                throw new ApplicationException(String.Format("Invalid trip id requested: {0}", tripId));
+            }
+
+            if(trip.DlTripView.AspNetUserId != User.Identity.GetUserId())
+            {
+                throw new ApplicationException(String.Format("Unauthorized trip id requested: {0} by {1}", tripId, User.Identity.GetUserId()));
+            }
+
+            // all seems ok if you reach here
             List<BlTripTemplate> _allTemplates = null;
             List<BlTripTemplate> _relatedTemplates = new List<BlTripTemplate>();
             _blError = TripManager.SearchRelatedTripTemplates(trip.DlTripView.Id, out _allTemplates);
@@ -265,7 +284,24 @@ namespace WebApplication1.Controllers
         public ActionResult EditTrip(int tripId)
         {
             BlViewTrip trip = null;
-            var _blError = TripManager.GetTripById(tripId, out trip);            
+            var _blError = TripManager.GetTripById(tripId, out trip);
+            // error handling
+            if (_blError.ErrorCode != 0)
+            {
+                throw new ApplicationException(_blError.ErrorMessage);
+            }
+
+            if (trip == null || trip.DlTripView == null)
+            {
+                throw new ApplicationException(String.Format("Invalid trip id requested: {0}", tripId));
+            }
+
+            if (trip.DlTripView.AspNetUserId != User.Identity.GetUserId())
+            {
+                throw new ApplicationException(String.Format("Unauthorized trip id requested: {0} by {1}", tripId, User.Identity.GetUserId()));
+            }
+
+            // looks like all ok
             List<BlTripTemplate> _allTemplates = null;
             List<BlTripTemplate> _relatedTemplates = new List<BlTripTemplate>();
             _blError = TripManager.SearchTripTemplatesByAlias(trip.DlTripView.TemplateSearchAlias, out _allTemplates);

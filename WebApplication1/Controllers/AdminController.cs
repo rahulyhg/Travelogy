@@ -21,22 +21,6 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// 
         /// </summary>
-        private void _CheckForAdminAccess()
-        {
-            string userType = ApplicationUserManager.GetUserType(User.Identity.Name).ToLower().Trim();
-            if(userType == "admin" || userType == "traveloger" || userType == "editor")
-            {
-                // things are just fine
-            }
-            else
-            {
-                throw new ApplicationException("Unauthorized access of admin feature!");
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <returns></returns>
         [Authorize]
         public ActionResult Index()

@@ -95,11 +95,13 @@
                         if (Session["HideCookieWarning"] == null)
                         {
                             <div class="alert alert-block alert-warning">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                @*<button type="button" class="close" data-dismiss="alert">&times;</button>*@
                                 <p>
-                                    To help you log in to our website and keep your trip planner running, we use cookies.By logging on and navigating the site, you agree to our <a class="orange" href="/Information/Cookies">Cookies Policy</a>
-                                </p>
-                                <p><strong>OK! I Understood, @Html.ActionLink("hide this", "HideCookieWarning", "Information", new { @returnUrl = url }, new { @class = "orange" }).</strong> </p>
+                                    To help you log in to our website and keep your trip planner running, we use cookies. 
+                                    By logging on and navigating the site, you agree to our <a href="/Information/Cookies" target="_blank">Cookies Policy</a>.
+                                    &nbsp;&nbsp;&nbsp;&nbsp; 
+                                    @Html.ActionLink("Got It!", "HideCookieWarning", "Information", new { @returnUrl = url }, new { @class = "orange" })
+                                </p>                                
                             </div>
                         }
                     }
