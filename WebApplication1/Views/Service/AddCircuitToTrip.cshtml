@@ -5,37 +5,73 @@
 @if (Model.ActiveTrip != null)
 {
     <div class="headline">
-        <h2>Your trip to: @Model.ActiveTrip.DlTripView.Name</h2>        
+        <h2>@Model.ActiveTrip.DlTripView.NickName ( trip to @Model.ActiveTrip.DlTripView.Name ) <span class="orange"> [Status: @Model.ActiveTrip.DlTripView.Status ]</span> </h2>
     </div>
-    <div class="row">
-        <div class="col-sm-4 info-blocks">
-            <i class="icon-calendar icon-info-blocks"></i>
-            <div class="info-blocks-in">
-                <h3>Planned date: 
-                    @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
-                    {
-                        @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()
-                    }
-                    else
-                    {
-                        @Html.Raw("Not planned")
-                    }
-                </h3>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
+
+    <hr class="margin-bottom-20">
+
+    <div class="img-box-3 text-center">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/airplane.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>
+                        @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
+                        {
+                            @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()
+                        }
+                        else
+                        {
+                            @Html.Raw("Not planned")
+                        }
+                    </h4>
+                    <h6 class="orange">(Planned date)</h6>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-4 info-blocks">
-            <i class="icon-ok-sign icon-info-blocks"></i>
-            <div class="info-blocks-in">
-                <h3>Status: @Model.ActiveTrip.DlTripView.Status</h3>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/group.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>
+                        @Model.ActiveTrip.DlTripView.PaxAdults Adults
+                        @if (Model.ActiveTrip.DlTripView.PaxMinors > 0)
+                        {
+                            @Html.Raw("and ") @Model.ActiveTrip.DlTripView.PaxMinors @Html.Raw(" minor(s)")
+                        }
+                    </h4>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-4 info-blocks">
-            <i class="icon-map-marker icon-info-blocks"></i>
-            <div class="info-blocks-in">
-                <h3>Starts at: @Model.ActiveTrip.DlTripView.StartLocation</h3>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Starts at: @Model.ActiveTrip.DlTripView.StartLocation</h4>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/money.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Estimated cost:</h4>
+                    <h5 class="orange">
+                        @if (Model.ActiveTrip.DlTripView.EstimatedCost.HasValue)
+                        {
+                            @Model.ActiveTrip.DlTripView.TripCurrency
+                            @Html.Raw(" ")
+                            @Model.ActiveTrip.DlTripView.EstimatedCost.Value.ToString("N2")
+                        }
+                        else
+                        { @Html.Raw("n/a")}
+                    </h5>
+                </div>
             </div>
         </div>
     </div>
@@ -45,7 +81,7 @@
 
 @if (Model != null && Model.CreateTripTemplate != null)
 {
-    <div class="headline"><h3>Add to my trip plan:</h3></div>
+    <div class="headline"><h1>Add @Model.CreateTripTemplate.DlTemplate.Name to my trip:</h1></div>
 
     using (Html.BeginForm("AddCircuitToTripSubmit", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
     {
@@ -57,12 +93,24 @@
 
         <div class="container blog-full-width">
             <div class="blog margin-bottom-20">
-                <div class="blog-img">
-                    <img class="img-responsive" src="@Model.CreateTripTemplate.DlTemplate.ThumbnailPath" alt="">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                        <div class="blog-img">
+                            <img class="img-responsive" src="@Model.CreateTripTemplate.DlTemplate.ThumbnailPath" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-12">
+                        <h2>@Model.CreateTripTemplate.DlTemplate.Name</h2>
+                        <p>@Model.CreateTripTemplate.DlTemplate.Description</p>
+                    </div>
                 </div>
-                <h2>@Model.CreateTripTemplate.DlTemplate.Name</h2>                
-                <p>@Model.CreateTripTemplate.DlTemplate.Description</p>
-                <p><button class="btn-u btn-u-orange" type="submit"><i class="icon-cogs "></i> Add to my trip</button></p>
+                <div class="row">
+                    <div class="col-md-12 margin-bottom-20">&nbsp;</div>
+                    <div class="col-md-12">
+                        <p><button class="btn-u btn-u-orange" type="submit">Add to my trip &nbsp; &nbsp; <i class="icon-arrow-right"></i></button></p>
+                    </div>
+                </div>
+                
             </div>
 
             @if (!String.IsNullOrEmpty(Model.CreateTripTemplate.DlTemplate.AdditionalHtml))
@@ -72,13 +120,23 @@
                 </div>
             }
 
-            <div class="media margin-bottom-20">
+            <div class="row">                
                 @foreach (var step in Model.CreateTripTemplate.DlTemplateSteps)
                 {
-                    <h3>@step.ShortDescription</h3>
-                    <p>@step.LongDescription</p>                    
+                    <div class="col-md-12">
+                        <h3>@step.Destination</h3>
+                        <h4 class="orange">@step.ShortDescription</h4>
+                        <p>@step.LongDescription</p>                    
+                    </div>                    
                 }
-            </div>            
+            </div>   
+            
+            <div class="row">
+                <div class="col-md-12 margin-bottom-20">&nbsp;</div>
+                <div class="col-md-12">
+                    <p><button class="btn-u btn-u-orange" type="submit">Add to my trip &nbsp; &nbsp; <i class="icon-arrow-right"></i></button></p>
+                </div>
+            </div>         
         </div>
     }
 }

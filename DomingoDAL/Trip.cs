@@ -33,5 +33,6 @@ namespace DomingoDAL
         public string NickName { get; set; }
         public string TripCurrency { get; set; }
         public Nullable<decimal> EstimatedCost { get; set; }
+        public string HomeLocation { get; set; }
     }
 }

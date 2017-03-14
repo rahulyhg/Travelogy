@@ -204,8 +204,10 @@ namespace DomingoBL
 
             var tripSteps = new List<TripStep>();
             var templateSteps = context.TripTemplateSteps.Where(p => p.TripTemplateId == tripTemplateId).OrderBy(p => p.SortOrder);
+            var sortOrder = 1;
+
             foreach (var templateStep in templateSteps)
-            {
+            {                
                 var tripStep = new TripStep()
                 {
                     TripId = tripId,
@@ -214,6 +216,8 @@ namespace DomingoBL
                     LongDescription = templateStep.LongDescription,
                     NightStay = templateStep.NightStay,
                     Destination = templateStep.Destination,
+                    Duration = templateStep.TypicalDurationDays,
+                    SortOrder = sortOrder ++
                 };
 
                 if (tripStartDate > DateTime.MinValue)
@@ -340,16 +344,47 @@ namespace DomingoBL
                         _dbTrip.TripType = trip.TripType;
                         _dbTrip.PaxAdults = trip.PaxAdults;
                         _dbTrip.PaxMinors = trip.PaxMinors;
+                        _dbTrip.HomeLocation = trip.HomeLocation;
                     }
 
                     if (tripSteps != null)
                     {
                         // save user notes and dates
+                        tripSteps = tripSteps.OrderBy(x => x.SortOrder).ToList();
                         _UpdateTripSteps(tripSteps, context, _dbTrip);
                     }
 
                     _dbTrip.EstimatedCost = _CalculateTripCost(tripSteps, context, _dbTrip);
 
+                    await context.SaveChangesAsync();
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trip"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> DeleteUserTripAsync(View_Trip trip)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var _dbTrip = context.Trips.Find(trip.Id);
+                    if(_dbTrip == null)
+                    {
+                        return new DomingoBlError() { ErrorCode = 100, ErrorMessage = "DeleteUserTripAsync: Invalid trip Id" };
+                    }
+
+                    _dbTrip.Status = "DELETED";
                     await context.SaveChangesAsync();
                 }
 
@@ -438,28 +473,25 @@ namespace DomingoBL
         /// <param name="tripSteps"></param>
         /// <param name="context"></param>
         /// <param name="_dbTrip"></param>
-        private static void _UpdateTripSteps(List<View_TripStep> tripSteps, TravelogyDevEntities1 context, Trip _dbTrip)
+        private static void _UpdateTripSteps(List<View_TripStep> tripSteps, TravelogyDevEntities1 context, Trip trip)
         {
+            var _date = trip.StartDate;
+
             foreach (var tripStep in tripSteps)
             {
-                var _dbTripStep = context.TripSteps.Find(tripStep.Id);
+                var _dbTripStep = context.TripSteps.Find(tripStep.Id);                
                 if (_dbTripStep != null)
                 {
                     // assign the notes
                     _dbTripStep.TravellerNote = tripStep.TravellerNote;
-
-                    // if the start dates has been edited
-                    if (tripStep.StartDate.HasValue && _dbTripStep.StartDate != tripStep.StartDate)
+                    _dbTripStep.Duration = tripStep.Duration;
+                    
+                    if(_date.HasValue && tripStep.Duration.HasValue)
                     {
-                        _dbTripStep.StartDate = tripStep.StartDate;
-                    }
-
-                    // if the end dates has been edited
-                    if (tripStep.EndDate.HasValue && _dbTripStep.EndDate != tripStep.EndDate)
-                    {
-                        _dbTripStep.EndDate = tripStep.EndDate;
-                        _dbTrip.EndDate = tripStep.EndDate;
-                    }
+                        _dbTripStep.StartDate = _date;
+                        _dbTripStep.EndDate = _date.Value.AddDays(tripStep.Duration.Value);
+                        _date = _date.Value.AddDays(tripStep.Duration.Value);
+                    }                    
                 }
             }
         }

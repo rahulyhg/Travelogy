@@ -34,5 +34,6 @@ namespace DomingoDAL
         public string TripType { get; set; }
         public int PaxAdults { get; set; }
         public int PaxMinors { get; set; }
+        public string HomeLocation { get; set; }
     }
 }

@@ -109,13 +109,15 @@
 
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
-                            <h5 class="orange">Planned start date: @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
+                            <h5 class="orange">Planned start date: 
+                            @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
                             { @Model.ActiveTrip.DlTripView.StartDate.Value.ToShortDateString()}</h5>
                             <p>@Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartDate, new { @class = "form-control", type = "date" })</p>
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <h5 class="orange">Start Location:</h5>
-                            <p>@Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartLocation, new { @class = "form-control" }) </p>
+                            <p>@Html.DropDownListFor(model => model.ActiveTrip.DlTripView.StartLocation, Model.TripStartLocationOptions, new { @class = "form-control" })</p>
+                            @*<p>@Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartLocation, new { @class = "form-control" }) </p> TripStartLocationOptions*@
                         </div>
                         <div class="col-md-3 col-sm-6">
                             @{
@@ -151,6 +153,10 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <h5 class="orange">Flying out from:</h5>
+                            <p>@Html.EditorFor(model => model.ActiveTrip.DlTripView.HomeLocation, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })</p>
+                        </div>
                         <div class="col-md-3 col-sm-6">
                             <h5 class="orange">Adults (above 15 yrs old)</h5>
                             <p>@Html.EditorFor(model => model.ActiveTrip.DlTripView.PaxAdults, new { htmlAttributes = new { @class = "form-control" } })</p>
@@ -195,29 +201,20 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4 class="orange">@tripStep.ShortDescription</h4>
-                                        <p>@tripStep.LongDescription</p>
-                                    </div>
-
-                                    <div class="col-md-3 col-sm-12">
-                                        <h4>Start date: 
-                                        @if (tripStep.StartDate.HasValue)
-                                        { 
-                                            @tripStep.StartDate.Value.ToShortDateString()
-                                        }
-                                        </h4>
-                                        <p>Change to: @Html.TextBoxFor(p => p.ActiveTrip.DlTripStepsView[x].StartDate, new { @class = "form-control", type = "date" })</p>
-                                    </div>
-
-                                    <div class="col-md-3 col-sm-12">
-                                        <h4>
-                                            End date:
+                                        <h4>@tripStep.Destination</h4>
+                                        <h5 class="orange">@tripStep.ShortDescription</h5>
+                                        <h5>
+                                            From:
+                                            @if (tripStep.StartDate.HasValue)
+                                            { @tripStep.StartDate.Value.ToShortDateString() }
+                                            else
+                                            { @Html.Raw("Not planned")}
+                                             -- to :
                                             @if (tripStep.EndDate.HasValue)
-                                            {
-                                                @tripStep.EndDate.Value.ToShortDateString()
-                                            }
-                                        </h4>
-                                        <p>Change to: @Html.TextBoxFor(p => p.ActiveTrip.DlTripStepsView[x].EndDate, new { @class = "form-control", type = "date" })</p>
+                                            { @tripStep.EndDate.Value.ToShortDateString() }
+                                            else { @Html.Raw("Not planned")}
+                                        </h5>
+                                        <p>@tripStep.LongDescription</p>
                                     </div>
 
                                     @if (!string.IsNullOrEmpty(Model.ActiveTrip.DlTripStepsView[x].TravelogerNote))
@@ -228,12 +225,18 @@
                                         </div>
                                     }
 
-                                    <div class="col-md-9">
+                                    <div class="col-md-12">
+                                        <h5>Planned Duration: @tripStep.Duration Days</h5>
+                                        <h5 class="orange">Change it to : 
+                                            @Html.EditorFor(p => p.ActiveTrip.DlTripStepsView[x].Duration, new { @class = "" }) 
+                                            Days</h5>
+                                    </div>
+                                    <div class="col-md-12">
                                         <h5>Add notes:</h5>
                                         <p>@Html.TextAreaFor(p => p.ActiveTrip.DlTripStepsView[x].TravellerNote, new { @class = "form-control" })</p>
                                         <div class="margin-bottom-20"></div>
                                         <button class="btn btn-default" type="submit">Save Notes</button>
-                                        <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@tripStep.TripId&tripStepId=@tripStep.Id"><i class="icon-plane"></i>&nbsp; Add Domestic Transfer</a>                                        
+                                        <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@tripStep.TripId&tripStepId=@tripStep.Id"><i class="icon-plane"></i>&nbsp; Add Domestic Transfer</a>
                                         <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId"><i class="icon-building"></i>&nbsp;Add Accommodation</a>
                                         <div class="margin-bottom-20"></div>
                                         <button class="btn btn-orange" type="submit">Save Trip</button>

@@ -86,7 +86,8 @@
 
     <hr class="margin-bottom-20">
     <div class="pull-left">
-        <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.DlTripView.Id" class="btn btn-orange"> Make Changes &nbsp; <i class="icon-edit"></i></a>
+        <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.DlTripView.Id" class="btn btn-orange"> Make Changes to my trip &nbsp; <i class="icon-edit"></i></a>
+        <a href="/Service/DeleteTrip?tripId=@Model.ActiveTrip.DlTripView.Id" class="btn btn-red">Discard this trip &nbsp; <i class="icon-trash"></i></a>  
     </div>
     <div class="margin-bottom-10"></div>
     <hr class="margin-bottom-40">
@@ -144,133 +145,139 @@
                         </div>
                     }
 
-                    @foreach (var tripStep in Model.ActiveTrip.DlTripStepsView)
-                    {
-                        <div class="col-md-12 col-sm-12">
-                            <div class="servive-block-in">
-                                <h4 class="text-left"><i class="icon-calendar-empty"></i> @tripStep.ShortDescription</h4>
-                                <h5 class="orange text-left">
-                                    Planned Dates:
-                                    @if (tripStep.StartDate.HasValue)
-                                    {@Html.Raw(tripStep.StartDate.Value.ToShortDateString());
-                                    }
-                                    else
-                                    { @Html.Raw("Not Planned");
-                                    } &nbsp; -- &nbsp;
-                                    @if (tripStep.EndDate.HasValue)
-                                    { @Html.Raw(tripStep.EndDate.Value.ToShortDateString());
-                                    }
-                                    else
-                                    { @Html.Raw("Not Planned");
-                                    }
-                                </h5>
-                                <p class="text-left">@tripStep.LongDescription</p>
+                    <div class="container">
+                        @foreach (var tripStep in Model.ActiveTrip.DlTripStepsView)
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="col-md-12 col-sm-12">
 
-                                <div class="img-box-3 text-left">
+                                        <h4 class="text-left">@tripStep.Destination &nbsp; <small>@tripStep.ShortDescription</small></h4>
+                                        <h5 class="orange text-left">
+                                            <i class="icon-calendar-empty"></i>
+                                            Planned Dates:
+                                            @if (tripStep.StartDate.HasValue)
+                                            {
+                                                @Html.Raw(tripStep.StartDate.Value.ToShortDateString());
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Not Planned");
+                                            } &nbsp; -- &nbsp;
+                                            @if (tripStep.EndDate.HasValue)
+                                            {
+                                                @Html.Raw(tripStep.EndDate.Value.ToShortDateString());
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Not Planned");
+                                            }
+                                        </h5>
+                                        <p class="text-left">@tripStep.LongDescription</p>
 
-                                    @{
-                                        var hotels = Model.ActiveTrip.DlBookingsView.Where(hotel => hotel.TripStepId == tripStep.Id);
-                                        foreach (var hotel in hotels)
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-2 col-sm-6">
-                                                    <!-- Image Box #3 Item -->
-                                                    <div class="img-box-3-item">
-                                                        <div class="img-box-3-icon">
-                                                            <img src="~/content/img/flat-icons/hotel-1.png" alt="" class="img-responsive" />
+                                        <div class="img-box-3 text-left">
+
+                                            @{
+                                                var hotels = Model.ActiveTrip.DlBookingsView.Where(hotel => hotel.TripStepId == tripStep.Id);
+                                                foreach (var hotel in hotels)
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <!-- Image Box #3 Item -->
+                                                            <div class="img-box-3-item">
+                                                                <div class="img-box-3-icon">
+                                                                    <img src="~/content/img/flat-icons/hotel-1.png" alt="" class="img-responsive" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-6">
+                                                            <h6>@hotel.AccommodationType at @hotel.TownOrCity</h6>
+                                                            <p>Booking Status: @hotel.Status </p>
+                                                            @if (!String.IsNullOrEmpty(hotel.PropertyName))
+                                                            {
+                                                                <h6 class="text-left">@hotel.PropertyName</h6>
+                                                                <p class="text-left">@hotel.PropertyAddress</p>
+                                                            }
+
+                                                            @if (hotel.CheckinDate.HasValue && hotel.CheckoutDate.HasValue)
+                                                            {
+                                                                <p class="text-left">Check-in: @hotel.CheckinDate.Value.ToShortDateString() - Check-out: @hotel.CheckoutDate.Value.ToShortDateString()</p>
+                                                            }
+                                                            <p class="text-left"><a class="orange" href="/Service/ViewAccommodationBooking?id=@hotel.Id">View details</a></p>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-4 col-sm-6">
-                                                    <h6>@hotel.AccommodationType at @hotel.TownOrCity</h6>
-                                                    <p>Booking Status: @hotel.Status </p>
-                                                    @if (!String.IsNullOrEmpty(hotel.PropertyName))
-                                                    {
-                                                        <h6 class="text-left">@hotel.PropertyName</h6>
-                                                        <p class="text-left">@hotel.PropertyAddress</p>
-                                                    }
+                                                }
+                                            }
+                                        </div>
 
-                                                    @if (hotel.CheckinDate.HasValue && hotel.CheckoutDate.HasValue)
-                                                    {
-                                                        <p class="text-left">Check-in: @hotel.CheckinDate.Value.ToShortDateString() - Check-out: @hotel.CheckoutDate.Value.ToShortDateString()</p>
-                                                    }
-                                                    <p class="text-left"><a class="orange" href="/Service/ViewAccommodationBooking?id=@hotel.Id">View details</a></p>
-                                                </div>
-                                            </div>
-                                        }
-                                    }
-                                </div>
+                                        <div class="img-box-3 text-left">
+                                            @{
+                                                var transfers = Model.ActiveTrip.DlTransportsBookingsView.Where(transfer => transfer.TripStepId == tripStep.Id);
+                                                foreach (var transfer in transfers)
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-md-2 col-sm-6">
+                                                            <!-- Image Box #3 Item -->
+                                                            <div class="img-box-3-item">
+                                                                <div class="img-box-3-icon">
+                                                                    @if (transfer.TransportType.ToLower().Contains("flight"))
+                                                                    {
+                                                                        <img src="~/content/img/flat-icons/aeroplane.png" alt="" class="img-responsive" />
+                                                                    }
+                                                                    else if (transfer.TransportType.ToLower().Contains("train"))
+                                                                    {
+                                                                        <img src="~/content/img/flat-icons/train-2.png" alt="" class="img-responsive" />
+                                                                    }
+                                                                    else if (transfer.TransportType.ToLower().Contains("bus"))
+                                                                    {
+                                                                        <img src="~/content/img/flat-icons/minibus.png" alt="" class="img-responsive" />
+                                                                    }
 
-                                <div class="img-box-3 text-left">
-                                    @{
-                                        var transfers = Model.ActiveTrip.DlTransportsBookingsView.Where(transfer => transfer.TripStepId == tripStep.Id);
-                                        foreach (var transfer in transfers)
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-2 col-sm-6">
-                                                    <!-- Image Box #3 Item -->
-                                                    <div class="img-box-3-item">
-                                                        <div class="img-box-3-icon">
-                                                            @if(transfer.TransportType.ToLower().Contains("flight"))
-                                                            {
-                                                                <img src="~/content/img/flat-icons/aeroplane.png" alt="" class="img-responsive" />
-                                                            }
-                                                            else if(transfer.TransportType.ToLower().Contains("train"))
-                                                            {
-                                                                <img src="~/content/img/flat-icons/train-2.png" alt="" class="img-responsive" />
-                                                            }
-                                                            else if (transfer.TransportType.ToLower().Contains("bus"))
-                                                            {
-                                                                <img src="~/content/img/flat-icons/minibus.png" alt="" class="img-responsive" />
-                                                            }
-
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <h6 class="text-left">@transfer.TransportFrom to @transfer.TransportTo by @transfer.TransportType</h6>
+                                                            @if (transfer.BookingDate.HasValue)
+                                                            {  <p class="text-left">@transfer.BookingDate.Value.ToShortDateString()</p> }
+                                                            <p class="text-left">@transfer.Adults Adults and @transfer.Kids Minors by @transfer.TravelClass</p>
+                                                            <p class="text-left"><a class="orange" href="/Service/ViewTransferBooking?id=@transfer.Id">View details</a></p>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-9 col-sm-6">
-                                                    <h6 class="text-left">@transfer.TransportFrom to @transfer.TransportTo by @transfer.TransportType</h6>
-                                                    @if (transfer.BookingDate.HasValue){  <p class="text-left">@transfer.BookingDate.Value.ToShortDateString()</p> }
-                                                    <p class="text-left">@transfer.Adults Adults and @transfer.Kids Minors by @transfer.TravelClass</p>
-                                                    <p class="text-left"><a class="orange" href="/Service/ViewTransferBooking?id=@transfer.Id">View details</a></p>
-                                                </div>
-                                            </div>
+                                                }
+                                            }
+                                        </div>
+
+
+                                        @if (!string.IsNullOrEmpty(tripStep.TravellerNote))
+                                        {
+                                            <h5 class="orange text-left">Your Notes:</h5>
+                                            <p class="text-left">@tripStep.TravellerNote</p>
                                         }
-                                    }
+
+                                        @if (!string.IsNullOrEmpty(tripStep.TravelogerNote))
+                                        {
+                                            <h5 class="orange text-left">Traveloger's Notes:</h5>
+                                            <p class="orange text-left">@tripStep.TravelogerNote</p>
+                                        }
+
+                                        <div class="margin-bottom-20"></div>
+
+                                        <p class="text-left">
+                                            <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId">&nbsp;Add Accommodation</a>&nbsp;
+                                            <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@tripStep.TripId&tripStepId=@tripStep.Id">&nbsp; Add Domestic Transfer</a>
+                                        </p>
+
+                                    </div>
                                 </div>
-
-
-                                @if (!string.IsNullOrEmpty(tripStep.TravellerNote))
-                                {
-                                    <h5 class="orange text-left">Your Notes:</h5>
-                                    <p class="text-left">@tripStep.TravellerNote</p>
-                                }
-
-                                @if (!string.IsNullOrEmpty(tripStep.TravelogerNote))
-                                {
-                                    <h5 class="orange text-left">Traveloger's Notes:</h5>
-                                    <p class="orange text-left">@tripStep.TravelogerNote</p>
-                                }
-
-                                <div class="margin-bottom-20"></div>
-
-                                <p class="text-left">                                    
-                                    <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId">&nbsp;Add Accommodation</a>&nbsp;
-                                    <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@tripStep.TripId&tripStepId=@tripStep.Id">&nbsp; Add Domestic Transfer</a>
-                                </p>
-
-                                <p class="text-left">
-                                    <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.DlTripView.Id" class="btn btn-orange"> Make changes to my trip &nbsp;</a>
-                                </p>
-
                             </div>
-                        </div>
-                    }
+
+                        }
+                    </div>
+                    
                 </div>
             </div>
 
-            @*<div class="tab-pane" id="booking">
-                @Html.Partial("_TripBookings", Model.ActiveTrip)
-            </div>*@
             <div class="tab-pane" id="messages">
                 <h4>Messages for your trip [@Model.ActiveTrip.DlTripView.Id]</h4>
                 @{
@@ -298,25 +305,31 @@
     </div>
 
     <div class="pull-left">
-        <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.DlTripView.Id" class="btn btn-orange"> Make Changes &nbsp; <i class="icon-edit"></i></a>
+        <a href="/Service/EditTrip?tripId=@Model.ActiveTrip.DlTripView.Id" class="btn btn-orange"> Make Changes to my trip &nbsp; <i class="icon-edit"></i></a>
     </div>
 
     <div class="margin-bottom-20"></div>
 
     if (Model.RelatedTemplates != null && Model.RelatedTemplates.Count > 0)
     {
-
         <div class="headline">
-            <h2>Suggestions for you</h2>
+            <h3>Suggestions for you</h3>
         </div>
         <div class="margin-bottom-20">
-            <p class="orange">Following Trip(s) are suggested for you to add to the current trip. You can combine multiple circuits to plan a longer trip.</p>
-        </div>
-
+            <h4>Following Trip(s) are suggested for you to add to the current trip. You can combine multiple circuits to plan a longer trip.</h4>
+        </div>               
+        
         foreach (var template in Model.RelatedTemplates)
         {
-            @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = Model.ActiveTrip.DlTripView.Id, TripTemplate = template })
-        }
+            <div class="panel panel-default">  
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Partial("_TripTemplateWidget", new WebApplication1.Models.TripTemplateWidgetViewModel { TripId = Model.ActiveTrip.DlTripView.Id, TripTemplate = template })    
+                        </div>                                    
+                    </div>
+                </div>                
+            </div>                    
+        }  
     }
-
- } @*end of active trip section*@
+} @*end of active trip section*@

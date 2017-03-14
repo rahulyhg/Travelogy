@@ -274,9 +274,23 @@ namespace WebApplication1.Models
         [Required(ErrorMessage = "Please give a name to your Trip!")]
         public string NickName { get; set; }
 
-        [Display(Name = "Choose where you want to start:")]
-        [Required(ErrorMessage = "Please pick a starting point for the Trip!")]
+        [Display(Name = "Choose where you want to fly out from:")]
+        [Required(ErrorMessage = "Please state where you plan to start from.")]
+        public string HomeLocation { get; set; }
+
+        [Display(Name = "Number of adults in your trip:")]
+        [Required(ErrorMessage = "Please mention the number of adults.")]
+        [Range(1, 15, ErrorMessage = "Please add one or more adults .. upto 15")]
+        public int Adults { get; set; }
+
+        [Display(Name = "Number of minors in your trip:")]        
+        public int Minors { get; set; }
+
+        [Display(Name = "Pick a starting point for the Trip:")]
+        [Required(ErrorMessage = "Please pick a starting point for the Trip.")]
         public string StartLocation { get; set; }
+
+
     }
 
     /// <summary>
@@ -349,6 +363,11 @@ namespace WebApplication1.Models
         /// 
         /// </summary>
         public List<BlTripTemplate> RelatedTemplates { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<System.Web.Mvc.SelectListItem> TripStartLocationOptions { get; set; }
     }
 
     /// <summary>

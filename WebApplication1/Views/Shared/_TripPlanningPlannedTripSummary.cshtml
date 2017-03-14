@@ -25,20 +25,18 @@
             </div>
             <div class="col-md-8">
                 <h2>@Model.DlTripView.NickName</h2>
-                <h4 class="orange">Your trip to @Model.DlTripView.Name</h4>
-                <ul class="list-unstyled search-rating">
-                    <li><i class="icon-star"></i></li>
-                    <li><i class="icon-star"></i></li>
-                    <li><i class="icon-star"></i></li>
-                    <li><i class="icon-star"></i></li>
-                    <li><i class="icon-star"></i></li>
-                </ul>
+                <h4 class="orange">Your trip to @Model.DlTripView.Name</h4>               
                 <p>@Model.DlTripView.Description</p>
                 <p>
                     <a href="/Service/ViewTrip?tripId=@Model.DlTripView.Id" class="btn btn-black">View trip</a>
-                    <a href="/Service/EditTrip?tripId=@Model.DlTripView.Id" class="btn btn-orange">Manage trip</a>                    
+                    <a href="/Service/EditTrip?tripId=@Model.DlTripView.Id" class="btn btn-orange">Manage trip</a>
+                    <a href="/Service/DeleteTrip?tripId=@Model.DlTripView.Id" class="btn btn-red">Discard trip</a>                    
                 </p>                
             </div>
+        </div>
+        <div id="dialog-confirm" title="Empty the recycle bin?">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+            These items will be permanently deleted and cannot be recovered. Are you sure?</p>
         </div>
     </div>
 }

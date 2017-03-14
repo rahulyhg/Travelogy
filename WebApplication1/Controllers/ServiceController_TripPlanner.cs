@@ -219,7 +219,10 @@ namespace WebApplication1.Controllers
                 NickName = model.CreateTripViewModel.NickName,
                 StartDate = model.CreateTripViewModel.StartDate,
                 StartLocation = model.CreateTripViewModel.StartLocation,
-                Status = TripStatus.planned.ToString()
+                Status = TripStatus.planned.ToString(),
+                HomeLocation = model.CreateTripViewModel.HomeLocation,
+                PaxAdults = model.CreateTripViewModel.Adults,
+                PaxMinors = model.CreateTripViewModel.Minors
             };
 
             var _blError = await TripManager.CreateTrip(trip, model.CreateTripViewModel.TemplateId);
@@ -278,6 +281,33 @@ namespace WebApplication1.Controllers
             return View("Trip", _model);
         }
 
+        [Authorize]
+        public ActionResult DeleteTrip(int tripId)
+        {
+            BlViewTrip trip = null;
+            var _blError = TripManager.GetTripById(tripId, out trip);
+            // error handling
+            if (_blError.ErrorCode != 0)
+            {
+                throw new ApplicationException(_blError.ErrorMessage);
+            }
+
+            if (trip == null || trip.DlTripView == null)
+            {
+                throw new ApplicationException(String.Format("Invalid trip id requested: {0}", tripId));
+            }
+
+            if (trip.DlTripView.AspNetUserId != User.Identity.GetUserId())
+            {
+                throw new ApplicationException(String.Format("Unauthorized trip id requested: {0} by {1}", tripId, User.Identity.GetUserId()));
+            }
+
+            // looks like all ok
+            var _model = new EditTripViewModel() { ActiveTrip = trip, RelatedTemplates = null };
+            return View(_model);
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -319,7 +349,15 @@ namespace WebApplication1.Controllers
                     }
                 }
             }
-            var _model = new EditTripViewModel() { ActiveTrip = trip, RelatedTemplates = _relatedTemplates };
+
+            var startLocationOptions = trip.DlTripView.StartLocation.Split('/').ToList();
+            var _tripStartLocationOptions = new List<SelectListItem>();
+            foreach (var startLocation in startLocationOptions)
+            {
+                _tripStartLocationOptions.Add(new SelectListItem() { Text = startLocation, Value = startLocation });
+            }            
+
+            var _model = new EditTripViewModel() { ActiveTrip = trip, RelatedTemplates = _relatedTemplates, TripStartLocationOptions = _tripStartLocationOptions };
             return View("EditTrip", _model);
         }
 
@@ -334,6 +372,29 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult> SaveTripAsync(EditTripViewModel model)
         {
             var _blError = await TripManager.SaveUserTripChangesAsync(model.ActiveTrip.DlTripView, model.ActiveTrip.DlTripStepsView);
+            return RedirectToAction("ViewTrip", new { @tripId = model.ActiveTrip.DlTripView.Id });
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteTripAsync(EditTripViewModel model, string submit)
+        {
+            if(submit == "discard")
+            {
+                // remove session var
+                Session["ImmediateTrip"] = null;
+
+                // update the status to DELETED
+                var _blError = await TripManager.DeleteUserTripAsync(model.ActiveTrip.DlTripView);
+                if(_blError.ErrorCode != 0)
+                {
+                    throw new ApplicationException(_blError.ErrorMessage);
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+            
             return RedirectToAction("ViewTrip", new { @tripId = model.ActiveTrip.DlTripView.Id });
         }
 

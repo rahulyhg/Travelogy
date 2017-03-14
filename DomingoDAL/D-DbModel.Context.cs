@@ -45,7 +45,6 @@ namespace DomingoDAL
         public virtual DbSet<HtmlEmail> HtmlEmails { get; set; }
         public virtual DbSet<HtmlEmailTemplate> HtmlEmailTemplates { get; set; }
         public virtual DbSet<AspNetUserSession> AspNetUserSessions { get; set; }
-        public virtual DbSet<Trip> Trips { get; set; }
         public virtual DbSet<TripTemplate> TripTemplates { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<TagMap> TagMaps { get; set; }
@@ -59,11 +58,12 @@ namespace DomingoDAL
         public virtual DbSet<View_TripBookingTransport> View_TripBookingTransport { get; set; }
         public virtual DbSet<DestinationCost> DestinationCosts { get; set; }
         public virtual DbSet<View_TripStepCost> View_TripStepCost { get; set; }
-        public virtual DbSet<View_Trip> View_Trip { get; set; }
         public virtual DbSet<CurrencyExchange> CurrencyExchanges { get; set; }
         public virtual DbSet<View_User> View_User { get; set; }
-        public virtual DbSet<TripStep> TripSteps { get; set; }
         public virtual DbSet<TripTemplateStep> TripTemplateSteps { get; set; }
+        public virtual DbSet<Trip> Trips { get; set; }
+        public virtual DbSet<View_Trip> View_Trip { get; set; }
+        public virtual DbSet<TripStep> TripSteps { get; set; }
         public virtual DbSet<View_TripStep> View_TripStep { get; set; }
     }
 }
