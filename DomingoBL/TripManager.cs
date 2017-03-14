@@ -66,6 +66,9 @@ namespace DomingoBL
                     if(dlTrip != null)
                     {
                         var trip = new BlViewTrip() { DlTripView = dlTrip };
+                        var tripSteps = context.View_TripStep.Where(p => p.TripId == dlTrip.Id).ToList();
+                        trip.DlTripStepsView = tripSteps;
+
                         return trip;
                     }
                 }
@@ -176,7 +179,7 @@ namespace DomingoBL
                         await context.SaveChangesAsync();
 
                         // get the steps from the template
-                        foreach (var tripStep in _CopyTripStepsFromTemplate(tripTemplateId, trip.Id, trip.StartDate, context))
+                        foreach (var tripStep in _CopyTripStepsFromTemplate(tripTemplateId, trip, trip.StartDate, context))
                         {
                             context.TripSteps.Add(tripStep);
                         }
@@ -194,7 +197,7 @@ namespace DomingoBL
             }
         }
 
-        private static List<TripStep> _CopyTripStepsFromTemplate(int tripTemplateId, int tripId, DateTime? startDate, TravelogyDevEntities1 context)
+        private static List<TripStep> _CopyTripStepsFromTemplate(int tripTemplateId, Trip trip, DateTime? startDate, TravelogyDevEntities1 context)
         {
             var tripStartDate = DateTime.MinValue;
             if(startDate.HasValue && startDate.Value > DateTime.MinValue)
@@ -202,15 +205,22 @@ namespace DomingoBL
                 tripStartDate = startDate.Value;
             }
 
+            var sortOrder = 1;
+            var _dbTripSteps = context.TripSteps.Where(p => p.TripId == trip.Id && p.UserRemoved == null);
+            if(_dbTripSteps != null)
+            {
+                sortOrder += _dbTripSteps.Count();
+            }
+
             var tripSteps = new List<TripStep>();
             var templateSteps = context.TripTemplateSteps.Where(p => p.TripTemplateId == tripTemplateId).OrderBy(p => p.SortOrder);
-            var sortOrder = 1;
+            
 
             foreach (var templateStep in templateSteps)
             {                
                 var tripStep = new TripStep()
                 {
-                    TripId = tripId,
+                    TripId = trip.Id,
                     TripTemplateStepId = templateStep.Id,
                     ShortDescription = templateStep.ShortDescription,
                     LongDescription = templateStep.LongDescription,
@@ -226,6 +236,7 @@ namespace DomingoBL
                     if(templateStep.TypicalDurationDays.HasValue)
                     {
                         tripStep.EndDate = tripStartDate.AddDays(templateStep.TypicalDurationDays.Value);
+                        trip.EndDate = tripStep.EndDate;
                     }
                 }
 
@@ -266,16 +277,12 @@ namespace DomingoBL
 
                         _dbTrip.Templates = string.Format("{0};{1}", _dbTrip.Templates, tripTemplateId);
 
-                        DateTime? dtDate = _dbTrip.EndDate.HasValue? _dbTrip.EndDate : _dbTrip.StartDate ;
+                        DateTime? dtDate = _dbTrip.EndDate ;
 
                         // get the steps from the template and add them to this trip
-                        foreach (var tripStep in _CopyTripStepsFromTemplate(tripTemplateId, _dbTrip.Id, dtDate, context))
+                        foreach (var tripStep in _CopyTripStepsFromTemplate(tripTemplateId, _dbTrip, dtDate, context))
                         {
-                            context.TripSteps.Add(tripStep);
-                            if (tripStep.EndDate.HasValue)
-                            {
-                                _dbTrip.EndDate = tripStep.EndDate;
-                            }
+                            context.TripSteps.Add(tripStep);                            
                         }
 
                         await context.SaveChangesAsync();
@@ -370,6 +377,88 @@ namespace DomingoBL
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="tripStepId"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> DeleteUserTripstepAsync(int tripStepId)
+        {
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    // find the trip step
+                    var _dbTripStep = context.TripSteps.Find(tripStepId);
+                    if(_dbTripStep == null)
+                    {
+                        return new DomingoBlError() { ErrorCode = 100, ErrorMessage = "DeleteUserTripstepAsync: invalid tripStepId" };
+                    }
+
+                    // set the removed flag
+                    _dbTripStep.UserRemoved = true;
+
+                    // cancel all hotels
+                    var _hotels = context.TripBookingAccommodations.Where(p => p.TripStepId == tripStepId);
+                    foreach(var _hotel in _hotels)
+                    {
+                        _hotel.Status = "USERCANCELLED";
+                    }
+
+                    // cancel all transfers
+                    var _transfers = context.TripBookingTransports.Where(p => p.TripStepId == tripStepId);
+                    foreach (var _transfer in _transfers)
+                    {
+                        _transfer.BookingStatus = "USERCANCELLED";
+                    }
+
+                    // save these changes
+                    await context.SaveChangesAsync();
+
+                    // re-align the trip dates
+                    await _UpdateTripSteps(_dbTripStep.TripId);
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        private static async Task<int> _UpdateTripSteps(int tripId)
+        {
+            using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+            {
+                var _trip = context.Trips.Find(tripId);
+                if (_trip == null) return -1;
+
+                var _date = _trip.StartDate;
+                if (!_date.HasValue) return -1;
+
+                // discard the step user has removed
+                var _tripSteps = context.TripSteps.Where(p => p.TripId == tripId && p.UserRemoved == null);
+                if (_tripSteps != null)
+                {
+                    _tripSteps = _tripSteps.OrderBy(p => p.SortOrder);
+
+                    foreach (var _tripStep in _tripSteps)
+                    {
+                        _tripStep.StartDate = _date;
+                        _tripStep.EndDate = _date.Value.AddDays(_tripStep.Duration.Value);
+                        _date = _date.Value.AddDays(_tripStep.Duration.Value);
+                    }
+                }
+
+                _trip.EndDate = _date;
+
+                await context.SaveChangesAsync();
+
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
         public static async Task<DomingoBlError> DeleteUserTripAsync(View_Trip trip)
@@ -382,9 +471,29 @@ namespace DomingoBL
                     if(_dbTrip == null)
                     {
                         return new DomingoBlError() { ErrorCode = 100, ErrorMessage = "DeleteUserTripAsync: Invalid trip Id" };
-                    }
+                    }  
 
                     _dbTrip.Status = "DELETED";
+
+                    var _dbTripSteps = context.TripSteps.Where(p => p.TripId == trip.Id);
+                    foreach(var _step in _dbTripSteps)
+                    {
+                        _step.UserRemoved = true;
+                    }
+
+                    var _hotels = context.TripBookingAccommodations.Where(p => p.TripId == trip.Id);
+                    foreach (var _hotel in _hotels)
+                    {
+                        _hotel.Status = "USERCANCELLED";
+                    }
+
+                    // cancel all transfers
+                    var _transfers = context.TripBookingTransports.Where(p => p.TripId == trip.Id);
+                    foreach (var _transfer in _transfers)
+                    {
+                        _transfer.BookingStatus = "USERCANCELLED";
+                    }
+
                     await context.SaveChangesAsync();
                 }
 
@@ -467,6 +576,9 @@ namespace DomingoBL
             return _totalCost;
         }
 
+        
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -480,7 +592,7 @@ namespace DomingoBL
             foreach (var tripStep in tripSteps)
             {
                 var _dbTripStep = context.TripSteps.Find(tripStep.Id);                
-                if (_dbTripStep != null)
+                if (_dbTripStep != null)  
                 {
                     // assign the notes
                     _dbTripStep.TravellerNote = tripStep.TravellerNote;
@@ -494,6 +606,8 @@ namespace DomingoBL
                     }                    
                 }
             }
+
+            trip.EndDate = _date;
         }
 
         /// <summary>
@@ -895,6 +1009,43 @@ namespace DomingoBL
                 return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripStepId"></param>
+        /// <param name="viewTrip"></param>
+        /// <returns></returns>
+        public static DomingoBlError GetTripstepDetailsById(int tripStepId, out BlViewTrip viewTrip)
+        {
+            viewTrip = new BlViewTrip();
+
+            try
+            {
+                using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+                {
+                    var dlTripStep = context.View_TripStep.Where(p => p.Id == tripStepId).FirstOrDefault(); 
+                    if(dlTripStep == null)
+                    {
+                        return new DomingoBlError() { ErrorCode = 100, ErrorMessage = "GetTripstepDetailsById: Invalid tripStepId" };
+                    }
+                    
+                    viewTrip.DlTripStepsView = new List<View_TripStep>();
+                    viewTrip.DlTripStepsView.Add(dlTripStep);
+                    viewTrip.DlTripView = context.View_Trip.Where(p => p.Id == dlTripStep.TripId).FirstOrDefault();
+
+                    viewTrip.DlBookingsView = context.View_TripBookingAccommodation.Where(p => p.TripStepId == tripStepId).ToList();
+                    viewTrip.DlTransportsBookingsView = context.View_TripBookingTransport.Where(p => p.TripStepId == tripStepId).ToList();
+                }
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
 
         /// <summary>
         /// 

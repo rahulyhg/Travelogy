@@ -2,7 +2,7 @@
 
 @if (@Model != null && @Model.DlTripView != null)
 {
-    <h3>Trip to @Model.DlTripView.Name starting at @Model.DlTripView.StartLocation <small class="orange"> [ Status: @Model.DlTripView.Status ]</small></h3>
+    <h3>Trip: @Model.DlTripView.NickName starting at @Model.DlTripView.StartLocation <small class="orange"> [ Status: @Model.DlTripView.Status ]</small></h3>
 
     <div class="search-blocks search-blocks-top-yellow">
         <div class="row">
@@ -25,19 +25,30 @@
             </div>
             <div class="col-md-8">
                 <h2>@Model.DlTripView.NickName</h2>
-                <h4 class="orange">Your trip to @Model.DlTripView.Name</h4>               
-                <p>@Model.DlTripView.Description</p>
+                <h4 class="orange">Your trip to @Model.DlTripView.Name</h4>  
+                @{ 
+                    System.Text.StringBuilder _tripSummary = new System.Text.StringBuilder();
+                    if(Model.DlTripStepsView != null)
+                    {
+                        foreach (var _step in Model.DlTripStepsView)
+                        {
+                            _tripSummary.AppendFormat("{0}...", _step.Destination);
+                        }
+                    }
+
+
+                    if (_tripSummary.Length == 0) { _tripSummary.Append(Model.DlTripView.Description); }
+
+                    <h5>@_tripSummary</h5>
+                }
+                <div class="margin-bottom-20"></div>
                 <p>
                     <a href="/Service/ViewTrip?tripId=@Model.DlTripView.Id" class="btn btn-black">View trip</a>
                     <a href="/Service/EditTrip?tripId=@Model.DlTripView.Id" class="btn btn-orange">Manage trip</a>
                     <a href="/Service/DeleteTrip?tripId=@Model.DlTripView.Id" class="btn btn-red">Discard trip</a>                    
                 </p>                
             </div>
-        </div>
-        <div id="dialog-confirm" title="Empty the recycle bin?">
-            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-            These items will be permanently deleted and cannot be recovered. Are you sure?</p>
-        </div>
+        </div>        
     </div>
 }
 

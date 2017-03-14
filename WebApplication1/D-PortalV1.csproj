@@ -9588,6 +9588,7 @@
     <Content Include="Views\DomingoTripPlannerv2\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutTravelogyV2.cshtml" />
     <Content Include="Views\Service\DeleteTrip.cshtml" />
+    <Content Include="Views\Service\RemoveDestinationFromTrip.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

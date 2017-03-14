@@ -375,6 +375,35 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ViewTrip", new { @tripId = model.ActiveTrip.DlTripView.Id });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="submit"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RemoveDestinationFromTripAsync(RemoveDestinationFromTripViewModel model, string submit)
+        {
+            if (submit == "remove")
+            {
+                var _blError = await TripManager.DeleteUserTripstepAsync(model.DlTripStep.Id);
+                if (_blError.ErrorCode != 0)
+                {
+                    throw new ApplicationException(_blError.ErrorMessage);
+                }
+            }
+
+            return RedirectToAction("EditTrip", new { @tripId = model.DlTripStep.TripId });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="submit"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -429,12 +458,21 @@ namespace WebApplication1.Controllers
         {
             BlViewTrip trip = null;
             var _blError = TripManager.GetTripById(tripId, out trip);
+            if (_blError.ErrorCode != 0)
+            {
+                throw new ApplicationException(_blError.ErrorMessage);
+            }
 
             var model = new TripViewModel();
             model.ActiveTrip = trip;
 
             BlTripTemplate template = null;
-            TripManager.GetTripTemplatesById(templateId, out template);
+            _blError = TripManager.GetTripTemplatesById(templateId, out template);
+            if (_blError.ErrorCode != 0)
+            {
+                throw new ApplicationException(_blError.ErrorMessage);
+            }
+
             model.CreateTripTemplate = template;
 
             return View(model);
@@ -451,8 +489,38 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult> AddCircuitToTripSubmit(TripViewModel model)
         {
             var blError = await TripManager.AddTemplateToTripAsync(model.ActiveTrip.DlTripView, model.CreateTripTemplate.DlTemplate.Id);
+            if (blError.ErrorCode != 0)
+            {
+                throw new ApplicationException(blError.ErrorMessage);
+            }
             return RedirectToAction("ViewTrip", new { tripId = model.ActiveTrip.DlTripView.Id });            
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tripStepId"></param>
+        /// <param name="tripId"></param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult RemoveDestinationFromTrip(int tripStepId, int tripId)
+        {
+            var _model = new RemoveDestinationFromTripViewModel();
+            BlViewTrip tripObj = null;
+            var blError = TripManager.GetTripstepDetailsById(tripStepId, out tripObj);
+            if(blError.ErrorCode != 0)
+            {
+                throw new ApplicationException(blError.ErrorMessage);
+            }
+
+            _model.DlTripStep = tripObj.DlTripStepsView[0];
+            _model.DlTrip = tripObj.DlTripView;
+            _model.DlBookingsView = tripObj.DlBookingsView;
+            _model.DlTransportsBookingsView = tripObj.DlTransportsBookingsView;
+
+            return View(_model);
+        }
+
 
         /// <summary>
         /// 

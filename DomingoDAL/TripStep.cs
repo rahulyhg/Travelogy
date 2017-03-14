@@ -29,5 +29,6 @@ namespace DomingoDAL
         public int TripTemplateId { get; set; }
         public string TopAttractions { get; set; }
         public Nullable<int> Duration { get; set; }
+        public Nullable<bool> UserRemoved { get; set; }
     }
 }

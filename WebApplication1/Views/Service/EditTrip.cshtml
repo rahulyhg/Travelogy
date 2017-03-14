@@ -199,50 +199,64 @@
                                 var tripStep = Model.ActiveTrip.DlTripStepsView[x];
                                 @Html.HiddenFor(p => p.ActiveTrip.DlTripStepsView[x].Id)
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h4>@tripStep.Destination</h4>
-                                        <h5 class="orange">@tripStep.ShortDescription</h5>
-                                        <h5>
-                                            From:
-                                            @if (tripStep.StartDate.HasValue)
-                                            { @tripStep.StartDate.Value.ToShortDateString() }
-                                            else
-                                            { @Html.Raw("Not planned")}
-                                             -- to :
-                                            @if (tripStep.EndDate.HasValue)
-                                            { @tripStep.EndDate.Value.ToShortDateString() }
-                                            else { @Html.Raw("Not planned")}
-                                        </h5>
-                                        <p>@tripStep.LongDescription</p>
-                                    </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4>@tripStep.Destination</h4>
+                                                <h5 class="orange">@tripStep.ShortDescription</h5>
+                                                <h5>
+                                                    From:
+                                                    @if (tripStep.StartDate.HasValue)
+                                                    { @tripStep.StartDate.Value.ToShortDateString() }
+                                                    else
+                                                    { @Html.Raw("Not planned")}
+                                                    -- to :
+                                                    @if (tripStep.EndDate.HasValue)
+                                                    { @tripStep.EndDate.Value.ToShortDateString() }
+                                                    else
+                                                    { @Html.Raw("Not planned")}
+                                                </h5>
+                                                <p>@tripStep.LongDescription</p>
+                                            </div>
 
-                                    @if (!string.IsNullOrEmpty(Model.ActiveTrip.DlTripStepsView[x].TravelogerNote))
-                                    {
-                                        <div class="col-md-9">
-                                            <h5 class="orange">Traveloger's Notes:</h5>
-                                            <p class="orange">@Model.ActiveTrip.DlTripStepsView[x].TravelogerNote</p>
+                                            @if (!string.IsNullOrEmpty(Model.ActiveTrip.DlTripStepsView[x].TravelogerNote))
+                                            {
+                                                <div class="col-md-9">
+                                                    <h5 class="orange">Traveloger's Notes:</h5>
+                                                    <p class="orange">@Model.ActiveTrip.DlTripStepsView[x].TravelogerNote</p>
+                                                </div>
+                                            }
+
+                                            <div class="col-md-12">
+                                                <h5>
+                                                    Planned Duration: @tripStep.Duration Days &nbsp;
+                                                    Change it to :
+                                                    @Html.EditorFor(p => p.ActiveTrip.DlTripStepsView[x].Duration, new { @class = "" })
+                                                    Days
+                                                </h5>  
+                                                <div class="margin-bottom-10"></div>                                              
+                                            </div>
+                                            <div class="col-md-12">
+                                                <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@tripStep.TripId&tripStepId=@tripStep.Id"><i class="icon-plane"></i>&nbsp; Add Domestic Transfer</a>
+                                                <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId"><i class="icon-building"></i>&nbsp;Add Accommodation</a>
+                                                <div class="margin-bottom-10"></div>                                              
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h5>Add notes:</h5>
+                                                <p>@Html.TextAreaFor(p => p.ActiveTrip.DlTripStepsView[x].TravellerNote, new { @class = "form-control" })</p>
+                                                <div class="margin-bottom-20"></div>
+                                                @*<button class="btn btn-default" type="submit">Save Notes</button>*@
+                                                <div class="margin-bottom-20"></div>
+                                                <button class="btn btn-orange" type="submit">Save Trip</button>
+                                                <a class="btn btn-red" href="/Service/RemoveDestinationFromTrip?TripId=@tripStep.TripId&tripStepId=@tripStep.Id">Remove @tripStep.Destination from my trip</a>
+                                            </div>
                                         </div>
-                                    }
-
-                                    <div class="col-md-12">
-                                        <h5>Planned Duration: @tripStep.Duration Days</h5>
-                                        <h5 class="orange">Change it to : 
-                                            @Html.EditorFor(p => p.ActiveTrip.DlTripStepsView[x].Duration, new { @class = "" }) 
-                                            Days</h5>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <h5>Add notes:</h5>
-                                        <p>@Html.TextAreaFor(p => p.ActiveTrip.DlTripStepsView[x].TravellerNote, new { @class = "form-control" })</p>
-                                        <div class="margin-bottom-20"></div>
-                                        <button class="btn btn-default" type="submit">Save Notes</button>
-                                        <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@tripStep.TripId&tripStepId=@tripStep.Id"><i class="icon-plane"></i>&nbsp; Add Domestic Transfer</a>
-                                        <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId"><i class="icon-building"></i>&nbsp;Add Accommodation</a>
-                                        <div class="margin-bottom-20"></div>
-                                        <button class="btn btn-orange" type="submit">Save Trip</button>
                                     </div>
                                 </div>
-                                <hr />
+
+                                
+                                
                             }
 
                         </div>

@@ -46,8 +46,8 @@
         <EntityTypeShape EntityType="TravelogyDevModel.TripTemplateStep" Width="1.5" PointX="8.375" PointY="12.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.Trip" Width="1.5" PointX="9.375" PointY="19.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_Trip" Width="1.5" PointX="4.375" PointY="18.75" />
-        <EntityTypeShape EntityType="TravelogyDevModel.TripStep" Width="1.5" PointX="19.375" PointY="13.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.View_TripStep" Width="1.5" PointX="6.375" PointY="18.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.TripStep" Width="1.5" PointX="20.5" PointY="14.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

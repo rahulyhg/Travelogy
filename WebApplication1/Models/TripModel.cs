@@ -7,7 +7,20 @@ using System.Linq;
 using System.Web;
 
 namespace WebApplication1.Models
-{    
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    public class RemoveDestinationFromTripViewModel
+    {
+        public View_Trip DlTrip { get; set; }
+
+        public View_TripStep DlTripStep { get; set; }
+
+        public List<View_TripBookingAccommodation> DlBookingsView { get; set; }
+        
+        public List<View_TripBookingTransport> DlTransportsBookingsView { get; set; }
+    }
 
     /// <summary>
     /// 

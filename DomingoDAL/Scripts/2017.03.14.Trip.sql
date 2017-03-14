@@ -14,3 +14,6 @@ GO
 ALTER TABLE [dbo].[TripStep] ADD [Duration] int
 GO
 
+ALTER TABLE [dbo].[TripStep] ADD [UserRemoved] bit
+GO
+
