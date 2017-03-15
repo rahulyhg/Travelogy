@@ -39,7 +39,14 @@
 
                     if (_tripSummary.Length == 0) { _tripSummary.Append(Model.DlTripView.Description); }
 
+                    <h5 class="orange">Planned destinations:</h5>
                     <h5>@_tripSummary</h5>
+
+                    if(Model.DlTripView.EstimatedCost.HasValue && Model.DlTripView.EstimatedCost.Value > 0)
+                    {
+                        <div class="margin-bottom-10"></div>
+                        <h6>Estimated cost: @Model.DlTripView.TripCurrency &nbsp; @Model.DlTripView.EstimatedCost.Value.ToString("N2")</h6>
+                    }
                 }
                 <div class="margin-bottom-20"></div>
                 <p>

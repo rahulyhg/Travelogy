@@ -222,7 +222,9 @@ namespace WebApplication1.Controllers
                 Status = TripStatus.planned.ToString(),
                 HomeLocation = model.CreateTripViewModel.HomeLocation,
                 PaxAdults = model.CreateTripViewModel.Adults,
-                PaxMinors = model.CreateTripViewModel.Minors
+                PaxMinors = model.CreateTripViewModel.Minors,
+                TripType = model.CreateTripViewModel.TripType,
+                TripCurrency = model.CreateTripViewModel.Currency,
             };
 
             var _blError = await TripManager.CreateTrip(trip, model.CreateTripViewModel.TemplateId);
@@ -547,7 +549,7 @@ namespace WebApplication1.Controllers
             {
                 TripName = tripObj.DlTripView.Name,
                 TripDescription = tripObj.DlTripView.Description,
-                TripStepName = tripStepObj.ShortDescription,
+                TripStepName = String.Format("{0} : {1}", tripStepObj.Destination, tripStepObj.ShortDescription),
                 TripStepDescription = tripStepObj.LongDescription,
                 TripStepStartDate = tripStepObj.StartDate,
                 TripStepEndDate = tripStepObj.EndDate,
@@ -555,7 +557,18 @@ namespace WebApplication1.Controllers
                 TripId = tripId,
                 Adults = tripObj.DlTripView.PaxAdults,
                 Kids = tripObj.DlTripView.PaxMinors,
+                TownOrCity = tripStepObj.Destination,
             };
+
+            if(tripStepObj.StartDate.HasValue)
+            {
+                model.CheckinDate = tripStepObj.StartDate.Value;
+            }
+
+            if(tripStepObj.EndDate.HasValue)
+            {
+                model.CheckoutDate = tripStepObj.EndDate.Value;
+            }
 
             return View("AccommodationBooking", model);
         }
@@ -669,6 +682,7 @@ namespace WebApplication1.Controllers
                 TripDescription = tripObj.DlTripView.Description,
                 Adults = tripObj.DlTripView.PaxAdults,
                 Kids = tripObj.DlTripView.PaxMinors,
+                TripStartDate = (tripStepObj != null && tripStepObj.StartDate.HasValue) ? tripStepObj.StartDate : tripObj.DlTripView.StartDate,
             };
 
             return View("FlightBooking", model);

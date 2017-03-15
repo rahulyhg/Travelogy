@@ -13,7 +13,7 @@
 @if (Model.ActiveTrip != null)
 {
     <div class="headline">
-        <h2>@Model.ActiveTrip.DlTripView.NickName ( trip to @Model.ActiveTrip.DlTripView.Name ) <span class="orange"> [Status: @Model.ActiveTrip.DlTripView.Status ]</span> </h2>                 
+        <h2>@Model.ActiveTrip.DlTripView.NickName ( trip to @Model.ActiveTrip.DlTripView.Name ) <span class="orange"> [Status: @Model.ActiveTrip.DlTripView.Status ]</span> </h2>                         
     </div>
 
     <hr class="margin-bottom-20">
@@ -59,7 +59,8 @@
                     <div class="img-box-3-icon">
                         <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
                     </div>
-                    <h4>Starts at: @Model.ActiveTrip.DlTripView.StartLocation</h4>
+                    <h5>Flying from: @Model.ActiveTrip.DlTripView.HomeLocation</h5>
+                    <h6 class="orange">Trip starts at: @Model.ActiveTrip.DlTripView.StartLocation</h6>                    
                 </div>
             </div>
 
@@ -68,17 +69,22 @@
                     <div class="img-box-3-icon">
                         <img src="~/content/img/flat-icons/money.png" alt="" class="img-responsive" />
                     </div>
-                    <h4>Estimated cost:</h4>                    
-                    <h5 class="orange">
-                        @if (Model.ActiveTrip.DlTripView.EstimatedCost.HasValue)
+                    <h4>Money and cost:</h4>   
+                    <h5>Travel style: @Model.ActiveTrip.DlTripView.TripType</h5>     
+                    <h6>Currency: @Model.ActiveTrip.DlTripView.TripCurrency</h6>            
+                    <h6 class="orange">
+                        @if (Model.ActiveTrip.DlTripView.EstimatedCost.HasValue && Model.ActiveTrip.DlTripView.EstimatedCost.Value > 0)
                         {
+                            @Html.Raw("Trip estimate: ")
                             @Model.ActiveTrip.DlTripView.TripCurrency
                             @Html.Raw(" ")                            
                             @Model.ActiveTrip.DlTripView.EstimatedCost.Value.ToString("N2")
                         }
                         else
-                        { @Html.Raw("n/a")}  
-                    </h5>
+                        { 
+                            @*@Html.Raw("Trip planner could not estimate your trip yet. Please ask a traveloger to calculate your estimated cost.")*@
+                        }  
+                    </h6>
                 </div>
             </div>
         </div>
@@ -117,7 +123,7 @@
                                             <h4>@flight.TransportFrom to @flight.TransportTo</h4>
                                             @if (!String.IsNullOrEmpty(flight.TransferDetails))
                                             {
-                                                <h4>@flight.TransferDetails</h4>
+                                                <p>@flight.TransferDetails</p>
                                             }
                                             <h5><a class="orange" href="/Service/ViewTransferBooking?id=@flight.Id">View Details</a></h5>
                                         </div>                                        
@@ -130,7 +136,7 @@
                         <div class="container">
                             <div class="row margin-bottom-20">
                                 <div class="col-md-12">
-                                    <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@Model.ActiveTrip.DlTripView.Id"><i class="icon-plane"></i>&nbsp; Add Flight Booking</a>
+                                    <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@Model.ActiveTrip.DlTripView.Id"><i class="icon-plane"></i>&nbsp; Add Inbound / Outbound Flights</a>
                                 </div>
                             </div>
                         </div>

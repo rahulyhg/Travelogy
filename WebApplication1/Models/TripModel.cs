@@ -291,18 +291,24 @@ namespace WebApplication1.Models
         [Required(ErrorMessage = "Please state where you plan to start from.")]
         public string HomeLocation { get; set; }
 
-        [Display(Name = "Number of adults in your trip:")]
+        [Display(Name = "Adults:")]
         [Required(ErrorMessage = "Please mention the number of adults.")]
         [Range(1, 15, ErrorMessage = "Please add one or more adults .. upto 15")]
         public int Adults { get; set; }
 
-        [Display(Name = "Number of minors in your trip:")]        
+        [Display(Name = "Minors:")]        
         public int Minors { get; set; }
 
         [Display(Name = "Pick a starting point for the Trip:")]
         [Required(ErrorMessage = "Please pick a starting point for the Trip.")]
         public string StartLocation { get; set; }
 
+        [Display(Name = "Choose type of trip:")]
+        [Required(ErrorMessage = "Please pick a type for the Trip.")]
+        public string TripType { get; set; }
+
+        [Display(Name = "Currency:")]
+        public string Currency { get; set; }        
 
     }
 

@@ -7,15 +7,13 @@
 </div>    
 
 <div class="row">
-    <div class="col-sm-12 info-blocks">
-        <i class="icon-compass icon-info-blocks"></i>
+    <div class="col-sm-12 info-blocks">        
         <div class="info-blocks-in">
             <h3>Your trip: @Model.TripName -- @Model.TripId</h3>
             <p>@Model.TripDescription</p>
         </div>
     </div>
-    <div class="col-sm-12 info-blocks">
-        <i class="icon-ok-sign icon-info-blocks"></i>
+    <div class="col-sm-12 info-blocks">        
         <div class="info-blocks-in">
             <h3>@Model.TripStepName</h3>
             <p>@Model.TripStepDescription</p>
@@ -29,30 +27,79 @@
 
 <hr class="margin-bottom-20"> 
 
-<blockquote>
-    <p>Accommodation bookings are done through the local travel agency who is handling your trip.<br /> Travelogers will update the status of your booking within 2 working days of requesting.</p>   
-</blockquote>
-
 <div>
     @using (Html.BeginForm("SaveTripBookingAccommodationAsync", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
 
-        @Html.HiddenFor(model => model.TripStepId)
         @Html.HiddenFor(model => model.TripId)
+        @Html.HiddenFor(model => model.TripStepId)
+        @Html.HiddenFor(model => model.CheckinDate)
+        @Html.HiddenFor(model => model.CheckoutDate)
+        
 
         <div class="panel panel-orange">
             <div class="panel-body">
 
-                @Html.LabelFor(model => model.AccommodationType)
                 <div class="row margin-bottom-10">
-                    <div class="col-md-5 col-md-offset-0">
-                        @Html.DropDownListFor(model => model.AccommodationType, Model.ListOfAccommodationTypes, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.AccommodationType, "", new { @class = "text-danger" })
+                    <div class="col-md-3 col-sm-6">
+                        <h5>Destination: @Model.TownOrCity</h5>                        
                     </div>
                 </div>
 
-                @Html.LabelFor(model => model.CheckinDate)
+                <div class="row margin-bottom-10">
+                    <div class="col-md-3 col-sm-6">
+                        <h6>Check in date: @Model.CheckinDate.ToShortDateString() </h6>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h6>Check out date: @Model.CheckoutDate.ToShortDateString()</h6>
+                    </div>
+                </div>
+
+                <div class="row margin-bottom-10">
+                    <div class="col-md-4 col-sm-12">
+                        <h6>Type of Accommodation: @*@Html.LabelFor(model => model.AccommodationType)*@</h6>
+                        <p>
+                            @Html.DropDownListFor(model => model.AccommodationType, Model.ListOfAccommodationTypes, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AccommodationType, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+                    <div class="col-md-8 col-sm-12">
+                    </div>
+                </div>
+
+                <div class="row margin-bottom-10">
+                    <div class="col-md-3 col-sm-6">
+                        <h6>Town or City:</h6>
+                        <p>
+                            @Html.EditorFor(model => model.TownOrCity, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TownOrCity, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+
+                    <div class="col-md-2 col-sm-6">
+                        <h6>Adults:</h6>
+                        <p>
+                            @Html.EditorFor(model => model.Adults, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Adults, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+
+                    <div class="col-md-2 col-sm-6">
+                        <h6>Minors:</h6>
+                        <p>
+                            @Html.EditorFor(model => model.Kids, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Kids, "", new { @class = "text-danger" })
+                        </p>
+                    </div>
+
+                </div>
+
+
+
+
+
+                @*@Html.LabelFor(model => model.CheckinDate)
                 <div class="row margin-bottom-10">
                     <div class="col-md-3 col-md-offset-0">
                         @Html.EditorFor(model => model.CheckinDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
@@ -66,36 +113,16 @@
                         @Html.EditorFor(model => model.CheckoutDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                         @Html.ValidationMessageFor(model => model.CheckoutDate, "", new { @class = "text-danger" })
                     </div>
-                </div>
+                </div>*@                
+                
 
-                @Html.LabelFor(model => model.TownOrCity)
-                <div class="row margin-bottom-10">
-                    <div class="col-md-3 col-md-offset-0">
-                        @Html.EditorFor(model => model.TownOrCity, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TownOrCity, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                
 
-                @Html.LabelFor(model => model.Adults)
-                <div class="row margin-bottom-10">
-                    <div class="col-md-3 col-md-offset-0">
-                        @Html.EditorFor(model => model.Adults, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Adults, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                @Html.LabelFor(model => model.Kids)
-                <div class="row margin-bottom-10">
-                    <div class="col-md-3 col-md-offset-0">
-                        @Html.EditorFor(model => model.Kids, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Kids, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                @Html.LabelFor(model => model.TravellerNotes)                
+                
+                @Html.LabelFor(model => model.TravellerNotes)
                 <div class="row margin-bottom-10">
                     <div class="col-md-11 col-md-offset-0">
-                        @Html.TextAreaFor(model => model.TravellerNotes, new { @class = "form-control", @rows = 4 })                        
+                        @Html.TextAreaFor(model => model.TravellerNotes, new { @class = "form-control", @rows = 4 })
                         @Html.ValidationMessageFor(model => model.TravellerNotes, "", new { @class = "text-danger"})
                     </div>
                 </div>
@@ -106,7 +133,7 @@
                         @Html.TextAreaFor(model => model.SpecialRequests, new { @class = "form-control", @rows = 4 })
                         @Html.ValidationMessageFor(model => model.SpecialRequests, "", new { @class = "text-danger" })
                     </div>
-                </div>                             
+                </div>
             </div>
         </div>
 
@@ -115,6 +142,8 @@
                 <div class="col-md-10">
                     <input type="submit" value="Save" class="btn btn-orange" />
                     <input type="reset" value="Reset" class="btn btn-black" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    @Html.ActionLink("Go back to trip details", "ViewTrip", new { @tripId = Model.TripId })
                 </div>                
             </div>
         </div>
@@ -122,8 +151,8 @@
         @Html.ValidationMessage("blError.ErrorMessage", new { @class = "text-danger" })
     }
 
-    <div>
-        @Html.ActionLink("Go back to trip details", "ViewTrip", new { @tripId = Model.TripId })
-    </div>
+    <blockquote>
+        <p>Accommodation bookings are done through the local travel agency who is handling your trip.<br /> Travelogers will update the status of your booking within 2 working days of requesting.</p>
+    </blockquote>   
 </div>
 

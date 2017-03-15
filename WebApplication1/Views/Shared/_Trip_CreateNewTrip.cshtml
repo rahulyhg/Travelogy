@@ -66,14 +66,47 @@
                             @Html.DropDownListFor(p => p.CreateTripViewModel.StartLocation, Model.CreateTripStartLocationOptions, new { @class = "form-control" })
                             <p class="orange">You can always change this location to anywhere (possible) you want!</p>
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-2 col-sm-6">
                             <h5 class="margin-bottom-10">@Html.LabelFor(p => p.CreateTripViewModel.Adults) </h5>
                             @Html.EditorFor(p => p.CreateTripViewModel.Adults, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })
                             @Html.ValidationMessageFor(p => p.CreateTripViewModel.Adults, "", new { @class = "text-danger" })
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-2 col-sm-6">
                             <h5 class="margin-bottom-10">@Html.LabelFor(p => p.CreateTripViewModel.Minors) </h5>
                             @Html.EditorFor(p => p.CreateTripViewModel.Minors, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })                            
+                        </div>
+                        <div class="col-md-2 col-sm-6">
+                            @{
+                                var ListOfClasses = new List<SelectListItem>();
+                                ListOfClasses.AddRange(new[]{
+                                    new SelectListItem() { Text = "LUXURY", Value = "LUXURY" },
+                                    new SelectListItem() { Text = "STANDARD", Value = "STANDARD" },
+                                    new SelectListItem() { Text = "ECONOMY", Value = "ECONOMY" }
+                                });
+                            }
+
+                            <h5 class="margin-bottom-10">Travel Style:</h5>
+                            <p>
+                                @Html.DropDownListFor(p => p.CreateTripViewModel.TripType, ListOfClasses, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(p => p.CreateTripViewModel.TripType, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-6">
+                            @{
+                                var ListOfCurrencies = new List<SelectListItem>();
+                                ListOfCurrencies.AddRange(new[]{
+                                    new SelectListItem() { Text = "GBP", Value = "GBP" },
+                                    new SelectListItem() { Text = "EUR", Value = "EUR" },
+                                    new SelectListItem() { Text = "USD", Value = "USD" },
+                                    new SelectListItem() { Text = "INR", Value = "INR" }
+                                });
+                            }
+
+                            <h5 class="margin-bottom-10">Currency:</h5>
+                            <p>
+                                @Html.DropDownListFor(p => p.CreateTripViewModel.Currency, ListOfCurrencies, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(p => p.CreateTripViewModel.Currency, "", new { @class = "text-danger" })
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -51,7 +51,8 @@
                     <div class="img-box-3-icon">
                         <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
                     </div>
-                    <h4>Starts at: @Model.ActiveTrip.DlTripView.StartLocation</h4>
+                    <h6 class="orange">Starts at: @Model.ActiveTrip.DlTripView.StartLocation</h6>
+                    <h5>Flying from: @Model.ActiveTrip.DlTripView.HomeLocation</h5>
                 </div>
             </div>
 
@@ -107,7 +108,10 @@
                 <div class="row">
                     <div class="col-md-12 margin-bottom-20">&nbsp;</div>
                     <div class="col-md-12">
-                        <p><button class="btn-u btn-u-orange" type="submit">Add to my trip &nbsp; &nbsp; <i class="icon-arrow-right"></i></button></p>
+                        <h4>
+                            <button class="btn-u btn-u-orange" type="submit">Yes, add to @Model.ActiveTrip.DlTripView.NickName &nbsp; &nbsp; <i class="icon-arrow-right"></i></button>
+                            &nbsp;<a class="btn btn-black" href="/Service/ViewTrip?tripId=@Model.ActiveTrip.DlTripView.Id">No, take me back to trip planner &nbsp; &nbsp; <i class="icon-arrow-left"></i></a> 
+                        </h4>                        
                     </div>
                 </div>
                 
@@ -134,7 +138,10 @@
             <div class="row">
                 <div class="col-md-12 margin-bottom-20">&nbsp;</div>
                 <div class="col-md-12">
-                    <p><button class="btn-u btn-u-orange" type="submit">Add to my trip &nbsp; &nbsp; <i class="icon-arrow-right"></i></button></p>
+                    <h4>
+                        <button class="btn-u btn-u-orange" type="submit">Yes, add to @Model.ActiveTrip.DlTripView.NickName &nbsp; &nbsp; <i class="icon-arrow-right"></i></button>
+                        &nbsp;<a class="btn btn-black" href="/Service/ViewTrip?tripId=@Model.ActiveTrip.DlTripView.Id">No, take me back to trip planner &nbsp; &nbsp; <i class="icon-arrow-left"></i></a>
+                    </h4>
                 </div>
             </div>         
         </div>

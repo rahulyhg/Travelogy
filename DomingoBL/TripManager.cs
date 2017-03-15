@@ -182,7 +182,13 @@ namespace DomingoBL
                         foreach (var tripStep in _CopyTripStepsFromTemplate(tripTemplateId, trip, trip.StartDate, context))
                         {
                             context.TripSteps.Add(tripStep);
-                        }
+                        }                        
+
+                        await context.SaveChangesAsync();
+
+                        // calculate cost
+                        var vwTripSteps = context.View_TripStep.Where(p => p.TripId == trip.Id).ToList();
+                        trip.EstimatedCost = _CalculateTripCost(vwTripSteps, context, trip);
 
                         await context.SaveChangesAsync();
                     }
@@ -277,13 +283,20 @@ namespace DomingoBL
 
                         _dbTrip.Templates = string.Format("{0};{1}", _dbTrip.Templates, tripTemplateId);
 
-                        DateTime? dtDate = _dbTrip.EndDate ;
+                        var dtDate = _dbTrip.EndDate ;
+                        if (!dtDate.HasValue) dtDate = _dbTrip.StartDate;
 
                         // get the steps from the template and add them to this trip
                         foreach (var tripStep in _CopyTripStepsFromTemplate(tripTemplateId, _dbTrip, dtDate, context))
                         {
                             context.TripSteps.Add(tripStep);                            
                         }
+
+                        await context.SaveChangesAsync();
+
+                        // calculate cost
+                        var vwTripSteps = context.View_TripStep.Where(p => p.TripId == trip.Id).ToList();
+                        _dbTrip.EstimatedCost = _CalculateTripCost(vwTripSteps, context, _dbTrip);
 
                         await context.SaveChangesAsync();
                     }
