@@ -88,7 +88,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TripTemplate.SearchAlias, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.TripTemplate.SearchAlias, new { htmlAttributes = new { @class = "form-control", @maxlength = 19 } })
+                    @Html.EditorFor(model => model.TripTemplate.SearchAlias, new { htmlAttributes = new { @class = "form-control", @maxlength = 20 } })
                     @Html.ValidationMessageFor(model => model.TripTemplate.SearchAlias, "", new { @class = "text-danger" })
                 </div>
             </div>
