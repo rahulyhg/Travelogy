@@ -117,4 +117,17 @@ namespace WebApplication1.Models
     {
         public string Mode { get; set; }
     }
+
+    public class CallMeBackViewModel
+    {
+        [Required(ErrorMessage = "Please enter your name.")]
+        [Display(Name = "Name:")]
+        public string WhomToCall { get; set; }
+
+        [StringLength(14)]
+        [Display(Name = "Telephone Number:")]
+        [Required(ErrorMessage = "Please enter your Telephone or Mobile number.")]
+        [RegularExpression(@"(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)", ErrorMessage = "Please enter a valid Telephone number")]
+        public string WhereToCall { get; set; }
+    }
 }

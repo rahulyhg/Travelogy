@@ -1,0 +1,33 @@
+﻿@model WebApplication1.Models.CallMeBackViewModel
+
+@using (Html.BeginForm("CallMeBackMicroAsync", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="margin-bottom-20"></div>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="headline">                   
+                    <h4>Want to know more? <small class="orange">We will call you back. Leave your name and number.</small> </h4>                    
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <p>@Html.EditorFor(model => model.WhomToCall, new { htmlAttributes = new { @class = "form-control", @placeholder = "Your name" } })</p>
+                        <p>@Html.ValidationMessageFor(model => model.WhomToCall, "", new { @class = "text-danger" })</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p>@Html.EditorFor(model => model.WhereToCall, new { htmlAttributes = new { @class = "form-control", @placeholder = "Your number (with country code)" } })</p>
+                        <p>@Html.ValidationMessageFor(model => model.WhereToCall, "", new { @class = "text-danger" })</p>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn-u" type="submit">Arrange a Call Back &nbsp;&nbsp; <i class="icon-phone"></i></button>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+    
+}
+
+

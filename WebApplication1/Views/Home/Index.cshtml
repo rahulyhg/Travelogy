@@ -38,15 +38,21 @@
             </div>
             @if (!Request.IsAuthenticated)
             {
-                <div class="row">
+                <hr class="margin-bottom-10" />
+                <div class="row"> @*Join us buttons*@
                     <div class="container">
-                        <h3>
-                            Join the club: <a href="/Account/Register" class="orange">Sign up for Free </a> or <a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-u-small btn-u-orange">
-                                <i class="icon-facebook"></i> &nbsp; Login with Facebook
-                            </a>
-                        </h3>
+                        <div class="col-md-12">
+                            <h3>
+                                Join the club: <a href="/Account/Register" class="orange">Sign up for Free </a> or <a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-u-small btn-u-orange">
+                                    <i class="icon-facebook"></i> &nbsp; Login with Facebook
+                                </a>
+                            </h3>
+                        </div>                        
                     </div>
-                </div>
+                </div> @*END: Join us buttons*@
+                <hr class="margin-bottom-10" />
+
+                @Html.Partial("_CallmeBackMicro")
             }
         </div>
     </div>

@@ -204,7 +204,7 @@ namespace WebApplication1.Controllers
                     await _SendVerificationEmail(model.Email, user.Id);
 
                     // create a CRM lead
-                    var blCrm = DomingoUserManager.CreateCrmLeadWebSignup(model.Email, user.Id);
+                    var blCrm = await DomingoUserManager.CreateCrmLeadWebSignup(model.Email, user.Id);
 
                     return RedirectToAction("Index", "Home");
                 }

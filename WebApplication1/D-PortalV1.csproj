@@ -9590,6 +9590,7 @@
     <Content Include="Views\Service\DeleteTrip.cshtml" />
     <Content Include="Views\Service\RemoveDestinationFromTrip.cshtml" />
     <Content Include="Views\Admin\_OnboardNewMember.cshtml" />
+    <Content Include="Views\Shared\_CallmeBackMicro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

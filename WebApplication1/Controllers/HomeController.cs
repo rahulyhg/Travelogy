@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using DomingoDAL;
 using WebApplication1.Models;
+using System.Threading.Tasks;
 
 namespace WebApplication1.Controllers
 {
@@ -46,9 +47,14 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public ActionResult Business()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CallMeBackMicroAsync(CallMeBackViewModel model)
         {
-            return View();
+            // create a CRM lead
+            var blCrm = await DomingoUserManager.CreateCrmLeadCallMeBack(model.WhomToCall, model.WhereToCall);
+
+            return RedirectToAction("ContactUsThanks", "Information");
         }
     }
 }

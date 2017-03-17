@@ -22,7 +22,7 @@ namespace DomingoBL
             {
                 // create a lead in the capsule CRM
                 var gateway = new CapsupleCrmGateway();
-                var crmResponse = await gateway.CreateCapsuleLead(userId, userId, emailAddress, "Un-known", "Portal Signup");
+                var crmResponse = await gateway.CreateCapsuleLead("Websignup", String.Format("{0}",DateTime.Now.Ticks), emailAddress, "Un-known", "Portal Signup");
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
             }
@@ -32,6 +32,45 @@ namespace DomingoBL
             }
         }
 
+        public static async Task<DomingoBlError> CreateCrmLeadCallMeBack(string name, string telephone)
+        {
+            try
+            {
+                // create a lead in the capsule CRM
+                string fName, lName;
+                var names = name.Split(' '); // in case there are two names
+
+                if (names.Length == 2)
+                {
+                    fName = names[0];
+                    lName = names[1];
+                }
+                else
+                {
+                    fName = name; lName = "";
+                }
+
+                var gateway = new CapsupleCrmGateway();
+                var crmResponse = await gateway.CreateCapsuleLead(fName, lName,
+                    "Not Captured", telephone, string.Format("{0} {1} clicked CallMeBack on website. Call back number is {2}", fName, lName, telephone));
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="emailAddress"></param>
+        /// <param name="telephone"></param>
+        /// <param name="note"></param>
+        /// <returns></returns>
         public static async Task<DomingoBlError> CreateCrmLeadUserCallin(string firstName, string lastName, string emailAddress, string telephone, string note)
         {
             try
