@@ -227,6 +227,7 @@
     <Content Include="Scripts\2017.03.09.View_TripStep.sql" />
     <Content Include="Scripts\2017.03.11.TripTemplateStepData.sql" />
     <Content Include="Scripts\2017.03.14.Trip.sql" />
+    <Content Include="Scripts\2017.03.16.sql" />
     <Content Include="Scripts\createtables-09feb2017.sql" />
     <Content Include="Scripts\CurrencyExchange.sql" />
     <Content Include="Scripts\DestinationActivity.sql" />

@@ -2,6 +2,7 @@
 using DomingoDAL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -139,5 +140,34 @@ namespace WebApplication1.Models
         /// 
         /// </summary>
         public IEnumerable<DestinationCost> CostObjects { get; set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class NewMemberViewModel
+    {
+        [Required(ErrorMessage = "Please enter First Name.")]
+        [Display(Name = "First Name:")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter Last Name.")]
+        [Display(Name = "Last Name:")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please enter Email.")]
+        [Display(Name = "Email:")]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [StringLength(14)]
+        [Display(Name = "Telephone Number:")]        
+        [Required]
+        [RegularExpression(@"(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)", ErrorMessage = "Please enter a valid Telephone number")]
+        public string Telephone { get; set; }
+
+        [Required(ErrorMessage = "Please enter Notes.")]
+        [Display(Name = "Notes")]
+        public string Notes { get; set; }
     }
 }

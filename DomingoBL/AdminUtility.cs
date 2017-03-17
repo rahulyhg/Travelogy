@@ -241,6 +241,7 @@ namespace DomingoBL
                             _newBooking.Adults = model.Adults;
                             _newBooking.BookingDate = model.BookingDate;
                             _newBooking.BookingStatus = model.BookingStatus;
+                            _newBooking.Currency = model.Currency;
                             _newBooking.EstimatedCost = model.EstimatedCost;
                             _newBooking.Kids = model.Kids;
                             _newBooking.TransportFrom = model.TransportFrom;
@@ -248,6 +249,8 @@ namespace DomingoBL
                             _newBooking.TransportType = model.TransportType;
                             _newBooking.TravelClass = model.TravelClass;
                             _newBooking.TransferDetails = model.TransferDetails;
+                            
+                            
 
                             context.TripBookingTransports.Add(_newBooking);
                             await context.SaveChangesAsync();
@@ -263,6 +266,7 @@ namespace DomingoBL
                                 _booking.Adults = model.Adults;
                                 if (model.BookingDate.HasValue) { _booking.BookingDate = model.BookingDate; }
                                 _booking.BookingStatus = model.BookingStatus;
+                                _booking.Currency = model.Currency;
                                 _booking.EstimatedCost = model.EstimatedCost;
                                 _booking.Kids = model.Kids;
                                 _booking.TransportFrom = model.TransportFrom;
@@ -312,6 +316,7 @@ namespace DomingoBL
                             _newBooking.Adults = model.Adults;
                             _newBooking.Kids = model.Kids;
                             _newBooking.TownOrCity = model.TownOrCity;
+                            _newBooking.Currency = model.Currency;
 
                             context.TripBookingAccommodations.Add(_newBooking);
                             await context.SaveChangesAsync();
@@ -335,6 +340,7 @@ namespace DomingoBL
                                 _booking.Adults = model.Adults;
                                 _booking.Kids = model.Kids;
                                 _booking.TownOrCity = model.TownOrCity;
+                                _booking.Currency = model.Currency;
 
                                 await context.SaveChangesAsync();
                             }

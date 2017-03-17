@@ -10,6 +10,7 @@ using WebApplication1.Helpers;
 using WebApplication1.Models;
 using Microsoft.AspNet.Identity;
 using DomingoBL.BlObjects;
+using DomingoBL.EmailManagement;
 
 namespace WebApplication1.Controllers
 {
@@ -252,6 +253,40 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("EditDestination", new { @id = model.DestinationId });
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> WelcomeNewMemberAsync(NewMemberViewModel model)
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var users = context.View_User.Where(p => p.Email == model.Email);
+            if(users == null || users.Count() == 0)
+            {
+                await _SendWelcomeEmail(model.FirstName, model.LastName, model.Email);
+
+                var _blError = await DomingoUserManager.CreateCrmLeadUserCallin(model.FirstName, model.LastName, model.Email, model.Telephone, model.Notes);
+            }            
+
+            return RedirectToAction("Index");
+        }
+
+        private async Task _SendWelcomeEmail(string firstName, string lastName, string email)
+        {
+            var emailUtility = new EmailUtility();
+            var emailParams = new Dictionary<String, String>();
+            emailParams.Add("FirstName", firstName);
+            emailParams.Add("LastName", lastName);
+
+            // create a task for sending the verification mail
+            var blEmail = await emailUtility.SendEmail("WelcomeEmail", email, emailParams);
         }
 
         /// <summary>

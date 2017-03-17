@@ -38,5 +38,6 @@ namespace DomingoDAL
         public Nullable<int> Kids { get; set; }
         public int TripId { get; set; }
         public string TownOrCity { get; set; }
+        public string Currency { get; set; }
     }
 }

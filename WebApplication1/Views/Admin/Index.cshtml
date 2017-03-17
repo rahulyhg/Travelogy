@@ -11,155 +11,130 @@
 </div>
 <div class="margin-bottom-20"></div>
 
+@Html.Partial("_OnboardNewMember")
 
-    <div class="img-box-3 text-center">
-        <div class="row">
-        @if ((ApplicationUserManager.GetUserType(User.Identity.Name) == "admin")
-                                        || (ApplicationUserManager.GetUserType(User.Identity.Name) == "traveloger"))
-        {
-            @*Trips*@
-            <div class="col-md-3 col-sm-6">
-                <div class="img-box-3-item">
-                    <a href="/Admin/Trips">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/booking.png" alt="" class="img-responsive" />
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="img-box-3 text-center">
+
+
+            <div class="row">
+                @if ((ApplicationUserManager.GetUserType(User.Identity.Name) == "admin")
+                        || (ApplicationUserManager.GetUserType(User.Identity.Name) == "traveloger"))
+                {
+                    @*Trips*@
+                    <div class="col-md-3 col-sm-6">
+                        <div class="img-box-3-item">
+                            <a href="/Admin/Trips">
+                                <div class="img-box-3-icon">
+                                    <img src="~/content/img/flat-icons/booking.png" alt="" class="img-responsive" />
+                                </div>
+                            </a>
+                            <h4>Manage Trips</h4>
                         </div>
-                    </a>
-                    <h4>Manage Trips</h4>
-                </div>
-                <div class="margin-bottom-20"></div>
-            </div>
+                        <div class="margin-bottom-20"></div>
+                    </div>
 
-            @*Hotel Bookings*@
-            <div class="col-md-3 col-sm-6">
-                <div class="img-box-3-item">
-                    <a href="/Admin/TripBookingAccommodations">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/hotel.png" alt="" class="img-responsive" />
+                    @*Hotel Bookings*@
+                    <div class="col-md-3 col-sm-6">
+                        <div class="img-box-3-item">
+                            <a href="/Admin/TripBookingAccommodations">
+                                <div class="img-box-3-icon">
+                                    <img src="~/content/img/flat-icons/hotel.png" alt="" class="img-responsive" />
+                                </div>
+                            </a>
+                            <h4>Hotel Bookings</h4>
                         </div>
-                    </a>
-                    <h4>Hotel Bookings</h4>
-                </div>
-                <div class="margin-bottom-20"></div>
-            </div>
+                        <div class="margin-bottom-20"></div>
+                    </div>
 
-            @*Transfer Bookings*@
-            <div class="col-md-3 col-sm-6">
-                <div class="img-box-3-item">
-                    <a href="/Admin/TripBookingTransports">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/aeroplane.png" alt="" class="img-responsive" />
+                    @*Transfer Bookings*@
+                    <div class="col-md-3 col-sm-6">
+                        <div class="img-box-3-item">
+                            <a href="/Admin/TripBookingTransports">
+                                <div class="img-box-3-icon">
+                                    <img src="~/content/img/flat-icons/aeroplane.png" alt="" class="img-responsive" />
+                                </div>
+                            </a>
+                            <h4>Transfer Bookings</h4>
                         </div>
-                    </a>
-                    <h4>Transfer Bookings</h4>
-                </div>
-                <div class="margin-bottom-20"></div>
-            </div>
+                        <div class="margin-bottom-20"></div>
+                    </div>
 
-            @*Message Center*@
-            <div class="col-md-3 col-sm-6">
-                <div class="img-box-3-item">
-                    <a href="/Admin/MessageCenter">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/11.png" alt="" class="img-responsive" />
+                    @*Message Center*@
+                    <div class="col-md-3 col-sm-6">
+                        <div class="img-box-3-item">
+                            <a href="/Admin/MessageCenter">
+                                <div class="img-box-3-icon">
+                                    <img src="~/content/img/flat-icons/11.png" alt="" class="img-responsive" />
+                                </div>
+                            </a>
+                            <h4>Message Center</h4>
                         </div>
-                    </a>
-                    <h4>Message Center</h4>
-                </div>
-                <div class="margin-bottom-40"></div>
-            </div>
+                        <div class="margin-bottom-40"></div>
+                    </div>
 
-            @*manage Users*@
-            <div class="col-md-3 col-sm-6">
-                <div class="img-box-3-item">
-                    <a href="/Admin/Users">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/group.png" alt="" class="img-responsive" />
+                    @*manage Users*@
+                    <div class="col-md-3 col-sm-6">
+                        <div class="img-box-3-item">
+                            <a href="/Admin/Users">
+                                <div class="img-box-3-icon">
+                                    <img src="~/content/img/flat-icons/group.png" alt="" class="img-responsive" />
+                                </div>
+                            </a>
+                            <h4>Manage Users</h4>
                         </div>
-                    </a>
-                    <h4>Manage Users</h4>
-                </div>
-            </div>
-        }    
-            
-        @if ((ApplicationUserManager.GetUserType(User.Identity.Name) == "admin")
-                || (ApplicationUserManager.GetUserType(User.Identity.Name) == "editor"))
-        {
-            @*manage Destinations*@
-            <div class="col-md-3 col-sm-6">
-                <div class="img-box-3-item">
-                    <a href="/Admin/Destinations">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/picture.png" alt="" class="img-responsive" />
+                    </div>
+                }
+
+                @if ((ApplicationUserManager.GetUserType(User.Identity.Name) == "admin")
+        || (ApplicationUserManager.GetUserType(User.Identity.Name) == "editor"))
+                {
+                    @*manage Destinations*@
+                    <div class="col-md-3 col-sm-6">
+                        <div class="img-box-3-item">
+                            <a href="/Admin/Destinations">
+                                <div class="img-box-3-icon">
+                                    <img src="~/content/img/flat-icons/picture.png" alt="" class="img-responsive" />
+                                </div>
+                            </a>
+                            <h4>Manage Destinations</h4>
                         </div>
-                    </a>
-                    <h4>Manage Destinations</h4>
-                </div>
-                <div class="margin-bottom-40"></div>
-            </div>
+                        <div class="margin-bottom-40"></div>
+                    </div>
 
-            @*manage Templates*@
-            <div class="col-md-3 col-sm-6">
-                <div class="img-box-3-item">
-                    <a href="/Admin/TripTemplates">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
+                    @*manage Templates*@
+                    <div class="col-md-3 col-sm-6">
+                        <div class="img-box-3-item">
+                            <a href="/Admin/TripTemplates">
+                                <div class="img-box-3-icon">
+                                    <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
+                                </div>
+                            </a>
+                            <h4>Manage Templates</h4>
                         </div>
-                    </a>
-                    <h4>Manage Templates</h4>
-                </div>
-                <div class="margin-bottom-40"></div>
-            </div>
+                        <div class="margin-bottom-40"></div>
+                    </div>
 
-            @*manage Providers*@
-            <div class="col-md-3 col-sm-6">
-                <div class="img-box-3-item">
-                    <a href="/Admin/Tripproviders">
-                        <div class="img-box-3-icon">
-                            <img src="~/content/img/flat-icons/18.png" alt="" class="img-responsive" />
+                    @*manage Providers*@
+                    <div class="col-md-3 col-sm-6">
+                        <div class="img-box-3-item">
+                            <a href="/Admin/Tripproviders">
+                                <div class="img-box-3-icon">
+                                    <img src="~/content/img/flat-icons/18.png" alt="" class="img-responsive" />
+                                </div>
+                            </a>
+                            <h4>Manage Providers</h4>
                         </div>
-                    </a>
-                    <h4>Manage Providers</h4>
-                </div>
-                <div class="margin-bottom-40"></div>
+                        <div class="margin-bottom-40"></div>
+                    </div>
+                }
+
             </div>
-        }
-
-        </div>
-    </div>    
-
-
-
-
-@*@if ((ApplicationUserManager.GetUserType(User.Identity.Name) == "admin")
-    || (ApplicationUserManager.GetUserType(User.Identity.Name) == "editor"))
-{
-    <div class="row servive-block margin-bottom-10">
-
-        <div class="col-md-3 col-sm-6">
-            <div class="servive-block-in servive-block-colored servive-block-orange">
-                <h4>Destinations</h4>
-                <div class="margin-bottom-20"></div>
-                <a href="/Admin/Destinations" class="white"> <div><i class="icon-road"></i></div></a>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-            <div class="servive-block-in servive-block-colored servive-block-yellow">
-                <h4>Trip Templates</h4>
-                <div class="margin-bottom-20"></div>
-                <a href="/Admin/TripTemplates" class="white"> <div><i class="icon-cogs"></i></div></a>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
-            <div class="servive-block-in servive-block-colored servive-block-orange">
-                <h4>Trip Providers</h4>
-                <div class="margin-bottom-20"></div>
-                <a href="/Admin/Tripproviders" class="white"> <div><i class="icon-cogs"></i></div></a>
-            </div>
-        </div>
-
+        </div>    
     </div>
-}*@
+</div>
+
+
+
 

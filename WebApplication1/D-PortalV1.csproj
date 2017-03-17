@@ -9589,6 +9589,7 @@
     <Content Include="Views\Shared\_LayoutTravelogyV2.cshtml" />
     <Content Include="Views\Service\DeleteTrip.cshtml" />
     <Content Include="Views\Service\RemoveDestinationFromTrip.cshtml" />
+    <Content Include="Views\Admin\_OnboardNewMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

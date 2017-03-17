@@ -35,5 +35,6 @@ namespace DomingoDAL
         public string LastName { get; set; }
         public string UserName { get; set; }
         public string TransferDetails { get; set; }
+        public string Currency { get; set; }
     }
 }

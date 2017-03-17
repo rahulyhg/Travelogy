@@ -32,6 +32,22 @@ namespace DomingoBL
             }
         }
 
+        public static async Task<DomingoBlError> CreateCrmLeadUserCallin(string firstName, string lastName, string emailAddress, string telephone, string note)
+        {
+            try
+            {
+                // create a lead in the capsule CRM
+                var gateway = new CapsupleCrmGateway();
+                var crmResponse = await gateway.CreateCapsuleLead(firstName, lastName, emailAddress, telephone, note);
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
