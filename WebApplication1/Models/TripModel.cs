@@ -227,8 +227,10 @@ namespace WebApplication1.Models
 
         [Display(Name = "No of Adults:")]
         [Required]
+        [Range(1, 15, ErrorMessage = "Please add one or more adults .. upto 15")]
         public int Adults { get; set; }
 
+        [Range(0, 15, ErrorMessage = "You cannot take negativity along!")]
         [Display(Name = "No of Children:")]
         [Required]
         public int Kids { get; set; }
@@ -281,6 +283,7 @@ namespace WebApplication1.Models
         /// </summary>
         [Display(Name = "Trip Start Date")]
         [Required(ErrorMessage = "Please specify a date (approximate will do!)")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
 
         [Display(Name = "A nick name for your Trip:")]
@@ -296,6 +299,7 @@ namespace WebApplication1.Models
         [Range(1, 15, ErrorMessage = "Please add one or more adults .. upto 15")]
         public int Adults { get; set; }
 
+        [Range(0, 15, ErrorMessage = "You cannot take negativity along!")]
         [Display(Name = "Minors:")]        
         public int Minors { get; set; }
 

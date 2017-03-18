@@ -683,6 +683,7 @@ namespace WebApplication1.Controllers
                 Adults = tripObj.DlTripView.PaxAdults,
                 Kids = tripObj.DlTripView.PaxMinors,
                 TripStartDate = (tripStepObj != null && tripStepObj.StartDate.HasValue) ? tripStepObj.StartDate : tripObj.DlTripView.StartDate,
+                FlightDate = (tripStepObj != null && tripStepObj.StartDate.HasValue) ? tripStepObj.StartDate.Value : tripObj.DlTripView.StartDate.Value,
             };
 
             return View("FlightBooking", model);

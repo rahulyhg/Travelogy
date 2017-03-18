@@ -363,7 +363,7 @@ namespace DomingoBL
                         _dbTrip.TripCurrency = trip.TripCurrency;
                         _dbTrip.TripType = trip.TripType;
                         _dbTrip.PaxAdults = trip.PaxAdults;
-                        _dbTrip.PaxMinors = trip.PaxMinors;
+                        _dbTrip.PaxMinors = trip.PaxMinors > 0 ? trip.PaxMinors : 0 ;
                         _dbTrip.HomeLocation = trip.HomeLocation;
                     }
 
@@ -372,9 +372,8 @@ namespace DomingoBL
                         // save user notes and dates
                         tripSteps = tripSteps.OrderBy(x => x.SortOrder).ToList();
                         _UpdateTripSteps(tripSteps, context, _dbTrip);
-                    }
-
-                    _dbTrip.EstimatedCost = _CalculateTripCost(tripSteps, context, _dbTrip);
+                        _dbTrip.EstimatedCost = _CalculateTripCost(tripSteps, context, _dbTrip);
+                    }                    
 
                     await context.SaveChangesAsync();
                 }

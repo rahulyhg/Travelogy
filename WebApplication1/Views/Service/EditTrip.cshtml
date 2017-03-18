@@ -1,5 +1,12 @@
 ﻿@model WebApplication1.Models.EditTripViewModel
 
+<script>
+    $(function () {
+        $("#ActiveTrip_DlTripView_StartDate").datepicker();
+        $("#ActiveTrip_DlTripView_StartDate").datepicker("option", "dateFormat", "DD, d MM, yy");
+      } );
+</script>
+
 @Html.Partial("_HomepageCarousel")
 
 @*if there is an active trip for rditing ---*@
@@ -109,13 +116,17 @@
 
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
-                            <h5 class="orange">Planned start date: 
+                            <h6>Planned start date: 
                             @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
-                            { @Model.ActiveTrip.DlTripView.StartDate.Value.ToShortDateString()}</h5>
-                            <p>@Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartDate, new { @class = "form-control", type = "date" })</p>
+                            { 
+                                @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()
+                            }
+                            </h6>
+                            <p>@Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartDate, new { @class = "form-control" })</p>
+                            <h6 class="orange">(Choose new date to change)</h6>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <h5 class="orange">Start Location:</h5>
+                            <h6>Start Location:</h6>
                             <p>@Html.DropDownListFor(model => model.ActiveTrip.DlTripView.StartLocation, Model.TripStartLocationOptions, new { @class = "form-control" })</p>
                             @*<p>@Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartLocation, new { @class = "form-control" }) </p> TripStartLocationOptions*@
                         </div>
@@ -129,7 +140,7 @@
                                     new SelectListItem() { Text = "INR", Value = "INR" }
                                 });
                             }
-                            <h5 class="orange">Preferred Currency:</h5>
+                            <h6>Preferred Currency:</h6>
                             <p>
                                 @Html.DropDownListFor(model => model.ActiveTrip.DlTripView.TripCurrency, ListOfCurrencies, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.ActiveTrip.DlTripView.TripCurrency, "", new { @class = "text-danger" })
@@ -145,7 +156,7 @@
                                 });
                             }
 
-                            <h5 class="orange">Preferred Travel Style:</h5>
+                            <h6>Preferred Travel Style:</h6>
                             <p>
                                 @Html.DropDownListFor(model => model.ActiveTrip.DlTripView.TripType, ListOfClasses, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.ActiveTrip.DlTripView.TripType, "", new { @class = "text-danger" })
@@ -154,16 +165,16 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
-                            <h5 class="orange">Flying out from:</h5>
+                            <h6>Flying out from:</h6>
                             <p>@Html.EditorFor(model => model.ActiveTrip.DlTripView.HomeLocation, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })</p>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <h5 class="orange">Adults (above 15 yrs old)</h5>
+                            <h6>Adults (above 15 yrs old):</h6>
                             <p>@Html.EditorFor(model => model.ActiveTrip.DlTripView.PaxAdults, new { htmlAttributes = new { @class = "form-control" } })</p>
                         </div>
 
                         <div class="col-md-3 col-sm-6">
-                            <h5 class="orange">Minors (below 15 yrs old)</h5>
+                            <h6>Minors (below 15 yrs old):</h6>
                             <p>@Html.EditorFor(model => model.ActiveTrip.DlTripView.PaxMinors, new { htmlAttributes = new { @class = "form-control" } })</p>
                         </div>
                     </div>
@@ -216,7 +227,28 @@
                                                     { @tripStep.EndDate.Value.ToShortDateString() }
                                                     else
                                                     { @Html.Raw("Not planned")}
-                                                </h5>
+                                                </h5>                                                
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-3 col-sm-6">
+                                                        <h5>Planned Duration: @tripStep.Duration Days</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 col-sm-6">
+                                                        <p>Change to: @Html.EditorFor(p => p.ActiveTrip.DlTripStepsView[x].Duration, new { @class = "form-control" })</p>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-6">
+                                                        <button class="btn btn-orange" type="submit">Save Trip</button>
+                                                    </div>
+                                                </div>
+                                                <div class="margin-bottom-10"></div>
+                                            </div>                                            
+                                                                                      
+
+                                            <div class="col-md-12 margin-bottom-20">
                                                 <p>@tripStep.LongDescription</p>
                                             </div>
 
@@ -228,15 +260,6 @@
                                                 </div>
                                             }
 
-                                            <div class="col-md-12">
-                                                <h5>
-                                                    Planned Duration: @tripStep.Duration Days &nbsp;
-                                                    Change it to :
-                                                    @Html.EditorFor(p => p.ActiveTrip.DlTripStepsView[x].Duration, new { @class = "" })
-                                                    Days
-                                                </h5>  
-                                                <div class="margin-bottom-10"></div>                                              
-                                            </div>
                                             <div class="col-md-12">
                                                 <a class="btn btn-default" href="/Service/AddFlightBooking?TripId=@tripStep.TripId&tripStepId=@tripStep.Id"><i class="icon-plane"></i>&nbsp; Add Domestic Transfer</a>
                                                 <a class="btn btn-default" href="/Service/AddTripBookingAccommodation?tripStepId=@tripStep.Id&tripId=@tripStep.TripId"><i class="icon-building"></i>&nbsp;Add Accommodation</a>

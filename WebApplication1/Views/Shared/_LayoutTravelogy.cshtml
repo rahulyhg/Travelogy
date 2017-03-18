@@ -7,30 +7,31 @@
 
     <!-- Google Tag Manager -->
     <script>
-(function (w, d, s, l, i) {
-    w[l] = w[l] || []; w[l].push({
-    'gtm.start':
-    new Date().getTime(), event: 'gtm.js'
-    }); var f = d.getElementsByTagName(s)[0],
-    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-T466XM');</script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+            'gtm.start':
+            new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-T466XM');
+    </script>
     <!-- End Google Tag Manager -->
         
     <!-- Description, Keywords and Author -->
     <meta name="description" content="@ViewBag.Description">
     <meta name="keywords" content="@ViewBag.KeyWords">
     <meta name="author" content="Travelogy Ltd">
-@if (ViewBag.RefreshPage != null)
-{
-    <meta http-equiv="refresh" content="60">
-}    
+    @if (ViewBag.RefreshPage != null)
+    {
+        <meta http-equiv="refresh" content="60">
+    }    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @*@Styles.Render("~/Content/css")*@
-    @*@Styles.Render("~/Content/css/styles")*@
-    @*@Scripts.Render("~/bundles/modernizr")*@
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <!-- Styles -->
     <!-- Bootstrap CSS -->
    

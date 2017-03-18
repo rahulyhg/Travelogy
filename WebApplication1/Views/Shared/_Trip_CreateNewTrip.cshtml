@@ -1,5 +1,11 @@
 ﻿@model WebApplication1.Models.TripViewModel
 
+<script>
+    $(function () {
+        $("#CreateTripViewModel_StartDate").datepicker();
+        $("#CreateTripViewModel_StartDate").datepicker("option", "dateFormat", "DD, d MM, yy");
+      } );
+</script>
 
 @if (Model.CreateTripTemplate != null)
 {
@@ -48,8 +54,9 @@
                             @Html.ValidationMessageFor(p => p.CreateTripViewModel.NickName, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-4 col-sm-12">
-                            <h5 class="margin-bottom-10">Approximate date of your trip :  </h5>
-                            @Html.TextBoxFor(p => p.CreateTripViewModel.StartDate, new { @class = "form-control", type = "date" })
+                            <h5 class="margin-bottom-10">Approximate date of your trip :  </h5>                            
+                            @*<p>Date: <input type="text" id="datepicker"></p>*@
+                            @Html.TextBoxFor(p => p.CreateTripViewModel.StartDate, new { @class = "form-control" })
                             @Html.ValidationMessageFor(p => p.CreateTripViewModel.StartDate, "", new { @class = "text-danger" })
                             <p class="orange">This is an approximate date you choose for planning, the exact date will be worked out when you book it.</p>
                         </div>  
@@ -74,6 +81,7 @@
                         <div class="col-md-2 col-sm-6">
                             <h5 class="margin-bottom-10">@Html.LabelFor(p => p.CreateTripViewModel.Minors) </h5>
                             @Html.EditorFor(p => p.CreateTripViewModel.Minors, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })                            
+                            @Html.ValidationMessageFor(p => p.CreateTripViewModel.Minors, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-2 col-sm-6">
                             @{
