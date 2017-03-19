@@ -426,6 +426,19 @@ namespace DomingoBL
 
                     // re-align the trip dates
                     await _UpdateTripSteps(_dbTripStep.TripId);
+
+                    var tripSteps = context.View_TripStep.Where(p => p.TripId == _dbTripStep.TripId);
+                    if (tripSteps != null)
+                    {
+                        var _dbTrip = context.Trips.Find(_dbTripStep.TripId);
+                        if(_dbTrip != null)
+                        {
+                            _dbTrip.EstimatedCost = _CalculateTripCost(tripSteps.ToList(), context, _dbTrip);
+                        }
+                    }
+
+                    await context.SaveChangesAsync();
+
                 }
 
                 return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
@@ -599,6 +612,8 @@ namespace DomingoBL
         /// <param name="_dbTrip"></param>
         private static void _UpdateTripSteps(List<View_TripStep> tripSteps, TravelogyDevEntities1 context, Trip trip)
         {
+            if (tripSteps == null) return;
+
             var _date = trip.StartDate;
 
             foreach (var tripStep in tripSteps)
@@ -609,14 +624,25 @@ namespace DomingoBL
                     // assign the notes
                     _dbTripStep.TravellerNote = tripStep.TravellerNote;
                     _dbTripStep.Duration = tripStep.Duration;
-                    
-                    if(_date.HasValue && tripStep.Duration.HasValue)
+
+                    // check if there are accommodation requests
+                    var _dbAccommodation = context.TripBookingAccommodations.Where(p => p.TripStepId == tripStep.Id).FirstOrDefault();
+
+                    if (_date.HasValue && tripStep.Duration.HasValue)
                     {
                         _dbTripStep.StartDate = _date;
                         _dbTripStep.EndDate = _date.Value.AddDays(tripStep.Duration.Value);
                         _date = _date.Value.AddDays(tripStep.Duration.Value);
+
+                        // update accommodation dates
+                        if (_dbAccommodation != null)
+                        {
+                            _dbAccommodation.CheckinDate = _dbTripStep.StartDate;
+                            _dbAccommodation.CheckoutDate = _dbTripStep.EndDate;
+                        }
                     }                    
                 }
+                
             }
 
             trip.EndDate = _date;
