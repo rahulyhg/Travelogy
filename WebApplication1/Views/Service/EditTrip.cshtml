@@ -4,7 +4,7 @@
     $(function () {
         $("#ActiveTrip_DlTripView_StartDate").datepicker();
         $("#ActiveTrip_DlTripView_StartDate").datepicker("option", "dateFormat", "DD, d MM, yy");
-      } );
+    });
 </script>
 
 @Html.Partial("_HomepageCarousel")
@@ -121,7 +121,7 @@
                             { 
                                 @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()
                             }
-                            </h6>
+                            </h6>                            
                             <p>@Html.TextBoxFor(model => model.ActiveTrip.DlTripView.StartDate, new { @class = "form-control" })</p>
                             <h6 class="orange">(Choose new date to change)</h6>
                         </div>

@@ -193,12 +193,12 @@ namespace WebApplication1.Models
                 var dropdownItems = new List<System.Web.Mvc.SelectListItem>();
                 dropdownItems.AddRange(new[]{
                             new System.Web.Mvc.SelectListItem() { Text = "--- please select one ---", Value = "" },
-                            new System.Web.Mvc.SelectListItem() { Text = "Flight - Economy", Value = "Economy" },
-                            new System.Web.Mvc.SelectListItem() { Text = "Flight - Business", Value = "Business" },
-                            new System.Web.Mvc.SelectListItem() { Text = "Flight - First", Value = "First" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Flight - Economy", Value = "Flight-Eco" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Flight - Business", Value = "Flight-Bsns" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Flight - First", Value = "Flight-First" },
                             new System.Web.Mvc.SelectListItem() { Text = "Train - Airconditioned", Value = "Train - AC" },
                             new System.Web.Mvc.SelectListItem() { Text = "Train - Non Airconditioned", Value = "Train - Non-AC" },
-                            new System.Web.Mvc.SelectListItem() { Text = "Bus or Coach", Value = "Bus" },
+                            new System.Web.Mvc.SelectListItem() { Text = "Bus or Coach", Value = "Bus-Coach" },
                             new System.Web.Mvc.SelectListItem() { Text = "Taxi or Car", Value = "Taxi" }
                 });
 

@@ -164,7 +164,7 @@
                                             Planned Dates:
                                             @if (tripStep.StartDate.HasValue)
                                             {
-                                                @Html.Raw(tripStep.StartDate.Value.ToShortDateString());
+                                                @Html.Raw(tripStep.StartDate.Value.ToLongDateString());
                                             }
                                             else
                                             {
@@ -172,7 +172,7 @@
                                             } &nbsp; -- &nbsp;
                                             @if (tripStep.EndDate.HasValue)
                                             {
-                                                @Html.Raw(tripStep.EndDate.Value.ToShortDateString());
+                                                @Html.Raw(tripStep.EndDate.Value.ToLongDateString());
                                             }
                                             else
                                             {
@@ -207,7 +207,7 @@
 
                                                             @if (hotel.CheckinDate.HasValue && hotel.CheckoutDate.HasValue)
                                                             {
-                                                                <p class="text-left">Check-in: @hotel.CheckinDate.Value.ToShortDateString() - Check-out: @hotel.CheckoutDate.Value.ToShortDateString()</p>
+                                                                <p class="text-left">Check-in: @hotel.CheckinDate.Value.ToLongDateString() - Check-out: @hotel.CheckoutDate.Value.ToLongDateString()</p>
                                                             }
                                                             <p class="text-left"><a class="orange" href="/Service/ViewAccommodationBooking?id=@hotel.Id">View details</a></p>
                                                         </div>
@@ -245,7 +245,7 @@
                                                         <div class="col-md-9 col-sm-6">
                                                             <h6 class="text-left">@transfer.TransportFrom to @transfer.TransportTo by @transfer.TransportType</h6>
                                                             @if (transfer.BookingDate.HasValue)
-                                                            {  <p class="text-left">@transfer.BookingDate.Value.ToShortDateString()</p> }
+                                                            {  <p class="text-left">@transfer.BookingDate.Value.ToLongDateString()</p> }
                                                             <p class="text-left">@transfer.Adults Adults and @transfer.Kids Minors by @transfer.TravelClass</p>
                                                             <p class="text-left"><a class="orange" href="/Service/ViewTransferBooking?id=@transfer.Id">View details</a></p>
                                                         </div>

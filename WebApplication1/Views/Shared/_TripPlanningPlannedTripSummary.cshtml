@@ -13,7 +13,7 @@
                         Trip starts on: 
                         @if (Model.DlTripView.StartDate.HasValue)
                         { 
-                            @Model.DlTripView.StartDate.Value.ToShortDateString() 
+                            @Model.DlTripView.StartDate.Value.ToLongDateString() 
                         }
                         else
                         {

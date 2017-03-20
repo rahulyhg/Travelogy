@@ -357,8 +357,8 @@ namespace WebApplication1.Controllers
             foreach (var startLocation in startLocationOptions)
             {
                 _tripStartLocationOptions.Add(new SelectListItem() { Text = startLocation, Value = startLocation });
-            }            
-
+            }
+            
             var _model = new EditTripViewModel() { ActiveTrip = trip, RelatedTemplates = _relatedTemplates, TripStartLocationOptions = _tripStartLocationOptions };
             return View("EditTrip", _model);
         }
@@ -697,9 +697,10 @@ namespace WebApplication1.Controllers
             var _booking = new TripBookingTransport();
 
             if (model.FlightClass.ToLower().Contains("train")) { _booking.TransportType = "Train"; }
-            else if (model.FlightClass.ToLower().Contains("bus")) { _booking.TransportType = "Bus"; }
+            else if (model.FlightClass.ToLower().Contains("flight")) { _booking.TransportType = "Flight"; }
+            else if (model.FlightClass.ToLower().Contains("bus") || model.FlightClass.ToLower().Contains("coach")) { _booking.TransportType = "Bus"; }
             else if (model.FlightClass.ToLower().Contains("taxi")) { _booking.TransportType = "Taxi"; }
-            else { _booking.TransportType = "Flight"; }
+            else { _booking.TransportType = "Unknown"; }
 
             _booking.TripId = model.TripId;
             _booking.TripStepId = model.TripStepId;
