@@ -25,7 +25,7 @@
                     <div class="img-box-3-icon">
                         <img src="~/content/img/flat-icons/airplane.png" alt="" class="img-responsive" />
                     </div>
-                    <h4>
+                    <h5>
                         @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
                         {
                             @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()
@@ -34,8 +34,12 @@
                         {
                             @Html.Raw("Not planned")
                         }
-                    </h4>                    
-                    <h6 class="orange">(Planned date)</h6>
+                    </h5>    
+                    @if (Model.ActiveTrip.DlTripView.EndDate.HasValue)
+                    {
+                        <h5>to @Model.ActiveTrip.DlTripView.EndDate.Value.ToLongDateString()</h5>
+                    }
+                    <h6 class="orange">(Planned dates)</h6>
                 </div>
             </div>
 
