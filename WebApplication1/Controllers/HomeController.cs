@@ -16,6 +16,9 @@ namespace WebApplication1.Controllers
 
         public ActionResult Error()
         {
+            var _logger = NLog.LogManager.GetCurrentClassLogger();
+            _logger.Info(String.Format("_getMeOutofHere: URL:{0}", Request.RawUrl));
+            
             return View("Error");
         }
 
