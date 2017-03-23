@@ -45,13 +45,14 @@ namespace WebApplication1.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [StringLength(14)]
-        [Display(Name = "Telephone Number")]
-        [RegularExpression(@"^\+(?:[0-9]?){6,14}[0-9]$", ErrorMessage = "Please enter a valid Telephone number")]
+        [StringLength(14, MinimumLength = 7, ErrorMessage = "This does not look like a valid number. ")]
+        [Display(Name = "Telephone Number:")]
+        [Required(ErrorMessage = "Please enter your Telephone number.")]
+        //[RegularExpression(@"^\+(?:[0-9]?){6,14}[0-9]$", ErrorMessage = "Please enter a valid Telephone number")]
         public string Telephone { get; set; }
 
-        [StringLength(14)]        
-        [RegularExpression(@"^\+(?:[0-9]?){6,14}[0-9]$", ErrorMessage = "Please enter a valid Mobile number")]
+        [StringLength(14, MinimumLength = 7, ErrorMessage = "This does not look like a valid number. ")]                
+        //[RegularExpression(@"^\+(?:[0-9]?){6,14}[0-9]$", ErrorMessage = "Please enter a valid Mobile number")]
         [Display(Name = "Mobile Number")]
         public string Mobile { get; set; }
 

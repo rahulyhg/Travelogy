@@ -160,10 +160,10 @@ namespace WebApplication1.Models
         [EmailAddress]
         public string Email { get; set; }
 
-        [StringLength(14)]
-        [Display(Name = "Telephone Number:")]        
-        [Required]
-        [RegularExpression(@"(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)", ErrorMessage = "Please enter a valid Telephone number")]
+        [StringLength(14, MinimumLength = 7, ErrorMessage = "This does not look like a valid number! ")]
+        [Display(Name = "Telephone Number:")]
+        [Required(ErrorMessage = "Please enter your Telephone or Mobile number.")]
+        //[RegularExpression(@"(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)", ErrorMessage = "Please enter a valid Telephone number")]
         public string Telephone { get; set; }
 
         [Required(ErrorMessage = "Please enter Notes.")]
