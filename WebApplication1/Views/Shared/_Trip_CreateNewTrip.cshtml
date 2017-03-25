@@ -137,9 +137,12 @@
             @if (Model.CreateTripTemplate.DlTemplateSteps != null && Model.CreateTripTemplate.DlTemplateSteps.Count > 0)
             {
                 <div class="headline">
-                    <h3>Trip details</h3>
-                    <p class="orange">You can fully customize this trip with help from expert travel advisors.</p>
+                    <h3>Itinerary details</h3>                    
                 </div>
+
+                <blockquote>
+                    <p class="orange">You can fully customize this trip using the Trip planner and with help from our expert travel advisors.</p>
+                </blockquote>
 
                 <div class="media margin-bottom-20">
                     @Html.Partial("_ViewTripTemplateSteps", Model.CreateTripTemplate)

@@ -10,12 +10,22 @@
     </div>
     <div class="col-md-9">
         <h2>@Model.TripTemplate.DlTemplate.Name</h2>
-        @*<a href="/Service/ViewTripTemplate?TemplateId=@Model.TripTemplate.DlTemplate.Id"><h5 class="orange margin-bottom-20">View details</h5></a>*@        
-        <a href="/Service/AddCircuitToTrip?tripId=@Model.TripId&templateId=@Model.TripTemplate.DlTemplate.Id"><h5 class="orange margin-bottom-20">View details</h5></a>        
+        @if (Request.IsAuthenticated)
+        {
+            if (Model.TripId > 0)
+            {
+                <a href="/Service/AddCircuitToTrip?tripId=@Model.TripId&templateId=@Model.TripTemplate.DlTemplate.Id"><h5 class="orange margin-bottom-20">View details</h5></a>
+            }
+            else
+            {
+                <a href="/Service/CreateTripFromTemplate?templateId=@Model.TripTemplate.DlTemplate.Id"><h5 class="orange margin-bottom-20">View details</h5></a>
+            }
+        }
+        
         <p>@Model.TripTemplate.DlTemplate.Description</p>
         <h6 class="orange">Typical duration: @Model.TripTemplate.DlTemplate.DurationDaysMin - @Model.TripTemplate.DlTemplate.DurationDaysMax Days</h6>        
     </div>
-    <div class="col-md-12 text-left">
+    <div class="col-md-12 text-center">
     @if (Request.IsAuthenticated)
     {
         if (Model.TripId > 0)

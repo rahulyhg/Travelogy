@@ -32,6 +32,12 @@ namespace DomingoBL
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="telephone"></param>
+        /// <returns></returns>
         public static async Task<DomingoBlError> CreateCrmLeadCallMeBack(string name, string telephone)
         {
             try
@@ -61,6 +67,48 @@ namespace DomingoBL
                 return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public static async Task<DomingoBlError> CreateCrmLeadDownloadBrochure(string name, string email, string attachment)
+        {
+            try
+            {
+                // create a lead in the capsule CRM
+                string fName, lName;
+                var names = name.Split(' '); // in case there are two names
+
+                if (names.Length == 2)
+                {
+                    fName = names[0];
+                    lName = names[1];
+                }
+                else
+                {
+                    fName = name; lName = "";
+                }
+
+                var gateway = new CapsupleCrmGateway();
+                var crmResponse = await gateway.CreateCapsuleLead(fName, lName, email,
+                    "Not Captured", string.Format("{0} {1} clicked Download Brochure on website.", fName, lName));
+
+                var emailUtility = new EmailUtility();
+                var emailParams = new Dictionary<String, String>();
+                emailParams.Add("UserName", fName);                
+                await emailUtility.SendEmailWithAttachment("DownloadBrochure", email, emailParams, attachment);
+
+                return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+        }
+
 
         /// <summary>
         /// 

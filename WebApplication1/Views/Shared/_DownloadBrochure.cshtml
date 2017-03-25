@@ -1,26 +1,30 @@
 ﻿@model WebApplication1.Models._DownloadBrochureModel
 
-<div class="row margin-bottom-40">
-    <div class="col-md-12 col-sm-12">
-        <div class="pricing hover-effect">
-            <div class="pricing-head">
-                <h3>Download Brochure</h3>
-                <h4>
-                    <i>FREE brochure to help you plan</i>
-                    @*<span>Get a customized guide for your @Model.CircuitName trip</span>*@
-                </h4>
-            </div>     
-            <div class="text-center">
-                <h4>A brochure that is not aimed at selling packaged trips!</h4>
-                <h5 class="orange">All Travelogy trips are customized with YOU at the center.</h5>
-                <h1>&nbsp;</h1>
-            </div>      
-            <div class="pricing-footer">
-                <a href="#">
-                    <i class="icon-cloud-download"></i>&nbsp; Download Now
-                </a>
+@if (Request.IsAuthenticated)
+{
+    <div class="row margin-bottom-40">
+        <div class="col-md-12 col-sm-12">
+            <div class="pricing hover-effect">
+                <div class="pricing-head">
+                    <h3>Download Brochure</h3>
+                    <h4>
+                        <i>FREE brochure to help you plan</i>
+                        @*<span>Get a customized guide for your @Model.CircuitName trip</span>*@
+                    </h4>
+                </div>
+                <div class="text-center">
+                    <h4>A brochure that is not aimed at selling packaged trips!</h4>
+                    <h5 class="orange">All Travelogy trips are customized with YOU at the center.</h5>
+                    <h1>&nbsp;</h1>
+                </div>
+                <div class="pricing-footer">
+                    <a href="#">
+                        <i class="icon-cloud-download"></i>&nbsp; Download Now
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
+
 
