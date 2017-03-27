@@ -58,15 +58,17 @@ namespace WebApplication1.Controllers
         // GET: Circuit - get all circuits
         public ActionResult Index()
         {
-            List<Destination> _destinations = null;
-            var blError = DestinationManager.GetAllDestinations(out _destinations);
-            if (blError.ErrorCode != 0 || _destinations == null || _destinations.Count == 0)
-            {
-                throw new ApplicationException(blError.ErrorMessage);
-            }
+            //List<Destination> _destinations = null;
+            //var blError = DestinationManager.GetAllDestinations(out _destinations);
+            //if (blError.ErrorCode != 0 || _destinations == null || _destinations.Count == 0)
+            //{
+            //    throw new ApplicationException(blError.ErrorMessage);
+            //}
 
-            var _model = new CircuitModelBase() { AllDestinations = _destinations, CircuitName = "All Destinations" };
-            return View(_model);
+            //var _model = new CircuitModelBase() { AllDestinations = _destinations, CircuitName = "All Destinations" };
+            //return View(_model);
+
+            return View();
         }
 
         // GET: Circuit - get all circuits for India
