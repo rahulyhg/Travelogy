@@ -403,6 +403,8 @@ namespace WebApplication1.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
+                var _logger = NLog.LogManager.GetCurrentClassLogger();
+                _logger.Info(String.Format("ExternalLoginCallback: AuthenticationManager.GetExternalLoginInfoAsync is NULL URL:{0}", Request.RawUrl));
                 return RedirectToAction("Login");
             }
 
