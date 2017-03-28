@@ -6,31 +6,32 @@
     <title>@ViewBag.Title - Travelogy | Science of Travelling</title>
 
     <!-- Google Tag Manager -->
-    <script>
-(function (w, d, s, l, i) {
-    w[l] = w[l] || []; w[l].push({
-    'gtm.start':
-    new Date().getTime(), event: 'gtm.js'
-    }); var f = d.getElementsByTagName(s)[0],
-    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-T466XM');</script>
+    @*<script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+            'gtm.start':
+            new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-T466XM');
+    </script>*@
     <!-- End Google Tag Manager -->
         
     <!-- Description, Keywords and Author -->
     <meta name="description" content="@ViewBag.Description">
     <meta name="keywords" content="@ViewBag.KeyWords">
     <meta name="author" content="Travelogy Ltd">
-@if (ViewBag.RefreshPage != null)
-{
-    <meta http-equiv="refresh" content="60">
-}    
+    @if (ViewBag.RefreshPage != null)
+    {
+        <meta http-equiv="refresh" content="60">
+    }    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @*@Styles.Render("~/Content/css")*@
-    @*@Styles.Render("~/Content/css/styles")*@
-    @*@Scripts.Render("~/bundles/modernizr")*@
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <!-- Styles -->
     <!-- Bootstrap CSS -->
    
@@ -117,6 +118,9 @@
                         <!-- Navigation starts.  -->
                         <div class="navy">
                         <ul>
+                            @*Login menu items*@
+                            @Html.Partial("_LoginPartial")
+
                             @if (Request.IsAuthenticated)
                             {
                                 if (!string.IsNullOrEmpty(ApplicationUserManager.GetUserType(User.Identity.Name)))
@@ -132,15 +136,15 @@
                             }
 
                             <li>
-                                <a href="#">Destinations</a>
-                                <ul>
+                                <a href="/Circuit">Destinations</a>
+                                @*<ul>
                                     <li>@Html.ActionLink("India", "index", "India")</li>
                                     <li>@Html.ActionLink("Tanzania", "Tanzania", "Circuit")</li>
                                     <li>@Html.ActionLink("Russia", "Russia", "Circuit")</li>
                                     <li>@Html.ActionLink("Mongolia", "Mongolia", "Circuit")</li>
                                     <li>@Html.ActionLink("Europe", "Europe", "Circuit")</li>
                                     <li><a href="/Circuit">Browse All</a></li>
-                                </ul>
+                                </ul>*@
                             </li>
 
                             @if (Request.IsAuthenticated)
@@ -168,8 +172,7 @@
                                 </li>
                             }
 
-                            @*Login menu items*@
-                            @Html.Partial("_LoginPartial")
+                            
                         </ul>                                               
                     </div>
                     <!-- Navigation ends -->
@@ -188,12 +191,14 @@
         </div>
     </div>
     <!-- Header two ends -->    
-        
-    <div class="alert alert-block alert-warning fade in text-center">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h4>Welcome to the all new Travelogy club portal - beta version!</h4>
-        <h6>We are in the process of testing this site now. It may take us a few days to get everything sorted!</h6>        
-    </div>
+    @if (!String.IsNullOrEmpty(System.Configuration.ConfigurationManager.AppSettings["ShowBetaWarning"]))
+    {
+        <div class="alert alert-block alert-warning fade in text-center">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4>Welcome to the all new Travelogy club portal - beta version!</h4>
+            <h6>We are in the process of testing this site now. It may take us a few days to get everything sorted!</h6>
+        </div>
+    }
 
     <!-- Main content starts -->
     <div class="main-block">
@@ -216,6 +221,13 @@
                         <h5 class="bold"><i class="fa fa-user"></i>&nbsp;&nbsp;About</h5>
                         <p class="orange">Travelogy club is a platform created to offer 360 degree solution for travel to exotic destinations.</p>                        
                     </div>
+                    <div class="margin-bottom-10"></div>
+                    <h5 class="bold white margin-bottom-10">Find us on social media</h5>
+                    <div class="brand-bg white">
+                        <!-- Social Media Icons -->
+                        <a href="https://www.facebook.com/travelogyclub/" target="_blank" class="blue"><i class="fa fa-facebook circle-3"></i> Facebook</a>
+                        <a href="https://twitter.com/travelogyclub" target="_blank" class="blue"><i class="fa fa-twitter circle-3"></i> Twitter</a>
+                    </div>
                 </div>
                 <div class="col-md-7 col-sm-6">
                     <!-- Foot Item -->
@@ -225,23 +237,16 @@
                         <!-- Foot Item Content -->
                         <div class="foot-item-content address">
                             <p class="tel white">                                
-                                <i class="fa fa-phone"></i>+44 20 3318 6049 (U.K. Customer Care)<br />
+                                <i class="fa fa-phone"></i>020 3318 6049 (Customer Care)<br />
                                 @*<i class="fa fa-phone"></i>+44 20 8560 2747 (U.K. Business Queries)<br />*@
                                 @*<i class="fa fa-phone"></i>+91 98366 97183 (India Customer Care) <br />*@
                                 <i class="fa fa-envelope"></i>  Mail : <a href="mailto:info@travelogyclub.com">info@travelogyclub.com</a><br />
+                                <i class="fa fa-building-o"></i> Registered Address : <br />1 Jordans Close, Isleworth <br />Greater London. Post Code: TW7 4JB. <br />
+                                Company House Reg # <a href="https://beta.companieshouse.gov.uk/company/08436057" target="_blank" class="orange">08436057</a> 
                                 @*<i class="fa fa-calendar"></i> Business Hours : Sales 9:30 - 5:30 India and U.K. <br />
                                 <i class="fa fa-clock-o"></i>Support : 24x7*@
                             </p>
                         </div>
-
-                        <div class="margin-bottom-10"></div>
-                        <h5 class="bold orange">Find us on social media</h5>
-                        <div class="brand-bg">
-                            <!-- Social Media Icons -->
-                            <a href="https://www.facebook.com/travelogyclub/" target="_blank" @*class="facebook"*@><i class="fa fa-facebook circle-3"></i> Facebook</a>
-                            <a href="https://twitter.com/travelogyclub" target="_blank" @*class="twitter"*@><i class="fa fa-twitter circle-3"></i> Twitter</a>                            
-                        </div>
-
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-6">
@@ -278,40 +283,9 @@
 
     </div>
 
-
     <span class="totop"><a href="/"><i class="fa fa-angle-up bg-color"></i></a></span>
 
-    <!-- Javascript files -->
-    <!-- jQuery -->
-    @*<script src="~/content/js/jquery.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="~/content/js/bootstrap.min.js"></script>
-    <!-- Placeholders JS -->
-    <script src="~/content/js/placeholders.js"></script>
-    <!-- Magnific Popup -->
-    <script src="~/content/js/jquery.magnific-popup.min.js"></script>
-    <!-- Owl carousel -->
-    <script src="~/content/js/owl.carousel.min.js"></script>
-    <!-- Respond JS for IE8 -->
-    <script src="~/content/js/respond.min.js"></script>
-    <!-- HTML5 Support for IE -->
-    <script src="~/content/js/html5shiv.js"></script>
-    <!-- Main JS -->
-    <script src="~/content/js/main.js"></script>
-
-    <!-- Javascript for this page -->
-    <!-- Custom JS. Type your JS code in custom.js file -->
-    <script src="~/content/js/custom.js"></script>*@
-
-    <!--
-    Style switcher. This is just for demo purpose only.
-    If you don't want remove the below line.
-    Some of the features of style switcher won't work on offline. THey only work when you upload it to server
-    -->
-    <!-- <script src="style-switcher/style-switcher.js"></script> -->
-
-
-    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/mainjs")

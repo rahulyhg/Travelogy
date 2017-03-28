@@ -17,8 +17,9 @@
             <div id="socialLoginList">
                 @foreach (AuthenticationDescription p in loginProviders)
                 {
-                    <p class="margin-bottom-40">
-                        You can use your @p.AuthenticationType account to login to Travelogy. Your account will automatically be created and linked to your @p.AuthenticationType profile.
+                    <p class="margin-bottom-40 text-center">
+                        You can use your @p.AuthenticationType account to login to Travelogy. 
+                        Your account will linked to your <strong>@p.AuthenticationType</strong>  profile.
                     </p>
                     <p class="text-center">
                         <button type="submit" class="btn-u btn-u200" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">Login with @p.AuthenticationType</button>

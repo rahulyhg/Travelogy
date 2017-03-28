@@ -55,12 +55,30 @@
             </div>
     
             <div class="form-group">
+                @{
+                    var ListOfCurrencies = new List<SelectListItem>();
+                    ListOfCurrencies.AddRange(new[]{
+                                    new SelectListItem() { Text = "GBP", Value = "GBP" },
+                                    new SelectListItem() { Text = "EUR", Value = "EUR" },
+                                    new SelectListItem() { Text = "USD", Value = "USD" },
+                                    new SelectListItem() { Text = "INR", Value = "INR" }
+                                });
+                }
+
+                @Html.LabelFor(model => model.DbObject.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.DropDownListFor(model => model.DbObject.Currency, ListOfCurrencies, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DbObject.Currency, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
                 @Html.LabelFor(model => model.DbObject.EstimatedCost, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-3">
                     @Html.EditorFor(model => model.DbObject.EstimatedCost, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.DbObject.EstimatedCost, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div>            
 
             <div class="form-group">
                 @Html.LabelFor(model => model.DbObject.Status, htmlAttributes: new { @class = "control-label col-md-2" })

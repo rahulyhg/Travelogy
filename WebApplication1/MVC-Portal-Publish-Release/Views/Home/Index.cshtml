@@ -21,7 +21,7 @@
         <div class="about-us-one">
             <div class="row">
                 <h1>Travelogy <small><i>(noun)</i><span class="orange"> the science of travelling.</span></small></h1>
-            </div>
+            </div>            
             <hr class="margin-bottom-10" />
             <div class="row">
                 <div class="container">
@@ -38,16 +38,23 @@
             </div>
             @if (!Request.IsAuthenticated)
             {
-                <div class="row">
+                <hr class="margin-bottom-10" />
+                <div class="row text-center">
+                    @*Join us buttons*@
                     <div class="container">
-                        <h3>
-                            Join the club: <a href="/Account/Register" class="orange">Sign up for Free </a> or <a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-u-small btn-u-orange">
-                                <i class="icon-facebook"></i> &nbsp; Login with Facebook
-                            </a>
-                        </h3>
+                        <div class="col-md-12">
+                            <h3>
+                                Join the club: <a href="/Account/Register" class="orange">Sign up for Free </a> or <a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-u-small btn-u-orange">
+                                    <i class="icon-facebook"></i> &nbsp; Login with Facebook
+                                </a>
+                            </h3>
+                        </div>
                     </div>
-                </div>
+                </div> @*END: Join us buttons*@
+
+                @Html.Partial("_CallmeBackMicro")
             }
+            
         </div>
     </div>
 
@@ -57,23 +64,28 @@
         <div class="col-sm-4 info-blocks">
             <i class="icon-lightbulb icon-info-blocks"></i>
             <div class="info-blocks-in">
-                <h3>Great ideas for exotic trips</h3>
-                <p>Great ideas for trips to India, Nepal, Bhutan, Russia, Mongolia and Tanzania. The itineraries have been prepared by expert travellers.</p>
+                <a href="/India"><h3>Great ideas for exotic trips</h3></a>                
+                <p>Great ideas for trips to <a href="/India" class="orange">India, Nepal, Bhutan</a>,  
+                <a href="/Circuit/Russia">Russia</a>, <a href="/Circuit/Mongolia">Mongolia</a>  and <a href="/Circuit/Tanzania">Tanzania</a>. The itineraries have been prepared by expert travellers.</p>
             </div>
         </div>
         <div class="col-sm-4 info-blocks">
             <i class="icon-laptop icon-info-blocks"></i>
-            <div class="info-blocks-in">
-                <h3>FREE Online trip planner</h3>
-                <p>Use our online planning tool for planning, booking and managing your trips.</p>
-            </div>
+            <a href="/service/TripPlanning">
+                <div class="info-blocks-in">
+                    <h3>FREE Online trip planner</h3>
+                    <p>Use our online planning tool for planning, booking and managing your trips.</p>
+                </div>
+            </a>            
         </div>
         <div class="col-sm-4 info-blocks">
             <i class="icon-user icon-info-blocks"></i>
-            <div class="info-blocks-in">
-                <h3>Expert Travel advisers</h3>
-                <p>Our service is backed up by expert advisers and local travel agencies in every location we offer. Have local knowlede at your fingertips</p>
-            </div>
+            <a href="/service/TravelLogistics">
+                <div class="info-blocks-in">
+                    <h3>Expert Travel advisers</h3>
+                    <p>Our service is backed up by expert advisers and local travel agencies in every location we offer. Have local knowlede at your fingertips</p>
+                </div>
+            </a>            
         </div>
     </div>
     <hr class="margin-bottom-20">
@@ -85,163 +97,22 @@
 
     else
     {   <!--End Tag Box v5-->
-        <div class="box-shadow-outer">
-            <div class="box-shadow-block box-shadow-1 text-left">
-                @Html.Partial("_TripPlannerAdvert")
-            </div>
-        </div>
+        @Html.Partial("_TripPlannerAdvert")
     }
 
     <div class="margin-bottom-20"></div>
 
-
-    <div class="container">
-
-        <hr class="margin-bottom-20" />
-
-        <!-- INDIA -->
-        <div class="box-shadow-outer">
-            <div class="box-shadow-block box-shadow-1 text-left">
-                <div class="row">
-                    <div class="col-md-4 col-sm-12">
-                        <a href="/India">
-                            <img class="img-responsive img-border margin-bottom-20" src="~/Content/img/gallery/small/thumbnail_WesternHimalaya.jpg" />
-                            <img class="img-responsive img-border margin-bottom-20" src="~/Content/img/gallery/small/thumbnail_IndianWestCoast.jpg" />
-                        </a>
-                    </div>
-                    <div class="col-md-8 col-sm-12">
-                        <a href="/India">
-                            <div class="block-heading-twelve">
-                                <h3 class="orange">India, Nepal &amp; Bhutan</h3>
-                                <h5>
-                                    Explore the tallest mountain range of the world, The Himalayas and go on
-                                    <span class="orange">Motorcycling, Backpacking &amp; Adventure travel.</span>
-                                    Get mesmerized by the majestic Taj Mahal and head to the desert of Rajasthan!
-                                    <span class="orange">From the gorgeous beaches of Goa,</span>
-                                    head South for the ancient temples and the Technology Hubs!
-                                    <span class="orange">Find Exciting Photography trips in India and Nepal.</span>
-                                    Know more about the far corners of the country, from the tribal villages of Nagaland to the
-                                    Bull-run of Tamilnadu, Explore more travel ideas for the Sub-continent...
-                                </h5>
-                            </div>
-                        </a>
-                        @if (Request.IsAuthenticated && _nextTrip == null)
-                        {       
-                            <div class="margin-bottom-20"></div>
-                            <a href="/Service/CreateTripForCountry?country=India">
-                                <div class="block-heading-twelve">
-                                    <h2>Start planning for India <i class="icon-arrow-right"></i></h2>
-                                </div>
-                            </a>                            
-                        }
-                    </div>
+    <div class="container">     
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="block-heading-twelve">
+                    <h1 class="orange">
+                        <small class="">We operate in </small> <a href="/India" class="orange">India, Nepal &amp; Bhutan</a>, <small class=""> <a href="/Circuit/Tanzania">Tanzania</a>, <a href="/Circuit/Russia">Russia</a>  &amp; <a href="/Circuit/Mongolia">Mongolia</a> </small> &nbsp;&nbsp;
+                        <a href="/Circuit" class="btn-u btn-large btn-orange">Find out more about the Destinations &nbsp;&nbsp; <i class="icon-arrow-right"></i></a>
+                    </h1>
                 </div>
             </div>
-        </div>
-        <!-- END : INDIA -->
-        <div class="margin-bottom-20"></div>
-        <!-- TANZANIA -->
-        <div class="box-shadow-outer">
-            <div class="box-shadow-block box-shadow-1 text-left">
-                <div class="row">
-                    <div class="col-md-8 col-sm-12">
-                        <a href="/Circuit/Tanzania">
-                            <div class="block-heading-twelve">
-                                <h3>Climb Kilimanjaro</h3>
-                                <h1 class="orange">Enjoy a Safari in Serengeti</h1>
-                                <h5>
-                                    The tallest lone standing mountain in the world and some of the most amazing wildlife sights on Earth!
-                                    <span class="orange">Exciting Travel plans for Tanzania</span> includes spending nights in a tent and keeping
-                                    the fire on to keep the lions at bay, <span class="orange">treading on knee deep snow to reach the summit of Kilimanjaro </span>
-                                    while you burn under a scorching sun! In the end enjoy a cool beer at a village hut and try some local delicacies, while
-                                    you spot a Girraffe grazing on a tall Acacia tree.
-                                </h5>
-                            </div>
-                        </a>
-                        @if (Request.IsAuthenticated && _nextTrip == null)
-                        {                            
-                            <div class="margin-bottom-20"></div>
-                            <a href="/Service/CreateTripForCountry?country=Tanzania">
-                                <div class="block-heading-twelve">
-                                    <h2>Start planning for Tanzania <i class="icon-arrow-right"></i></h2>
-                                </div>
-                            </a>
-                        }
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        <a href="/Circuit/Tanzania">
-                            <img class="img-responsive img-border margin-bottom-10" src="~/Content/img/gallery/small/thumbnail_safari.jpg" />
-                            <img class="img-responsive img-border margin-bottom-10" src="~/Content/img/gallery/small/thumbnail_kili.jpg" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END : TANZANIA -->
-
-        <div class="margin-bottom-20"></div>
-
-        <div class="row">
-            <!-- MONGOLIA -->
-            <div class="col-md-6 col-sm-12">
-                <div class="box-shadow-outer">
-                    <div class="box-shadow-block box-shadow-1 text-left">
-                        <a href="/Circuit/Mongolia">
-                            <div class="block-heading-twelve">
-                                <img class="img-responsive img-border margin-bottom-20" src="~/Content/img/gallery/small/thumbnail_mongol02.jpg" />
-                                <h3>Mongolia</h3>
-                                <h1>Gobi Desert&nbsp;&amp;<span class="orange"> Altai Mountains</span> </h1>
-                                <h5>
-                                    Be a Nomad in the endless fields of Mongolia, <span class="orange">The legendary land of Zenghis Khan </span>
-                                    offers great adventure for every traveller.
-                                </h5>
-                            </div>
-                        </a>
-                        @if (Request.IsAuthenticated && _nextTrip == null)
-                        {
-                            <div class="margin-bottom-20"></div>
-                            <a href="/Service/CreateTripForCountry?country=Mongolia">
-                                <div class="block-heading-twelve">
-                                    <h2>Start planning for Mongolia <i class="icon-arrow-right"></i></h2>
-                                </div>
-                            </a>
-                        }
-                    </div>
-                </div>
-            </div>
-            <!-- END : MONGOLIA -->
-            <!-- END : RUSSIA -->
-            <div class="col-md-6 col-sm-12">
-                <div class="box-shadow-outer">
-                    <div class="box-shadow-block box-shadow-1 text-left">
-                        <a href="/Circuit/Russia">
-                            <div class="block-heading-twelve">
-                                <img class="img-responsive img-border margin-bottom-20" src="~/Content/img/gallery/small/thumbnail_tsr02.jpg" />
-                                <h3>Russia</h3>
-                                <h1>Trans-Siberian <span class="orange">&amp;&nbsp;Lake Baikal</span> </h1>
-                                <h5>
-                                    The longest running train of the planet.
-                                    <span class="orange">The deepest lake on Earth.</span>
-                                    There are plenty of adventures stored in the world's largest country!
-                                </h5>
-                            </div>
-                        </a>
-                        @if (Request.IsAuthenticated && _nextTrip == null)
-                        {
-                            <div class="margin-bottom-20"></div>
-                            <a href="/Service/CreateTripForCountry?country=Russia">
-                                <div class="block-heading-twelve">
-                                    <h2>Start planning for Russia <i class="icon-arrow-right"></i></h2>
-                                </div>
-                            </a>
-                        }
-                    </div>
-                </div>
-            </div>
-            <!-- END : RUSSIA -->
-        </div>
-        <hr class="margin-bottom-20" />
-
+        </div>   
     </div>
 }
 

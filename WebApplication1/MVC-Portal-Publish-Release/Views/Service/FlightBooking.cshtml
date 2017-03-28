@@ -1,5 +1,12 @@
 ﻿@model WebApplication1.Models.FlightBookingViewModel
 
+<script>
+    $(function () {
+        $("#FlightDate").datepicker();
+        $("#FlightDate").datepicker("option", "dateFormat", "DD, d MM, yy");
+      } );
+</script>
+
 @Html.Partial("_HomepageCarousel")
 
 <div class="headline">
@@ -7,8 +14,7 @@
 </div>  
 
 <div class="row">
-    <div class="col-sm-12 info-blocks">
-        <i class="icon-plane icon-info-blocks"></i>
+    <div class="col-sm-12 info-blocks">        
         <div class="info-blocks-in">
             <h3>Your trip: @Model.TripName -- @Model.TripId</h3>
             <h4>
@@ -28,8 +34,7 @@
 
     @if (Model.TripStepId > 0)
     {
-        <div class="col-sm-12 info-blocks">
-            <i class="icon-ok-sign icon-info-blocks"></i>
+        <div class="col-sm-12 info-blocks">            
             <div class="info-blocks-in">
                 <h3>@Model.TripStepName</h3>
                 <p>@Model.TripStepDescription</p>
@@ -62,7 +67,7 @@
                     <div class="row margin-bottom-10">                       
                         <div class="col-md-3 col-md-offset-0">
                             @Html.LabelFor(model => model.FlightDate) <br />
-                            @Html.EditorFor(model => model.FlightDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                            @Html.EditorFor(model => model.FlightDate, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.FlightDate, "", new { @class = "text-danger" })
                         </div>
 

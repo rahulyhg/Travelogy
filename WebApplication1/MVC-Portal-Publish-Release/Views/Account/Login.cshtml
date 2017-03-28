@@ -1,10 +1,24 @@
 ﻿@using WebApplication1.Models
 @model LoginViewModel
-@{
-    ViewBag.Title = "Sign in to your account";
-}
-
  
+<div class="col-lg-8 col-lg-offset-2">
+    <!--Tag Box v5-->
+    <div class="row text-center">
+        <div class="col-md-12 margin-bottom-20"> 
+            <h6 class="text-center">
+                Welcome to the all new Travelogy club portal. You need to logged in to use our Trip Planner and other features.                 
+             </h6>   
+            <h5>
+                If you have not created an account yet, click here to 
+                <a href="/Account/Register" class="orange">Sign up and Join the club <i class="icon-signin"></i> </a>
+            </h5>    
+            <div class="margin-bottom-20"></div>
+            <h6 class="orange"> <i>Signing up and using the Trip Planner is FREE and does not need your Credit Card details!</i> </h6>     
+        </div>
+    </div>
+    <!--End Tag Box v5-->
+</div>
+
 <div class="row">
     <div class="col-md-4 col-lg-offset-2">
         <section id="loginForm">
@@ -13,7 +27,8 @@
                 @Html.AntiForgeryToken()
 
                 <div class="reg-header">
-                    <h3>@ViewBag.Title.</h3>
+                    <h6 class="orange">Already signed up?</h6>
+                    <h4>Sign in to your account.</h4>
                     @*<h4>@Html.ActionLink("or Sign up and join the Club", "Register")</h4>*@
                 </div>
 
@@ -30,9 +45,9 @@
                 </div>
 
 
-                <div class="input-group margin-bottom-20">
+                @*<div class="input-group margin-bottom-20">
                     @Html.CheckBoxFor(m => m.RememberMe) &nbsp; @Html.LabelFor(m => m.RememberMe)
-                </div>
+                </div>*@
 
                 if (Model != null && (!string.IsNullOrEmpty(Model.LoginFailureMessage)))
                 {
@@ -48,13 +63,12 @@
                         <input type="submit" value="Log in" class="btn-u pull-right" />
                     </div>
                 </div>
-                <div class="margin-bottom-20"></div>
+                <div class="margin-bottom-40"></div>
 
                 @* Enable this once you have account confirmation enabled for password reset functionality*@
-                <p class="text-center">
-                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                </p>
-                }
+                <h6 class="text-center">Forgot your password?</h6>
+                <h6 class="orange text-center">@Html.ActionLink("Retrieve by clicking here.", "ForgotPassword")</h6>               
+            }
         </section>
     </div>
     <div class="col-md-4">
@@ -68,26 +82,15 @@
     </div>
 </div>
 
-<div class="col-lg-8 col-lg-offset-2">
-    <!--Tag Box v5-->
-    <div class="row tag-box tag-box-v5">
-        <div class="col-md-8">
-            <span>If you have not created an account yet: </span>
-        </div>
-        <div class="col-md-4">
-            <p> <a href="/Account/Register" class="btn-u btn-u-lg btn-u-orange"><i class="icon-signin"></i> &nbsp;Sign up and Join the club</a></p>
-        </div>
-    </div>
-    <!--End Tag Box v5-->
-</div>
+
 
 
 <div class="row">
     <div class="col-md-12 padd-15 text-center">
-        <h4>
+        <h6>
             By Signing up and logging in, you agree to our <a href="/Information/TermsAndConditions" target="_blank" class="orange">Terms And Conditions</a>.
-            <small>Please read our <a href="/Information/Privacy" target="_blank" class="orange">Privacy policy</a> for peace of mind.</small>
-        </h4>
+            Please read our <a href="/Information/Privacy" target="_blank" class="orange">Privacy policy</a>.
+        </h6>
     </div>
 </div>
 

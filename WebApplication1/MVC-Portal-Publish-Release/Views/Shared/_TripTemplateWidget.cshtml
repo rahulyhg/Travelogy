@@ -10,25 +10,37 @@
     </div>
     <div class="col-md-9">
         <h2>@Model.TripTemplate.DlTemplate.Name</h2>
-        <a href="/Service/ViewTripTemplate?TemplateId=@Model.TripTemplate.DlTemplate.Id"><h5 class="orange margin-bottom-20">View details</h5></a>        
+        <div class="margin-bottom-10"></div>
+        @if (Request.IsAuthenticated)
+        {
+            if (Model.TripId > 0)
+            {
+                <a href="/Service/AddCircuitToTrip?tripId=@Model.TripId&templateId=@Model.TripTemplate.DlTemplate.Id" class="btn"><h5 class="orange">Add this circuit to my Trip</h5></a>
+            }
+            else
+            {
+                <a href="/Service/CreateTripFromTemplate?templateId=@Model.TripTemplate.DlTemplate.Id" class="btn btn-black"><h5 class="white">Customize this trip <i class="icon-arrow-right"></i></h5></a>
+            }
+        }
+        
         <p>@Model.TripTemplate.DlTemplate.Description</p>
         <h6 class="orange">Typical duration: @Model.TripTemplate.DlTemplate.DurationDaysMin - @Model.TripTemplate.DlTemplate.DurationDaysMax Days</h6>        
     </div>
-    <div class="col-md-12 text-left">
+    <div class="col-md-12 text-center">
     @if (Request.IsAuthenticated)
     {
-        if (Model.TripId > 0)
+        @*if (Model.TripId > 0)
         {
             <a href="/Service/AddCircuitToTrip?tripId=@Model.TripId&templateId=@Model.TripTemplate.DlTemplate.Id">
-                <h3 class="orange">Add this to my Trip <i class="icon-arrow-right"></i></h3>
+                <h5 class="orange">View details of this circuit <i class="icon-arrow-right"></i></h5>
             </a>            
         }
         else
         {
             <a href="/Service/CreateTripFromTemplate?templateId=@Model.TripTemplate.DlTemplate.Id">
-                <h3 class="orange">Start my plan with this circuit <i class="icon-arrow-right"></i></h3>                
+                <h5 class="orange">Start my plan with this circuit <i class="icon-arrow-right"></i></h5>                
             </a>
-        }
+        }*@
     }
     else
     {

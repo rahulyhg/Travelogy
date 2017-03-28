@@ -32,40 +32,74 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="block-heading-eight">
-            <h3>Geographically you can expect a lot here... <small>the highest mountain range in the world, over 4500 miles of coastline,
-                high altitude desert, some of the densest forests of the world, vast salty marshes, lush green backwaters, 
-                the wettest place on earth in the eastern corner of the country to a bone dry desert in the west!</small></h3>            
-        </div>                 
+@if (!Request.IsAuthenticated)
+{
+    <div class="container">
+        <div class="row">
+            @{ 
+                var model = new WebApplication1.Models._DownloadBrochureRequestModel() { BrochurePath = "/Content/Brochures/Travbrochure-India.pdf" };
+                Html.RenderPartial("_DownloadBrochureNotLoggedIn", model);
+            }
+        </div>
     </div>
-</div>
+}
+else
+{
+        <div class="container">
+            <div class="row">
+                <div class="panel panel-orange">
+                    <div class="panel-body">
+                        <a href="/Content/Brochures/Travbrochure-India.pdf" target="_blank" class="btn btn-orange"><h3 class="white">&nbsp; &nbsp;Download our brochure &nbsp; &nbsp; <i class="icon-cloud-download"></i> </h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+}
+
 
 <div class="headline">
     <h3>Travel circuits in India</h3>
 </div>
 
-@for (var i = 0; i < Model.AllDestinations.Count; i++)
-{
-    if (i % 4 == 0)
-    {
-        @Html.Raw("<div class=\"row\">");
-    }
+<div class="row margin-bottom-20">
+    <div class="col-md-3 col-sm-6">
+        <div class="thumbnails thumbnail-style">
+            <a href="/Circuit/India"><img class="img-responsive" src="/content/img/India/thumbnail001.jpg" alt="" /></a>
+    </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="thumbnails thumbnail-style">
+            <a href="/Circuit/India"><img class="img-responsive" src="/content/img/India/thumbnail002.jpg" alt="" /></a>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="thumbnails thumbnail-style">
+            <a href="/Circuit/India"><img class="img-responsive" src="/content/img/India/thumbnail003.jpg" alt="" /></a>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="thumbnails thumbnail-style">
+            <a href="/Circuit/India"><img class="img-responsive" src="/content/img/India/thumbnail004.jpg" alt="" /></a>
+        </div>
+    </div>
+</div><!--/row-->
 
-    {
-        var item = Model.AllDestinations[i];
-        @Html.Partial("_DestinationWidgetMicro", item)
-    }
+<div class="container">
+    <div class="row">
+        <div class="block-heading-eight">
+            <h3>
+                Geographically you can expect a lot here... <small>
+                    the highest mountain range in the world, over 4500 miles of coastline,
+                    high altitude desert, some of the densest forests of the world, vast salty marshes, lush green backwaters,
+                    the wettest place on earth in the eastern corner of the country to a bone dry desert in the west!
+                </small>
+            </h3>
+        </div>
+    </div>
+</div>
 
-    if (i % 4 == 3)
-    {
-        @Html.Raw("</div>");
-    }
-
-    if (i == Model.AllDestinations.Count - 1)
-    {
-        @Html.Raw("</div>");
-    }
-
-}
+<div class="row margin-bottom-20">
+    <div class="col-md-12">
+        <a href="/Circuit/India"><h1>Check all the circuits for India &nbsp;&nbsp;<i class="icon-arrow-right"></i></h1></a>
+    </div>
+</div>
