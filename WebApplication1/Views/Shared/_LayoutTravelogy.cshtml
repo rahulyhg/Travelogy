@@ -126,7 +126,8 @@
                                 if (!string.IsNullOrEmpty(ApplicationUserManager.GetUserType(User.Identity.Name)))
                                 {
                                     if ((ApplicationUserManager.GetUserType(User.Identity.Name) == "admin")
-                                                || (ApplicationUserManager.GetUserType(User.Identity.Name) == "editor"))
+                                        || (ApplicationUserManager.GetUserType(User.Identity.Name) == "traveloger")
+                                        || (ApplicationUserManager.GetUserType(User.Identity.Name) == "editor"))
                                     {
                                         <li>@Html.ActionLink("Dashboard", "index", "Admin")</li>
                                         <li>@Html.ActionLink("Messages", "MessageCenter", "Admin")</li>
