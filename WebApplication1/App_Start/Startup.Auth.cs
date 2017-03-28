@@ -50,7 +50,7 @@ namespace WebApplication1
             // facebook
             app.UseFacebookAuthentication(
                appId: "169913900145520",
-               appSecret: "12ad8643deba3b26b35d700e7a3ed010");
+               appSecret: "6382e0dfeebd743e80eb42f01d3c6776");
 
             
             //app.UseMicrosoftAccountAuthentication(
