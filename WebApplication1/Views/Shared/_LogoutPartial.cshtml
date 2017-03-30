@@ -7,9 +7,11 @@
         
         <div class="row pull-right">
             <div class="col-md-12 pull-right col-sm-12">
-                Hello @User.Identity.GetUserName()                             
+                <h6>
+                User: <span class="orange">@User.Identity.GetUserName()</span> 
                 | @Html.ActionLink("Account settings", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                 | <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                </h6>                
             </div>    
         </div>
 

@@ -1,7 +1,7 @@
 ﻿@model DomingoDAL.Destination
 
 @if(Model != null)
-{    
+{   
     <!--Destination-->
     <div class="col-md-6 col-sm-12">
         <div class="thumbnails thumbnail-style">
@@ -10,7 +10,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <a class="hover-effect" href="@Model.CircuitUrl"><img class="img-responsive img-border" src="@Model.ThumbnailPath" alt="" /></a>            
+                    <a class="hover-effect" href="@Model.CircuitUrl"><img class="img-responsive img-border" src="@Model.ThumbnailPath" alt="" /></a>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <h5>@Model.Tagline</h5>
@@ -18,16 +18,16 @@
                     <p><i class="icon-calendar"></i> Ideal for: @Model.BestTimeToVisit</p>
                     <p><i class="icon-tags"></i> Suitable for: @Model.TravelStyles</p>
                     <div class="margin-bottom-10"></div>
-                    <a class="hover-effect" href="@Model.CircuitUrl"><h6 class="orange">View details</h6></a> 
+                    <a class="hover-effect" href="@Model.CircuitUrl"><h6 class="orange">View details</h6></a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="caption">
                         <div class="margin-bottom-20"></div>
-                        @if (Model.Description.Length > 200)
+                        @if (Model.Description.Length > 300)
                         {
-                            var desc = Model.Description.Substring(0, 200) + "...";
+                            var desc = Model.Description.Substring(0, 300) + "...";
                             <p>@desc</p>
                         }
                         else
@@ -39,22 +39,25 @@
 
                         @if (Request.IsAuthenticated)
                         {
-                            <p class="orange">Browse all the trip ideas for @Model.Name</p>
-                            <a class="btn-u btn-u-small" href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateSearchAlias"><i class="icon-location-arrow"></i>&nbsp; Plan a trip</a>
+                            <p class="orange">Browse all the trip ideas for @Model.Name and start planning for a custom trip.</p>
+                            <div class="margin-bottom-10"></div>
+                            <a class="btn-u btn-u-small" href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateSearchAlias">&nbsp; Plan a trip &nbsp;&nbsp;<i class="icon-arrow-right"></i></a>
+                            <div class="margin-bottom-10"></div>
                         }
                         else
                         {
-                            <a class="btn-u btn-u-small" href="/account/register"><i class="icon-location-arrow"></i>&nbsp; Join and plan trips</a>
+                            <h6>Join for FREE to start planning trips, use the Trip planner to create and manage custom itineraries.</h6>
+                            <div class="margin-bottom-10"></div>
+                            <a class="btn-u btn-u-small" href="/account/Membership">&nbsp; Join the club &nbsp;&nbsp;<i class="icon-arrow-right"></i></a>
+                            <div class="margin-bottom-10"></div>
                         }
 
                     </div>
                 </div>
             </div>
-            
-            
         </div>
     </div>
-    <!--Destination-->    
+    <!--Destination-->   
 }
 
 

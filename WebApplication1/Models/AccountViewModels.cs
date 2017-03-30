@@ -65,6 +65,13 @@ namespace WebApplication1.Models
         public string LoginFailureMessage { get; set; }
     }
 
+    //public class MembershipViewModel
+    //{
+    //    public RegisterViewModel RegisterModel { get; set; }
+
+    //    public LoginViewModel LoginModel { get; set; }
+    //}
+
     public class RegisterViewModel
     {
         [Required]

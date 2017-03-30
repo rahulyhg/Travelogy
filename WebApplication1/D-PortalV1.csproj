@@ -9598,6 +9598,9 @@
     <Content Include="Views\Admin\_OnboardNewMember.cshtml" />
     <Content Include="Views\Shared\_CallmeBackMicro.cshtml" />
     <Content Include="Views\Shared\_DownloadBrochureNotLoggedIn.cshtml" />
+    <Content Include="Views\Account\Membership.cshtml" />
+    <Content Include="Views\Shared\_JoinTravelogyClub.cshtml" />
+    <Content Include="Views\Shared\_LoginToTravelogyClub.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

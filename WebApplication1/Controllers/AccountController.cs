@@ -143,6 +143,14 @@ namespace WebApplication1.Controllers
         }
 
         //
+        // GET: /Account/Membership
+        [AllowAnonymous]
+        public ActionResult Membership()
+        {            
+            return View();
+        }
+
+        //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()

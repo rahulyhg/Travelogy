@@ -1,0 +1,60 @@
+﻿@model WebApplication1.Models.RegisterViewModel
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="reg-header">
+        <h2 class="color">@ViewBag.Title. <span class="small">Create a FREE account</span> </h2>
+    </div>
+
+    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    <div class="input-group margin-bottom-20">
+        <span class="input-group-addon"><i class="icon-user"></i></span>
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+    </div>
+   
+    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+    <div class="input-group margin-bottom-20">
+        <span class="input-group-addon"><i class="icon-lock"></i></span>
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+    </div>    
+
+    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+    <div class="input-group margin-bottom-20">
+        <span class="input-group-addon"><i class="icon-lock"></i></span>
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+    </div>
+
+    <label>Only strong passwords are allowed. Create a new Password at least 6 characters long, which contains : </label>
+    <ul>
+        <li>One Capital Letter</li>
+        <li>One Number</li>
+        <li>One special character</li>
+    </ul>
+    <label>Your password will not be accepted if it seems weak.</label>
+    <label class="orange">Example of a strong password: <strong>Travelogy12$</strong></label>
+    <br />
+
+    <div class="row">
+        <div class="col-md-12">
+            <p class="danger">@Html.ValidationSummary()</p>
+        </div>
+    </div>
+
+    <div class="row margin-bottom-20">
+        <div class="col-md-12">
+            <input type="submit" value="Register" class="btn-u pull-right" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h6>
+                By Joining the club you agree to our <a href="/Information/TermsAndConditions" target="_blank" class="orange">Terms And Conditions</a>.
+                We keep your data safe, please read our <a href="/Information/Privacy" target="_blank" class="orange">Privacy policy</a>.
+            </h6>
+        </div>
+    </div>
+
+}
