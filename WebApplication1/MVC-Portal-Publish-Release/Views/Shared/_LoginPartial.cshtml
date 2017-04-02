@@ -1,0 +1,8 @@
+﻿@*@using Microsoft.AspNet.Identity*@
+@if (!Request.IsAuthenticated)
+{
+    <li>@Html.ActionLink("Join / Login", "Membership", "Account")</li>
+    @*<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <li>@Html.ActionLink("Join us", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+}
+

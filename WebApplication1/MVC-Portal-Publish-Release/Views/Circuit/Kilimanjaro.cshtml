@@ -1,0 +1,138 @@
+﻿@model WebApplication1.Models.DomingoModelBase
+
+@{
+    if (Model != null && Model.Destination != null)
+    {
+        ViewBag.Description = Model.Destination.MetaDescription;
+        ViewBag.KeyWords = Model.Destination.MetaKeywords;
+    }
+}
+
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">        
+        <ul class="pull-right breadcrumb">
+            <li><a href="/Circuit/Tanzania">Tanzania</a></li>
+            <li class="active">Kilimanjaro</li>
+        </ul>
+    </div>
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+@Html.Partial("_DestinationViewHeader", Model)
+
+<div class="container">
+    <div class="row blog-page blog-item">
+        <div class="col-md-12 md-margin-bottom-60">            
+            <div class="blog margin-bottom-40">
+                <h2>Summit the tallest lone standing mountain in the world!</h2>
+            </div>
+            <p> 
+                Kilimanjaro is the tallest lone standing mountain in the world! At Uhuru peak, 5895 m above sea level, you can stand on a glacier right on the equator.
+                You can then look at the clouds below you. Make new friends on the way up and on your way down. All this in the middle of the incredible landscape of Africa!
+            </p>
+            <div class="blog-img">                
+                <img class="img-responsive" src="~/Content/img/Kilimanjaro-Climb/KILI-S03.JPG" alt="" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="blog-three">    
+
+    <div class="img-box-3 text-center">
+        <div class="row">
+            <h1 class="text-center">Travelogy club services for Kilimanjaro expedition</h1><br />
+        </div>
+        <div class="row">
+            <!--Item-1-->
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/Content/img/flat-icons/18.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Planning</h4>
+                    <div class="bor bg-orange"></div>
+                    <p><small>Create your plan using the Trip Planner, use out expert team to discuss the options for climbing.</small></p>
+                </div>
+            </div>
+
+            <!--Item-2-->
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/Content/img/flat-icons/12.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Tickets and Bookings</h4>
+                    <div class="bor bg-orange"></div>
+                    <p><small>Travelogy club will take care of the air tickets and the required accommodation.</small></p>
+                </div>
+            </div>
+
+            <!--Item-3-->
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/Content/img/flat-icons/17.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Guides and crew</h4>
+                    <div class="bor bg-orange"></div>
+                    <p><small>We use our trusted partners on ground to provide you with professional guides and expert mountain crew.</small></p>
+                </div>
+            </div>
+
+            <!--Item-4-->
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/Content/img/flat-icons/16.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Camping gears</h4>
+                    <div class="bor bg-orange"></div>
+                    <p><small>We arrange for the tents and other equipments you will need for a successful climb.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                @if (Request.IsAuthenticated)
+            {
+                if (Model != null && Model.Destination != null)
+                {
+                    var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = Model.Destination.Name, TemplateAlias = Model.Destination.TemplateSearchAlias };
+                        @Html.Partial("_StartTripPlanning", _model)
+                    }
+                }
+
+                else
+                {
+                    @Html.Partial("_JoinNowTripPlanning")
+                }
+            </div>
+            <div class="col-md-6 col-sm-6">
+                @if (Request.IsAuthenticated)
+            {
+                if (Model != null && Model.Destination != null)
+                {
+                    var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = Model.Destination.Name };
+                        @Html.Partial("_DownloadBrochure", _model)
+                    }
+                }
+                else
+                {
+                    if (Model != null && Model.Destination != null)
+                    {
+                        @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = Model.Destination.Name });
+                }
+            }
+            </div>
+        </div>
+    </div>
+</div>

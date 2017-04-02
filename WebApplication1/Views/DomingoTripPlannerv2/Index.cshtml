@@ -15,16 +15,17 @@
                         credentials: 'Au_oubgAnV-h-Vd2AMHY5E5PySpNaaSBgGRKffDdL8qXFrzu7s1uyPZvXl6G2Knx',
                         center: new Microsoft.Maps.Location(27.0331906, 88.2296557),
                         mapTypeId: Microsoft.Maps.MapTypeId.road,
-                        zoom: 3
+                        disableStreetside: true,
+                        zoom: 4
                     });
 
-                    //var center = map.getCenter();
-                    //var infobox = new Microsoft.Maps.Infobox(center, {
-                    //    title: 'Map Center',
-                    //    description: 'London'
-                    //});
-                    //infobox.setMap(map);
-                    //infobox.setOptions({ showPointer: false, showCloseButton: false });
+                    var center = map.getCenter();
+                    var infobox = new Microsoft.Maps.Infobox(center, {
+                        title: 'Map Center',
+                        description: 'London'
+                    });
+                    infobox.setMap(map);
+                    infobox.setOptions({ showPointer: false, showCloseButton: false });
                 }
 
 

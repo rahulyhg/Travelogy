@@ -1,0 +1,20 @@
+﻿@model DomingoDAL.Destination
+
+@if (Model != null)
+{
+    <!--Destination-->
+    <div class="col-md-3 col-sm-6">
+        <div class="thumbnails thumbnail-style">
+            <div class="caption">
+                <h3><a class="hover-effect" href="@Model.CircuitUrl">@Model.Name</a></h3>
+            </div>
+            <a class="hover-effect" href="@Model.CircuitUrl"><img class="img-responsive img-border img-thumbnail" src="@Model.ThumbnailPath" alt="" /></a>
+            <div class="caption">
+                <h6 class="orange">@Model.Tagline</h6>
+                <p>@Model.ShortDescription</p>
+                <div class="margin-bottom-10"></div>                
+            </div>
+        </div>
+    </div>
+    <!--Destination-->
+}

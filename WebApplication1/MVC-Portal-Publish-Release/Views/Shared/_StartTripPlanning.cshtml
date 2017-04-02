@@ -1,0 +1,53 @@
+﻿@model WebApplication1.Models._StartTripPlanningViewModel
+
+@if (Model.IsActiveTrip == true)
+{
+    <div class="row margin-bottom-40">
+        <div class="col-md-12 col-sm-12">
+            <div class="pricing hover-effect">
+                <div class="pricing-head">
+                    <h3>Add to your trip now</h3>
+                    <h4>
+                        <i>You can add multiple circuits</i>
+                        <span>Add @Model.CircuitName trips to your plan</span>
+                    </h4>
+                </div>
+                <div class="text-center">
+                    <h3 class="orange">Browse our trip ideas for @Model.CircuitName</h3>                    
+                </div>
+                <div class="pricing-footer">
+                    <a href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateAlias">
+                        <h3 class="white">&nbsp; &nbsp;  Add to Current trip &nbsp; &nbsp; </h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+else
+{
+    <div class="row margin-bottom-40">
+        <div class="col-md-12 col-sm-12">
+            <div class="pricing hover-effect">
+                <div class="pricing-head">
+                    <h3>Plan your trip now</h3>
+                    <h4>
+                        <i>FREE ONLINE TRIP PLANNER</i>
+                        <span>Plan exciting trips to @Model.CircuitName</span>
+                    </h4>
+                </div>
+                <div class="text-center">
+                    <h3 class="orange">Browse our trip ideas for @Model.CircuitName</h3>                    
+                    <h1>&nbsp;</h1>
+                </div>
+                <div class="pricing-footer">
+                    <a href="/service/ListAllTripTemplates?templateAlias=@Model.TemplateAlias">
+                        <h2 class="white">&nbsp; &nbsp;  Start Planning &nbsp; &nbsp; <i class="icon-arrow-right"></i></h2>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

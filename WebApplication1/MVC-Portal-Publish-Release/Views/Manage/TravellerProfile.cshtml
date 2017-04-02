@@ -1,0 +1,163 @@
+﻿  @model WebApplication1.Models.TravellerProfileViewModel
+
+@Html.Partial("_HomepageCarousel")
+
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs margin-bottom-20">
+    <div class="container">
+        <h1 class="pull-left">Your travel profile</h1>        
+    </div>
+</div><!--/breadcrumbs-->
+
+@using (Html.BeginForm("SaveTravellerProfile", "Manage", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="tab-v1">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#personal_details" data-toggle="tab">Personal Details</a></li>
+            <li><a href="#travel_interests" data-toggle="tab">Travel interests</a></li>            
+            <li><a href="#travel_settings" data-toggle="tab">Settings</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">          
+
+        @* Tab for personal_details*@
+        <div class="tab-pane active" id="personal_details">
+            <div class="panel panel-orange">
+                
+                <div class="panel-body">
+                    <h4>Personal Details</h4>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">@Html.LabelFor(m => m.FirstName)</span>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                            </div>
+                            <div class="margin-bottom-10"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">@Html.LabelFor(m => m.LastName)</span>
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                            </div>
+                            <div class="margin-bottom-10"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">@Html.LabelFor(m => m.Telephone)</span>
+                                @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control", @placeholder = "Include country code" })                                
+                            </div>
+                            <div class="input-group">
+                                @Html.ValidationMessageFor(m => m.Telephone, "", new { @class = "danger" })
+                            </div>
+                           
+                            <div class="margin-bottom-10"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">@Html.LabelFor(m => m.Mobile)</span>
+                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "Include country code" })
+                            </div>
+                            <div class="input-group">
+                                @Html.ValidationMessageFor(m => m.Mobile, "", new { @class = "danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">@Html.LabelFor(m => m.AddressLine1)</span>
+                                @Html.TextBoxFor(m => m.AddressLine1, new { @class = "form-control", @placeholder = "1st line of address" })
+                            </div>
+                            <div class="margin-bottom-10"></div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon">@Html.LabelFor(m => m.AddressLine2)</span>
+                                @Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control", @placeholder = "2nd line of address" })
+                            </div>
+                            <div class="margin-bottom-10"></div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon">@Html.LabelFor(m => m.City)</span>
+                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City or Town" })
+                            </div>
+                            <div class="margin-bottom-10"></div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon">@Html.LabelFor(m => m.PostCode)</span>
+                                @Html.TextBoxFor(m => m.PostCode, new { @class = "form-control", @placeholder = "Post Code or Zip" })
+                            </div>
+                            <div class="margin-bottom-10"></div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon">@Html.LabelFor(m => m.Country)</span>
+                                @Html.DropDownListFor(m => m.Country, Model.ListOfCountries, new { @class = "form-control" })
+                            </div>
+                            <div class="margin-bottom-10"></div>
+                        </div>
+                    </div>
+                                        
+                </div>                
+            </div>
+        </div>
+        @* end Tab for personal_details*@
+
+        @* Tab for travel_interests*@
+        <div class="tab-pane" id="travel_interests">
+            <div class="panel panel-orange">
+                <div class="panel-body">
+                    <h4>Saving your interests <small>will help us find the suitable plans for your travel</small></h4>
+                    <p class="orange">Tell us what you are interested in.</p>
+                    <div class="margin-bottom-10"></div>
+                    <div class="row">
+
+                        @for (var i = 0; i < Model.TravellerInterests.Count(); i++)
+                        {
+                            <div class="col-md-3 col-sm-6">
+                                <div class="input-group margin-bottom-10">
+                                    <span class="input-group-addon">
+                                        @Html.CheckBoxFor(p => Model.TravellerInterests[i].Checked)
+                                    </span>
+                                    @Html.HiddenFor(p => Model.TravellerInterests[i].Id)
+                                    @Html.TextBoxFor(m => m.TravellerInterests[i].Name, new { @class = "form-control", @readonly = true })
+                                </div>
+                            </div>
+                        }       
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* end Tab for travel_interests*@
+
+        @* Tab for travel_settings*@
+        <div class="tab-pane" id="travel_settings">
+            <div class="panel panel-orange">
+                <div class="panel-body">
+                    <h4>Travel planner settings</h4>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="input-group">
+                                <span class="input-group-addon">@Html.LabelFor(m => m.TravelStyle)</span>
+                                @Html.DropDownListFor(m => m.TravelStyle, Model.TravelStyles, new { @class = "form-control" })
+                            </div>
+                            <div class="margin-bottom-10"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="input-group">
+                                <span class="input-group-addon">@Html.LabelFor(m => m.TravelGroupSize)</span>
+                                @Html.DropDownListFor(m => m.TravelGroupSize, Model.TravelGroupSizes, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        @* end Tab for travel_settings*@
+    </div>
+
+    <div class="row padd-15">
+        <div class="col-md-12">
+            <input type="submit" value="Save your profile" class="btn-u pull-right" />
+        </div>
+    </div>
+}
+
+

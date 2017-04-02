@@ -1,0 +1,95 @@
+﻿@model WebApplication1.Models.EditTripViewModel
+
+@Html.Partial("_HomepageCarousel")
+
+<div class="headline">
+    <h3>
+        @Model.ActiveTrip.DlTripView.NickName
+        <small class="orange">[Your trip to: @Model.ActiveTrip.DlTripView.Name] - Trip Ref # @Model.ActiveTrip.DlTripView.Id</small>
+    </h3>
+</div>
+
+<div class="img-box-3 text-center">
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/airplane.png" alt="" class="img-responsive" />
+                </div>
+                <h4>
+                    @if (Model.ActiveTrip.DlTripView.StartDate.HasValue)
+                    {
+                        @Model.ActiveTrip.DlTripView.StartDate.Value.ToLongDateString()
+                    }
+                    else
+                    {
+                        @Html.Raw("Not planned")
+                    }
+                </h4>
+                <h6 class="orange">(Planned date)</h6>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/group.png" alt="" class="img-responsive" />
+                </div>
+                <h4>
+                    @Model.ActiveTrip.DlTripView.PaxAdults Adults
+                    @if (Model.ActiveTrip.DlTripView.PaxMinors > 0)
+                    {
+                        @Html.Raw("and ") @Model.ActiveTrip.DlTripView.PaxMinors @Html.Raw(" minor(s)")
+                    }
+                </h4>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/maps-and-flags-4.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Starts at: @Model.ActiveTrip.DlTripView.StartLocation</h4>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/money.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Estimated cost:</h4>
+                <h5 class="orange">
+                    @if (Model.ActiveTrip.DlTripView.EstimatedCost.HasValue)
+                    {
+                        @Model.ActiveTrip.DlTripView.TripCurrency
+                        @Html.Raw(" ")
+                        @Model.ActiveTrip.DlTripView.EstimatedCost.Value.ToString("N2")
+                    }
+                    else
+                    { @Html.Raw("n/a")}
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("DeleteTripAsync", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.HiddenFor(p => p.ActiveTrip.DlTripView.Id);
+
+    <div class="container">
+        <div class="alert alert-block alert-danger">
+            <h3>Are you sure you want to discard this trip?</h3>
+            <h6>This trip will be permanently deleted if you proceed.</h6>
+            <div class="margin-bottom-20"></div>
+            <p>
+                <button name="submit" class="btn-u btn-u-red" type="submit" value="discard">Yes I am sure, Discard it</button>
+                <button name="submit" class="btn-u btn-u-sea" type="submit" value="keep">I changed my mind, keep it</button>
+            </p>
+        </div>
+    </div>
+}
+

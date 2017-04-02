@@ -1,0 +1,154 @@
+﻿@model WebApplication1.Models.TripViewModel
+
+<script>
+    $(function () {
+        $("#CreateTripViewModel_StartDate").datepicker();
+        $("#CreateTripViewModel_StartDate").datepicker("option", "dateFormat", "DD, d MM, yy");
+      } );
+</script>
+
+@if (Model.CreateTripTemplate != null)
+{
+    <div class="headline"><h2>Plan your trip:</h2></div>
+
+    using (Html.BeginForm("CreateTrip", "Service", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken();
+
+        // the templateId
+        @Html.HiddenFor(p => p.CreateTripViewModel.TemplateId);
+        @*@Html.HiddenFor(p => p.CreateTripViewModel.StartDate);*@
+        @Html.HiddenFor(p => p.CreateTripViewModel.DestinationId);
+
+        <div class="container blog-full-width">
+            
+            <div class="blog margin-bottom-20">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="blog-img">
+                            <img class="img-responsive" src="@Model.CreateTripTemplate.DlTemplate.ThumbnailPath" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <h2>@Model.CreateTripTemplate.DlTemplate.Name</h2>
+                        <div class="blog-post-tags">
+                            <ul class="list-unstyled blog-info">
+                                <li><i class="icon-calendar"></i>Best time to visit: @Model.CreateTripTemplate.DlTemplate.BestTimeToVisit</li>
+                                <li><i class="icon-location-arrow"></i> Usually starts at: @Model.CreateTripTemplate.DlTemplate.StartLocation</li>
+                                <li><i class="icon-suitcase"></i> Usual Duration: @Model.CreateTripTemplate.DlTemplate.DurationDaysMin to @Model.CreateTripTemplate.DlTemplate.DurationDaysMax Days</li>                                
+                            </ul>
+                        </div>                        
+                    </div>
+                    <div class="col-md-5 col-sm-12">
+                        <p>@Model.CreateTripTemplate.DlTemplate.Description</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-orange">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <h5 class="margin-bottom-10">Give a name to your trip:  </h5>
+                            @Html.EditorFor(p => p.CreateTripViewModel.NickName, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })
+                            @Html.ValidationMessageFor(p => p.CreateTripViewModel.NickName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <h5 class="margin-bottom-10">Approximate date of your trip :  </h5>                            
+                            @*<p>Date: <input type="text" id="datepicker"></p>*@
+                            @Html.TextBoxFor(p => p.CreateTripViewModel.StartDate, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(p => p.CreateTripViewModel.StartDate, "", new { @class = "text-danger" })
+                            <p class="orange">This is an approximate date you choose for planning, the exact date will be worked out when you book it.</p>
+                        </div>  
+                        <div class="col-md-4 col-sm-12">
+                            <h5 class="margin-bottom-10">@Html.LabelFor(p => p.CreateTripViewModel.HomeLocation) </h5>
+                            @Html.EditorFor(p => p.CreateTripViewModel.HomeLocation, new { htmlAttributes = new { @class = "form-control", @placeholder = "(e.g. London)", @maxlength = 49 } })
+                            @Html.ValidationMessageFor(p => p.CreateTripViewModel.HomeLocation, "", new { @class = "text-danger" })
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            @*<h5 class="margin-bottom-10">Choose where to start your trip :  </h5>*@
+                            <h5 class="margin-bottom-10">@Html.LabelFor(p => p.CreateTripViewModel.StartLocation)  </h5>
+                            @Html.DropDownListFor(p => p.CreateTripViewModel.StartLocation, Model.CreateTripStartLocationOptions, new { @class = "form-control" })
+                            <p class="orange">You can always change this location to anywhere (possible) you want!</p>
+                        </div>
+                        <div class="col-md-2 col-sm-6">
+                            <h5 class="margin-bottom-10">@Html.LabelFor(p => p.CreateTripViewModel.Adults) </h5>
+                            @Html.EditorFor(p => p.CreateTripViewModel.Adults, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })
+                            @Html.ValidationMessageFor(p => p.CreateTripViewModel.Adults, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2 col-sm-6">
+                            <h5 class="margin-bottom-10">@Html.LabelFor(p => p.CreateTripViewModel.Minors) </h5>
+                            @Html.EditorFor(p => p.CreateTripViewModel.Minors, new { htmlAttributes = new { @class = "form-control", @maxlength = 49 } })                            
+                            @Html.ValidationMessageFor(p => p.CreateTripViewModel.Minors, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2 col-sm-6">
+                            @{
+                                var ListOfClasses = new List<SelectListItem>();
+                                ListOfClasses.AddRange(new[]{
+                                    new SelectListItem() { Text = "LUXURY", Value = "LUXURY" },
+                                    new SelectListItem() { Text = "STANDARD", Value = "STANDARD" },
+                                    new SelectListItem() { Text = "ECONOMY", Value = "ECONOMY" }
+                                });
+                            }
+
+                            <h5 class="margin-bottom-10">Travel Style:</h5>
+                            <p>
+                                @Html.DropDownListFor(p => p.CreateTripViewModel.TripType, ListOfClasses, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(p => p.CreateTripViewModel.TripType, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                        <div class="col-md-2 col-sm-6">
+                            @{
+                                var ListOfCurrencies = new List<SelectListItem>();
+                                ListOfCurrencies.AddRange(new[]{
+                                    new SelectListItem() { Text = "GBP", Value = "GBP" },
+                                    new SelectListItem() { Text = "EUR", Value = "EUR" },
+                                    new SelectListItem() { Text = "USD", Value = "USD" },
+                                    new SelectListItem() { Text = "INR", Value = "INR" }
+                                });
+                            }
+
+                            <h5 class="margin-bottom-10">Currency:</h5>
+                            <p>
+                                @Html.DropDownListFor(p => p.CreateTripViewModel.Currency, ListOfCurrencies, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(p => p.CreateTripViewModel.Currency, "", new { @class = "text-danger" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            
+            <div class="col-md-12 text-right">
+                <p><button class="btn-u btn-u-lg btn-u-orange" type="submit"> Start planning &nbsp;&nbsp; <i class="icon-arrow-right"></i></button></p>
+            </div>
+
+            @if (!String.IsNullOrEmpty(Model.CreateTripTemplate.DlTemplate.AdditionalHtml))
+            {
+                <div class="container">
+                    <div class="row margin-bottom-20">
+                        @Html.Raw(Model.CreateTripTemplate.DlTemplate.AdditionalHtml)
+                    </div>
+                </div>
+            }   
+
+            @*// TODO: Move this to a partial view*@
+            @if (Model.CreateTripTemplate.DlTemplateSteps != null && Model.CreateTripTemplate.DlTemplateSteps.Count > 0)
+            {
+                <div class="headline">
+                    <h3>Itinerary details</h3>                    
+                </div>
+
+                <blockquote>
+                    <p class="orange">You can fully customize this trip using the Trip planner and with help from our expert travel advisors.</p>
+                </blockquote>
+
+                <div class="media margin-bottom-20">
+                    @Html.Partial("_ViewTripTemplateSteps", Model.CreateTripTemplate)
+                </div>
+            }                       
+        </div>
+    };
+}
+

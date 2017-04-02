@@ -1,0 +1,27 @@
+﻿<!--Lake Baikal-->
+<div class="row blog blog-medium margin-bottom-40">
+    <div class="col-md-5">
+        <img class="img-responsive" src="~/Content/img/gallery/small/thumbnail_baikal.jpg" alt="">
+    </div>
+    <div class="col-md-7">
+        <h2>Lake Baikal - <small>Explore the deeps of the Pearl of Siberia</small>  </h2>
+        <ul class="list-unstyled list-inline blog-info">
+            <li><i class="icon-calendar"></i> Summer, Winter</li>
+            <li><i class="icon-arrow-right"></i> <a href="#">Adventure</a></li>
+            <li><i class="icon-tags"></i> Backpacking, Luxury</li>
+        </ul>
+        <p>Lake baikal holds 20% of all the liquid fresh water in the world! Called the Pearl of Siberia this lake is made of drinkable clean water. Surrounded by rocky terrain and pine forests, the lake is completely frozen in winter, and partly frozen in the spring time.</p>
+        <p>
+            @if (Request.IsAuthenticated)
+            {
+                <a class="btn-u btn-u-small" href="/service/ListAllTripTemplates?templateAlias=LakeBaikal"><i class="icon-location-arrow"></i>&nbsp; Create a Trip plan</a>
+            }
+            else
+            {
+                <a class="btn-u btn-u-small" href="/account/Membership"><i class="icon-location-arrow"></i>&nbsp; Join and Create Trip plan</a>
+            }
+            <a class="btn-u btn-u-small" href="/circuit/lakebaikal"><i class="icon-location-arrow"></i>&nbsp; Explore</a>
+        </p>
+    </div>
+</div>
+<!--End Lake Baikal--> 

@@ -1,0 +1,49 @@
+﻿@model WebApplication1.Models.NewMemberViewModel
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="white">Onboard new customer:</h4>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("WelcomeNewMemberAsync", "Admin", new { ReturnUrl = "" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-md-3">
+                    <p>@Html.LabelFor(model => model.FirstName)</p>
+                    <p>@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control"} })</p>
+                    <p>@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })</p>                    
+                </div>
+                <div class="col-md-3">
+                    <p>@Html.LabelFor(model => model.LastName)</p>
+                    <p>@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })</p>                    
+                    <p>@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })</p>                    
+                </div>
+                <div class="col-md-3">
+                    <p>@Html.LabelFor(model => model.Email)</p>
+                    <p>@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })</p>                    
+                    <p>@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })</p>                    
+                </div>
+                <div class="col-md-3">
+                    <p>@Html.LabelFor(model => model.Telephone)</p>                    
+                    <p>@Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })</p>         
+                    <p>@Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })</p>                               
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>@Html.LabelFor(model => model.Notes)</p>
+                    <p>@Html.TextAreaFor(model => model.Notes, new { @class = "form-control", @rows = 8 })</p>
+                    <p>@Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })</p>                    
+                </div>
+            </div>
+
+            <div class="row pull-right">
+                <div class="col-md-12">
+                    <button class="btn-u" type="submit">Onboard new Member</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

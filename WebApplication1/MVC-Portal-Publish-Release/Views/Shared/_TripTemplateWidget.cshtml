@@ -1,0 +1,57 @@
+﻿@model WebApplication1.Models.TripTemplateWidgetViewModel
+
+<div class="search-blocks">    
+    <div class="col-md-3 search-img">
+        <img class="img-responsive" src="@Model.TripTemplate.DlTemplate.ThumbnailPath" alt="">
+        <ul class="list-unstyled">
+            <li><i class="icon-briefcase"></i>Best time to visit: @Model.TripTemplate.DlTemplate.BestTimeToVisit</li>
+            <li><i class="icon-map-marker"></i>Usually starts at: @Model.TripTemplate.DlTemplate.StartLocation</li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <h2>@Model.TripTemplate.DlTemplate.Name</h2>
+        <div class="margin-bottom-10"></div>
+        @if (Request.IsAuthenticated)
+        {
+            if (Model.TripId > 0)
+            {
+                <a href="/Service/AddCircuitToTrip?tripId=@Model.TripId&templateId=@Model.TripTemplate.DlTemplate.Id" class="btn"><h5 class="orange">Add this circuit to my Trip</h5></a>
+            }
+            else
+            {
+                <a href="/Service/CreateTripFromTemplate?templateId=@Model.TripTemplate.DlTemplate.Id" class="btn btn-black"><h5 class="white">Customize this trip <i class="icon-arrow-right"></i></h5></a>
+            }
+        }
+        
+        <p>@Model.TripTemplate.DlTemplate.Description</p>
+        <h6 class="orange">Typical duration: @Model.TripTemplate.DlTemplate.DurationDaysMin - @Model.TripTemplate.DlTemplate.DurationDaysMax Days</h6>        
+    </div>
+    <div class="col-md-12 text-center">
+    @if (Request.IsAuthenticated)
+    {
+        @*if (Model.TripId > 0)
+        {
+            <a href="/Service/AddCircuitToTrip?tripId=@Model.TripId&templateId=@Model.TripTemplate.DlTemplate.Id">
+                <h5 class="orange">View details of this circuit <i class="icon-arrow-right"></i></h5>
+            </a>            
+        }
+        else
+        {
+            <a href="/Service/CreateTripFromTemplate?templateId=@Model.TripTemplate.DlTemplate.Id">
+                <h5 class="orange">Start my plan with this circuit <i class="icon-arrow-right"></i></h5>                
+            </a>
+        }*@
+    }
+    else
+    {
+        <a href="/Account/Membership" class="btn-u btn-orange">Sign up</a>
+        @*<a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-orange"><i class="icon-facebook"></i> &nbsp; Login with Facebook</a>*@
+        <p>Use our FREE online Trip planner.</p>   
+    }
+    </div>    
+</div>
+
+@if (!string.IsNullOrEmpty(Model.TripTemplate.DlTemplate.AdditionalHtml))
+{
+    @Html.Raw(Model.TripTemplate.DlTemplate.AdditionalHtml)
+}

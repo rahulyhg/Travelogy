@@ -1,0 +1,75 @@
+﻿@model WebApplication1.Models.AccommodationBookingViewModel
+
+@Html.Partial("_HomepageCarousel")
+
+<div class="headline">
+    <h4>Your booking for @Model.AccommodationType at @Model.TownOrCity</h4>
+</div>
+
+
+<div class="img-box-3 text-left">
+    <div class="row">
+        <div class="col-md-2 col-sm-6">
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/hotel-1.png" alt="" class="img-responsive" />
+                </div>
+            </div>                  
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="img-box-3-item">
+                <h5>Adults: @Model.Adults, Minors: @Model.Kids</h5>
+                <h5 class="orange">Check-in date:</h5>
+                @if (Model.CheckinDate > DateTime.MinValue)
+                {
+                    <p>@Model.CheckinDate.ToLongDateString()</p>
+                }
+                else
+                {
+                    <p>@Html.Raw("Not planned")</p>
+                }
+
+                <h5 class="orange">Check-out date:</h5>
+                @if (Model.CheckoutDate > DateTime.MinValue)
+                {
+                    <p>@Model.CheckoutDate.ToLongDateString()</p>
+                }
+                else
+                {
+                    <p>@Html.Raw("Not planned")</p>
+                }
+
+                <h5 class="orange">Status: </h5>
+                <p>@Model.BookingStatus</p>
+            </div>            
+        </div>
+
+        <div class="col-md-5 col-sm-12">
+            <h5 class="orange">Your message:</h5>
+            <p>@Model.TravellerNotes</p>
+            <h5 class="orange">Special Requests:</h5>
+            <p>@Model.SpecialRequests</p>
+            <h5 class="orange">Traveloger's Message:</h5>
+            <p>@Model.AdminNotes</p>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.PropertyName))
+        {
+            <div class="col-md-12">
+                <h5 class="orange">Property Name:</h5>
+                <p>@Model.PropertyName</p>
+
+                <h5 class="orange">Property Address:</h5>
+                <p>@Model.PropertyAddress</p>
+            </div>
+        }
+
+        
+    </div>
+</div>
+
+<div class="margin-bottom-20">    
+</div>
+
+<a href="/Service/ViewTrip?tripId=@Model.TripId" class="btn-u btn-orange">Back to trip planning</a>

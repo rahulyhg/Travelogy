@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DomingoDAL.Destination>
+
+@Html.Partial("_HomepageCarousel")
+
+<div class="headline">
+    <h3>Manage Destinations:</h3>
+</div>
+
+    <h4>
+        @Html.ActionLink("Create New", "CreateDestination")
+    </h4>    
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tagline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThumbnailPath)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td colspan="4">
+                <h5 class="orange">@Html.DisplayFor(modelItem => item.Name) [@Html.DisplayFor(modelItem => item.Weightage)]  &nbsp; - <small>@Html.ActionLink("Edit", "EditDestination", new { id = item.Id })</small> </h5>
+            </td>            
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tagline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.ThumbnailPath)*@
+                <img src="@item.ThumbnailPath" class="img-responsive" style="max-width:100px;" />
+            </td>
+            
+        </tr>
+    }    
+    </table>
+

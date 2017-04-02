@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Join the club";
+}
+
+<div class="col-lg-8 col-lg-offset-2">
+    <!--Tag Box v5-->
+    <div class="row text-center">
+        <div class="col-md-12 margin-bottom-20">
+            <h6 class="text-center">
+                Welcome to the all new Travelogy club portal. Create a FREE account to use our Trip Planner and other features.
+            </h6>
+            <div class="margin-bottom-20"></div>
+            <h6 class="orange"> <i>Signing up and using the Trip Planner is FREE and does not need your Credit Card details!</i> </h6>
+        </div>
+    </div>
+    <!--End Tag Box v5-->
+</div>
+
+<div class="row">    
+    <div class="col-md-4 col-lg-offset-2">
+        @Html.Partial("_LoginToTravelogyClub", new WebApplication1.Models.LoginViewModel())
+    </div>
+    <div class="col-md-4">
+        @Html.Partial("_JoinTravelogyClub", new WebApplication1.Models.RegisterViewModel())
+    </div>    
+    @*<div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new WebApplication1.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>*@
+</div>

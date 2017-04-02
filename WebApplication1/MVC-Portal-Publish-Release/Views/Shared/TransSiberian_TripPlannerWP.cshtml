@@ -1,0 +1,30 @@
+﻿<!--TSR-->
+<div class="row blog blog-medium margin-bottom-40">
+    <div class="col-md-5">
+        <img class="img-responsive" src="~/Content/img/gallery/small/thumbnail_tsr.jpg" alt="">
+    </div>
+    <div class="col-md-7">
+        <h3>Travel on the longest running trains for a Trans-Siberian adventure</h3>
+        <ul class="list-unstyled list-inline blog-info">
+            <li><i class="icon-calendar"></i> Summer, Winter</li>
+            <li><i class="icon-arrow-right"></i> <a href="#">Adventure</a></li>
+            <li><i class="icon-tags"></i> Backpacking, Luxury</li>
+        </ul>
+        <p>The Trans Siberian Railway runs across the Russian south, connecting west to the far east. At 9,289 km it is the world's longest railway stretch. Crossing seven time zones, trains take 7-8 days to complete the Journey - from Moscow to Vladivostok. There are countless places to venture out on this vast stretch. From the forests of Taiga to the Lake Baikal, exciting adventures await.</p>
+
+        <p>
+            @if (Request.IsAuthenticated)
+            {
+                <a class="btn-u btn-u-small" href="/service/ListAllTripTemplates?templateAlias=TransSiberian"><i class="icon-location-arrow"></i>&nbsp; Create a Trip plan</a>
+            }
+            else
+            {
+                <a class="btn-u btn-u-small" href="/account/Membership"><i class="icon-location-arrow"></i>&nbsp; Join and Create Trip plan</a>
+            }
+            <a class="btn-u btn-u-small" href="/circuit/transsiberian"><i class="icon-location-arrow"></i>&nbsp; Explore</a>
+        </p>
+
+
+    </div>
+</div>
+<!--End TSR--> 

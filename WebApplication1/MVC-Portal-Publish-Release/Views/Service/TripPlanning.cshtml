@@ -1,0 +1,62 @@
+﻿@model WebApplication1.Models.TripPlanningViewModel
+
+@{
+    ViewBag.Title = "Trip Planner";
+}
+
+@Html.Partial("_HomepageCarousel")
+
+<div class="headline">
+    <h3>Trip planner</h3>
+</div>
+
+<div class="about-us-one">
+    <div class="about-logo">
+        <p>
+            Presenting the FREE tool that will help every traveller plan their adventures (or a romantic getaway).
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    
+
+    @if (!Request.IsAuthenticated)
+    {
+        @Html.Partial("_TripPlanningNotLoggedInView")
+    }
+    else // for logged in users
+    {
+        // user has not created any trip yet
+        // show the create options
+        if (Model.AllTrips == null || Model.AllTrips.Count == 0)
+        {
+            Html.RenderPartial("_TripPlanningZeroTrips", Model);
+        }
+
+        // planned trips
+        else if (Model.PlannedTrips != null && Model.PlannedTrips.Count > 0)
+        {
+            foreach (var trip in Model.PlannedTrips)
+            {
+                Html.RenderPartial("_TripPlanningPlannedTripSummary", trip);
+            }
+
+            <div class="row tag-box tag-box-v5">
+                <div class="col-md-8">
+                    <span>Planned more trips for future!</span>
+                </div>
+                <div class="col-md-4">
+                    <a href="/circuit" class="btn-u btn-u-lg btn-u-orange"><i class="icon-cloud"></i> Browse all circuits...</a>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+
+
+
+
+

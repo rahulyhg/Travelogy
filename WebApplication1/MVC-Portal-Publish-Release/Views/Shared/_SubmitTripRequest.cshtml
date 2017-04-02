@@ -1,0 +1,55 @@
+﻿@model  WebApplication1.Models._SubmitTripRequestViewModel
+
+<div class="row">
+
+    <div class="col-md-12 col-sm-6">
+
+        <div class="block-heading-two">
+            <h3><span>You can also send your queries to our team</span></h3>
+            <h6 class="color">We will contact you as soon possible and discuss your @Model.CircuitName travel plans.</h6>
+        </div>
+
+        <!-- Appointment content -->
+        <form class="form" role="form" action="/Information/SubmitTripRequestAsync" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="CIRCUIT" value="@Model.CircuitName" />            
+
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="FIRST_NAME" name="FIRST_NAME" placeholder="First Name (required)" required>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="LAST_NAME" name="LAST_NAME" placeholder="Last Name (required)" required>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" type="email" id="EMAIL" name="EMAIL" placeholder="Email (required)" required>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="PHONE" name="PHONE" placeholder="Phone number (Optional)">
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <textarea class="form-control" id="TRIP_REQUEST" name="TRIP_REQUEST"
+                                  rows="3" placeholder="Write more about your enquiry. If you wish to visit somewhere which has not been listed above, do not hesitate to write that to us. Your wish is our command."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="chkBoxIAgree"><strong>Please confirm that you have read and agree to our <a href="/Information/TermsAndConditions" target="_blank">Terms and Conditions</a></strong>&nbsp;&nbsp;</label>
+                        <input type="checkbox" id="Field15" name="Field15" required />
+                    </div>
+                    <button type="submit" class="btn btn-color">Send your query</button>
+                    <br />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+﻿@model WebApplication1.Models.ViewTripTemplateViewModel
+
+@Html.Partial("_HomepageCarousel")
+
+@if (Model.TripTemplate.DlTemplateSteps != null && Model.TripTemplate.DlTemplateSteps.Count > 0)
+{
+    <div class="headline">
+        <h3>@Model.TripTemplate.DlTemplate.Name</h3>        
+    </div>
+
+    <div class="container">
+        <div class="row margin-bottom-20">
+            <div class="col-md-4 col-sm-12">
+                @if (!string.IsNullOrEmpty(Model.TripTemplate.DlTemplate.ThumbnailPath))
+                {
+                    <img src="@Model.TripTemplate.DlTemplate.ThumbnailPath" class="img-responsive img-border" />
+                }
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <h5 class="orange">Best time to visit: @Model.TripTemplate.DlTemplate.BestTimeToVisit</h5>
+                <h5 class="orange">Usually starts at: @Model.TripTemplate.DlTemplate.StartLocation</h5>
+            </div>
+        </div>
+        <div class="row margin-bottom-20">   
+            <div class="col-md-12">
+                <h4>@Model.TripTemplate.DlTemplate.Description</h4>
+            </div>                     
+        </div>
+        @if (!String.IsNullOrEmpty(Model.TripTemplate.DlTemplate.AdditionalHtml))
+        {
+            <div class="row margin-bottom-20">
+                @Html.Raw(Model.TripTemplate.DlTemplate.AdditionalHtml)
+            </div>
+        }        
+    </div>
+
+    <div class="col-md-12 text-left">
+        @if (Request.IsAuthenticated)
+        {
+            if (Model.TripId > 0)
+            {
+                <a href="/Service/AddCircuitToTrip?tripId=@Model.TripId&templateId=@Model.TripTemplate.DlTemplate.Id">
+                    <h3 class="orange">Add this to my Trip <i class="icon-arrow-right"></i></h3>
+                </a>
+                <h5>You can fully customize this trip with help from expert travel advisors.</h5>
+            }
+            else
+            {
+                <a href="/Service/CreateTripFromTemplate?templateId=@Model.TripTemplate.DlTemplate.Id">
+                    <h3 class="orange">Start my plan with this circuit <i class="icon-arrow-right"></i></h3>
+                </a>
+                <h5>You can fully customize this trip with help from expert travel advisors.</h5>
+            }
+        }
+        else
+        {
+            <a href="/Account/Membership" class="btn-u btn-orange">Sign up</a>
+            @*<a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-orange"><i class="icon-facebook"></i> &nbsp; Login with Facebook</a>*@
+            <p>Use our FREE online Trip planner.</p>
+        }
+    </div>
+        
+    <div class="container margin-bottom-20">
+        @Html.Partial("_ViewTripTemplateSteps", Model.TripTemplate)
+    </div>
+
+    <div class="col-md-12 text-left">
+        @if (Request.IsAuthenticated)
+        {
+            if (Model.TripId > 0)
+            {
+                <a href="/Service/AddCircuitToTrip?tripId=@Model.TripId&templateId=@Model.TripTemplate.DlTemplate.Id">
+                    <h3 class="orange">Add this to my Trip <i class="icon-arrow-right"></i></h3>
+                </a>
+                <h5>You can fully customize this trip with help from expert travel advisors.</h5>
+            }
+            else
+            {
+                <a href="/Service/CreateTripFromTemplate?templateId=@Model.TripTemplate.DlTemplate.Id">
+                    <h3 class="orange">Start my plan with this circuit <i class="icon-arrow-right"></i></h3>
+                </a>
+                <h5>You can fully customize this trip with help from expert travel advisors.</h5>
+            }
+        }
+        else
+        {
+            <a href="/Account/Membership" class="btn-u btn-orange">Sign up</a>
+            @*<a href="/Account/ExternalLogin?provider=Facebook" class="btn-u btn-orange"><i class="icon-facebook"></i> &nbsp; Login with Facebook</a>*@
+            <p>Use our FREE online Trip planner.</p>
+        }
+    </div>
+}       
