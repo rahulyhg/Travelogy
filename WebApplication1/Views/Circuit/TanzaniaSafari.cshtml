@@ -88,6 +88,30 @@
     </div>
 </div>
 
+@if (!Request.IsAuthenticated)
+{
+    <div class="container">
+        <div class="row">
+            @{
+                var model = new WebApplication1.Models._DownloadBrochureRequestModel() { BrochurePath = "/Content/Brochures/TravBrochure-TzSafari.pdf" };
+                Html.RenderPartial("_DownloadBrochureNotLoggedIn", model);
+            }
+        </div>
+    </div>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <div class="panel panel-orange">
+                    <div class="panel-body">
+                        <a href="/Content/Brochures/TravBrochure-TzSafari.pdf" target="_blank" class="btn btn-orange"><h3 class="white">&nbsp; &nbsp;Download our brochure &nbsp; &nbsp; <i class="icon-cloud-download"></i> </h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-sm-12">
@@ -106,21 +130,13 @@
             }
         </div>
         <div class="col-md-12 col-sm-12">
-            @if (Request.IsAuthenticated)
-            {
-                if (Model != null && Model.Destination != null)
-                {
-                    var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = Model.Destination.Name };
-                    @Html.Partial("_DownloadBrochure", _model)
-                }
-            }
-            else
+            @if (!Request.IsAuthenticated)
             {
                 if (Model != null && Model.Destination != null)
                 {
                     @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = Model.Destination.Name });
                 }
-            }
+            }            
         </div>
     </div>
 </div>

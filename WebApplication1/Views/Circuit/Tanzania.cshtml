@@ -18,28 +18,142 @@
 
 <div class="about-us-one">
     <div class="about-logo">
-        <h4 class="orange">Climbing Kilimanjaro</h4>
-        <p>
-            Kilimanjaro is the tallest lone standing mountain in the world!
-            At Uhuru peak, 5895 m above sea level, you can stand on a glacier right on the equator.
-            You can then look at the clouds below you. Make new friends on the way up and on your way down.
-            All this in the middle of the incredible landscape of Africa! 
-        </p>
-        <h4 class="orange">Get wild in the heart of Africa</h4>
-        <p>
-            Serengeti offers unparalleled closeness to the wild animals! 
-            Spread over 30,000 sq.km this region hosts the world's largest migration of animals every year. 
-            Home to about 70 large mammals and over 500 species of birds, Serengeti is a snapshot into the past. 
-            This is exactly how our planet is supposed to be. While the Masai people walk next to the wild animals, 
-            you will have to be on a safe 4x4 vehicle to be able to enjoy this wonderful place.
-        </p>
+        <h4 class="orange">The original garden of Eden</h4>
+        <p>Tanzania probably is the oldest known continuously inhabited areas on Earth; fossil remains of humans and pre-human hominids have been found dating back over two million years!
+        Visit the Oldupai Gorge where you can find the history of mankind, visit the Ngorongoro crater, where a pre-historic mega mountain once rose to the skies, twice the height of Kilimanjaro. 
+        Watch the migration of Wilderbeasts, spend nights in tents in the Lion infested plains, watch a Giraffe chomping off the leaves of a tree top. Stop in a small village, have a local dish -
+        dig into Ugaali (Corn starch) and fried fish! <strong>Most people visit here to Climb Kilimanjaro and to enjoy a Safari in the endless wilderness.</strong></p>
     </div>
 </div>
 
 <hr class="margin-bottom-20" />
 
+<div class="container">
+    @if (Request.IsAuthenticated)
+    {
+        <a href="/Service/CreateTripForCountry?country=Tanzania" class="btn btn-black"><h1 class="white">Start planning for Tanzania &nbsp; <i class="icon-arrow-right"></i></h1></a>
+    }
+    else
+    {
+        <h1 class="orange">Create your own custom package for Tanzania - <small><a href="/Account/Membership">Sign up for FREE and use the Trip Planner</a></small></h1>
+    }
+</div>
+<hr class="margin-bottom-20" />
+
+<div class="blog-three">
+
+    <div class="img-box-3 text-center">        
+        <div class="row">
+            <!--Item-1-->
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/Content/img/flat-icons/18.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Planning</h4>
+                    <div class="bor bg-orange"></div>
+                    <h6>Create your plan using the Trip Planner, use out expert team to discuss the options for climbing.</h6>
+                </div>
+            </div>
+
+            <!--Item-2-->
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/Content/img/flat-icons/airplane.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Air Tickets</h4>
+                    <div class="bor bg-orange"></div>
+                    <h6>Travelogy club will offer you the best value air tickets to Tanzania.</h6>
+                </div>
+            </div>
+
+            <!--Item-2-->
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/Content/img/flat-icons/hotel-6.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Accommodation</h4>
+                    <div class="bor bg-orange"></div>
+                    <h6>Book range of accommodation with us, Hotels, Jungle lodges and Camps.</h6>
+                </div>
+            </div>
+
+            <!--Item-3-->
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/Content/img/flat-icons/group.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Guides and crew</h4>
+                    <div class="bor bg-orange"></div>
+                    <h6>We use our trusted partners on ground to provide you with professional guides and expert mountain crew.</h6>
+                </div>
+            </div>    
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/Content/img/flat-icons/bunk.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Camping gears</h4>
+                    <div class="bor bg-orange"></div>
+                    <h6>We arrange for the tents and other equipments you will need for a successful climb.</h6>
+                </div>
+            </div>  
+
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/jeep.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Safari</h4>
+                    <div class="bor bg-orange"></div>
+                    <h6>We arrange to provide you with the best Safari vehicles.</h6>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/cape.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>Jungle camps</h4>
+                    <div class="bor bg-orange"></div>
+                    <h6>We arrange for the tents and other equipments you will need for a true feel of the wilderness.</h6>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <!-- Image Box #3 Item -->
+                <div class="img-box-3-item">
+                    <div class="img-box-3-icon">
+                        <img src="~/content/img/flat-icons/notes.png" alt="" class="img-responsive" />
+                    </div>
+                    <h4>All permits</h4>
+                    <div class="bor bg-orange"></div>
+                    <h6>All permits for Kilimanjaro and all national parks are arranged by our provider.</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr class="margin-bottom-20" />
+
 <div class="headline">
-    <h3>Trip ideas for Tanzania</h3>
+    <h3>Our circuits in Tanzania</h3>
 </div>
 
 

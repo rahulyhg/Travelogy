@@ -23,20 +23,14 @@
 
 <div class="container">
     <div class="row blog-page blog-item">
-        <div class="col-md-12 md-margin-bottom-60">            
-            <div class="blog margin-bottom-40">
-                <h2>Summit the tallest lone standing mountain in the world!</h2>
-            </div>
-            <p> 
-                Kilimanjaro is the tallest lone standing mountain in the world! At Uhuru peak, 5895 m above sea level, you can stand on a glacier right on the equator.
-                You can then look at the clouds below you. Make new friends on the way up and on your way down. All this in the middle of the incredible landscape of Africa!
-            </p>
+        <div class="col-md-12 md-margin-bottom-60">                        
             <div class="blog-img">                
                 <img class="img-responsive" src="~/Content/img/Kilimanjaro-Climb/KILI-S03.JPG" alt="" />
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="blog-three">    
 
@@ -98,6 +92,31 @@
             </div>
         </div>
     </div>
+
+
+    @if (!Request.IsAuthenticated)
+    {
+        <div class="container">
+            <div class="row">
+                @{
+                    var model = new WebApplication1.Models._DownloadBrochureRequestModel() { BrochurePath = "/Content/Brochures/TravBrochure-Kilimanjaro.pdf" };
+                    Html.RenderPartial("_DownloadBrochureNotLoggedIn", model);
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <div class="panel panel-orange">
+                    <div class="panel-body">
+                        <a href="/Content/Brochures/TravBrochure-Kilimanjaro.pdf" target="_blank" class="btn btn-orange"><h3 class="white">&nbsp; &nbsp;Download our brochure &nbsp; &nbsp; <i class="icon-cloud-download"></i> </h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
     <div class="container">
         <div class="row">
