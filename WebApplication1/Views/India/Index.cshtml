@@ -14,19 +14,87 @@
 <div class="container">
     <div class="row">
         <div class="block-heading-twelve">
-            <h3 class="color">India <small>from the Himalayas to the Indian Ocean</small></h3>
-            <h5>... and from the mythical age of the Mahabharata to the modern world of an internet savvy society!</h5>
+            <h3 class="color">Destination India</h3>
+            <h2>From the Himalayas to the Indian Ocean, this vast country offers visitors a panorama of fascinating magnitude. 
+            Get amazed as you witness the journey from the mythical ages of the Mahabharata to the modern world of an internet savvy society!</h2>            
         </div>
     </div>
 </div>
 
 <hr class="margin-bottom-20" />
+<div class="container">
+    @if (Request.IsAuthenticated)
+    {
+        <a href="/Service/CreateTripForCountry?country=India" class="btn btn-black"><h1 class="white">Start planning for India &nbsp; <i class="icon-arrow-right"></i></h1></a>         
+    }
+    else
+    {
+        <h1 class="orange">Create your own custom package for India - <small><a href="/Account/Membership">Sign up for FREE and use the Trip Planner</a></small></h1>
+    }    
+</div>
+<hr class="margin-bottom-20" />
+
+<div class="img-box-3 text-center">
+    <div class="row">
+        <!--Item-1-->
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/18.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Planning</h4>
+                <div class="bor bg-orange"></div>
+                <h6>Our FREE online Travel Planner backed up by a team of experts help you create the custom itinerary best suitable for you.</h6>
+            </div>
+        </div>
+
+        <!--Item-2-->
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/passport.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Visas</h4>
+                <div class="bor bg-orange"></div>
+                <h6>Get guidance for VISA to India - we will walk you through the process step by step.</h6>
+            </div>
+        </div>
+
+        <!--Item-3-->
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/airplane.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Air tickets</h4>
+                <div class="bor bg-orange"></div>
+                <h6>We use our trusted partners to book best value Air tickets to India.</h6>
+            </div>
+        </div>
+
+        <!--Item-6-->
+        <div class="col-md-3 col-sm-6">
+            <!-- Image Box #3 Item -->
+            <div class="img-box-3-item">
+                <div class="img-box-3-icon">
+                    <img src="~/content/img/flat-icons/bed-1.png" alt="" class="img-responsive" />
+                </div>
+                <h4>Accommodation</h4>
+                <div class="bor bg-orange"></div>
+                <h6>Our internal booking system gets you the best deals on all classes of Hotels across India.</h6>
+            </div>
+        </div>
+    </div>    
+</div>
+
 
 <div class="about-us-one">
     <div class="about-logo">
-        <p>India is aptly called a sub-continent. This vast country offers the visitor a panorama of fascinating magnitude, 
-        from the multitude of religions and ethnography, to a vast variety of languages, and monuments that have been present 
-        for thousands of years. As India wakes up to a globalised world, it retains the connection with its history, 
+        <p>India is aptly called a sub-continent. From the multitude of religions and ethnography, to a vast variety of languages, 
+        and monuments that have been present for thousands of years. As India wakes up to a globalised world, it retains the connection with its history, 
         mixing it with the modernity that is seen in nooks and corners. The intensity of culture that awes and fascinates many who 
         visit there can be overwhelming.</p>
     </div>
@@ -59,6 +127,23 @@ else
 
 <div class="headline">
     <h3>Travel circuits in India</h3>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="block-heading-eight">
+            <h3 class="orange">
+                Geographically you can expect a lot here...
+                <small class="">
+                    the highest mountain range in the world, over 4500 miles of coastline,
+                    high altitude desert, some of the densest forests of the world, vast salty marshes, lush green backwaters,
+                    the wettest place on earth in the eastern corner of the country to a bone dry desert in the west ...
+                </small>
+                <a href="/Circuit/India">check all the circuits in India &nbsp;&nbsp;<i class="icon-arrow-right"></i></a>
+            </h3>
+        </div>
+    </div>
 </div>
 
 <div class="row margin-bottom-20">
@@ -96,18 +181,3 @@ else
     </div>
 </div><!--/row-->
 
-<div class="container">
-    <div class="row">
-        <div class="block-heading-eight">
-            <h3 class="orange">
-                Geographically you can expect a lot here... 
-                <small class="">
-                    the highest mountain range in the world, over 4500 miles of coastline,
-                    high altitude desert, some of the densest forests of the world, vast salty marshes, lush green backwaters,
-                    the wettest place on earth in the eastern corner of the country to a bone dry desert in the west ...
-                </small>
-                <a href="/Circuit/India">check all the circuits in India &nbsp;&nbsp;<i class="icon-arrow-right"></i></a>
-            </h3>
-        </div>
-    </div>
-</div>
