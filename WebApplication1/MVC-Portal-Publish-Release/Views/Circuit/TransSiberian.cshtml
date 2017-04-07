@@ -94,12 +94,12 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-12 col-sm-12">
                 @if (Request.IsAuthenticated)
-            {
-                if (Model != null && Model.Destination != null)
                 {
-                    var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = Model.Destination.Name, TemplateAlias = Model.Destination.TemplateSearchAlias };
+                    if (Model != null && Model.Destination != null)
+                    {
+                        var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = Model.Destination.Name, TemplateAlias = Model.Destination.TemplateSearchAlias };
                         @Html.Partial("_StartTripPlanning", _model)
                     }
                 }
@@ -109,20 +109,20 @@
                     @Html.Partial("_JoinNowTripPlanning")
                 }
             </div>
-            <div class="col-md-6 col-sm-6">
-                @if (Request.IsAuthenticated)
+            <div class="ol-md-12 col-sm-12">
+            @if (Request.IsAuthenticated)
             {
                 if (Model != null && Model.Destination != null)
                 {
                     var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = Model.Destination.Name };
-                        @Html.Partial("_DownloadBrochure", _model)
-                    }
+                    @Html.Partial("_DownloadBrochure", _model)
                 }
-                else
+            }
+            else
+            {
+                if (Model != null && Model.Destination != null)
                 {
-                    if (Model != null && Model.Destination != null)
-                    {
-                        @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = Model.Destination.Name });
+                    @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = Model.Destination.Name });
                 }
             }
             </div>
