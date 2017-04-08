@@ -1,4 +1,5 @@
 ﻿@model WebApplication1.Models.DomingoModelBase
+@using Microsoft.AspNet.Identity;
 
 @*@Html.Partial("_AsiaCircuitsCarousel")*@
 
@@ -9,6 +10,32 @@
 </div>
 
 @Html.Partial("_DestinationViewHeader", Model)
+
+<div class="container">
+    @{
+        DomingoBL.BlObjects.BlViewTrip _nextTrip = null;
+        if (Request.IsAuthenticated)
+        {
+            _nextTrip = ApplicationUserManager.GetImmidiateTrip(User.Identity.GetUserId());
+            if (_nextTrip == null)
+            {
+                <a href="/Service/CreateTripForCountry?country=Mongolia" class="btn btn-black"><h1 class="white">Start planning for Mongolia &nbsp; <i class="icon-arrow-right"></i></h1></a>
+            }
+            else
+            {
+                @Html.Partial("_ImmediateTrip")
+            }
+        }
+        else
+        {
+            <h1>Create your own custom package for Mongolia</h1>
+            <h1>
+                <a href="/Account/Membership" class="btn-u btn-black">Sign up for FREE and use the Trip Planner &nbsp; <i class="icon-arrow-right"></i></a>
+            </h1>
+        }
+    }
+    
+</div>
 
 <div class="img-box-3 text-center">
     <div class="row">
@@ -124,42 +151,23 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="block-heading-twelve">
-            <a href="/service/ListAllTripTemplates?templateAlias=@Model.Destination.TemplateSearchAlias">
-                <h1>Check all @Model.Destination.Name trip ideas!</h1>
-            </a>
-        </div>
-    </div>
-</div>
+<hr class="margin-bottom-20" />
 
-<hr class="margin-bottom-40" />
+
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 col-sm-6">
+    <div class="row">        
+        <div class="col-md-12 col-sm-12">
             @if (Request.IsAuthenticated)
             {
-                if (Model != null && Model.Destination != null)
-                {
-                    var _model = new WebApplication1.Models._StartTripPlanningViewModel() { CircuitName = Model.Destination.Name, TemplateAlias = Model.Destination.TemplateSearchAlias };
-                    @Html.Partial("_StartTripPlanning", _model)
-                }
-            }
-
-            else
-            {
-                @Html.Partial("_JoinNowTripPlanning")
-            }
-        </div>
-        <div class="col-md-6 col-sm-6">
-            @if (Request.IsAuthenticated)
-            {
-                if (Model != null && Model.Destination != null)
-                {
-                    var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = Model.Destination.Name };
-                    @Html.Partial("_DownloadBrochure", _model)
-                }
+                <div class="container">
+                    <div class="row">
+                        <div class="panel panel-orange">
+                            <div class="panel-body">
+                                <a href="/Content/Brochures/Travbrochure-India.pdf" target="_blank" class="btn btn-orange"><h3 class="white">&nbsp; &nbsp;Download our brochure &nbsp; &nbsp; <i class="icon-cloud-download"></i> </h3></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
             else
             {

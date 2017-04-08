@@ -137,10 +137,10 @@
             </div>
             <div class="col-md-12 col-sm-12">
                 @if (Request.IsAuthenticated)
-            {
-                if (Model != null && Model.Destination != null)
                 {
-                    var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = Model.Destination.Name };
+                    if (Model != null && Model.Destination != null)
+                    {
+                        var _model = new WebApplication1.Models._DownloadBrochureModel() { CircuitName = Model.Destination.Name };
                         @Html.Partial("_DownloadBrochure", _model)
                     }
                 }
@@ -149,8 +149,8 @@
                     if (Model != null && Model.Destination != null)
                     {
                         @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = Model.Destination.Name });
+                    }
                 }
-            }
             </div>
         </div>
     </div>

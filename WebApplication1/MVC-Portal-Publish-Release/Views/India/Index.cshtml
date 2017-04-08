@@ -22,14 +22,15 @@
 </div>
 
 <hr class="margin-bottom-20" />
-<div class="container">
+<div class="container text-center">
     @if (Request.IsAuthenticated)
     {
         <a href="/Service/CreateTripForCountry?country=India" class="btn btn-black"><h1 class="white">Start planning for India &nbsp; <i class="icon-arrow-right"></i></h1></a>         
     }
     else
     {
-        <h1 class="orange">Create your own custom package for India - <small><a href="/Account/Membership">Sign up for FREE and use the Trip Planner</a></small></h1>
+        <h1>Create your own custom package for India</h1>
+        <h1><a href="/Account/Membership" class="btn-u btn-black">Sign up for FREE and use the Trip Planner &nbsp; <i class="icon-arrow-right"></i></a></h1>
     }    
 </div>
 <hr class="margin-bottom-20" />
@@ -181,4 +182,15 @@ else
         </div>
     </div>
 </div><!--/row-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            @if (!Request.IsAuthenticated)
+            {
+                @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = "India" });
+            }            
+        </div>
+    </div>
+</div>
 

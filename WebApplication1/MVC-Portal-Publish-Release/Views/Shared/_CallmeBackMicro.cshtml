@@ -4,32 +4,31 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="margin-bottom-20"></div>
     <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-body">                
-                <div class="row">
-                    <div class="col-md-12">
-                        <p>Want to know more? <span class="orange">Leave your name and number, we will call you back.</span></p>
+        <blockquote>
+            <h4 class="orange margin-bottom-10"><i>Want to know more?</i> </h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="icon-user"></i></span>
+                        @Html.TextBoxFor(model => model.WhomToCall, new { @class = "form-control", @placeholder = "Leave your name" })                        
                     </div>
+                    @Html.ValidationMessageFor(model => model.WhomToCall, "", new { @class = "text-danger" })
                 </div>
-                <div class="row">
-                    <div class="col-md-4">                        
-                        <p>@Html.EditorFor(model => model.WhomToCall, new { htmlAttributes = new { @class = "form-control", @placeholder = "Your name" } })</p>
-                        <p>@Html.ValidationMessageFor(model => model.WhomToCall, "", new { @class = "text-danger" })</p>
+                <div class="col-md-3">
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="icon-phone"></i></span>
+                        @Html.TextBoxFor(model => model.WhereToCall, new { @class = "form-control", @placeholder = "and your number" })                        
                     </div>
-                    <div class="col-md-4">
-                        <p>@Html.EditorFor(model => model.WhereToCall, new { htmlAttributes = new { @class = "form-control", @placeholder = "Your number (with country code)" } })</p>
-                        <p>@Html.ValidationMessageFor(model => model.WhereToCall, "", new { @class = "text-danger" })</p>
-                    </div>
-                    <div class="col-md-4">
-                        <button class="btn-u" type="submit">Arrange a Call Back &nbsp;&nbsp; <i class="icon-phone"></i></button>
-                    </div>
+                    @Html.ValidationMessageFor(model => model.WhereToCall, "", new { @class = "text-danger" })
                 </div>
-            </div>            
-        </div>
+                <div class="col-md-3">
+                    <button class="btn-u" type="submit">Arrange a Call Back &nbsp;&nbsp; <i class="icon-arrow-right"></i></button>
+                </div>
+            </div>
+        </blockquote>     
     </div>
-    
+
 }
 
 
