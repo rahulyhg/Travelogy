@@ -9415,6 +9415,7 @@
     <Content Include="Content\assets\plugins\revolution_slider\rs-plugin\videojs\font\vjs.eot" />
     <Content Include="Content\assets\plugins\revolution_slider\rs-plugin\videojs\font\vjs.ttf" />
     <Content Include="Content\assets\plugins\revolution_slider\rs-plugin\videojs\font\vjs.woff" />
+    <Content Include="sitemap.xml" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -9601,6 +9602,7 @@
     <Content Include="Views\Account\Membership.cshtml" />
     <Content Include="Views\Shared\_JoinTravelogyClub.cshtml" />
     <Content Include="Views\Shared\_LoginToTravelogyClub.cshtml" />
+    <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

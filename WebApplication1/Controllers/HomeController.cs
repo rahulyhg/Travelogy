@@ -8,7 +8,6 @@ using Microsoft.AspNet.Identity;
 using DomingoDAL;
 using WebApplication1.Models;
 using System.Threading.Tasks;
-using System.Configuration;
 using System.IO;
 
 namespace WebApplication1.Controllers
@@ -50,27 +49,6 @@ namespace WebApplication1.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CallMeBackMicroAsync(CallMeBackViewModel model)
-        {
-            // create a CRM lead
-            var blCrm = await DomingoUserManager.CreateCrmLeadCallMeBack(model.WhomToCall, model.WhereToCall);
-
-            return RedirectToAction("ContactUsThanks", "Information");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DownloadBrochureRequestAsync(_DownloadBrochureRequestModel model)
-        {
-            // create a CRM lead
-            var brochurePath = ConfigurationManager.AppSettings["HostSite"] + model.BrochurePath;            
-            var blCrm = await DomingoUserManager.CreateCrmLeadDownloadBrochure(model.Name, model.Email, brochurePath);
-
-            return RedirectToAction("ContactUsThanks", "Information");
         }
     }
 }

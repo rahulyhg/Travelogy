@@ -15,7 +15,7 @@
 body { 
    color: #333; 
    font-size: 13px;
-   line-height: 1.6;
+   line-height: 1.4;
 }
 
 p, a, li { 
@@ -38,7 +38,8 @@ h1, h2, h3, h4, h5 {
    margin-top: 5px; 
    text-shadow: none; 
    font-weight: normal !important; 
-   font-family: 'Open Sans', sans-serif; 
+   /*font-family: 'Open Sans', sans-serif;*/ 
+   font-family: "Open-sans",Arial,"Helvetica Neue",Helvetica,sans-serif;
 } 
 h1 i, h2 i, h3 i, h4 i, h5 i {
    margin-right: 7px;

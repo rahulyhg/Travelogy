@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using System.Configuration;
 
 namespace WebApplication1.Controllers
 {
@@ -111,6 +112,37 @@ namespace WebApplication1.Controllers
         public ActionResult TermsAndConditions()
         {
             return View();
-        }        
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DownloadBrochureRequestAsync(_DownloadBrochureRequestModel model)
+        {
+            // create a CRM lead
+            var brochurePath = ConfigurationManager.AppSettings["HostSite"] + model.BrochurePath;
+            var blCrm = await DomingoUserManager.CreateCrmLeadDownloadBrochure(model.Name, model.Email, brochurePath);
+            ViewBag.ConfirmationMessage = "Your brochure has been emailed to you.";
+            return View("ContactUsThanks");            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CallMeBackMicroAsync(CallMeBackViewModel model)
+        {
+            // create a CRM lead
+            var blCrm = await DomingoUserManager.CreateCrmLeadCallMeBack(model.WhomToCall, model.WhereToCall);
+            ViewBag.ConfirmationMessage = "Our agents will call you back as soon as possible.";
+            return View("ContactUsThanks");
+        }
     }
 }
