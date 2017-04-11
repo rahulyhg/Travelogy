@@ -1,8 +1,9 @@
 ﻿@model WebApplication1.Models.CircuitModelBase
 
-@{ 
-    ViewBag.Description = "Travelogy club offers fully customized holidays and travel opportunities in India";
-    ViewBag.KeyWords = "India, India Travel, India Holidays";
+@{
+    ViewBag.Title = "India trip planner";
+    ViewBag.Description = "Plan your own customized holidays and travel itineraries for India";
+    ViewBag.KeyWords = "india travel, travel to india,india trip,india tour,india route planner";
 }
 
 <div class="row">
@@ -15,106 +16,123 @@
     <div class="row">
         <div class="block-heading-twelve">
             <h3 class="color">Destination India</h3>
-            <h2>From the Himalayas to the Indian Ocean, this vast country offers visitors a panorama of fascinating magnitude. 
-            Get amazed as you witness the journey from the mythical ages of the Mahabharata to the modern world of an internet savvy society!</h2>            
+            <p>
+                From the Himalayas to the Indian Ocean, this vast country offers visitors a panorama of fascinating magnitude.
+                Get amazed as you witness the journey from the mythical ages of the Mahabharata to the modern world of an internet savvy society! 
+                India is aptly called a sub-continent. From the multitude of religions and ethnography, to a vast variety of languages,
+                and monuments that have been present for thousands of years. As India wakes up to a globalised world, it retains the connection with its history,
+                mixing it with the modernity that is seen in nooks and corners.
+            </p>
         </div>
     </div>
 </div>
 
-<hr class="margin-bottom-20" />
-<div class="container text-center">
-    @if (Request.IsAuthenticated)
+<hr class="margin-bottom-10" />
+
+<div class="container">
+    <div class="about-us-one">
+        <div class="row">
+            <h3>Travelogy <small><i>(noun)</i><span class="orange"> the science of travelling.</span></small></h3>
+        </div>        
+        <div class="row">
+            <div class="container">
+                <div class="about-logo">
+                    <h4>Welcome to the club created for the "travellers" <i>by</i> the travellers!</h4>
+                    <p>
+                       Find 360 degree solutions for your travel. Over here, you can create your custom trip plan using our <a href="/service/TripPlanning" class="orange">FREE Trip Planning tool.</a>
+                       <strong>Plan exciting trips to India</strong> and unlock destinations for the next level of your game. We work with hand-picked, friendly and hard-working local operators in each destination.
+                    </p>
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <blockquote>
+                            <h3>Use our FREE Trip Planner for India</h3>
+                            <div class="margin-bottom-20"></div>
+                            <div class="img-box-3 text-center">
+                                <div class="row">
+                                    <!--Item-1-->
+                                    <div class="col-md-3 col-sm-6">
+                                        <!-- Image Box #3 Item -->
+                                        <div class="img-box-3-item">
+                                            <div class="img-box-3-icon">
+                                                <img src="~/content/img/flat-icons/18.png" alt="" class="img-responsive" />
+                                            </div>
+                                            <h4>India Trip Plan</h4>
+                                            <div class="bor bg-orange"></div>
+                                            <h6>Our FREE online Travel Planner backed up by a team of experts help you create the custom itinerary best suitable for you.</h6>
+                                        </div>
+                                    </div>
+
+                                    <!--Item-2-->
+                                    <div class="col-md-3 col-sm-6">
+                                        <!-- Image Box #3 Item -->
+                                        <div class="img-box-3-item">
+                                            <div class="img-box-3-icon">
+                                                <img src="~/content/img/flat-icons/passport.png" alt="" class="img-responsive" />
+                                            </div>
+                                            <h4>Visas to India</h4>
+                                            <div class="bor bg-orange"></div>
+                                            <h6>Get guidance for VISA to India - we will walk you through the process step by step.</h6>
+                                        </div>
+                                    </div>
+
+                                    <!--Item-3-->
+                                    <div class="col-md-3 col-sm-6">
+                                        <!-- Image Box #3 Item -->
+                                        <div class="img-box-3-item">
+                                            <div class="img-box-3-icon">
+                                                <img src="~/content/img/flat-icons/airplane.png" alt="" class="img-responsive" />
+                                            </div>
+                                            <h4>Air tickets to India</h4>
+                                            <div class="bor bg-orange"></div>
+                                            <h6>We use our trusted partners to book best value Air tickets to India.</h6>
+                                            <h6><small>Also find the best value domestic transfers inside India</small></h6>
+                                        </div>
+                                    </div>
+
+                                    <!--Item-6-->
+                                    <div class="col-md-3 col-sm-6">
+                                        <!-- Image Box #3 Item -->
+                                        <div class="img-box-3-item">
+                                            <div class="img-box-3-icon">
+                                                <img src="~/content/img/flat-icons/bed-1.png" alt="" class="img-responsive" />
+                                            </div>
+                                            <h4>Accommodation in India</h4>
+                                            <div class="bor bg-orange"></div>
+                                            <h6>Our booking system gets you the best deals on all classes of Hotels across India.</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="margin-bottom-20"></div>
+                            <a href="/Account/Membership" class="btn-u btn-orange">Sign up for Free &nbsp; <i class="icon-arrow-right"></i> </a>
+                        </blockquote>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container text-center">
+        @if (Request.IsAuthenticated)
+        {
+            <a href="/Service/CreateTripForCountry?country=India" class="btn btn-black"><h1 class="white">Start planning for India &nbsp; <i class="icon-arrow-right"></i></h1></a>
+        }
+    </div>
+    <hr class="margin-bottom-20" />   
+
+    @if (!Request.IsAuthenticated)
     {
-        <a href="/Service/CreateTripForCountry?country=India" class="btn btn-black"><h1 class="white">Start planning for India &nbsp; <i class="icon-arrow-right"></i></h1></a>         
+        <div class="container">
+            <div class="row">
+                @{
+                    var model = new WebApplication1.Models._DownloadBrochureRequestModel() { BrochurePath = "/Content/Brochures/Travbrochure-India.pdf" };
+                    Html.RenderPartial("_DownloadBrochureNotLoggedIn", model);
+                }
+            </div>
+        </div>
     }
     else
     {
-        <h1>Create your own custom package for India</h1>
-        <h1><a href="/Account/Membership" class="btn-u btn-black">Sign up for FREE and use the Trip Planner &nbsp; <i class="icon-arrow-right"></i></a></h1>
-    }    
-</div>
-<hr class="margin-bottom-20" />
-
-<div class="img-box-3 text-center">
-    <div class="row">
-        <!--Item-1-->
-        <div class="col-md-3 col-sm-6">
-            <!-- Image Box #3 Item -->
-            <div class="img-box-3-item">
-                <div class="img-box-3-icon">
-                    <img src="~/content/img/flat-icons/18.png" alt="" class="img-responsive" />
-                </div>
-                <h4>India Trip Plan</h4>
-                <div class="bor bg-orange"></div>
-                <h6>Our FREE online Travel Planner backed up by a team of experts help you create the custom itinerary best suitable for you.</h6>
-            </div>
-        </div>
-
-        <!--Item-2-->
-        <div class="col-md-3 col-sm-6">
-            <!-- Image Box #3 Item -->
-            <div class="img-box-3-item">
-                <div class="img-box-3-icon">
-                    <img src="~/content/img/flat-icons/passport.png" alt="" class="img-responsive" />
-                </div>
-                <h4>Visas to India</h4>
-                <div class="bor bg-orange"></div>
-                <h6>Get guidance for VISA to India - we will walk you through the process step by step.</h6>
-            </div>
-        </div>
-
-        <!--Item-3-->
-        <div class="col-md-3 col-sm-6">
-            <!-- Image Box #3 Item -->
-            <div class="img-box-3-item">
-                <div class="img-box-3-icon">
-                    <img src="~/content/img/flat-icons/airplane.png" alt="" class="img-responsive" />
-                </div>
-                <h4>Air tickets to India</h4>
-                <div class="bor bg-orange"></div>
-                <h6>We use our trusted partners to book best value Air tickets to India.</h6>
-                <h6><small>Also find the best value domestic transfers inside India</small></h6>
-            </div>
-        </div>
-
-        <!--Item-6-->
-        <div class="col-md-3 col-sm-6">
-            <!-- Image Box #3 Item -->
-            <div class="img-box-3-item">
-                <div class="img-box-3-icon">
-                    <img src="~/content/img/flat-icons/bed-1.png" alt="" class="img-responsive" />
-                </div>
-                <h4>Accommodation in India</h4>
-                <div class="bor bg-orange"></div>
-                <h6>Our booking system gets you the best deals on all classes of Hotels across India.</h6>
-            </div>
-        </div>
-    </div>    
-</div>
-
-
-<div class="about-us-one">
-    <div class="about-logo">
-        <p>India is aptly called a sub-continent. From the multitude of religions and ethnography, to a vast variety of languages, 
-        and monuments that have been present for thousands of years. As India wakes up to a globalised world, it retains the connection with its history, 
-        mixing it with the modernity that is seen in nooks and corners. The intensity of culture that awes and fascinates many who 
-        visit there can be overwhelming.</p>
-    </div>
-</div>
-
-@if (!Request.IsAuthenticated)
-{
-    <div class="container">
-        <div class="row">
-            @{ 
-                var model = new WebApplication1.Models._DownloadBrochureRequestModel() { BrochurePath = "/Content/Brochures/Travbrochure-India.pdf" };
-                Html.RenderPartial("_DownloadBrochureNotLoggedIn", model);
-            }
-        </div>
-    </div>
-}
-else
-{
         <div class="container">
             <div class="row">
                 <div class="panel panel-orange">
@@ -124,73 +142,65 @@ else
                 </div>
             </div>
         </div>
-}
+    }
 
-
-<div class="headline">
-    <h3>Travel circuits in India</h3>
-</div>
-
-
-<div class="container">
-    <div class="row">
-        <div class="block-heading-eight">
-            <h3 class="orange">
-                Geographically you can expect a lot here...
-                <small class="">
-                    the highest mountain range in the world, over 4500 miles of coastline,
-                    high altitude desert, some of the densest forests of the world, vast salty marshes, lush green backwaters,
-                    the wettest place on earth in the eastern corner of the country to a bone dry desert in the west ...
-                </small>
-                <a href="/Circuit/India">check all the circuits in India &nbsp;&nbsp;<i class="icon-arrow-right"></i></a>
-            </h3>
+    <div class="container">
+        <div class="row">
+            <div class="block-heading-twelve">
+                <h1 class="orange">You can expect everything here ...</h1>
+                <p>
+                    the highest mountain range in the world, over 4500 miles of coastline, high altitude desert, some of the densest forests of the world, 
+                    vast salty marshes, lush green backwaters, the wettest place on earth in the eastern corner of the country to a bone dry desert in the west ...
+                </p>
+                <h1><a href="/Circuit/India">Choose circuits in India and start planning &nbsp;&nbsp;<i class="icon-arrow-right"></i></a></h1>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="row margin-bottom-20">
-    <div class="col-md-3 col-sm-6">
-        <div class="thumbnails">
-            <a href="/Circuit/India">
-                <img class="img-responsive" src="/content/img/India/thumbnail001.jpg" alt="" />
-                <h3>Mountains <small>home to the highest mountain ranges of the world.</small></h3>
-            </a>            
+    <div class="row margin-bottom-20">
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnails">
+                <a href="/Circuit/India">
+                    <img class="img-responsive" src="/content/img/India/thumbnail001.jpg" alt="" />
+                    <h3>Mountains <small>home to the highest mountain ranges of the world.</small></h3>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-        <div class="thumbnails">
-            <a href="/Circuit/India">
-                <img class="img-responsive" src="/content/img/India/thumbnail002.jpg" alt="" />
-                <h3>Culture <small>arguably one of the most culturally diverse country.</small></h3>
-            </a>
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnails">
+                <a href="/Circuit/India">
+                    <img class="img-responsive" src="/content/img/India/thumbnail002.jpg" alt="" />
+                    <h3>Culture <small>arguably one of the most culturally diverse country.</small></h3>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-        <div class="thumbnails">
-            <a href="/Circuit/India">
-                <img class="img-responsive" src="/content/img/India/thumbnail003.jpg" alt="" /> 
-                <h3>History <small>discover relics of over 5000 years of civilization.</small></h3>
-            </a>
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnails">
+                <a href="/Circuit/India">
+                    <img class="img-responsive" src="/content/img/India/thumbnail003.jpg" alt="" />
+                    <h3>History <small>discover relics of over 5000 years of civilization.</small></h3>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-        <div class="thumbnails">
-            <a href="/Circuit/India">
-                <img class="img-responsive" src="/content/img/India/thumbnail004.jpg" alt="" />
-                <h3>Adventure <small>surprise yourself with unlimited opportunities of adventure.</small></h3>
-            </a>
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnails">
+                <a href="/Circuit/India">
+                    <img class="img-responsive" src="/content/img/India/thumbnail004.jpg" alt="" />
+                    <h3>Adventure <small>surprise yourself with unlimited opportunities of adventure.</small></h3>
+                </a>
+            </div>
         </div>
-    </div>
-</div><!--/row-->
+    </div><!--/row-->
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            @if (!Request.IsAuthenticated)
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                @if (!Request.IsAuthenticated)
             {
-                @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = "India" });
-            }            
+                    @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = "India" });
+            }
+            </div>
         </div>
     </div>
-</div>
 
+</div>

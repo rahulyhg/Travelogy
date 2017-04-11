@@ -1,6 +1,6 @@
 ﻿@model WebApplication1.Models.CallMeBackViewModel
 
-@using (Html.BeginForm("CallMeBackMicroAsync", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+@using (Html.BeginForm("CallMeBackMicroAsync", "Information", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
 {
     @Html.AntiForgeryToken()
 

@@ -1,6 +1,6 @@
 ﻿@model WebApplication1.Models._DownloadBrochureRequestModel
 
-@using (Html.BeginForm("DownloadBrochureRequestAsync", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+@using (Html.BeginForm("DownloadBrochureRequestAsync", "Information", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.BrochurePath)
@@ -11,7 +11,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h5>Want to know more? <span class="orange">Get our Brochure.</span></h5>
+                        <h5>Want to know more? <span class="orange">Get our online brochure in your mail.</span></h5>
                     </div>
                 </div>
                 <div class="margin-bottom-10"></div>

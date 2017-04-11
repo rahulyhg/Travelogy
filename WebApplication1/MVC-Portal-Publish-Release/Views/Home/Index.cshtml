@@ -4,7 +4,9 @@
 @using Microsoft.AspNet.Identity;
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Plan your own trips";
+    ViewBag.Description = "Plan your bespoke trip to India, Tanzania, Russia and Mongolia";
+    ViewBag.KeyWords = "india travel, travel to india,india trip,india tour,india route planner";
 }
 
 @Html.Partial("_HomepageCarousel")
@@ -101,32 +103,71 @@
 
     <div class="margin-bottom-20"></div>
 
-    <div class="container">          
-        <div class="headline"><h3>Our Destinations</h3></div>
+    <div class="container">        
+        <div class="block-heading-twelve">
+            <h1>Discover more with us: <small>we help you travel Independently, create your own custom itinerary, backed by inputs from travel experts. Trip planning is absolutely FREE. Check the destinations we offer currently.</small></h1>                            
+        </div>          
         <div class="row margin-bottom-20">
             <a href="/India">
+                <div class="container">
+                    <div class="row">
+                        <div class="block-heading-twelve">
+                            <h3 class="color">India <small>one of the most diverse countries!</small></h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="margin-bottom-10"></div>
+                            <div class="thumbnails">
+                                <img class="img-responsive" src="/content/img/india/th_large_westIndia.jpg" alt="" />
+                            </div>
+                            <p>From the Himalayas to the Indian Ocean, this vast country offers visitors a panorama of fascinating magnitude.</p>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="margin-bottom-10"></div>
+                            <div class="thumbnails">
+                                <img class="img-responsive" src="/content/img/india/th_large_rajasthan.jpg" alt="" />
+                            </div>
+                            <p>There is something for everyone, from History to Adventure, from Wildlife to Nightlife, experience diversity built over thousands of years.</p>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="margin-bottom-10"></div>
+                            <div class="thumbnails">
+                                <img class="img-responsive" src="/content/img/india/th_large_ladakh.jpg" alt="" />
+                            </div>
+                            <p>Experience the far corners and hidden gems, there is way too much more left here to see after the Taj Mahal and the Golden temple.</p>
+                        </div>
+                    </div>                    
+                </div>                
+            </a>
+        </div>
+        <div class="row margin-bottom-20">           
+            <a href="/Circuit/Tanzania">
                 <div class="col-md-3 col-sm-6">
-                    <h1>India</h1>     
+                    <h1 class="orange">Kilimanjaro</h1>
+                    <h6>Get high in Africa</h6>
                     <div class="margin-bottom-10"></div>               
                     <div class="thumbnails">
-                        <img class="img-responsive" src="/content/img/gallery/small/thumbnail_IndianWestCoast.jpg" alt="" />
+                        <img class="img-responsive" src="~/content/img/gallery/small/thumbnail_kili.jpg" alt="" />
                     </div>
-                    <p>From the Himalayas to the Indian Ocean, this vast country offers visitors a panorama of fascinating magnitude.</p>
+                    <p>Kilimanjaro is the tallest lone standing mountain in the world! At Uhuru peak, 5895 m above sea level, you can stand on a glacier right on the equator.</p>
                 </div>
             </a>
             <a href="/Circuit/Tanzania">
                 <div class="col-md-3 col-sm-6">
-                    <h1>Tanzania</h1>
-                    <div class="margin-bottom-10"></div>               
+                    <h1 class="orange">Serengeti</h1>
+                    <h6>Find the wild side</h6>
+                    <div class="margin-bottom-10"></div>
                     <div class="thumbnails">
                         <img class="img-responsive" src="/content/img/gallery/small/thumbnail_safari.jpg" alt="" />
                     </div>
-                    <p>Visit the Oldupai Gorge where you can find the history of mankind, visit the Ngorongoro crater, where a pre-historic mega mountain once rose to the skies, twice the height of Kilimanjaro.</p>
+                    <p>Serengeti offers unparalleled closeness to the wild animals! Spread over 30,000 sq.km this region hosts the world's largest migration of animals every year.</p>
                 </div>
             </a>
             <a href="/Circuit/Russia">
                 <div class="col-md-3 col-sm-6">
-                    <h1>Russia</h1>
+                    <h1 class="orange">Eastern Russia</h1>
+                    <h6>The deepest lake on Earth</h6>
                     <div class="margin-bottom-10"></div>               
                     <div class="thumbnails">
                         <img class="img-responsive" src="/content/img/gallery/small/thumbnail_baikal_winter.jpg" alt="" />
@@ -136,7 +177,8 @@
             </a>
             <a href="/Circuit/Mongolia">
                 <div class="col-md-3 col-sm-6">
-                    <h1>Mongolia</h1>
+                    <h1 class="orange">Mongolia</h1>
+                    <h6>Be a true nomad</h6>
                     <div class="margin-bottom-10"></div>               
                     <div class="thumbnails">
                         <img class="img-responsive" src="/content/img/gallery/small/thumbnail_mongolia.jpg" alt="" />
