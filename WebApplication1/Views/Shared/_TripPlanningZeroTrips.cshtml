@@ -1,5 +1,22 @@
 ﻿@model WebApplication1.Models.TripPlanningViewModel
 
+@{ 
+    string urlRussiaPlanner, urlIndiaPlanner, urlTanzaniaPlanner, urlMongoliaPlanner;
+    if(Request.IsAuthenticated)
+    {
+        urlRussiaPlanner = "/Service/CreateTripForCountry?country=Russia";
+        urlIndiaPlanner = "/Service/CreateTripForCountry?country=India";
+        urlTanzaniaPlanner = "/Service/CreateTripForCountry?country=Tanzania";
+        urlMongoliaPlanner = "/Service/CreateTripForCountry?country=Mongolia";
+    }
+    else
+    {
+        urlRussiaPlanner = "/Plan/Russia";
+        urlIndiaPlanner = "/Plan/India";
+        urlTanzaniaPlanner = "/Plan/Tanzania";
+        urlMongoliaPlanner = "/Plan/Mongolia";
+    }
+}
 <div class="container">
     <div class="row">
         <div class="block-heading-twelve">
@@ -63,7 +80,6 @@
     
     <div class="row">
         <div class="block-heading-twelve">
-            <h1>Want to know more before you start? <a href="/Service/MessageCenter">Send a message to us.</a></h1>    
             <h2 class="orange">The trip planner is FREE to use, you will only pay for any bookings you make through us.</h2>        
         </div>
     </div>
@@ -74,52 +90,52 @@
                 <div class="col-md-3 col-sm-6">
                     <!-- Image Box #3 Item -->
                     <div class="img-box-3-item">
-                        <a href="/Service/CreateTripForCountry?country=India">
+                        <a href="@urlIndiaPlanner">
                             <div class="img-box-3-icon">
                                 <img src="~/content/img/flat-icons/india.png" alt="" class="img-responsive" />
                             </div>
                         </a>                            
                         <h3 class="orange">India</h3>
-                        @*<div class="bor bg-black"></div>*@                        
+                        
                     </div>
                 </div>
 
                 <div class="col-md-3 col-sm-6">
                     <!-- Image Box #3 Item -->
                     <div class="img-box-3-item">
-                        <a href="/Service/CreateTripForCountry?country=Russia">
+                        <a href="@urlRussiaPlanner">
                             <div class="img-box-3-icon">
                                 <img src="~/content/img/flat-icons/Russia.png" alt="" class="img-responsive" />
                             </div>
                         </a>
                         <h3>Russia</h3>
-                        @*<div class="bor bg-black"></div>*@
+                        
                     </div>
                 </div>
 
                 <div class="col-md-3 col-sm-6">
                     <!-- Image Box #3 Item -->
                     <div class="img-box-3-item">
-                        <a href="/Service/CreateTripForCountry?country=Mongolia">
+                        <a href="@urlMongoliaPlanner">
                             <div class="img-box-3-icon">
                                 <img src="~/content/img/flat-icons/Mongolia.png" alt="" class="img-responsive" />
                             </div>
                         </a>
                         <h3>Mongolia</h3>
-                        @*<div class="bor bg-black"></div>*@
+                        
                     </div>
                 </div>
 
                 <div class="col-md-3 col-sm-6">
                     <!-- Image Box #3 Item -->
                     <div class="img-box-3-item">
-                        <a href="/Service/CreateTripForCountry?country=Tanzania">
+                        <a href="@urlTanzaniaPlanner">
                             <div class="img-box-3-icon">
                                 <img src="~/content/img/flat-icons/Tanzania.png" alt="" class="img-responsive" />
                             </div>
                         </a>
                         <h3>Tanzania</h3>
-                        @*<div class="bor bg-black"></div>*@
+                        
                     </div>
                 </div>
             </div>
@@ -131,44 +147,38 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="headline">
-            <h3 class="orange">Featured circuits</h3>
-        </div>
-    </div>
-
-    @*<div class="container">*@
-        @for (var i = 0; i < Model.SuggestedDestinations.Count; i++)
-        {
-            if (i % 4 == 0)
+        @{
+            if (Model != null && Model.SuggestedDestinations != null)
             {
-            @Html.Raw("<div class=\"row\">");
+                <div class="row">
+                    <div class="headline">
+                        <h3 class="orange">Featured circuits</h3>
+                    </div>
+                </div>
+
+                for (var i = 0; i < Model.SuggestedDestinations.Count; i++)
+                {
+                    if (i % 4 == 0)
+                    {
+                        @Html.Raw("<div class=\"row\">");
+                    }
+
+                    {
+                        var item = Model.SuggestedDestinations[i];
+                        @Html.Partial("_DestinationWidget", item)
+                    }
+
+                    if (i % 4 == 3)
+                    {
+                        @Html.Raw("</div>");
+                    }
+
+                    if (i == Model.SuggestedDestinations.Count - 1)
+                    {
+                        @Html.Raw("</div>");
+                    }
+                }
             }
-
-            {
-                var item = Model.SuggestedDestinations[i];
-            @Html.Partial("_DestinationWidget", item)
-        }
-
-        if (i % 4 == 3)
-        {
-            @Html.Raw("</div>");
-            }
-
-            if (i == Model.SuggestedDestinations.Count - 1)
-            {
-            @Html.Raw("</div>");
-            }
-        }
-    @*</div>*@
-
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Get more ideas ... <a href="/circuit" class="orange"> Browse all circuits <i class="icon-cloud"></i></a></h3>
-        </div>
-    </div>
-
+        }    
 </div>
 

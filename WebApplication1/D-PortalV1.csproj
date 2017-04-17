@@ -185,6 +185,7 @@
     <Compile Include="Controllers\IndiaController.cs" />
     <Compile Include="Controllers\InformationController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\ServiceController_Messages.cs" />
     <Compile Include="Controllers\ServiceController_TripPlanner.cs" />
@@ -1920,6 +1921,11 @@
     <Content Include="Views\Shared\_JoinTravelogyClub.cshtml" />
     <Content Include="Views\Shared\_LoginToTravelogyClub.cshtml" />
     <Content Include="Web.sitemap" />
+    <Content Include="Views\Plan\Index.cshtml" />
+    <Content Include="Views\Plan\India.cshtml" />
+    <Content Include="Views\Plan\Tanzania.cshtml" />
+    <Content Include="Views\Plan\Russia.cshtml" />
+    <Content Include="Views\Plan\Mongolia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
