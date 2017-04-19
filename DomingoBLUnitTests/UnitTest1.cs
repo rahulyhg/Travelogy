@@ -2,12 +2,21 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DomingoBL;
 using DomingoDAL;
+using DomingoBL.Google;
 
 namespace DomingoBLUnitTests
 {
     [TestClass]
     public class UnitTest1
     {
+        [TestMethod]
+        public void Test_Google_Api_distancematrix()
+        {
+            var _api = new GoogleApi();
+            _api.Test_distancematrix();
+        }
+
+
         [TestMethod]
         public void Test_Create_CRM_LEAD_Valid_Params()
         {
