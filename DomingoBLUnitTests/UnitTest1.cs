@@ -16,6 +16,13 @@ namespace DomingoBLUnitTests
             _api.Test_distancematrix();
         }
 
+        [TestMethod]
+        public void Test_Google_Api_DistanceCalculation()
+        {
+            var _api = new GoogleApi();
+            var d = _api._CalculateDistance("Darjeeling", "Bangalore");
+            Assert.IsTrue(d > 0);
+        }
 
         [TestMethod]
         public void Test_Create_CRM_LEAD_Valid_Params()

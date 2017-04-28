@@ -391,6 +391,49 @@ namespace DomingoBL
             return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
         }
 
+        public static async Task<DomingoBlError> SavePlaceAsync(Place place)
+        {
+            try
+            {
+                using (var context = new TravelogyDevEntities1())
+                {
+                    if (place.Id > 0)
+                    {
+                        var _dbPlace = context.Places.Find(place.Id);
+                        if(_dbPlace == null)
+                        {
+                            return new DomingoBlError() { ErrorCode = 100, ErrorMessage = "SavePlaceAsync: No matching record found" };
+                        }
+
+                        _dbPlace.CountryId = place.CountryId;
+                        _dbPlace.Activities = place.Activities;
+                        _dbPlace.Attractions = place.Attractions;
+                        _dbPlace.Lattitude = place.Lattitude;
+                        _dbPlace.LongDescription = place.LongDescription;
+                        _dbPlace.Longitude = place.Longitude;
+                        _dbPlace.Name = place.Name;
+                        _dbPlace.ShortDescription = place.ShortDescription;
+                        _dbPlace.State = place.State;
+
+                        await context.SaveChangesAsync();
+                    }
+
+                    else
+                    {
+                        context.Places.Add(place);
+                        await context.SaveChangesAsync();
+                    }
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                return new DomingoBlError() { ErrorCode = 100, ErrorMessage = ex.Message };
+            }
+
+            return new DomingoBlError() { ErrorCode = 0, ErrorMessage = "" };
+        }
+
         /// <summary>
         /// 
         /// </summary>

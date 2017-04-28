@@ -66,6 +66,15 @@
           <Property Name="ActionTimeStamp" Type="datetime" Nullable="false" />
           <Property Name="ActionUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
+        <EntityType Name="Connection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DestinationId" Type="int" Nullable="false" />
+          <Property Name="Distance" Type="decimal" Precision="10" Scale="4" />
+        </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="Id" />
@@ -197,6 +206,42 @@
           <Property Name="FromAddress" Type="nvarchar" MaxLength="200" />
           <Property Name="FromName" Type="nvarchar" MaxLength="200" />
           <Property Name="Description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lattitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="LongDescription" Type="ntext" />
+          <Property Name="Attractions" Type="nvarchar" MaxLength="100" />
+          <Property Name="Activities" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="100" />
+          <Property Name="Beach" Type="int" />
+          <Property Name="Mountain" Type="int" />
+          <Property Name="Trekking" Type="int" />
+          <Property Name="Nightlife" Type="int" />
+          <Property Name="Wildlife" Type="int" />
+          <Property Name="Desert" Type="int" />
+          <Property Name="Culture" Type="int" />
+          <Property Name="Motorcycle" Type="int" />
+          <Property Name="History" Type="int" />
+          <Property Name="Spiritual" Type="int" />
+          <Property Name="SocialWork" Type="int" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="ntext" />
         </EntityType>
         <EntityType Name="SubDestination">
           <Key>
@@ -741,6 +786,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primar
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserSessions" EntityType="Self.AspNetUserSessions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Connection" EntityType="Self.Connection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CurrencyExchange" EntityType="Self.CurrencyExchange" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
@@ -752,6 +798,8 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primar
           <EntitySet Name="DestinationTravelOption" EntityType="Self.DestinationTravelOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HtmlEmail" EntityType="Self.HtmlEmail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HtmlEmailTemplate" EntityType="Self.HtmlEmailTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubDestination" EntityType="Self.SubDestination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TagMap" EntityType="Self.TagMap" Schema="dbo" store:Type="Tables" />
@@ -1026,6 +1074,9 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primar
           <EntitySet Name="TripBookingTransports" EntityType="TravelogyDevModel.TripBookingTransport" />
           <EntitySet Name="View_TripBookingAccommodation" EntityType="TravelogyDevModel.View_TripBookingAccommodation" />
           <EntitySet Name="View_TripBookingTransport" EntityType="TravelogyDevModel.View_TripBookingTransport" />
+          <EntitySet Name="Regions" EntityType="TravelogyDevModel.Region" />
+          <EntitySet Name="Connections" EntityType="TravelogyDevModel.Connection" />
+          <EntitySet Name="Places" EntityType="TravelogyDevModel.Place" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1710,6 +1761,51 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primar
           <Property Name="TransferDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Currency" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Connection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceId" Type="Int32" Nullable="false" />
+          <Property Name="DestinationId" Type="Int32" Nullable="false" />
+          <Property Name="Distance" Type="Decimal" Precision="10" Scale="4" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lattitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="ShortDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LongDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Attractions" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Activities" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Beach" Type="Int32" />
+          <Property Name="Mountain" Type="Int32" />
+          <Property Name="Trekking" Type="Int32" />
+          <Property Name="Nightlife" Type="Int32" />
+          <Property Name="Wildlife" Type="Int32" />
+          <Property Name="Desert" Type="Int32" />
+          <Property Name="Culture" Type="Int32" />
+          <Property Name="Motorcycle" Type="Int32" />
+          <Property Name="History" Type="Int32" />
+          <Property Name="Spiritual" Type="Int32" />
+          <Property Name="SocialWork" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2366,6 +2462,54 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primar
                 <ScalarProperty Name="TripId" ColumnName="TripId" />
                 <ScalarProperty Name="EstimatedCost" ColumnName="EstimatedCost" />
                 <ScalarProperty Name="TransportType" ColumnName="TransportType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="TravelogyDevModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Connections">
+            <EntityTypeMapping TypeName="TravelogyDevModel.Connection">
+              <MappingFragment StoreEntitySet="Connection">
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="TravelogyDevModel.Place">
+              <MappingFragment StoreEntitySet="Place">
+                <ScalarProperty Name="SocialWork" ColumnName="SocialWork" />
+                <ScalarProperty Name="Spiritual" ColumnName="Spiritual" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="Motorcycle" ColumnName="Motorcycle" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+                <ScalarProperty Name="Desert" ColumnName="Desert" />
+                <ScalarProperty Name="Wildlife" ColumnName="Wildlife" />
+                <ScalarProperty Name="Nightlife" ColumnName="Nightlife" />
+                <ScalarProperty Name="Trekking" ColumnName="Trekking" />
+                <ScalarProperty Name="Mountain" ColumnName="Mountain" />
+                <ScalarProperty Name="Beach" ColumnName="Beach" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Activities" ColumnName="Activities" />
+                <ScalarProperty Name="Attractions" ColumnName="Attractions" />
+                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Lattitude" ColumnName="Lattitude" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

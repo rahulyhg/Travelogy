@@ -77,6 +77,39 @@ namespace WebApplication1.Controllers
             return View(context.Destinations);
         }
 
+        [Authorize]
+        public ActionResult Places()
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            return View(context.Places);
+        }
+
+        [Authorize]
+        public ActionResult EditPlace(int id)
+        {
+            _CheckForAdminAccess();
+
+            var context = new TravelogyDevEntities1();
+            var _model = context.Places.Find(id);
+            if(_model == null)
+            {
+                throw new ApplicationException("EditPlace: Invalid argument");
+            }
+
+            return View(_model);
+        }
+
+        [Authorize]
+        public async Task<ActionResult> SavePlaceAsync(Place model)
+        {
+            _CheckForAdminAccess();
+
+            var _blError = await AdminUtility.SavePlaceAsync(model);
+
+            return RedirectToAction("Places");
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -491,6 +524,8 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("TripManagement", new { @id = model.TripId });
         }
+
+        
 
         /// <summary>
         /// 

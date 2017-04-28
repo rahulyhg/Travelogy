@@ -1926,6 +1926,8 @@
     <Content Include="Views\Plan\Tanzania.cshtml" />
     <Content Include="Views\Plan\Russia.cshtml" />
     <Content Include="Views\Plan\Mongolia.cshtml" />
+    <Content Include="Views\Admin\Places.cshtml" />
+    <Content Include="Views\Admin\EditPlace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

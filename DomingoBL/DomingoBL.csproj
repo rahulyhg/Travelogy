@@ -78,6 +78,10 @@
       <Project>{c02dd5fa-8f02-4790-8dd8-6f3ab131130e}</Project>
       <Name>DomingoDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GoogleMapsApi\GoogleMapsApi.csproj">
+      <Project>{61E9FC82-47B0-43C3-8749-95D3A9967060}</Project>
+      <Name>GoogleMapsApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
