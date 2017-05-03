@@ -51,6 +51,8 @@
         <EntityTypeShape EntityType="TravelogyDevModel.Region" Width="1.5" PointX="0.75" PointY="21.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.Connection" Width="1.5" PointX="5.375" PointY="11.75" />
         <EntityTypeShape EntityType="TravelogyDevModel.Place" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.TripStepV2" Width="1.5" PointX="21.375" PointY="7.75" />
+        <EntityTypeShape EntityType="TravelogyDevModel.TripV2" Width="1.5" PointX="11.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

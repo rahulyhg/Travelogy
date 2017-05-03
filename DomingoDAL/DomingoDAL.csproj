@@ -168,10 +168,16 @@
     <Compile Include="TripStep.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TripStepV2.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TripTemplate.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TripTemplateStep.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TripV2.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="View_TagDestination.cs">

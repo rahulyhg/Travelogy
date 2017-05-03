@@ -36,5 +36,6 @@ namespace DomingoDAL
         public Nullable<int> History { get; set; }
         public Nullable<int> Spiritual { get; set; }
         public Nullable<int> SocialWork { get; set; }
+        public Nullable<int> UsualDays { get; set; }
     }
 }

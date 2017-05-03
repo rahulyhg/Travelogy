@@ -110,6 +110,16 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("Places");
         }
+
+        [Authorize]
+        public ActionResult CreatePlace()
+        {
+            _CheckForAdminAccess();
+
+            var _model = new Place();
+            return View(_model);
+        }
+
         /// <summary>
         /// 
         /// </summary>
