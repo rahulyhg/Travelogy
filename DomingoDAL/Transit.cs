@@ -12,14 +12,18 @@ namespace DomingoDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Connection
+    public partial class Transit
     {
         public int Id { get; set; }
         public int SourceId { get; set; }
         public int DestinationId { get; set; }
         public Nullable<decimal> Distance { get; set; }
-        public Nullable<int> MinimumTransitTime { get; set; }
-        public Nullable<decimal> DrivingTime { get; set; }
-        public Nullable<decimal> TransitTime { get; set; }
+        public string departure_stop { get; set; }
+        public string departure_time { get; set; }
+        public string arrival_stop { get; set; }
+        public string arrival_time { get; set; }
+        public Nullable<decimal> Transit_Time { get; set; }
+        public string Mode { get; set; }
+        public string Description { get; set; }
     }
 }

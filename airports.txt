@@ -1,0 +1,102 @@
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Hyderabad','HYD','Rajiv Gandhi International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Tirupati','TIR','Tirupati Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Vijayawada','VGA','Vijayawada Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Visakhapatnam','VTZ','Visakhapatnam Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Daporijo','DAE','Daporijo Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Tezu','TEI','Tezu Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Zero','ZER','Zero Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Dibrugarh','DIB','Mohanbari Air Force Station')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Guwahati','GAU','Lokpriya Gopinath Bordoloi International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Jorhat','JRH','Jorhat Air Force Station'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Kailashahar','IXH','Kailashahar Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'North Lakhimpur','IXI','Lilabari Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Tezpur','TEZ','Tezpur Air Force Station'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Gaya','GAY','Bodhgaya Airport International')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Patna','PAT','Lok Nayak Jayaprakash Airport')	
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Chandigarh','IXC','Chandigarh Air Force Station'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Delhi','DEL','Indira Gandhi International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Goa','GOI','Dabolim Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Gandhinagar','AMD','Sardar Vallabhbhai Patel International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Bhavnagar','BHU','Bhavnagar Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Porbunder','PBD','	Porbandar Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Rajkot','RAJ','Rajkot Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Surat','STV','Surat Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Vadodara','BDQ','Vadodara Airport (Harni Airport)')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Dharamsala','DHM','Gaggal Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Kulu','KUU','Bhuntar Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Shimla','SLV','Shimla Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Jammu','IXJ','Jammu Airport (Satwari Airport)'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Leh','IXL','Leh Kushok Bakula Rimpochee Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Srinagar','SXR	Srinagar Air Force Station'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Jamshedpur','IXW','Sonari Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Ranchi','IXR','Birsa Munda Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Bengaluru','BLR','	Bengaluru International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Belgaum','IXG','Belgaum Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Mangalore','IXE','Mangalore International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Mysore','MYQ','Mandkalli Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Trivandrum','TRV','Trivandrum International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Kochi','COK','Cochin International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Kozhikode','CCJ','Calicut International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Bhopal','BHO','Bhopal Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Gwalior','GWL','Gwalior Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Indore','IDR','Devi Ahilyabai Holkar Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Khajuraho','HJR','	Khajuraho Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Aurangabad','IXU','Aurangabad Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Mumbai','BOM','Chhatrapati Shivaji International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Nagpur','NAG','Dr. Babasaheb Ambedkar International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Nanded','NDC','Nanded Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Nasik','ISK','Gandhinagar Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Pune','PNQ','Pune International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Imphal','IMF','Imphal Airport (Tulihal Airport)'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Shillong','SHL','Shillong Airport - Umroi Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Aizawl','AJL','Turial Air Base'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Dimapur','DMU','Dimapur Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Bhubaneswar','BBI','Biju Patnaik Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Pondicherry','PNY','Pondicherry Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Amritsar','ATQ','Raja Sansi International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Bathinda','BUP','Bhisiana Air Base')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Ludhiana','LUH	Sahnewal Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Pathankot','IXP','Pathankot Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Jaipur','JAI','Jaipur Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Bikaner','BKB','Nal Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Jaisalmer','JSA','Jaisalmer Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Jodhpur','JDH','Jodhpur Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Kota','KTU','Kota Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Udaipur','UDR','Udaipur Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Chennai','MAA','Chennai International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Coimbatore','CJB','Coimbatore International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Madurai','IXM','Madurai International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Agartala','IXA','Agartala Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Agra','AGR','Kheria Airport / (Agra Air Force Station)'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Allahabad','IXD','Allahabad Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Gorakhpur','GOP','Gorakhpur Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Kanpur','KNU','Kanpur Civil Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Lucknow','LKO','Amausi Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Varanasi','VNS','Varanasi Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Dehradun','DED	Jolly Grant Airport'	)
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Kolkata','CCU','Netaji Subhash Chandra Bose International Airport')
+INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Siliguri','IXB','Bagdogra Air Force Station')	
+
+
+
+==============================================================================
+--INSERT INTO [dbo].[Airport]([CountryId],[RegionId],[City],[Code],[Name]) VALUES (100001,100001,'Port Blair','IXZ','Port Blair Air Force Station')	
+
+'Rupsi','RUP','Rupsi Airport'	
+'Silchar','IXS','Kumbhirgram Air Force Station'	
+'Puttaparthi','BEK','Sri Sathya Sai Airport'	
+'Rajahmundry','RJA','Rajahmundry Airport'	
+'Warangal','WGC','Warangal Airport'	
+'Bilaspur','PAB','Bilaspur Airport'	
+'Raipur','RPR','Raipur Airport'
+'Daman','NMB','Daman Airport'	
+'Bhuj','BHJ','Bhuj Airport Shyamji Krishna Verma Airport'
+'Jamnagar','JGA','Jamnagar Airport'
+'Kandla','IXY','Kandla Airport'	
+'Keshod','IXK','Keshod Airport'	
+'Surendranagar','SUN','Zalawad Airport'	
+'Bellary','BEP','Bellary Airport'	
+'Ratnagiri','RTC','Ratnagiri Airport'	
+'Solapur','SSE','Solapur Airport'	
+'Rourkela','RRK','Rourkela Airport'	
+'Salem','SXV','Salem Airport'	

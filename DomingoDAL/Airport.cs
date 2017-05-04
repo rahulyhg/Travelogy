@@ -12,14 +12,16 @@ namespace DomingoDAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Connection
+    public partial class Airport
     {
         public int Id { get; set; }
-        public int SourceId { get; set; }
-        public int DestinationId { get; set; }
-        public Nullable<decimal> Distance { get; set; }
-        public Nullable<int> MinimumTransitTime { get; set; }
-        public Nullable<decimal> DrivingTime { get; set; }
-        public Nullable<decimal> TransitTime { get; set; }
+        public int RegionId { get; set; }
+        public int CountryId { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public Nullable<decimal> Lattitude { get; set; }
+        public Nullable<decimal> Longitude { get; set; }
+        public string City { get; set; }
+        public string Class { get; set; }
     }
 }

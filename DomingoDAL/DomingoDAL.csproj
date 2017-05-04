@@ -56,6 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Airport.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetRole.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
@@ -145,6 +148,9 @@
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ThreadMessage.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transit.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Traveller.cs">

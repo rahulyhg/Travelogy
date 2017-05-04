@@ -23,18 +23,60 @@ namespace DomingoBLUnitTests
         }
 
         [TestMethod]
-        public void Test_Google_Api_distancematrix()
+        public void Test_Google_Api_PopulateDistances()
         {
             var _api = new GoogleApi();
-            _api.Test_distancematrix();
+            _api.PopulateDistances();
+        }
+
+        [TestMethod]
+        public void Test_Google_Api_PopulateDriveTimes()
+        {
+            var _api = new GoogleApi();
+            _api.PopulateDriveTimes();
+        }
+
+        [TestMethod]
+        public void Test_Google_Api_PopulateAirportDriveTimes()
+        {
+            var _api = new GoogleApi();
+            _api.PopulateAirportDriveTimes();
+        }
+
+        [TestMethod]
+        public void Test_Google_Api_PopulateAirportAddress()
+        {
+            var _api = new GoogleApi();
+            _api.PopulateAirportAddress();
+        }
+
+        [TestMethod]
+        public void Test_Google_Api_PopulateAirportTransitTimes()
+        {
+            var _api = new GoogleApi();
+            _api.PopulateAirportTransitTimes();
+        }
+
+        [TestMethod]
+        public void Test_Google_Api_PopulateAirportDistances()
+        {
+            var _api = new GoogleApi();
+            _api.PopulateAirportDistances();
         }
 
         [TestMethod]
         public void Test_Google_Api_DistanceCalculation()
         {
+            //var _api = new GoogleApi();
+            //var d = _api._CalculateDrivingTime("Chittorgarh", "Bangalore");            
+            //Assert.IsTrue(d > 0);
+        }
+
+        [TestMethod]
+        public void Test_Google_Api_PopulateTransitRoutes()
+        {
             var _api = new GoogleApi();
-            var d = _api._CalculateDistance("Chittorgarh", "Bangalore");
-            Assert.IsTrue(d > 0);
+            _api.PopulateTransitRoutes();
         }
 
         [TestMethod]

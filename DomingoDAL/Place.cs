@@ -37,5 +37,9 @@ namespace DomingoDAL
         public Nullable<int> Spiritual { get; set; }
         public Nullable<int> SocialWork { get; set; }
         public Nullable<int> UsualDays { get; set; }
+        public string NearestAirport { get; set; }
+        public Nullable<decimal> NearestAirportDistance { get; set; }
+        public Nullable<decimal> NearestAirportTransitTime { get; set; }
+        public Nullable<decimal> NearestAirportDriveTime { get; set; }
     }
 }
