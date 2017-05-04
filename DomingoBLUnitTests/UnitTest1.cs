@@ -4,6 +4,7 @@ using DomingoBL;
 using DomingoDAL;
 using DomingoBL.Google;
 using System.Collections.Generic;
+using DomingoBL.FlightStatsApi;
 
 namespace DomingoBLUnitTests
 {
@@ -78,6 +79,20 @@ namespace DomingoBLUnitTests
             var _api = new GoogleApi();
             _api.PopulateTransitRoutes();
         }
+
+        [TestMethod]
+        public void Test_FlightStatsApi_PopulateAllFlights()
+        {
+            FlightStatsApiGateway.PopulateAllFlights();
+        }
+
+        [TestMethod]
+        public void Test_FlightStatsApi_FindAndSaveFlights()
+        {
+            FlightStatsApiGateway.FindAndSaveFlights(100033, 100075, 2017, 6, 15);
+        }
+
+        
 
         [TestMethod]
         public void Test_Create_CRM_LEAD_Valid_Params()

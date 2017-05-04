@@ -59,6 +59,9 @@
     <Compile Include="Airport.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AirportConnection.cs">
+      <DependentUpon>D-DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetRole.cs">
       <DependentUpon>D-DbModel.tt</DependentUpon>
     </Compile>

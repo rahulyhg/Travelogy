@@ -19,6 +19,19 @@
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="Class" Type="nchar" MaxLength="2" />
         </EntityType>
+        <EntityType Name="AirportConnection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="DestinationId" Type="int" Nullable="false" />
+          <Property Name="FlightTime1" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="DepartureTime" Type="nvarchar" MaxLength="20" />
+          <Property Name="ArrivalTime" Type="nvarchar" MaxLength="20" />
+          <Property Name="FlightNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="Stops" Type="int" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -91,6 +104,9 @@
           <Property Name="MinimumTransitTime" Type="int" />
           <Property Name="DrivingTime" Type="decimal" Precision="10" Scale="4" />
           <Property Name="TransitTime" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="AvgFlightTime" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="MinFlightTime" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="MaxFlightTime" Type="decimal" Precision="10" Scale="4" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -846,6 +862,7 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primar
         </Association>
         <EntityContainer Name="TravelogyDevModelStoreContainer">
           <EntitySet Name="Airport" EntityType="Self.Airport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AirportConnection" EntityType="Self.AirportConnection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -1146,10 +1163,11 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primar
           <EntitySet Name="Regions" EntityType="TravelogyDevModel.Region" />
           <EntitySet Name="TripStepV2" EntityType="TravelogyDevModel.TripStepV2" />
           <EntitySet Name="TripV2" EntityType="TravelogyDevModel.TripV2" />
-          <EntitySet Name="Connections" EntityType="TravelogyDevModel.Connection" />
           <EntitySet Name="Places" EntityType="TravelogyDevModel.Place" />
           <EntitySet Name="Airports" EntityType="TravelogyDevModel.Airport" />
           <EntitySet Name="Transits" EntityType="TravelogyDevModel.Transit" />
+          <EntitySet Name="AirportConnections" EntityType="TravelogyDevModel.AirportConnection" />
+          <EntitySet Name="Connections" EntityType="TravelogyDevModel.Connection" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1870,18 +1888,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primar
           <Property Name="EstimatedCost" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="HomeLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Connection">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SourceId" Type="Int32" Nullable="false" />
-          <Property Name="DestinationId" Type="Int32" Nullable="false" />
-          <Property Name="Distance" Type="Decimal" Precision="10" Scale="4" />
-          <Property Name="MinimumTransitTime" Type="Int32" />
-          <Property Name="DrivingTime" Type="Decimal" Precision="10" Scale="4" />
-          <Property Name="TransitTime" Type="Decimal" Precision="10" Scale="4" />
-        </EntityType>
         <EntityType Name="Place">
           <Key>
             <PropertyRef Name="Id" />
@@ -1943,6 +1949,34 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primar
           <Property Name="Transit_Time" Type="Decimal" Precision="10" Scale="4" />
           <Property Name="Mode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AirportConnection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceId" Type="Int32" Nullable="false" />
+          <Property Name="DestinationId" Type="Int32" Nullable="false" />
+          <Property Name="FlightTime1" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="DepartureTime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ArrivalTime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FlightNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Stops" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Connection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceId" Type="Int32" Nullable="false" />
+          <Property Name="DestinationId" Type="Int32" Nullable="false" />
+          <Property Name="Distance" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="MinimumTransitTime" Type="Int32" />
+          <Property Name="DrivingTime" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="TransitTime" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="AvgFlightTime" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="MinFlightTime" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="MaxFlightTime" Type="Decimal" Precision="10" Scale="4" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2643,19 +2677,6 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Connections">
-            <EntityTypeMapping TypeName="TravelogyDevModel.Connection">
-              <MappingFragment StoreEntitySet="Connection">
-                <ScalarProperty Name="TransitTime" ColumnName="TransitTime" />
-                <ScalarProperty Name="DrivingTime" ColumnName="DrivingTime" />
-                <ScalarProperty Name="MinimumTransitTime" ColumnName="MinimumTransitTime" />
-                <ScalarProperty Name="Distance" ColumnName="Distance" />
-                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
-                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Places">
             <EntityTypeMapping TypeName="TravelogyDevModel.Place">
               <MappingFragment StoreEntitySet="Place">
@@ -2714,6 +2735,36 @@ warning 6002: The table/view 'TravelogyDev.dbo.View_User' does not have a primar
                 <ScalarProperty Name="arrival_stop" ColumnName="arrival_stop" />
                 <ScalarProperty Name="departure_time" ColumnName="departure_time" />
                 <ScalarProperty Name="departure_stop" ColumnName="departure_stop" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AirportConnections">
+            <EntityTypeMapping TypeName="TravelogyDevModel.AirportConnection">
+              <MappingFragment StoreEntitySet="AirportConnection">
+                <ScalarProperty Name="Stops" ColumnName="Stops" />
+                <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+                <ScalarProperty Name="DepartureTime" ColumnName="DepartureTime" />
+                <ScalarProperty Name="FlightTime1" ColumnName="FlightTime1" />
+                <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Connections">
+            <EntityTypeMapping TypeName="TravelogyDevModel.Connection">
+              <MappingFragment StoreEntitySet="Connection">
+                <ScalarProperty Name="MaxFlightTime" ColumnName="MaxFlightTime" />
+                <ScalarProperty Name="MinFlightTime" ColumnName="MinFlightTime" />
+                <ScalarProperty Name="AvgFlightTime" ColumnName="AvgFlightTime" />
+                <ScalarProperty Name="TransitTime" ColumnName="TransitTime" />
+                <ScalarProperty Name="DrivingTime" ColumnName="DrivingTime" />
+                <ScalarProperty Name="MinimumTransitTime" ColumnName="MinimumTransitTime" />
                 <ScalarProperty Name="Distance" ColumnName="Distance" />
                 <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
                 <ScalarProperty Name="SourceId" ColumnName="SourceId" />

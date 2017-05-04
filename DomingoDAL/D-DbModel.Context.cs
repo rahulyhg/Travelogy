@@ -68,9 +68,10 @@ namespace DomingoDAL
         public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<TripStepV2> TripStepV2 { get; set; }
         public virtual DbSet<TripV2> TripV2 { get; set; }
-        public virtual DbSet<Connection> Connections { get; set; }
         public virtual DbSet<Place> Places { get; set; }
         public virtual DbSet<Airport> Airports { get; set; }
         public virtual DbSet<Transit> Transits { get; set; }
+        public virtual DbSet<AirportConnection> AirportConnections { get; set; }
+        public virtual DbSet<Connection> Connections { get; set; }
     }
 }
