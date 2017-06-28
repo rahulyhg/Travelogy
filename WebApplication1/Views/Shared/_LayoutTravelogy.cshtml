@@ -131,7 +131,7 @@
                         <div class="navy">
                         <ul>
                             @*Login menu items*@
-                            @Html.Partial("_LoginPartial")
+                            @*@Html.Partial("_LoginPartial")*@
 
                             @if (Request.IsAuthenticated)
                             {
@@ -151,6 +151,14 @@
                             <li>
                                 <a href="/Circuit">Destinations</a>                                
                             </li>
+
+                            <li>
+                                <a href="#">Services</a>
+                                <ul>
+                                    <li>@Html.ActionLink("Trip Planning", "Tripplanning", "Service")</li>
+                                    <li>@Html.ActionLink("Logistics", "TravelLogistics", "Service")</li>                                    
+                                </ul>
+                            </li>                            
 
                             @if (Request.IsAuthenticated)
                             {

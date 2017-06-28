@@ -30,17 +30,17 @@
                     <div class="about-logo">
                         <h3>Welcome to the club created for the "travellers" <i>by</i> the travellers!</h3>
                         <p>
-                            Find 360 degree solutions for your travel. Over here, you can create your custom trip plan using our <a href="/service/TripPlanning" class="orange">FREE Trip Planning tool.</a>
+                            Find 360 degree solutions for your travel. Over here, you can create your custom trip plan using our Expert team. @*<a href="/service/TripPlanning" class="orange">FREE Trip Planning tool.</a>*@
                             You can get ideas for trips to <strong>India, Nepal &amp; Bhutan, Russia, Mongolia and Tanzania</strong>.
                             Get in touch with us for <a href="/service/TravelLogistics" class="orange">Logistics &amp; Support services</a>
                             in the destinations to make your exotic trips a great experience to remember. We work with hand-picked, friendly and hard-working local operators in each destination.
                         </p>
-                        @if (!Request.IsAuthenticated)
+                        @*@if (!Request.IsAuthenticated)
                         {
                             <blockquote>
                                 <h3>Start using our trip planner <a href="/Account/Membership" class="btn-u btn-orange">Sign up for Free &nbsp; <i class="icon-arrow-right"></i> </a></h3> 
                             </blockquote>                            
-                        }                        
+                        }*@                        
                     </div>
                 </div>
             </div>   
@@ -50,7 +50,7 @@
 
     <hr class="margin-bottom-40">
 
-    <div class="container">
+    @*<div class="container">
         <div class="row">
             <div class="col-sm-4 info-blocks">
                 <i class="icon-lightbulb icon-info-blocks"></i>
@@ -87,7 +87,7 @@
                 @Html.Partial("_CallmeBackMicro")
             }
         </div>
-    </div>
+    </div>*@
     
     if (Request.IsAuthenticated)
     {
@@ -96,9 +96,9 @@
 
     else
     {   <!--End Tag Box v5-->
-        <div class="container">
+        @*<div class="container">
             @Html.Partial("_TripPlannerAdvert")
-        </div>        
+        </div>*@        
     }
 
     <div class="margin-bottom-20"></div>
