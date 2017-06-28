@@ -5,6 +5,7 @@ using DomingoDAL;
 using DomingoBL.Google;
 using System.Collections.Generic;
 using DomingoBL.FlightStatsApi;
+using System.Text;
 
 namespace DomingoBLUnitTests
 {
@@ -16,10 +17,17 @@ namespace DomingoBLUnitTests
         {
             List<Place> suggestions = null;
             List<TripInterest> interests = new List<TripInterest>();
-            interests.Add(TripInterest.Beach);
             interests.Add(TripInterest.Mountain);
-            var blError = TripManagerV2.GetSuggestedTrip("New Delhi", 14, interests, out suggestions);
+            interests.Add(TripInterest.History);
+            var blError = TripManagerV2.GetSuggestedTrip("New Delhi", 20, interests, out suggestions);
 
+            var sb = new StringBuilder();
+            foreach(var suggestion in suggestions)
+            {
+                sb.AppendFormat("--{0}--", suggestion.Name);
+            }
+
+            var sug = sb.ToString();
             Assert.IsTrue(blError.ErrorCode == 0);
         }
 
@@ -35,6 +43,20 @@ namespace DomingoBLUnitTests
         {
             var _api = new GoogleApi();
             _api.PopulateDriveTimes();
+        }
+
+        [TestMethod]
+        public void Test_Google_Api_PopulateAirConnectivityTimes()
+        {
+            var _api = new GoogleApi();
+            _api.PopulateAirConnectivityTimes();
+        }
+
+        [TestMethod]
+        public void Test_Google_Api_PopulateMinimumTransitTimes()
+        {
+            var _api = new GoogleApi();
+            _api.PopulateMinimumTransitTimes();
         }
 
         [TestMethod]

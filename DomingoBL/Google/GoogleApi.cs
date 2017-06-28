@@ -240,7 +240,79 @@ namespace DomingoBL.Google
                 context.SaveChanges();
             }
         }
-        
+
+        public void PopulateAirConnectivityTimes()
+        {
+            using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+            {
+                var sources = context.Places.ToList();
+                var conns = context.Connections.Select(p => p);
+                var airportconns = context.AirportConnections.Select(p => p);
+                var destinations = sources;
+
+                foreach (var source in sources)
+                {
+                    foreach (var destination in destinations)
+                    {
+                        // if the source is destination - skip
+                        if (source.Name == destination.Name)
+                            continue;
+
+                        // if the places do not have airports - skip
+                        if (String.IsNullOrEmpty(source.NearestAirport) || String.IsNullOrEmpty(destination.NearestAirport))
+                            continue;
+
+                        // if the places are near the same airport - skip
+                        if (source.NearestAirport == destination.NearestAirport)
+                            continue;
+
+                        // ok now that we have two airports - calculate flight time
+                        int fromAirport = context.Airports.Where(p => p.Code == source.NearestAirport).FirstOrDefault().Id;
+                        int toAirport = context.Airports.Where(p => p.Code == destination.NearestAirport).FirstOrDefault().Id;
+
+                        var flights = airportconns.Where(p => p.SourceId == fromAirport && p.DestinationId == toAirport);
+                        if (flights == null || flights.Count() == 0) // there are no connecting flightts
+                            continue;
+
+                        var averageFlightTime = flights.Average(p => p.FlightTime1);
+                        var minFLightTime = flights.Min(p => p.FlightTime1);
+                        var maxFlightTime = flights.Max(p => p.FlightTime1);
+
+                        var conn = conns.Where(p => p.SourceId == source.Id && p.DestinationId == destination.Id).FirstOrDefault();
+                        if(conn != null)
+                        {
+                            conn.MaxFlightTime = maxFlightTime + source.NearestAirportDriveTime + destination.NearestAirportDriveTime;
+                            conn.MinFlightTime = minFLightTime + source.NearestAirportDriveTime + destination.NearestAirportDriveTime;
+                            conn.AvgFlightTime = averageFlightTime + source.NearestAirportDriveTime + destination.NearestAirportDriveTime;
+                            context.SaveChanges();
+                        }
+                       
+                    }  
+                }
+            }
+        }
+
+        public void PopulateMinimumTransitTimes()
+        {
+            using (TravelogyDevEntities1 context = new TravelogyDevEntities1())
+            {
+                var conns = context.Connections.Select(p => p);
+                foreach(var conn in conns)
+                {
+                    if(conn.MinFlightTime != 0 && conn.MinFlightTime < conn.DrivingTime)
+                    {
+                        conn.MinimumTransitTime = (int)(conn.MinFlightTime * 60) ;
+                    }
+                    else
+                    {
+                        conn.MinimumTransitTime = (int)(conn.DrivingTime * 60);
+                    }
+                }
+
+                context.SaveChanges();
+            }
+        }
+
         private void _GeocodePlace(string address, out double latitude, out double longitude)
         {
             latitude = 0; longitude = 0;

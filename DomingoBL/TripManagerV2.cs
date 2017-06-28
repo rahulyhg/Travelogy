@@ -54,6 +54,12 @@ namespace DomingoBL
                     // calculate scores
                     CalculateScores(interests, placeAndScore, context);
 
+                    // remove starting point duplicate
+                    if(placeAndScore.ContainsKey(startingPlace.Id))
+                    {
+                        placeAndScore.Remove(startingPlace.Id);
+                    }
+
                     // sort by scores
                     placeAndScore = placeAndScore.OrderByDescending(x => x.Value.Score).ToDictionary(x => x.Key, x => x.Value);
 
@@ -97,7 +103,7 @@ namespace DomingoBL
             while (suggestions.Count > 0)
             {
                 // now find the city closest to starting
-                next = FindClosestPlace(current, suggestions, context);
+                next = FindClosestPlaceByRoadAndAir(current, suggestions, context);
                 suggestions.Remove(next);
                 OptimizedList.Add(next);
                 current = next;
@@ -106,26 +112,73 @@ namespace DomingoBL
             return OptimizedList;
         }
 
-        private static Place FindClosestPlace(Place origin, List<Place> destinations, TravelogyDevEntities1 context)
+        
+        private static Place FindClosestPlaceByRoad(Place origin, List<Place> destinations, TravelogyDevEntities1 context, out decimal distance)
+        {
+            if (destinations.Count == 1)
+            {
+                distance = 0;
+                return destinations.First();
+            }
+              
+
+            Place nearest = destinations.First();
+            var _xConnection = context.Connections.Where(p => p.SourceId == origin.Id && p.DestinationId == nearest.Id).FirstOrDefault(); // City.Distance(origin, destinations.First());
+            var driveTime = _xConnection.DrivingTime.Value;
+            var _minDistance = _xConnection.Distance.Value;
+
+            foreach (var _place in destinations)
+            {
+                var tempDriveTime = context.Connections.Where(p => p.SourceId == origin.Id && p.DestinationId == _place.Id).FirstOrDefault().DrivingTime.Value;
+                var tempDistance = context.Connections.Where(p => p.SourceId == origin.Id && p.DestinationId == _place.Id).FirstOrDefault().Distance.Value;
+                if (tempDriveTime < driveTime)
+                {
+                    nearest = _place;
+                    driveTime = tempDriveTime;
+                    _minDistance = tempDistance;
+                }
+            }
+
+            distance = _minDistance;
+            return nearest;
+        }
+
+        private static Place FindClosestPlaceByAir(Place origin, List<Place> destinations, TravelogyDevEntities1 context)
         {
             if (destinations.Count == 1)
                 return destinations.First();
 
             Place nearest = destinations.First();
             var _xConnection = context.Connections.Where(p => p.SourceId == origin.Id && p.DestinationId == nearest.Id).FirstOrDefault(); // City.Distance(origin, destinations.First());
-            var distance = _xConnection.Distance.Value;
+            var transitTime = _xConnection.MinimumTransitTime.Value;
 
             foreach (var _place in destinations)
             {
-                var tempDistance = context.Connections.Where(p => p.SourceId == origin.Id && p.DestinationId == _place.Id).FirstOrDefault().Distance.Value; 
-                if (tempDistance < distance)
+                if (_place.Id == origin.Id) continue;
+
+                var tempTransitTime = context.Connections.Where(p => p.SourceId == origin.Id && p.DestinationId == _place.Id).FirstOrDefault().MinimumTransitTime.Value;
+                if (tempTransitTime < transitTime)
                 {
                     nearest = _place;
-                    distance = tempDistance;
+                    transitTime = tempTransitTime;
                 }
             }
 
             return nearest;
+        }
+
+        private static Place FindClosestPlaceByRoadAndAir(Place origin, List<Place> destinations, TravelogyDevEntities1 context)
+        {
+            decimal distance = 0;
+            var closestByRoad = FindClosestPlaceByRoad(origin, destinations, context, out distance);
+            if(distance <= 650)            
+                return closestByRoad;
+            
+            var closestByAir = FindClosestPlaceByAir(origin, destinations, context);
+            if (closestByAir == null)
+                return closestByRoad;
+
+            return closestByAir;
         }
 
         private static void CalculateScores(List<TripInterest> interests, Dictionary<int, PlaceScore> placeAndScore, TravelogyDevEntities1 context)
