@@ -101,10 +101,10 @@
         </div>*@        
     }
 
-    <div class="margin-bottom-20"></div>
+    @*<div class="margin-bottom-20"></div>*@
 
     <div class="container">        
-        <div class="block-heading-twelve">
+        <div class="row">
             <h1>Discover more with us: <small>we help you travel Independently, create your own custom itinerary, backed by inputs from travel experts. Trip planning is absolutely FREE. Check the destinations we offer currently.</small></h1>                            
         </div>          
         <div class="row margin-bottom-20">
@@ -193,6 +193,10 @@
                 <a href="/Circuit" class="btn-u btn-large btn-orange">Find out more about the Destinations &nbsp;&nbsp; <i class="icon-arrow-right"></i></a>
             </h1>*@
 
+        @if (!Request.IsAuthenticated)
+        {
+            @Html.Partial("_SubmitTripRequest", new WebApplication1.Models._SubmitTripRequestViewModel() { CircuitName = "upcoming" });
+        }
 
     </div>
 }

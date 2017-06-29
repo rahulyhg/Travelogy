@@ -31,20 +31,20 @@
 
 <div class="container">
     <div class="about-us-one">
-        <div class="row">
+        @*<div class="row">
             <h3>Travelogy <small><i>(noun)</i><span class="orange"> the science of travelling.</span></small></h3>
-        </div>        
+        </div>*@        
         <div class="row">
             <div class="container">
                 <div class="about-logo">
-                    <h4>Welcome to the club created for the "travellers" <i>by</i> the travellers!</h4>
+                    @*<h4>Welcome to the club created for the "travellers" <i>by</i> the travellers!</h4>
                     <p>
                        Find 360 degree solutions for your travel. Over here, you can create your custom trip plan using our <a href="/service/TripPlanning" class="orange">FREE Trip Planning tool.</a>
                        <strong>Plan exciting trips to India</strong> and unlock destinations for the next level of your game. We work with hand-picked, friendly and hard-working local operators in each destination.
-                    </p>
+                    </p>*@
                     @if (!Request.IsAuthenticated)
                     {
-                        <blockquote>
+                        @*<blockquote>
                             <h3>Use our FREE Trip Planner for India</h3>
                             <div class="margin-bottom-20"></div>
                             <div class="img-box-3 text-center">
@@ -112,7 +112,14 @@
                                     Html.RenderPartial("_DownloadBrochureNotLoggedIn", model);
                                 }
                             </div>
-                        </blockquote>
+                        </blockquote>*@
+
+                        <div class="row">
+                            @{
+                                var model = new WebApplication1.Models._DownloadBrochureRequestModel() { BrochurePath = "/Content/Brochures/Travbrochure-India.pdf" };
+                                Html.RenderPartial("_DownloadBrochureNotLoggedIn", model);
+                            }
+                        </div>
                     }
                 </div>
             </div>
@@ -143,7 +150,7 @@
     <div class="container">
         <div class="row">
             <div class="block-heading-twelve">
-                <h1 class="orange">You can expect everything here ...</h1>
+                <h1 class="orange">You can expect anything here ...</h1>
                 <p>
                     the highest mountain range in the world, over 4500 miles of coastline, high altitude desert, some of the densest forests of the world, 
                     vast salty marshes, lush green backwaters, the wettest place on earth in the eastern corner of the country to a bone dry desert in the west ...
@@ -187,7 +194,7 @@
         </div>
     </div><!--/row-->
 
-    <h1><a href="/Circuit/India" class="btn-u btn-black">Choose circuits in India and start planning &nbsp;&nbsp;<i class="icon-arrow-right"></i></a></h1>
+    <h1><a href="/Circuit/India" class="btn-u btn-black">Start planning your trip to India &nbsp;&nbsp;<i class="icon-arrow-right"></i></a></h1>
 
     <div class="container">
         <div class="row">

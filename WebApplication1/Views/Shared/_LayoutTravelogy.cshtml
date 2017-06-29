@@ -153,11 +153,11 @@
                             </li>
 
                             <li>
-                                <a href="#">Services</a>
-                                <ul>
+                                <a href="/Service/TravelLogistics">Services</a>
+                                @*<ul>
                                     <li>@Html.ActionLink("Trip Planning", "Tripplanning", "Service")</li>
                                     <li>@Html.ActionLink("Logistics", "TravelLogistics", "Service")</li>                                    
-                                </ul>
+                                </ul>*@
                             </li>                            
 
                             @if (Request.IsAuthenticated)
@@ -203,15 +203,14 @@
             }
         </div>
     </div>
-    <!-- Header two ends -->    
-    @if (!String.IsNullOrEmpty(System.Configuration.ConfigurationManager.AppSettings["ShowBetaWarning"]))
-    {
-        <div class="alert alert-block alert-warning fade in text-center">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4>Welcome to the all new Travelogy club portal - beta version!</h4>
-            <h6>We are in the process of testing this site now. It may take us a few days to get everything sorted!</h6>
+    
+    
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12"><h3>Call us at <i class="orange">020 3318 6049</i> to discuss your travel plans, or <a href="/Information/ContactUs" class="orange">contact us</a> and send your query.</h3></div>
         </div>
-    }
+    </div>
 
     <!-- Main content starts -->
     <div class="main-block">
